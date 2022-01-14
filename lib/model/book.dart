@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_gunggeumhany/service/core/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -10,17 +9,37 @@ class Book with _$Book {
   const factory Book({
     required String? docKey,
     required List<String>? searchKeyWord,
+    required List<String>? reviewUserKey,
+    required int? reviewRating,
     required String title,
     required String contents,
     required String url,
     required String isbn,
     required DateTime? datetime,
-    // @TimestampConverter() required DateTime? dateTime,
+    @TimestampConverter() required DateTime? createdAt,
     required List<String> authors,
     required String publisher,
     required List<String> translators,
     required int price,
     required String thumbnail,
   }) = _Book;
+  const Book._();
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
+  factory Book.empty() => Book(
+        docKey: "",
+        searchKeyWord: [],
+        reviewUserKey: [],
+        reviewRating: 0,
+        title: "",
+        contents: "",
+        url: "",
+        isbn: "",
+        datetime: DateTime.now(),
+        createdAt: DateTime.now(),
+        authors: [],
+        publisher: "",
+        translators: [],
+        price: 0,
+        thumbnail: "",
+      );
 }

@@ -68,12 +68,17 @@ class BookRepo {
           _batch.set(
               _id,
               _setBookData[i]
-                  .copyWith(docKey: _id.id, searchKeyWord: _searchKeyWord)
+                  .copyWith(
+                    docKey: _id.id,
+                    searchKeyWord: _searchKeyWord,
+                    createdAt: DateTime.now(),
+                    reviewUserKey: [],
+                    reviewRating: 0,
+                  )
                   .toJson());
         }
         await _batch.commit();
       }
-
       return _kakaoBookData;
     }
     return [];
@@ -99,27 +104,37 @@ class BookRepo {
       final decoded = json.decode(utf8.decode(response.bodyBytes));
       final _documents = decoded["documents"] as List<dynamic>;
       final _kakaoResult = KakaoBook.fromJson(decoded as Map<String, dynamic>);
+      final bool _isEnd = _kakaoResult.meta.isEnd;
       final _kakaoBookData = _documents
           .map((e) => Book.fromJson(e as Map<String, dynamic>))
           .toList();
       final List<Book> _setBookData = _kakaoResult.documents;
-      if (_setBookData.isNotEmpty) {
-        _setBookData.removeWhere((element) =>
-            _localBookData.map((e) => e.title).contains(element.title));
-        for (int i = 0; i < _setBookData.length; i++) {
-          final _id = _bookRef.doc();
-          final List<String> _searchKeyWord =
-              searchKeywordSplit(book: _setBookData, index: i);
-          _batch.set(
-              _id,
-              _setBookData[i]
-                  .copyWith(docKey: _id.id, searchKeyWord: _searchKeyWord)
-                  .toJson());
+      if (!_isEnd) {
+        if (_setBookData.isNotEmpty) {
+          _setBookData.removeWhere((element) =>
+              _localBookData.map((e) => e.title).contains(element.title));
+          for (int i = 0; i < _setBookData.length; i++) {
+            final _id = _bookRef.doc();
+            final List<String> _searchKeyWord =
+                searchKeywordSplit(book: _setBookData, index: i);
+            _batch.set(
+                _id,
+                _setBookData[i]
+                    .copyWith(
+                      docKey: _id.id,
+                      searchKeyWord: _searchKeyWord,
+                      createdAt: DateTime.now(),
+                      reviewUserKey: [],
+                      reviewRating: 0,
+                    )
+                    .toJson());
+          }
+          await _batch.commit();
+          return _kakaoBookData;
         }
-        await _batch.commit();
+      } else {
+        return [];
       }
-
-      return _kakaoBookData;
     }
     return [];
   }

@@ -25,11 +25,14 @@ class _$BookTearOff {
   _Book call(
       {required String? docKey,
       required List<String>? searchKeyWord,
+      required List<String>? reviewUserKey,
+      required int? reviewRating,
       required String title,
       required String contents,
       required String url,
       required String isbn,
       required DateTime? datetime,
+      @TimestampConverter() required DateTime? createdAt,
       required List<String> authors,
       required String publisher,
       required List<String> translators,
@@ -38,11 +41,14 @@ class _$BookTearOff {
     return _Book(
       docKey: docKey,
       searchKeyWord: searchKeyWord,
+      reviewUserKey: reviewUserKey,
+      reviewRating: reviewRating,
       title: title,
       contents: contents,
       url: url,
       isbn: isbn,
       datetime: datetime,
+      createdAt: createdAt,
       authors: authors,
       publisher: publisher,
       translators: translators,
@@ -63,12 +69,15 @@ const $Book = _$BookTearOff();
 mixin _$Book {
   String? get docKey => throw _privateConstructorUsedError;
   List<String>? get searchKeyWord => throw _privateConstructorUsedError;
+  List<String>? get reviewUserKey => throw _privateConstructorUsedError;
+  int? get reviewRating => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get contents => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get isbn => throw _privateConstructorUsedError;
-  DateTime? get datetime =>
-      throw _privateConstructorUsedError; // @TimestampConverter() required DateTime? dateTime,
+  DateTime? get datetime => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get createdAt => throw _privateConstructorUsedError;
   List<String> get authors => throw _privateConstructorUsedError;
   String get publisher => throw _privateConstructorUsedError;
   List<String> get translators => throw _privateConstructorUsedError;
@@ -87,11 +96,14 @@ abstract class $BookCopyWith<$Res> {
   $Res call(
       {String? docKey,
       List<String>? searchKeyWord,
+      List<String>? reviewUserKey,
+      int? reviewRating,
       String title,
       String contents,
       String url,
       String isbn,
       DateTime? datetime,
+      @TimestampConverter() DateTime? createdAt,
       List<String> authors,
       String publisher,
       List<String> translators,
@@ -111,11 +123,14 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
   $Res call({
     Object? docKey = freezed,
     Object? searchKeyWord = freezed,
+    Object? reviewUserKey = freezed,
+    Object? reviewRating = freezed,
     Object? title = freezed,
     Object? contents = freezed,
     Object? url = freezed,
     Object? isbn = freezed,
     Object? datetime = freezed,
+    Object? createdAt = freezed,
     Object? authors = freezed,
     Object? publisher = freezed,
     Object? translators = freezed,
@@ -131,6 +146,14 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
           ? _value.searchKeyWord
           : searchKeyWord // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      reviewUserKey: reviewUserKey == freezed
+          ? _value.reviewUserKey
+          : reviewUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      reviewRating: reviewRating == freezed
+          ? _value.reviewRating
+          : reviewRating // ignore: cast_nullable_to_non_nullable
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -150,6 +173,10 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
       datetime: datetime == freezed
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       authors: authors == freezed
           ? _value.authors
@@ -183,11 +210,14 @@ abstract class _$BookCopyWith<$Res> implements $BookCopyWith<$Res> {
   $Res call(
       {String? docKey,
       List<String>? searchKeyWord,
+      List<String>? reviewUserKey,
+      int? reviewRating,
       String title,
       String contents,
       String url,
       String isbn,
       DateTime? datetime,
+      @TimestampConverter() DateTime? createdAt,
       List<String> authors,
       String publisher,
       List<String> translators,
@@ -208,11 +238,14 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
   $Res call({
     Object? docKey = freezed,
     Object? searchKeyWord = freezed,
+    Object? reviewUserKey = freezed,
+    Object? reviewRating = freezed,
     Object? title = freezed,
     Object? contents = freezed,
     Object? url = freezed,
     Object? isbn = freezed,
     Object? datetime = freezed,
+    Object? createdAt = freezed,
     Object? authors = freezed,
     Object? publisher = freezed,
     Object? translators = freezed,
@@ -228,6 +261,14 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
           ? _value.searchKeyWord
           : searchKeyWord // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      reviewUserKey: reviewUserKey == freezed
+          ? _value.reviewUserKey
+          : reviewUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      reviewRating: reviewRating == freezed
+          ? _value.reviewRating
+          : reviewRating // ignore: cast_nullable_to_non_nullable
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -247,6 +288,10 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
       datetime: datetime == freezed
           ? _value.datetime
           : datetime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       authors: authors == freezed
           ? _value.authors
@@ -274,20 +319,24 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Book implements _Book {
+class _$_Book extends _Book {
   const _$_Book(
       {required this.docKey,
       required this.searchKeyWord,
+      required this.reviewUserKey,
+      required this.reviewRating,
       required this.title,
       required this.contents,
       required this.url,
       required this.isbn,
       required this.datetime,
+      @TimestampConverter() required this.createdAt,
       required this.authors,
       required this.publisher,
       required this.translators,
       required this.price,
-      required this.thumbnail});
+      required this.thumbnail})
+      : super._();
 
   factory _$_Book.fromJson(Map<String, dynamic> json) => _$$_BookFromJson(json);
 
@@ -295,6 +344,10 @@ class _$_Book implements _Book {
   final String? docKey;
   @override
   final List<String>? searchKeyWord;
+  @override
+  final List<String>? reviewUserKey;
+  @override
+  final int? reviewRating;
   @override
   final String title;
   @override
@@ -305,7 +358,10 @@ class _$_Book implements _Book {
   final String isbn;
   @override
   final DateTime? datetime;
-  @override // @TimestampConverter() required DateTime? dateTime,
+  @override
+  @TimestampConverter()
+  final DateTime? createdAt;
+  @override
   final List<String> authors;
   @override
   final String publisher;
@@ -318,7 +374,7 @@ class _$_Book implements _Book {
 
   @override
   String toString() {
-    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
+    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, reviewUserKey: $reviewUserKey, reviewRating: $reviewRating, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
   }
 
   @override
@@ -329,11 +385,16 @@ class _$_Book implements _Book {
             const DeepCollectionEquality().equals(other.docKey, docKey) &&
             const DeepCollectionEquality()
                 .equals(other.searchKeyWord, searchKeyWord) &&
+            const DeepCollectionEquality()
+                .equals(other.reviewUserKey, reviewUserKey) &&
+            const DeepCollectionEquality()
+                .equals(other.reviewRating, reviewRating) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.contents, contents) &&
             const DeepCollectionEquality().equals(other.url, url) &&
             const DeepCollectionEquality().equals(other.isbn, isbn) &&
             const DeepCollectionEquality().equals(other.datetime, datetime) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.authors, authors) &&
             const DeepCollectionEquality().equals(other.publisher, publisher) &&
             const DeepCollectionEquality()
@@ -347,11 +408,14 @@ class _$_Book implements _Book {
       runtimeType,
       const DeepCollectionEquality().hash(docKey),
       const DeepCollectionEquality().hash(searchKeyWord),
+      const DeepCollectionEquality().hash(reviewUserKey),
+      const DeepCollectionEquality().hash(reviewRating),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(contents),
       const DeepCollectionEquality().hash(url),
       const DeepCollectionEquality().hash(isbn),
       const DeepCollectionEquality().hash(datetime),
+      const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(authors),
       const DeepCollectionEquality().hash(publisher),
       const DeepCollectionEquality().hash(translators),
@@ -369,20 +433,24 @@ class _$_Book implements _Book {
   }
 }
 
-abstract class _Book implements Book {
+abstract class _Book extends Book {
   const factory _Book(
       {required String? docKey,
       required List<String>? searchKeyWord,
+      required List<String>? reviewUserKey,
+      required int? reviewRating,
       required String title,
       required String contents,
       required String url,
       required String isbn,
       required DateTime? datetime,
+      @TimestampConverter() required DateTime? createdAt,
       required List<String> authors,
       required String publisher,
       required List<String> translators,
       required int price,
       required String thumbnail}) = _$_Book;
+  const _Book._() : super._();
 
   factory _Book.fromJson(Map<String, dynamic> json) = _$_Book.fromJson;
 
@@ -390,6 +458,10 @@ abstract class _Book implements Book {
   String? get docKey;
   @override
   List<String>? get searchKeyWord;
+  @override
+  List<String>? get reviewUserKey;
+  @override
+  int? get reviewRating;
   @override
   String get title;
   @override
@@ -400,7 +472,10 @@ abstract class _Book implements Book {
   String get isbn;
   @override
   DateTime? get datetime;
-  @override // @TimestampConverter() required DateTime? dateTime,
+  @override
+  @TimestampConverter()
+  DateTime? get createdAt;
+  @override
   List<String> get authors;
   @override
   String get publisher;

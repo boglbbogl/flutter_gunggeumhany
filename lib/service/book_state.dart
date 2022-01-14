@@ -9,23 +9,38 @@ class BookState extends ChangeNotifier {
   bool _isKakaoSearch = false;
   bool _isKakaoEndPage = false;
   bool _isMoreLoading = false;
+  bool _isLocalLoading = false;
+  bool _isKakaoLoading = false;
   int _page = 1;
   String _query = "";
 
   Future getSearchBook({
     required String query,
   }) async {
-    _localBookList = await _bookRepo.getLocalBookSearch(query: query);
-    _query = query;
-    _isKakaoSearch = false;
-    _page = 1;
+    _isLocalLoading = true;
+    notifyListeners();
+    if (query.isNotEmpty) {
+      _localBookList = await _bookRepo.getLocalBookSearch(query: query);
+      _query = query;
+      _isKakaoSearch = false;
+      _isKakaoEndPage = false;
+      _page = 1;
+    }
+    _isLocalLoading = false;
     notifyListeners();
   }
 
   Future getKakaoSearchBook() async {
-    _kakaoBookList = await _bookRepo.getKakaoBookSearch(query: _query, page: 1);
-    _page = 1;
-    _isKakaoSearch = true;
+    _isKakaoLoading = true;
+    notifyListeners();
+    if (_query.isNotEmpty) {
+      _kakaoBookList =
+          await _bookRepo.getKakaoBookSearch(query: _query, page: 1);
+      _page = 1;
+      _isKakaoSearch = true;
+      _isKakaoEndPage = false;
+    }
+    _isKakaoLoading = false;
     notifyListeners();
   }
 
@@ -39,6 +54,7 @@ class BookState extends ChangeNotifier {
     } else {
       _kakaoBookList.addAll(_moreList);
       _page = _page + 1;
+      _isKakaoEndPage = false;
     }
     _isMoreLoading = false;
     notifyListeners();
@@ -49,4 +65,6 @@ class BookState extends ChangeNotifier {
   bool get isKakaoSearch => _isKakaoSearch;
   bool get isKakaoEndPage => _isKakaoEndPage;
   bool get isMoreLoading => _isMoreLoading;
+  bool get isLocalLoading => _isLocalLoading;
+  bool get isKakaoLoading => _isKakaoLoading;
 }
