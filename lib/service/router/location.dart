@@ -1,6 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_gunggeumhany/presentation/home_page.dart';
+import 'package:flutter_gunggeumhany/presentation/home/home_page.dart';
 
 // Main Location
 class Location extends BeamLocation {

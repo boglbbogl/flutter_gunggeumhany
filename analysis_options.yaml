@@ -1,5 +1,11 @@
 include: package:lint/analysis_options.yaml
 
+analyzer:
+  errors:
+    missing_required_param: error
+    missing_return: error
+    must_be_immutable: error
+
 linter:
   rules:
     avoid_single_cascade_in_expression_statements: false
@@ -8,12 +14,4 @@ linter:
     require_trailing_commas: false
     use_build_context_synchronously: false
 
-analyzer:
-  exclude:
-    - "**.g.dart"
-    - "**.freezed.dart"
 
-  errors:
-    missing_required_param: error
-    missing_return: error
-    must_be_immutable: error

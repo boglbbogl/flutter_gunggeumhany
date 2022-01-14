@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/presentation/_app/hany_app.dart';
-import 'package:flutter_gunggeumhany/presentation/splash_screen.dart';
+import 'package:flutter_gunggeumhany/presentation/splash/splash_screen.dart';
 
 class HanyAppStart extends StatelessWidget {
   const HanyAppStart({
