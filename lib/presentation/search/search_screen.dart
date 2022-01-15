@@ -61,6 +61,7 @@ class SearchScreen extends StatelessWidget {
                 ),
                 if (!value.isKakaoSearch) ...[
                   _bookListView(
+                      isKakaoSearch: value.isKakaoSearch,
                       context: context,
                       bookList: value.localBookList,
                       widget: Padding(
@@ -95,6 +96,7 @@ class SearchScreen extends StatelessWidget {
                 ],
                 if (value.isKakaoSearch) ...[
                   _bookListView(
+                    isKakaoSearch: value.isKakaoSearch,
                     context: context,
                     bookList: value.kakaoBookList,
                     widget: value.isKakaoEndPage
@@ -150,6 +152,7 @@ class SearchScreen extends StatelessWidget {
     required List<Book> bookList,
     required BuildContext context,
     required Widget widget,
+    required bool isKakaoSearch,
   }) {
     return Expanded(
       child: Padding(
@@ -215,17 +218,19 @@ class SearchScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 20,
-                    right: 20,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text("별점 ${e.reviewRating.toString()}"),
-                        Text("리뷰 ${e.reviewUserKey!.length.toString()}개"),
-                      ],
+                  if (!isKakaoSearch) ...[
+                    Positioned(
+                      bottom: 20,
+                      right: 20,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text("별점 ${e.reviewRating.toString()}"),
+                          Text("리뷰 ${e.reviewUserKey!.length.toString()}개"),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ],
               ),
             ),
