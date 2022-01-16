@@ -1,8 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/constant/app_color.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+import 'package:flutter_gunggeumhany/presentation/review/review_page.dart';
 import 'package:flutter_gunggeumhany/service/book_state.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -161,77 +162,88 @@ class SearchScreen extends StatelessWidget {
           shrinkWrap: true,
           children: [
             ...bookList.map(
-              (e) => Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: const Color.fromRGBO(51, 51, 51, 1),
-                          border: Border.all(
-                              color: const Color.fromRGBO(71, 71, 71, 1))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              e.title.length > 40
-                                  ? "${e.title.substring(0, 40)} ..."
-                                  : e.title,
-                              style: theme.textTheme.bodyText2!.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14),
-                            ),
-                            const SizedBox(height: 6),
-                            _authorsAndTranslators(
-                                list: e.authors, title: '지은이'),
-                            _authorsAndTranslators(
-                                list: e.translators, title: '옮긴이'),
-                            const SizedBox(height: 2),
-                            DefaultTextStyle(
-                              style: theme.textTheme.bodyText2!.copyWith(
-                                color: const Color.fromRGBO(195, 195, 195, 1),
-                                fontSize: 11,
+              (e) => InkWell(
+                onTap: () {
+                  pushNewScreen(context,
+                      screen: ReviewPage(
+                        book: e,
+                      ),
+                      pageTransitionAnimation:
+                          PageTransitionAnimation.cupertino);
+                },
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: const Color.fromRGBO(51, 51, 51, 1),
+                            border: Border.all(
+                                color: const Color.fromRGBO(71, 71, 71, 1))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                e.title.length > 40
+                                    ? "${e.title.substring(0, 40)} ..."
+                                    : e.title,
+                                style: theme.textTheme.bodyText2!.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
                               ),
-                              child: Row(
-                                children: [
-                                  Text(e.publisher),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 4),
-                                    child: Container(
-                                      width: 1,
-                                      height: 8,
-                                      color: const Color.fromRGBO(
-                                          135, 135, 135, 1),
+                              const SizedBox(height: 6),
+                              _authorsAndTranslators(
+                                  list: e.authors, title: '지은이'),
+                              _authorsAndTranslators(
+                                  list: e.translators, title: '옮긴이'),
+                              const SizedBox(height: 2),
+                              DefaultTextStyle(
+                                style: theme.textTheme.bodyText2!.copyWith(
+                                  color: const Color.fromRGBO(195, 195, 195, 1),
+                                  fontSize: 11,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text(e.publisher),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 4),
+                                      child: Container(
+                                        width: 1,
+                                        height: 8,
+                                        color: const Color.fromRGBO(
+                                            135, 135, 135, 1),
+                                      ),
                                     ),
-                                  ),
-                                  Text(e.datetime.toString().substring(0, 10)),
-                                ],
-                              ),
-                            )
-                          ],
+                                    Text(
+                                        e.datetime.toString().substring(0, 10)),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  if (!isKakaoSearch) ...[
-                    Positioned(
-                      bottom: 20,
-                      right: 20,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("별점 ${e.reviewRating.toString()}"),
-                          Text("리뷰 ${e.reviewUserKey!.length.toString()}개"),
-                        ],
+                    if (!isKakaoSearch) ...[
+                      Positioned(
+                        bottom: 20,
+                        right: 20,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text("별점 ${e.starRating.toString()}"),
+                            Text("리뷰 ${e.starUserKey!.length.toString()}개"),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
             widget,

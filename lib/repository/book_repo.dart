@@ -72,8 +72,10 @@ class BookRepo {
                     docKey: _id.id,
                     searchKeyWord: _searchKeyWord,
                     createdAt: DateTime.now(),
-                    reviewUserKey: [],
-                    reviewRating: 0,
+                    starUserKey: [],
+                    starRating: 0.0,
+                    favoriteUserKey: [],
+                    favoirteRating: 0.0,
                   )
                   .toJson());
         }
@@ -124,8 +126,10 @@ class BookRepo {
                       docKey: _id.id,
                       searchKeyWord: _searchKeyWord,
                       createdAt: DateTime.now(),
-                      reviewUserKey: [],
-                      reviewRating: 0,
+                      starUserKey: [],
+                      starRating: 0.0,
+                      favoriteUserKey: [],
+                      favoirteRating: 0.0,
                     )
                     .toJson());
           }

@@ -25,8 +25,10 @@ class _$BookTearOff {
   _Book call(
       {required String? docKey,
       required List<String>? searchKeyWord,
-      required List<String>? reviewUserKey,
-      required int? reviewRating,
+      required List<String>? starUserKey,
+      required double? starRating,
+      required List<String>? favoriteUserKey,
+      required double? favoirteRating,
       required String title,
       required String contents,
       required String url,
@@ -41,8 +43,10 @@ class _$BookTearOff {
     return _Book(
       docKey: docKey,
       searchKeyWord: searchKeyWord,
-      reviewUserKey: reviewUserKey,
-      reviewRating: reviewRating,
+      starUserKey: starUserKey,
+      starRating: starRating,
+      favoriteUserKey: favoriteUserKey,
+      favoirteRating: favoirteRating,
       title: title,
       contents: contents,
       url: url,
@@ -69,8 +73,10 @@ const $Book = _$BookTearOff();
 mixin _$Book {
   String? get docKey => throw _privateConstructorUsedError;
   List<String>? get searchKeyWord => throw _privateConstructorUsedError;
-  List<String>? get reviewUserKey => throw _privateConstructorUsedError;
-  int? get reviewRating => throw _privateConstructorUsedError;
+  List<String>? get starUserKey => throw _privateConstructorUsedError;
+  double? get starRating => throw _privateConstructorUsedError;
+  List<String>? get favoriteUserKey => throw _privateConstructorUsedError;
+  double? get favoirteRating => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get contents => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -96,8 +102,10 @@ abstract class $BookCopyWith<$Res> {
   $Res call(
       {String? docKey,
       List<String>? searchKeyWord,
-      List<String>? reviewUserKey,
-      int? reviewRating,
+      List<String>? starUserKey,
+      double? starRating,
+      List<String>? favoriteUserKey,
+      double? favoirteRating,
       String title,
       String contents,
       String url,
@@ -123,8 +131,10 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
   $Res call({
     Object? docKey = freezed,
     Object? searchKeyWord = freezed,
-    Object? reviewUserKey = freezed,
-    Object? reviewRating = freezed,
+    Object? starUserKey = freezed,
+    Object? starRating = freezed,
+    Object? favoriteUserKey = freezed,
+    Object? favoirteRating = freezed,
     Object? title = freezed,
     Object? contents = freezed,
     Object? url = freezed,
@@ -146,14 +156,22 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
           ? _value.searchKeyWord
           : searchKeyWord // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      reviewUserKey: reviewUserKey == freezed
-          ? _value.reviewUserKey
-          : reviewUserKey // ignore: cast_nullable_to_non_nullable
+      starUserKey: starUserKey == freezed
+          ? _value.starUserKey
+          : starUserKey // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      reviewRating: reviewRating == freezed
-          ? _value.reviewRating
-          : reviewRating // ignore: cast_nullable_to_non_nullable
-              as int?,
+      starRating: starRating == freezed
+          ? _value.starRating
+          : starRating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      favoriteUserKey: favoriteUserKey == freezed
+          ? _value.favoriteUserKey
+          : favoriteUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      favoirteRating: favoirteRating == freezed
+          ? _value.favoirteRating
+          : favoirteRating // ignore: cast_nullable_to_non_nullable
+              as double?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -210,8 +228,10 @@ abstract class _$BookCopyWith<$Res> implements $BookCopyWith<$Res> {
   $Res call(
       {String? docKey,
       List<String>? searchKeyWord,
-      List<String>? reviewUserKey,
-      int? reviewRating,
+      List<String>? starUserKey,
+      double? starRating,
+      List<String>? favoriteUserKey,
+      double? favoirteRating,
       String title,
       String contents,
       String url,
@@ -238,8 +258,10 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
   $Res call({
     Object? docKey = freezed,
     Object? searchKeyWord = freezed,
-    Object? reviewUserKey = freezed,
-    Object? reviewRating = freezed,
+    Object? starUserKey = freezed,
+    Object? starRating = freezed,
+    Object? favoriteUserKey = freezed,
+    Object? favoirteRating = freezed,
     Object? title = freezed,
     Object? contents = freezed,
     Object? url = freezed,
@@ -261,14 +283,22 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
           ? _value.searchKeyWord
           : searchKeyWord // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      reviewUserKey: reviewUserKey == freezed
-          ? _value.reviewUserKey
-          : reviewUserKey // ignore: cast_nullable_to_non_nullable
+      starUserKey: starUserKey == freezed
+          ? _value.starUserKey
+          : starUserKey // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      reviewRating: reviewRating == freezed
-          ? _value.reviewRating
-          : reviewRating // ignore: cast_nullable_to_non_nullable
-              as int?,
+      starRating: starRating == freezed
+          ? _value.starRating
+          : starRating // ignore: cast_nullable_to_non_nullable
+              as double?,
+      favoriteUserKey: favoriteUserKey == freezed
+          ? _value.favoriteUserKey
+          : favoriteUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      favoirteRating: favoirteRating == freezed
+          ? _value.favoirteRating
+          : favoirteRating // ignore: cast_nullable_to_non_nullable
+              as double?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -323,8 +353,10 @@ class _$_Book extends _Book {
   const _$_Book(
       {required this.docKey,
       required this.searchKeyWord,
-      required this.reviewUserKey,
-      required this.reviewRating,
+      required this.starUserKey,
+      required this.starRating,
+      required this.favoriteUserKey,
+      required this.favoirteRating,
       required this.title,
       required this.contents,
       required this.url,
@@ -345,9 +377,13 @@ class _$_Book extends _Book {
   @override
   final List<String>? searchKeyWord;
   @override
-  final List<String>? reviewUserKey;
+  final List<String>? starUserKey;
   @override
-  final int? reviewRating;
+  final double? starRating;
+  @override
+  final List<String>? favoriteUserKey;
+  @override
+  final double? favoirteRating;
   @override
   final String title;
   @override
@@ -374,7 +410,7 @@ class _$_Book extends _Book {
 
   @override
   String toString() {
-    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, reviewUserKey: $reviewUserKey, reviewRating: $reviewRating, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
+    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, starUserKey: $starUserKey, starRating: $starRating, favoriteUserKey: $favoriteUserKey, favoirteRating: $favoirteRating, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
   }
 
   @override
@@ -386,9 +422,13 @@ class _$_Book extends _Book {
             const DeepCollectionEquality()
                 .equals(other.searchKeyWord, searchKeyWord) &&
             const DeepCollectionEquality()
-                .equals(other.reviewUserKey, reviewUserKey) &&
+                .equals(other.starUserKey, starUserKey) &&
             const DeepCollectionEquality()
-                .equals(other.reviewRating, reviewRating) &&
+                .equals(other.starRating, starRating) &&
+            const DeepCollectionEquality()
+                .equals(other.favoriteUserKey, favoriteUserKey) &&
+            const DeepCollectionEquality()
+                .equals(other.favoirteRating, favoirteRating) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.contents, contents) &&
             const DeepCollectionEquality().equals(other.url, url) &&
@@ -408,8 +448,10 @@ class _$_Book extends _Book {
       runtimeType,
       const DeepCollectionEquality().hash(docKey),
       const DeepCollectionEquality().hash(searchKeyWord),
-      const DeepCollectionEquality().hash(reviewUserKey),
-      const DeepCollectionEquality().hash(reviewRating),
+      const DeepCollectionEquality().hash(starUserKey),
+      const DeepCollectionEquality().hash(starRating),
+      const DeepCollectionEquality().hash(favoriteUserKey),
+      const DeepCollectionEquality().hash(favoirteRating),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(contents),
       const DeepCollectionEquality().hash(url),
@@ -437,8 +479,10 @@ abstract class _Book extends Book {
   const factory _Book(
       {required String? docKey,
       required List<String>? searchKeyWord,
-      required List<String>? reviewUserKey,
-      required int? reviewRating,
+      required List<String>? starUserKey,
+      required double? starRating,
+      required List<String>? favoriteUserKey,
+      required double? favoirteRating,
       required String title,
       required String contents,
       required String url,
@@ -459,9 +503,13 @@ abstract class _Book extends Book {
   @override
   List<String>? get searchKeyWord;
   @override
-  List<String>? get reviewUserKey;
+  List<String>? get starUserKey;
   @override
-  int? get reviewRating;
+  double? get starRating;
+  @override
+  List<String>? get favoriteUserKey;
+  @override
+  double? get favoirteRating;
   @override
   String get title;
   @override

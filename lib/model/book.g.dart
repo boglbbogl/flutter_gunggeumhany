@@ -11,10 +11,14 @@ _$_Book _$$_BookFromJson(Map<String, dynamic> json) => _$_Book(
       searchKeyWord: (json['searchKeyWord'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      reviewUserKey: (json['reviewUserKey'] as List<dynamic>?)
+      starUserKey: (json['starUserKey'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      reviewRating: json['reviewRating'] as int?,
+      starRating: (json['starRating'] as num?)?.toDouble(),
+      favoriteUserKey: (json['favoriteUserKey'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      favoirteRating: (json['favoirteRating'] as num?)?.toDouble(),
       title: json['title'] as String,
       contents: json['contents'] as String,
       url: json['url'] as String,
@@ -38,8 +42,10 @@ _$_Book _$$_BookFromJson(Map<String, dynamic> json) => _$_Book(
 Map<String, dynamic> _$$_BookToJson(_$_Book instance) => <String, dynamic>{
       'docKey': instance.docKey,
       'searchKeyWord': instance.searchKeyWord,
-      'reviewUserKey': instance.reviewUserKey,
-      'reviewRating': instance.reviewRating,
+      'starUserKey': instance.starUserKey,
+      'starRating': instance.starRating,
+      'favoriteUserKey': instance.favoriteUserKey,
+      'favoirteRating': instance.favoirteRating,
       'title': instance.title,
       'contents': instance.contents,
       'url': instance.url,
