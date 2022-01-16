@@ -25,7 +25,11 @@ SliverAppBar reviewAppbarWidget({
             child: Container(
               width: size.width,
               height: size.height * 0.6,
-              decoration: BoxDecoration(color: Colors.black.withOpacity(0.6)),
+              decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.6),
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12))),
             ),
           ),
           Padding(
@@ -103,7 +107,7 @@ SliverAppBar reviewAppbarWidget({
                     fontSize: 9,
                   ),
                 ),
-                const SizedBox(height: 25),
+                const SizedBox(height: 30),
               ],
             )),
           ),

@@ -6,6 +6,7 @@ class BookState extends ChangeNotifier {
   final BookRepo _bookRepo = BookRepo();
   List<Book> _localBookList = [];
   List<Book> _kakaoBookList = [];
+  Book _newBookItem = Book.empty();
   bool _isKakaoSearch = false;
   bool _isKakaoEndPage = false;
   bool _isMoreLoading = false;
@@ -60,6 +61,27 @@ class BookState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future currentBookUpdateItem({
+    required String docKey,
+  }) async {
+    _newBookItem = await _bookRepo.currentBookUpdateItem(docKey: docKey);
+    notifyListeners();
+  }
+
+  Future getNewBookWhereISBNItemNotDocKey({
+    required String isbn,
+  }) async {
+    _newBookItem = await _bookRepo.getNewBookWhereISBNItemNotDocKey(isbn: isbn);
+    notifyListeners();
+  }
+
+  void getLocalBookDetailItme({
+    required Book book,
+  }) {
+    _newBookItem = book;
+    notifyListeners();
+  }
+
   List<Book> get localBookList => _localBookList;
   List<Book> get kakaoBookList => _kakaoBookList;
   bool get isKakaoSearch => _isKakaoSearch;
@@ -67,4 +89,5 @@ class BookState extends ChangeNotifier {
   bool get isMoreLoading => _isMoreLoading;
   bool get isLocalLoading => _isLocalLoading;
   bool get isKakaoLoading => _isKakaoLoading;
+  Book get newBookItem => _newBookItem;
 }

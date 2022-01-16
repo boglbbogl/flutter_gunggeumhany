@@ -1,9 +1,78 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gunggeumhany/model/review.dart';
+import 'package:flutter_gunggeumhany/repository/review_repo.dart';
 
 class ReviewState extends ChangeNotifier {
+  final ReviewRepo _reviewRepo = ReviewRepo();
+  final Review _review = Review.empty();
+  List<Review> _reviewList = [];
+  Review? _myReview;
   double _starRating = 0;
   double _favoriteRating = 0;
   String _reviewContents = "";
+  bool _isCreateReview = false;
+
+  void started() {
+    _starRating = 0;
+    _favoriteRating = 0;
+    _reviewContents = "";
+  }
+
+  Future getReviewList({
+    required String bookDocKey,
+    required String userKey,
+  }) async {
+    _reviewList = await _reviewRepo.getReviewList(bookDocKey: bookDocKey);
+    _myReview =
+        _reviewList.where((e) => userKey.contains(e.userKey)).toList().isEmpty
+            ? null
+            : _reviewList.where((e) => userKey.contains(e.userKey)).toList()[0];
+    notifyListeners();
+  }
+
+  Future getMyReviewList({
+    required String bookDocKey,
+    required String userKey,
+  }) async {
+    _myReview =
+        await _reviewRepo.getMyReview(bookDocKey: bookDocKey, userKey: userKey);
+    notifyListeners();
+  }
+
+  Future deleteMyReview({
+    required Review review,
+    required BuildContext context,
+  }) async {
+    await _reviewRepo.deleteMyReview(review: review);
+    Navigator.of(context)
+      ..pop()
+      ..pop();
+  }
+
+  Future createReview({
+    required String bookDocKey,
+    required String userKey,
+    required BuildContext context,
+  }) async {
+    _isCreateReview = true;
+    notifyListeners();
+    if (_starRating == 0.0) {
+      //show snackbar
+    } else {
+      await _reviewRepo.createReview(
+          review: _review.copyWith(
+        bookDocKey: bookDocKey,
+        starRating: _starRating,
+        favoriteRating: _favoriteRating,
+        contents: _reviewContents,
+        userKey: userKey,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      ));
+    }
+    _isCreateReview = false;
+    notifyListeners();
+  }
 
   void changedReviewContents({
     required String value,
@@ -29,4 +98,7 @@ class ReviewState extends ChangeNotifier {
   double get starRating => _starRating;
   double get favoriteRating => _favoriteRating;
   String get reviewContents => _reviewContents;
+  bool get isCreateReview => _isCreateReview;
+  List<Review> get reviewList => _reviewList;
+  Review? get myReview => _myReview;
 }

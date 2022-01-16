@@ -1,13 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/model/kakao_book.dart';
 import 'package:flutter_gunggeumhany/repository/core/search_keyword_split.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_api.keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
-import 'package:flutter_gunggeumhany/service/core/logger.dart';
 import 'package:http/http.dart' as http;
 
 class BookRepo {
@@ -30,8 +27,31 @@ class BookRepo {
         .get();
 
     final _result = _snapshot.docs.map((e) => Book.fromJson(e.data())).toList();
-    logger.e(_result);
+
     return _result;
+  }
+
+  Future<Book> currentBookUpdateItem({
+    required String docKey,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _bookRef =
+        _firestore.collection(collectionBook).doc(docKey);
+    final _snapshot = await _bookRef.get();
+    final _result = Book.fromJson(_snapshot.data()!);
+    return _result;
+  }
+
+  Future<Book> getNewBookWhereISBNItemNotDocKey({
+    required String isbn,
+  }) async {
+    final CollectionReference<Map<String, dynamic>> _bookRef =
+        _firestore.collection(collectionBook);
+    final List<Book> _result = await _bookRef
+        .where('isbn', isEqualTo: isbn)
+        .get()
+        .then(
+            (value) => value.docs.map((e) => Book.fromJson(e.data())).toList());
+    return _result[0];
   }
 
   Future<List<Book>> getKakaoBookSearch({
@@ -75,7 +95,7 @@ class BookRepo {
                     starUserKey: [],
                     starRating: 0.0,
                     favoriteUserKey: [],
-                    favoirteRating: 0.0,
+                    favoriteRating: 0.0,
                   )
                   .toJson());
         }
@@ -129,7 +149,7 @@ class BookRepo {
                       starUserKey: [],
                       starRating: 0.0,
                       favoriteUserKey: [],
-                      favoirteRating: 0.0,
+                      favoriteRating: 0.0,
                     )
                     .toJson());
           }

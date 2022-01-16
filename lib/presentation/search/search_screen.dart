@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/constant/app_color.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_page.dart';
+import 'package:flutter_gunggeumhany/presentation/search/search_appbar_widget.dart';
+import 'package:flutter_gunggeumhany/presentation/search/search_item_widget.dart';
+import 'package:flutter_gunggeumhany/presentation/search/search_rating_widget.dart';
+import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/book_state.dart';
+import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
@@ -17,42 +22,8 @@ class SearchScreen extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        icon: const Icon(Icons.arrow_back_rounded)),
-                    SizedBox(
-                        width: size.width * 0.7,
-                        height: size.height * 0.04,
-                        child: TextFormField(
-                          onFieldSubmitted: (value) {
-                            context
-                                .read<BookState>()
-                                .getSearchBook(query: value);
-                            FocusScope.of(context).unfocus();
-                          },
-                          style: theme.textTheme.bodyText2!
-                              .copyWith(color: Colors.white, fontSize: 10),
-                          decoration:
-                              const InputDecoration(hintText: ' 검색어를 입력해 주세요'),
-                        )),
-                    if (value.isLocalLoading) ...[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: SizedBox(
-                          width: 25,
-                          height: 25,
-                          child: CircularProgressIndicator(
-                            color: appMainColor,
-                          ),
-                        ),
-                      )
-                    ],
-                  ],
-                ),
+                searchAppbarWidget(
+                    context: context, isLocalLoading: value.isLocalLoading),
                 Container(
                   margin:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
@@ -163,83 +134,34 @@ class SearchScreen extends StatelessWidget {
           children: [
             ...bookList.map(
               (e) => InkWell(
-                onTap: () {
+                onTap: () async {
+                  context.read<ReviewState>().started();
+                  if (e.docKey == null) {
+                    await context
+                        .read<BookState>()
+                        .getNewBookWhereISBNItemNotDocKey(isbn: e.isbn);
+                  } else {
+                    await context
+                        .read<BookState>()
+                        .currentBookUpdateItem(docKey: e.docKey!);
+                  }
+                  await context.read<ReviewState>().getReviewList(
+                      userKey: context.read<AuthState>().userProfile!.userKey,
+                      bookDocKey:
+                          context.read<BookState>().newBookItem.docKey!);
                   pushNewScreen(context,
-                      screen: ReviewPage(
-                        book: e,
-                      ),
+                      screen: const ReviewPage(),
                       pageTransitionAnimation:
                           PageTransitionAnimation.cupertino);
                 },
                 child: Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: const Color.fromRGBO(51, 51, 51, 1),
-                            border: Border.all(
-                                color: const Color.fromRGBO(71, 71, 71, 1))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                e.title.length > 40
-                                    ? "${e.title.substring(0, 40)} ..."
-                                    : e.title,
-                                style: theme.textTheme.bodyText2!.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              const SizedBox(height: 6),
-                              _authorsAndTranslators(
-                                  list: e.authors, title: '지은이'),
-                              _authorsAndTranslators(
-                                  list: e.translators, title: '옮긴이'),
-                              const SizedBox(height: 2),
-                              DefaultTextStyle(
-                                style: theme.textTheme.bodyText2!.copyWith(
-                                  color: const Color.fromRGBO(195, 195, 195, 1),
-                                  fontSize: 11,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Text(e.publisher),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4),
-                                      child: Container(
-                                        width: 1,
-                                        height: 8,
-                                        color: const Color.fromRGBO(
-                                            135, 135, 135, 1),
-                                      ),
-                                    ),
-                                    Text(
-                                        e.datetime.toString().substring(0, 10)),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    searchItemWidget(book: e),
                     if (!isKakaoSearch) ...[
-                      Positioned(
-                        bottom: 20,
-                        right: 20,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text("별점 ${e.starRating.toString()}"),
-                            Text("리뷰 ${e.starUserKey!.length.toString()}개"),
-                          ],
-                        ),
+                      searchRatingWidget(
+                        favorite: e.favoriteRating! / e.favoriteUserKey!.length,
+                        star: e.starRating! / e.starUserKey!.length,
+                        reviewLength: e.starUserKey!.length.toString(),
                       ),
                     ],
                   ],
@@ -249,41 +171,6 @@ class SearchScreen extends StatelessWidget {
             widget,
           ],
         ),
-      ),
-    );
-  }
-
-  DefaultTextStyle _authorsAndTranslators({
-    required List<String> list,
-    required String title,
-  }) {
-    return DefaultTextStyle(
-      style: theme.textTheme.bodyText2!.copyWith(
-        color: const Color.fromRGBO(225, 225, 225, 1),
-        fontSize: 12,
-      ),
-      child: Row(
-        children: [
-          Text(title),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: Container(
-              width: 1,
-              height: 8,
-              color: const Color.fromRGBO(135, 135, 135, 1),
-            ),
-          ),
-          ...list.map((e) => Wrap(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Text(
-                      e,
-                    ),
-                  ),
-                ],
-              )),
-        ],
       ),
     );
   }
