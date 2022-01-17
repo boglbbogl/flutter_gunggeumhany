@@ -27,7 +27,9 @@ Consumer reviewItemWidget() {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          userImage(
+                          userImageAndName(
+                              context: context,
+                              userKey: review.userProfile.userKey,
                               imageUrl: review.userProfile.imageUrl,
                               nickName: review.userProfile.nickName),
                           Row(

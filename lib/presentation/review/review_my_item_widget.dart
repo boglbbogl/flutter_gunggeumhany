@@ -29,7 +29,10 @@ SliverList reviewMyItemWidget({
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    userImage(
+                    userImageAndName(
+                        context: context,
+                        userKey:
+                            context.watch<AuthState>().userProfile!.userKey,
                         imageUrl:
                             context.watch<AuthState>().userProfile!.imageUrl,
                         nickName:

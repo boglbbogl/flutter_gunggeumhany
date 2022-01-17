@@ -4,6 +4,7 @@ import 'package:flutter_gunggeumhany/presentation/core/app_theme.dart';
 import 'package:flutter_gunggeumhany/service/activity_state.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/book_state.dart';
+import 'package:flutter_gunggeumhany/service/profile_state.dart';
 import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:flutter_gunggeumhany/service/router/router.dart';
 import 'package:flutter_gunggeumhany/service/sign_in_state.dart';
@@ -21,6 +22,7 @@ class HanyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => BookState()),
         ChangeNotifierProvider(create: (context) => ReviewState()),
         ChangeNotifierProvider(create: (context) => ActivityState()),
+        ChangeNotifierProvider(create: (context) => ProfileState()),
       ],
       child: MaterialApp.router(
         routeInformationParser: BeamerParser(),
