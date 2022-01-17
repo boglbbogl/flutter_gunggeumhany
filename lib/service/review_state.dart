@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
+import 'package:flutter_gunggeumhany/model/review_user.dart';
 import 'package:flutter_gunggeumhany/repository/review_repo.dart';
 
 class ReviewState extends ChangeNotifier {
   final ReviewRepo _reviewRepo = ReviewRepo();
   final Review _review = Review.empty();
-  List<Review> _reviewList = [];
+  List<ReviewUser> _userReviewList = [];
   Review? _myReview;
   double _starRating = 0;
   double _favoriteRating = 0;
@@ -18,15 +19,22 @@ class ReviewState extends ChangeNotifier {
     _reviewContents = "";
   }
 
-  Future getReviewList({
+  Future getUserReviewList({
     required String bookDocKey,
     required String userKey,
   }) async {
-    _reviewList = await _reviewRepo.getReviewList(bookDocKey: bookDocKey);
-    _myReview =
-        _reviewList.where((e) => userKey.contains(e.userKey)).toList().isEmpty
-            ? null
-            : _reviewList.where((e) => userKey.contains(e.userKey)).toList()[0];
+    _userReviewList =
+        await _reviewRepo.getUserJoinReview(bookDocKey: bookDocKey);
+    _myReview = _userReviewList
+            .where((e) => userKey.contains(e.userProfile.userKey))
+            .toList()
+            .isEmpty
+        ? null
+        : _userReviewList
+            .where((e) => userKey.contains(e.userProfile.userKey))
+            .toList()[0]
+            .review;
+
     notifyListeners();
   }
 
@@ -99,6 +107,6 @@ class ReviewState extends ChangeNotifier {
   double get favoriteRating => _favoriteRating;
   String get reviewContents => _reviewContents;
   bool get isCreateReview => _isCreateReview;
-  List<Review> get reviewList => _reviewList;
+  List<ReviewUser> get userReviewList => _userReviewList;
   Review? get myReview => _myReview;
 }

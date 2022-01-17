@@ -21,7 +21,7 @@ class ReviewPage extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            reviewAppbarWidget(book: _bookItem),
+            reviewAppbarWidget(book: _bookItem, context: context),
             if (context.watch<ReviewState>().myReview == null) ...[
               reviewCreateWidget(
                   context: context, bookDocKey: _bookItem.docKey ?? ""),

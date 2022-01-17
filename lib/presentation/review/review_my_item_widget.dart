@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gunggeumhany/constant/app_color.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
+import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
+import 'package:flutter_gunggeumhany/presentation/core/user_image.dart';
+import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/core/app_date_time.dart';
 import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -27,7 +29,11 @@ SliverList reviewMyItemWidget({
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('nickName'),
+                    userImage(
+                        imageUrl:
+                            context.watch<AuthState>().userProfile!.imageUrl,
+                        nickName:
+                            context.watch<AuthState>().userProfile!.nickName),
                     InkWell(
                         onTap: () {
                           showModalBottomSheet(
@@ -67,6 +73,7 @@ SliverList reviewMyItemWidget({
                   ],
                 ),
               ),
+              const SizedBox(height: 8),
               _ratingForm(
                   title: '별점',
                   icon: Icons.star_rounded,

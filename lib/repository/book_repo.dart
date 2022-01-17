@@ -26,7 +26,8 @@ class BookRepo {
         // .where('title', isLessThanOrEqualTo: "$query+\uf7ff")
         .get();
 
-    final _result = _snapshot.docs.map((e) => Book.fromJson(e.data())).toList();
+    final _result = _snapshot.docs.map((e) => Book.fromJson(e.data())).toList()
+      ..sort((a, b) => b.starRating!.compareTo(a.starRating!));
 
     return _result;
   }
@@ -96,6 +97,7 @@ class BookRepo {
                     starRating: 0.0,
                     favoriteUserKey: [],
                     favoriteRating: 0.0,
+                    bookmarkUserKey: [],
                   )
                   .toJson());
         }
@@ -150,6 +152,7 @@ class BookRepo {
                       starRating: 0.0,
                       favoriteUserKey: [],
                       favoriteRating: 0.0,
+                      bookmarkUserKey: [],
                     )
                     .toJson());
           }

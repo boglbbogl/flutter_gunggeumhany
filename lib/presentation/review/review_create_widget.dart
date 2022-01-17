@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gunggeumhany/constant/app_color.dart';
+import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -28,12 +28,13 @@ SliverList reviewCreateWidget({
                   '리뷰를 남겨주세요',
                   style: theme.textTheme.bodyText2!.copyWith(
                       color: appMainColor,
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 12),
               _ratingBarForm(
+                  isHalf: true,
                   title: "별점",
                   size: 28,
                   color: Colors.amber,
@@ -45,6 +46,7 @@ SliverList reviewCreateWidget({
                   }),
               const SizedBox(height: 8),
               _ratingBarForm(
+                  isHalf: false,
                   leftPadding: 6,
                   title: "추천",
                   size: 23,
@@ -152,7 +154,7 @@ SliverList reviewCreateWidget({
                               child: Text('리뷰 남기기',
                                   style: theme.textTheme.bodyText2!.copyWith(
                                       color: Colors.white,
-                                      fontSize: 14,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.bold)),
                             ),
                           ),
@@ -202,6 +204,7 @@ Padding _ratingBarForm({
   required double size,
   required Function(double) onRatingUpdate,
   double? leftPadding = 0,
+  required bool isHalf,
 }) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -211,13 +214,13 @@ Padding _ratingBarForm({
         Text(title,
             style: theme.textTheme.bodyText2!.copyWith(
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: 12,
               color: color,
             )),
         RatingBar(
           itemSize: size,
           itemPadding: EdgeInsets.only(left: leftPadding!),
-          allowHalfRating: true,
+          allowHalfRating: isHalf,
           ratingWidget: RatingWidget(
               full: Icon(
                 full,

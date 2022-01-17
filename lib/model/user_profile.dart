@@ -21,7 +21,8 @@ class UserProfile with _$UserProfile {
   factory UserProfile.empty() => UserProfile(
         userKey: "",
         nickName: "",
-        imageUrl: "",
+        imageUrl:
+            "https://firebasestorage.googleapis.com/v0/b/flutter-gunggeumhany-eef52.appspot.com/o/contant%2Fuser.png?alt=media&token=33cc9343-e3e4-4f56-99d3-26eda3477173",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );

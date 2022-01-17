@@ -137,9 +137,10 @@ class __$UserInformationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserInformation implements _UserInformation {
+class _$_UserInformation extends _UserInformation {
   const _$_UserInformation(
-      {required this.userKey, required this.age, required this.sex});
+      {required this.userKey, required this.age, required this.sex})
+      : super._();
 
   factory _$_UserInformation.fromJson(Map<String, dynamic> json) =>
       _$$_UserInformationFromJson(json);
@@ -184,11 +185,12 @@ class _$_UserInformation implements _UserInformation {
   }
 }
 
-abstract class _UserInformation implements UserInformation {
+abstract class _UserInformation extends UserInformation {
   const factory _UserInformation(
       {required String userKey,
       required String age,
       required String sex}) = _$_UserInformation;
+  const _UserInformation._() : super._();
 
   factory _UserInformation.fromJson(Map<String, dynamic> json) =
       _$_UserInformation.fromJson;

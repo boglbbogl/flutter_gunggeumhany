@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gunggeumhany/constant/app_color.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_page.dart';
 import 'package:flutter_gunggeumhany/presentation/search/search_appbar_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/search/search_item_widget.dart';
@@ -145,7 +145,7 @@ class SearchScreen extends StatelessWidget {
                         .read<BookState>()
                         .currentBookUpdateItem(docKey: e.docKey!);
                   }
-                  await context.read<ReviewState>().getReviewList(
+                  await context.read<ReviewState>().getUserReviewList(
                       userKey: context.read<AuthState>().userProfile!.userKey,
                       bookDocKey:
                           context.read<BookState>().newBookItem.docKey!);
@@ -156,12 +156,15 @@ class SearchScreen extends StatelessWidget {
                 },
                 child: Stack(
                   children: [
-                    searchItemWidget(book: e),
+                    searchItemWidget(
+                        book: e,
+                        isBookmark: e.bookmarkUserKey!.contains(
+                            context.read<AuthState>().userProfile!.userKey)),
                     if (!isKakaoSearch) ...[
                       searchRatingWidget(
                         favorite: e.favoriteRating! / e.favoriteUserKey!.length,
                         star: e.starRating! / e.starUserKey!.length,
-                        reviewLength: e.starUserKey!.length.toString(),
+                        reviewLength: e.starUserKey!.length,
                       ),
                     ],
                   ],

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gunggeumhany/constant/app_color.dart';
+import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 
 Positioned searchRatingWidget({
   required double favorite,
   required double star,
-  required String reviewLength,
+  required int reviewLength,
 }) {
   return Positioned(
     bottom: 20,
@@ -25,13 +25,15 @@ Positioned searchRatingWidget({
               icon: Icons.star_rounded,
               color: Colors.amber),
         ],
-        Text(
-          "리뷰 $reviewLength개",
-          style: theme.textTheme.bodyText2!.copyWith(
-              color: const Color.fromRGBO(195, 195, 195, 1),
-              fontSize: 11,
-              fontWeight: FontWeight.bold),
-        ),
+        if (reviewLength != 0) ...[
+          Text(
+            "리뷰 $reviewLength개",
+            style: theme.textTheme.bodyText2!.copyWith(
+                color: const Color.fromRGBO(195, 195, 195, 1),
+                fontSize: 11,
+                fontWeight: FontWeight.bold),
+          ),
+        ],
       ],
     ),
   );

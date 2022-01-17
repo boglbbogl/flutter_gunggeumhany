@@ -38,6 +38,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   freezed_annotation: ^1.1.0
   http: ^0.13.4
+  intl: ^0.17.0
   json_annotation: ^4.4.0
   persistent_bottom_nav_bar: ^4.0.2
   provider: ^6.0.2
@@ -84,6 +85,15 @@ flutter:
     - family: NotoSans
       fonts:
         - asset: assets/fonts/NotoSansKR-Regular.otf
+    - family: DOHYEON
+      fonts:
+        - asset: assets/fonts/BMDOHYEON_otf.otf
+    - family: Jua
+      fonts:
+        - asset: assets/fonts/Jua-Regular.ttf
+    - family: BlackHanSans
+      fonts:
+        - asset: assets/fonts/BlackHanSans-Regular.ttf
     
   #
   # For details regarding fonts from package dependencies,

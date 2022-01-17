@@ -10,6 +10,12 @@ class UserInformation with _$UserInformation {
     required String age,
     required String sex,
   }) = _UserInformation;
+  const UserInformation._();
   factory UserInformation.fromJson(Map<String, dynamic> json) =>
       _$UserInformationFromJson(json);
+  factory UserInformation.empty() => const UserInformation(
+        userKey: "",
+        age: "",
+        sex: "",
+      );
 }
