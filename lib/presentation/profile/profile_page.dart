@@ -1,6 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gunggeumhany/model/profile_model.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_indicator.dart';
 import 'package:flutter_gunggeumhany/presentation/profile/profile_appbar_widget.dart';
@@ -49,7 +48,7 @@ class ProfilePage extends StatelessWidget {
                       .where((element) =>
                           element.userProfile.userKey.contains(userKey))
                       .map((e) => e.userProfile.nickName)
-                      .first),
+                      .firstOrNull!),
               body: NestedScrollView(
                   headerSliverBuilder: (context, value) {
                     return [
@@ -83,7 +82,7 @@ class ProfilePage extends StatelessWidget {
                                 .where((element) => element.userProfile.userKey
                                     .contains(userKey))
                                 .map((e) => e.review)
-                                .first
+                                .firstOrNull!
                             //  context
                             //     .watch<ProfileState>()
                             //     .profileModel!
@@ -97,7 +96,7 @@ class ProfilePage extends StatelessWidget {
                               .where((element) =>
                                   element.userProfile.userKey.contains(userKey))
                               .map((e) => e.book)
-                              .first,
+                              .firstOrNull!,
                           // book: context
 
                           //     .watch<ProfileState>()

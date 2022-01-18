@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_theme.dart';
 import 'package:flutter_gunggeumhany/service/activity_state.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
-import 'package:flutter_gunggeumhany/service/bestseller_state.dart';
+import 'package:flutter_gunggeumhany/service/aladin_state.dart';
 import 'package:flutter_gunggeumhany/service/book_state.dart';
 import 'package:flutter_gunggeumhany/service/main_state.dart';
 import 'package:flutter_gunggeumhany/service/profile_state.dart';
@@ -20,8 +20,7 @@ class HanyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (context) => MainState()..getFirestoreBestsellerBookItem()),
+        ChangeNotifierProvider(create: (context) => MainState()),
         ChangeNotifierProvider(create: (context) => AuthState()),
         ChangeNotifierProvider(create: (context) => SignInState()),
         ChangeNotifierProvider(create: (context) => BookState()),
@@ -29,7 +28,7 @@ class HanyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ActivityState()),
         ChangeNotifierProvider(create: (context) => ProfileState()),
         ChangeNotifierProvider(create: (context) => SettingState()),
-        ChangeNotifierProvider(create: (context) => BestsellerState()),
+        ChangeNotifierProvider(create: (context) => AladinState()),
       ],
       child: MaterialApp.router(
         routeInformationParser: BeamerParser(),

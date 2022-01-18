@@ -16,8 +16,12 @@ class AuthRepo {
     final DocumentReference<Map<String, dynamic>> _userRef =
         _firestore.collection(collectionUser).doc(userKey);
     final _result = await _userRef.get();
-    final UserProfile _userProfile = UserProfile.fromJson(_result.data()!);
-    return _userProfile;
+    if (_result.exists) {
+      final UserProfile _userProfile = UserProfile.fromJson(_result.data()!);
+      return _userProfile;
+    } else {
+      return null;
+    }
   }
 
   Future<UserActivity?> getMyActivity({
@@ -26,8 +30,12 @@ class AuthRepo {
     final DocumentReference<Map<String, dynamic>> _activityRef =
         _firestore.collection(collectionUserActivity).doc(userKey);
     final _result = await _activityRef.get();
-    final UserActivity _userActivity = UserActivity.fromJson(_result.data()!);
-    return _userActivity;
+    if (_result.exists) {
+      final UserActivity _userActivity = UserActivity.fromJson(_result.data()!);
+      return _userActivity;
+    } else {
+      return null;
+    }
   }
 
   Future createNewUserProfile({

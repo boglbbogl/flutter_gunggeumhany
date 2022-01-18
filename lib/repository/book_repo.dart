@@ -98,7 +98,7 @@ class BookRepo {
                     favoriteUserKey: [],
                     favoriteRating: 0.0,
                     bookmarkUserKey: [],
-                    isbn8: _setBookData[i].isbn.split(" ")[0],
+                    isbn10: _setBookData[i].isbn.split(" ")[0],
                     isbn13: _setBookData[i].isbn.split(" ")[1],
                   )
                   .toJson());
@@ -155,7 +155,7 @@ class BookRepo {
                       favoriteUserKey: [],
                       favoriteRating: 0.0,
                       bookmarkUserKey: [],
-                      isbn8: _setBookData[i].isbn.split(" ")[0],
+                      isbn10: _setBookData[i].isbn.split(" ")[0],
                       isbn13: _setBookData[i].isbn.split(" ")[1],
                     )
                     .toJson());

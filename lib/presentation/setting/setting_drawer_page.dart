@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
+import 'package:flutter_gunggeumhany/presentation/setting/api_screen.dart';
 import 'package:flutter_gunggeumhany/presentation/setting/setting_profile_update_page.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/profile_state.dart';
@@ -43,6 +44,12 @@ class SettingDrawerPage extends StatelessWidget {
                 title: '로그아웃',
                 onTap: () {
                   context.read<AuthState>().signOut();
+                }),
+            _listTileForm(
+                icon: Icons.error_outline_rounded,
+                title: 'API',
+                onTap: () {
+                  pushNewScreen(context, screen: ApiScreen());
                 }),
           ],
         ),
