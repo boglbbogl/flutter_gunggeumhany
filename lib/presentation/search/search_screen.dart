@@ -150,7 +150,7 @@ class SearchScreen extends StatelessWidget {
                       bookDocKey:
                           context.read<BookState>().newBookItem.docKey!);
                   pushNewScreen(context,
-                      screen: const ReviewPage(),
+                      screen: const ReviewPage(bookItem: null),
                       pageTransitionAnimation:
                           PageTransitionAnimation.cupertino);
                 },

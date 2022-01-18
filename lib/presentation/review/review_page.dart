@@ -9,28 +9,47 @@ import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:provider/provider.dart';
 
 class ReviewPage extends StatelessWidget {
+  final Book? bookItem;
   const ReviewPage({
     Key? key,
+    required this.bookItem,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Book _bookItem = Provider.of<BookState>(context).newBookItem;
+    final Book _bookItem = bookItem == null
+        ? Provider.of<BookState>(context).newBookItem
+        : bookItem!;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
             reviewAppbarWidget(book: _bookItem, context: context),
-            if (context.watch<ReviewState>().myReview == null) ...[
-              reviewCreateWidget(
-                  context: context, bookDocKey: _bookItem.docKey ?? ""),
+            if (!context.watch<ReviewState>().isGetReviewListLoading) ...[
+              if (context.watch<ReviewState>().myReview == null) ...[
+                reviewCreateWidget(
+                    bookTitle: _bookItem.title,
+                    authors: _bookItem.authors,
+                    context: context,
+                    bookDocKey: _bookItem.docKey ?? ""),
+              ],
+              if (context.watch<ReviewState>().myReview != null) ...[
+                reviewMyItemWidget(
+                    me: context.watch<ReviewState>().myReview!,
+                    context: context),
+              ],
+              reviewItemWidget(),
             ],
-            if (context.watch<ReviewState>().myReview != null) ...[
-              reviewMyItemWidget(
-                  me: context.watch<ReviewState>().myReview!, context: context),
+            if (context.watch<ReviewState>().isGetReviewListLoading) ...[
+              SliverList(
+                  delegate: SliverChildListDelegate([
+                const Padding(
+                  padding: EdgeInsets.only(top: 40),
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              ]))
             ],
-            reviewItemWidget(),
           ],
         ),
       ),

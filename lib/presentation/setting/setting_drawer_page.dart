@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
+import 'package:flutter_gunggeumhany/presentation/setting/setting_profile_update_page.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/profile_state.dart';
+import 'package:flutter_gunggeumhany/service/setting_state.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
 class SettingDrawerPage extends StatelessWidget {
@@ -28,7 +31,13 @@ class SettingDrawerPage extends StatelessWidget {
         body: Column(
           children: [
             _listTileForm(
-                icon: Icons.account_circle_rounded, title: '프로필', onTap: () {}),
+                icon: Icons.account_circle_rounded,
+                title: '프로필',
+                onTap: () {
+                  context.read<SettingState>().started();
+                  context.read<ProfileState>().openAndCloseDrawer(value: false);
+                  pushNewScreen(context, screen: SettingProfileUpdatePage());
+                }),
             _listTileForm(
                 icon: Icons.logout_rounded,
                 title: '로그아웃',

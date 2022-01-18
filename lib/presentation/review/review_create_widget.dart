@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 SliverList reviewCreateWidget({
   required BuildContext context,
   required String bookDocKey,
+  required String bookTitle,
+  required List<String> authors,
 }) {
   return SliverList(
       delegate: SliverChildListDelegate([
@@ -121,6 +123,8 @@ SliverList reviewCreateWidget({
                       await context.read<ReviewState>().createReview(
                             context: context,
                             bookDocKey: bookDocKey,
+                            bookTitle: bookTitle,
+                            authors: authors,
                             userKey:
                                 context.read<AuthState>().userProfile!.userKey,
                           );

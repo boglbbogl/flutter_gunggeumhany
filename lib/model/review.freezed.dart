@@ -29,6 +29,8 @@ class _$ReviewTearOff {
       required double starRating,
       required double favoriteRating,
       required String contents,
+      required String bookTitle,
+      required List<String> bookAuthors,
       @TimestampConverter() required DateTime createdAt,
       @TimestampConverter() required DateTime updatedAt}) {
     return _Review(
@@ -38,6 +40,8 @@ class _$ReviewTearOff {
       starRating: starRating,
       favoriteRating: favoriteRating,
       contents: contents,
+      bookTitle: bookTitle,
+      bookAuthors: bookAuthors,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
@@ -59,6 +63,8 @@ mixin _$Review {
   double get starRating => throw _privateConstructorUsedError;
   double get favoriteRating => throw _privateConstructorUsedError;
   String get contents => throw _privateConstructorUsedError;
+  String get bookTitle => throw _privateConstructorUsedError;
+  List<String> get bookAuthors => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -80,6 +86,8 @@ abstract class $ReviewCopyWith<$Res> {
       double starRating,
       double favoriteRating,
       String contents,
+      String bookTitle,
+      List<String> bookAuthors,
       @TimestampConverter() DateTime createdAt,
       @TimestampConverter() DateTime updatedAt});
 }
@@ -100,6 +108,8 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
     Object? starRating = freezed,
     Object? favoriteRating = freezed,
     Object? contents = freezed,
+    Object? bookTitle = freezed,
+    Object? bookAuthors = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -128,6 +138,14 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
           ? _value.contents
           : contents // ignore: cast_nullable_to_non_nullable
               as String,
+      bookTitle: bookTitle == freezed
+          ? _value.bookTitle
+          : bookTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      bookAuthors: bookAuthors == freezed
+          ? _value.bookAuthors
+          : bookAuthors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -152,6 +170,8 @@ abstract class _$ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
       double starRating,
       double favoriteRating,
       String contents,
+      String bookTitle,
+      List<String> bookAuthors,
       @TimestampConverter() DateTime createdAt,
       @TimestampConverter() DateTime updatedAt});
 }
@@ -173,6 +193,8 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
     Object? starRating = freezed,
     Object? favoriteRating = freezed,
     Object? contents = freezed,
+    Object? bookTitle = freezed,
+    Object? bookAuthors = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -201,6 +223,14 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
           ? _value.contents
           : contents // ignore: cast_nullable_to_non_nullable
               as String,
+      bookTitle: bookTitle == freezed
+          ? _value.bookTitle
+          : bookTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      bookAuthors: bookAuthors == freezed
+          ? _value.bookAuthors
+          : bookAuthors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       createdAt: createdAt == freezed
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -223,6 +253,8 @@ class _$_Review extends _Review {
       required this.starRating,
       required this.favoriteRating,
       required this.contents,
+      required this.bookTitle,
+      required this.bookAuthors,
       @TimestampConverter() required this.createdAt,
       @TimestampConverter() required this.updatedAt})
       : super._();
@@ -243,6 +275,10 @@ class _$_Review extends _Review {
   @override
   final String contents;
   @override
+  final String bookTitle;
+  @override
+  final List<String> bookAuthors;
+  @override
   @TimestampConverter()
   final DateTime createdAt;
   @override
@@ -251,7 +287,7 @@ class _$_Review extends _Review {
 
   @override
   String toString() {
-    return 'Review(docKey: $docKey, bookDocKey: $bookDocKey, userKey: $userKey, starRating: $starRating, favoriteRating: $favoriteRating, contents: $contents, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Review(docKey: $docKey, bookDocKey: $bookDocKey, userKey: $userKey, starRating: $starRating, favoriteRating: $favoriteRating, contents: $contents, bookTitle: $bookTitle, bookAuthors: $bookAuthors, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -268,6 +304,9 @@ class _$_Review extends _Review {
             const DeepCollectionEquality()
                 .equals(other.favoriteRating, favoriteRating) &&
             const DeepCollectionEquality().equals(other.contents, contents) &&
+            const DeepCollectionEquality().equals(other.bookTitle, bookTitle) &&
+            const DeepCollectionEquality()
+                .equals(other.bookAuthors, bookAuthors) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
@@ -281,6 +320,8 @@ class _$_Review extends _Review {
       const DeepCollectionEquality().hash(starRating),
       const DeepCollectionEquality().hash(favoriteRating),
       const DeepCollectionEquality().hash(contents),
+      const DeepCollectionEquality().hash(bookTitle),
+      const DeepCollectionEquality().hash(bookAuthors),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt));
 
@@ -303,6 +344,8 @@ abstract class _Review extends Review {
       required double starRating,
       required double favoriteRating,
       required String contents,
+      required String bookTitle,
+      required List<String> bookAuthors,
       @TimestampConverter() required DateTime createdAt,
       @TimestampConverter() required DateTime updatedAt}) = _$_Review;
   const _Review._() : super._();
@@ -321,6 +364,10 @@ abstract class _Review extends Review {
   double get favoriteRating;
   @override
   String get contents;
+  @override
+  String get bookTitle;
+  @override
+  List<String> get bookAuthors;
   @override
   @TimestampConverter()
   DateTime get createdAt;

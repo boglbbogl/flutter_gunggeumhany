@@ -14,12 +14,13 @@ InkWell userImage({
 }) {
   return InkWell(
     onTap: () async {
-      await context.read<ProfileState>().getUserReviewAndProfile(
+      context.read<ProfileState>().getUserReviewAndProfile(
           userKey: context.read<AuthState>().userProfile!.userKey);
       context.read<ProfileState>().openAndCloseDrawer(value: false);
       pushNewScreen(context,
-          screen: const ProfilePage(
+          screen: ProfilePage(
             isMe: true,
+            userKey: context.read<AuthState>().userProfile!.userKey,
           ));
     },
     child: Padding(
@@ -62,13 +63,12 @@ InkWell userImageAndName({
 }) {
   return InkWell(
     onTap: () async {
-      await context
-          .read<ProfileState>()
-          .getUserReviewAndProfile(userKey: userKey);
+      context.read<ProfileState>().getUserReviewAndProfile(userKey: userKey);
       context.read<ProfileState>().openAndCloseDrawer(value: false);
       pushNewScreen(context,
-          screen: const ProfilePage(
+          screen: ProfilePage(
             isMe: false,
+            userKey: userKey,
           ));
     },
     child: Row(

@@ -27,17 +27,21 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  another_flushbar: ^1.10.28
   beamer: ^1.2.0
   cached_network_image: ^3.2.0
   cloud_firestore: ^3.1.6
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.3.5
   firebase_core: ^1.11.0
+  firebase_storage: ^10.2.4
   flutter:
     sdk: flutter
   flutter_rating_bar: ^4.0.0
   freezed_annotation: ^1.1.0
   http: ^0.13.4
+  image: ^3.1.1
+  image_picker: ^0.8.4+4
   intl: ^0.17.0
   json_annotation: ^4.4.0
   persistent_bottom_nav_bar: ^4.0.2

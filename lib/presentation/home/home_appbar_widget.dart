@@ -3,8 +3,8 @@ import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_fonts.dart';
 import 'package:flutter_gunggeumhany/presentation/core/user_image.dart';
 import 'package:flutter_gunggeumhany/presentation/search/search_screen.dart';
+import 'package:flutter_gunggeumhany/repository/bestseller_repo.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
-import 'package:flutter_gunggeumhany/service/profile_state.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 

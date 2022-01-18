@@ -1,19 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gunggeumhany/model/profile_model.dart';
-import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/repository/profile_repo.dart';
-import 'package:flutter_gunggeumhany/service/core/logger.dart';
 
 class ProfileState extends ChangeNotifier {
   final ProfileRepo _profileRepo = ProfileRepo();
   bool _isDrawer = false;
-  ProfileModel? _profileModel;
+  final List<ProfileModel> _profileModelList = [];
 
   Future getUserReviewAndProfile({
     required String userKey,
   }) async {
-    _profileModel =
+    final ProfileModel _profileModel =
         await _profileRepo.getUserReviewAndProfile(userKey: userKey);
+
+    final ProfileModel? _deleteUserModel = _profileModelList
+            .where((element) => userKey.contains(element.userProfile.userKey))
+            .toList()
+            .isEmpty
+        ? null
+        : _profileModelList
+            .where((element) => userKey.contains(element.userProfile.userKey))
+            .toList()[0];
+    if (_deleteUserModel != null) {
+      _profileModelList.remove(_deleteUserModel);
+    }
+    _profileModelList.add(_profileModel);
     notifyListeners();
   }
 
@@ -25,5 +36,5 @@ class ProfileState extends ChangeNotifier {
   }
 
   bool get isDrawer => _isDrawer;
-  ProfileModel? get profileModel => _profileModel;
+  List<ProfileModel> get profileModelList => _profileModelList;
 }

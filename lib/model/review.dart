@@ -14,6 +14,8 @@ class Review with _$Review {
     required double starRating,
     required double favoriteRating,
     required String contents,
+    required String bookTitle,
+    required List<String> bookAuthors,
     @TimestampConverter() required DateTime createdAt,
     @TimestampConverter() required DateTime updatedAt,
   }) = _Review;
@@ -29,5 +31,7 @@ class Review with _$Review {
         contents: "",
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
+        bookAuthors: [],
+        bookTitle: "",
       );
 }

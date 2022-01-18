@@ -12,6 +12,7 @@ class ReviewState extends ChangeNotifier {
   double _favoriteRating = 0;
   String _reviewContents = "";
   bool _isCreateReview = false;
+  bool _isGetReviewListLoading = false;
 
   void started() {
     _starRating = 0;
@@ -23,6 +24,8 @@ class ReviewState extends ChangeNotifier {
     required String bookDocKey,
     required String userKey,
   }) async {
+    _isGetReviewListLoading = true;
+    notifyListeners();
     _userReviewList =
         await _reviewRepo.getUserJoinReview(bookDocKey: bookDocKey);
     _myReview = _userReviewList
@@ -34,6 +37,7 @@ class ReviewState extends ChangeNotifier {
             .where((e) => userKey.contains(e.userProfile.userKey))
             .toList()[0]
             .review;
+    _isGetReviewListLoading = false;
 
     notifyListeners();
   }
@@ -60,6 +64,8 @@ class ReviewState extends ChangeNotifier {
   Future createReview({
     required String bookDocKey,
     required String userKey,
+    required String bookTitle,
+    required List<String> authors,
     required BuildContext context,
   }) async {
     _isCreateReview = true;
@@ -76,6 +82,8 @@ class ReviewState extends ChangeNotifier {
         userKey: userKey,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
+        bookTitle: bookTitle,
+        bookAuthors: authors,
       ));
     }
     _isCreateReview = false;
@@ -109,4 +117,5 @@ class ReviewState extends ChangeNotifier {
   bool get isCreateReview => _isCreateReview;
   List<ReviewUser> get userReviewList => _userReviewList;
   Review? get myReview => _myReview;
+  bool get isGetReviewListLoading => _isGetReviewListLoading;
 }
