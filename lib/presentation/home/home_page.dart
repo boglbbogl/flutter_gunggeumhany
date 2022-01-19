@@ -31,6 +31,10 @@ class HomePage extends StatelessWidget {
                           createdAt: provider.bestsellerCreatedAt,
                           book: provider.bestsellerList),
                       _mainBookForm(
+                          title: "궁금하니 추천",
+                          createdAt: "",
+                          book: provider.hanyRecommedBook),
+                      _mainBookForm(
                           title: '주목할 만한 신간',
                           createdAt: provider.specialNewBookCreatedAt,
                           book: provider.specialNewBookList),
@@ -38,14 +42,18 @@ class HomePage extends StatelessWidget {
                           title: '추천 리스트',
                           createdAt: provider.recommendBlogCreatedAt,
                           book: provider.recommendBlogList),
-                      _mainBookForm(
-                          title: '베스트 셀러 (외국)',
-                          createdAt: provider.bestsellerForeignCreatedAt,
-                          book: provider.bestsellerForeignList),
-                      _mainBookForm(
-                          title: '신간',
-                          createdAt: provider.newBookCreatedAt,
-                          book: provider.newBookList),
+                      if (provider.bestsellerForeignList.isNotEmpty) ...[
+                        _mainBookForm(
+                            title: '베스트 셀러 (외국)',
+                            createdAt: provider.bestsellerForeignCreatedAt,
+                            book: provider.bestsellerForeignList),
+                      ],
+                      if (provider.newBookList.isNotEmpty) ...[
+                        _mainBookForm(
+                            title: '신간',
+                            createdAt: provider.newBookCreatedAt,
+                            book: provider.newBookList),
+                      ],
                       if (provider.editorMysteryStory.isNotEmpty) ...[
                         _mainBookForm(
                             title: '미스테리 소설',
@@ -88,12 +96,6 @@ class HomePage extends StatelessWidget {
                             createdAt: provider.recommendEditorCreatedAt,
                             book: provider.editorArtAndCulture),
                       ],
-                      if (provider.editorChildBook.isNotEmpty) ...[
-                        _mainBookForm(
-                            title: '어린이',
-                            createdAt: provider.recommendEditorCreatedAt,
-                            book: provider.editorChildBook),
-                      ],
                       if (provider.editorEssay.isNotEmpty) ...[
                         _mainBookForm(
                             title: '에세이',
@@ -111,6 +113,12 @@ class HomePage extends StatelessWidget {
                             title: '외국어',
                             createdAt: provider.recommendEditorCreatedAt,
                             book: provider.editorForeignLanguage),
+                      ],
+                      if (provider.editorChildBook.isNotEmpty) ...[
+                        _mainBookForm(
+                            title: '어린이',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorChildBook),
                       ],
                       if (provider.editorCartoon.isNotEmpty) ...[
                         _mainBookForm(
@@ -131,8 +139,8 @@ class HomePage extends StatelessWidget {
                             book: provider.editorMusicBook),
                       ],
                       const SizedBox(height: 20),
-                      if (provider.bestsellerList.isNotEmpty ||
-                          provider.moreBookItemIndex != 3) ...[
+                      if (provider.bestsellerList.isNotEmpty &&
+                          provider.moreBookItemIndex != 5) ...[
                         Shimmer.fromColors(
                           baseColor: const Color.fromRGBO(155, 155, 155, 1),
                           highlightColor:
@@ -152,6 +160,12 @@ class HomePage extends StatelessWidget {
                                       } else if (provider.moreBookItemIndex ==
                                           2) {
                                         provider.categoryMoreBookThirdItem();
+                                      } else if (provider.moreBookItemIndex ==
+                                          3) {
+                                        provider.categoryMoreBookForthItem();
+                                      } else if (provider.moreBookItemIndex ==
+                                          4) {
+                                        provider.categoryMoreBookFifthItem();
                                       } else {}
                                     },
                                     child: const Icon(

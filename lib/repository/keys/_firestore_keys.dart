@@ -9,6 +9,7 @@ const collectionNewBook = "NEWBOOKS";
 const collectionSpecialNewBook = "SPECIAL_NEWBOOKS";
 const collectionRecommendBlog = "RECOMMEND_BLOG";
 const collectionRecommendEditor = "RECOMMEND_EDITOR";
+const collectionHanyRecommend = "HANY_RECOMMEND";
 // subCollection
 const documentEditorMystery = "MYSTERY_STORY_50926";
 const documentEditorDrama = "DRAMA_STORY_51242";

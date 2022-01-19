@@ -9,6 +9,8 @@ List<String> searchKeywordSplit({
   final List<String> _titleSplit3 = book[index].title.split(")");
   final List<String> _titleSplit4 = book[index].title.split(".");
   final List<String> _titleSplit5 = book[index].title.split(":");
+  final List<String> _titleSplit6 =
+      book[index].title.replaceAll(".", " ").split(" ");
   final List<String> _contentsSplit = book[index].contents.split(" ");
   final List<String> _authorAndTranslatorSplit = [];
   for (final element in book[index].authors) {
@@ -29,6 +31,7 @@ List<String> searchKeywordSplit({
       _titleSplit3 +
       _titleSplit4 +
       _titleSplit5 +
+      _titleSplit6 +
       _contentsSplit +
       _translators +
       _authorAndTranslatorSplit;

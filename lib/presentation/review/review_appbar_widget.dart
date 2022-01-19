@@ -208,12 +208,15 @@ SliverAppBar reviewAppbarWidget({
                   ),
                 ),
                 const SizedBox(height: 6),
-                Text(
+                if(book.contents.isNotEmpty)...[
+  Text(
                   "${book.contents} ...",
                   style: theme.textTheme.bodyText2!.copyWith(
                     fontSize: 9,
                   ),
                 ),
+                ],
+              
                 const SizedBox(height: 35),
               ],
             )),

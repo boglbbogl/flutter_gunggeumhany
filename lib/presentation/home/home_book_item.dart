@@ -34,7 +34,7 @@ class HomeBookItem extends StatelessWidget {
                   title,
                   style: theme.textTheme.bodyText2!.copyWith(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(width: 18),

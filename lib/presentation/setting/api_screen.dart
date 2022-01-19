@@ -61,22 +61,21 @@ class ApiScreen extends StatelessWidget {
                   onTap: () {
                     context
                         .read<AladinState>()
-                        .aladinRecommendEditorFistToFirestoreLogic();
+                        .recommendEditorAladinISBNReCallKakaoBook();
                   },
-                  isLoading: context
-                      .watch<AladinState>()
-                      .isRecommendEditorFirstLoading,
+                  isLoading:
+                      context.watch<AladinState>().isRecommendEditorLoading,
                   title: '에디터 추천(카테고리 별) - 1'),
-              _apiForm(
-                  onTap: () {
-                    context
-                        .read<AladinState>()
-                        .aladinRecommendEditorSecondToFirestoreLogic();
-                  },
-                  isLoading: context
-                      .watch<AladinState>()
-                      .isRecommendEditorSecondLoading,
-                  title: '에디터 추천(카테고리 별) - 2'),
+              // _apiForm(
+              //     onTap: () {
+              //       context
+              //           .read<AladinState>()
+              //           .aladinRecommendEditorSecondToFirestoreLogic();
+              //     },
+              //     isLoading: context
+              //         .watch<AladinState>()
+              //         .isRecommendEditorSecondLoading,
+              //     title: '에디터 추천(카테고리 별) - 2'),
             ],
           ),
         ),
