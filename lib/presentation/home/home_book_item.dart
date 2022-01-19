@@ -43,7 +43,7 @@ class HomeBookItem extends StatelessWidget {
                     createdAt,
                     style: theme.textTheme.bodyText2!.copyWith(
                       color: const Color.fromRGBO(155, 155, 155, 1),
-                      fontSize: 12,
+                      fontSize: 10,
                     ),
                   ),
                 ],

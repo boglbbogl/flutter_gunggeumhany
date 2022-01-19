@@ -16,47 +16,101 @@ class ApiScreen extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              InkWell(
+              _apiForm(
                   onTap: () {
                     context
                         .read<AladinState>()
                         .aladinBestsellerToFirestoreLogic();
                   },
-                  child: const Text('알라딘 베스트셀러')),
-              const SizedBox(height: 30),
-              InkWell(
+                  isLoading: context.watch<AladinState>().isBestsellerLoading,
+                  title: '알라딘 베스트셀러'),
+              _apiForm(
                   onTap: () {
                     context
                         .read<AladinState>()
                         .aladinBestsellerForeignToFirestoreLogic();
                   },
-                  child: const Text('알라딘 베스트셀러(외국)')),
-              const SizedBox(height: 30),
-              InkWell(
+                  isLoading:
+                      context.watch<AladinState>().isBestsellerForeignLoading,
+                  title: '알라딘 베스트셀러(외국)'),
+              _apiForm(
                   onTap: () {
                     context.read<AladinState>().aladinNewBookToFirestoreLogic();
                   },
-                  child: const Text('알라딘 신간')),
-              const SizedBox(height: 30),
-              InkWell(
+                  isLoading: context.watch<AladinState>().isNewBookLoading,
+                  title: '알라딘 신간'),
+              _apiForm(
                   onTap: () {
                     context
                         .read<AladinState>()
                         .aladinSpecialNewBookToFirestoreLogic();
                   },
-                  child: const Text('알라딘 주목할 만한 신간')),
-              const SizedBox(height: 30),
-              InkWell(
+                  isLoading:
+                      context.watch<AladinState>().isSpecialNewBookLoading,
+                  title: '알라딘 주목할 만한 신간'),
+              _apiForm(
                   onTap: () {
                     context
                         .read<AladinState>()
                         .aladinRecommendBlogToFirestoreLogic();
                   },
-                  child: const Text('블로그 추천')),
+                  isLoading:
+                      context.watch<AladinState>().isRecommendBlogLoading,
+                  title: '블로그 추천'),
+              _apiForm(
+                  onTap: () {
+                    context
+                        .read<AladinState>()
+                        .aladinRecommendEditorFistToFirestoreLogic();
+                  },
+                  isLoading: context
+                      .watch<AladinState>()
+                      .isRecommendEditorFirstLoading,
+                  title: '에디터 추천(카테고리 별) - 1'),
+              _apiForm(
+                  onTap: () {
+                    context
+                        .read<AladinState>()
+                        .aladinRecommendEditorSecondToFirestoreLogic();
+                  },
+                  isLoading: context
+                      .watch<AladinState>()
+                      .isRecommendEditorSecondLoading,
+                  title: '에디터 추천(카테고리 별) - 2'),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Column _apiForm({
+    required Function() onTap,
+    required bool isLoading,
+    required String title,
+  }) {
+    return Column(
+      children: [
+        SizedBox(
+          width: size.width * 0.8,
+          height: size.height * 0.06,
+          child: ElevatedButton(
+            onPressed: onTap,
+            child: isLoading
+                ? CircularProgressIndicator(
+                    color: appMainColor,
+                  )
+                : Text(
+                    title,
+                    style: theme.textTheme.bodyText2!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
+                  ),
+          ),
+        ),
+        const SizedBox(height: 35),
+      ],
     );
   }
 }

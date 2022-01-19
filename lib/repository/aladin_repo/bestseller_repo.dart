@@ -27,7 +27,10 @@ class BestsellerRepo {
     final _createdAt = _bestsellerSnapshot.docs
         .map((e) => e.data()["createdAt"] as Timestamp)
         .firstOrNull;
-    final _result = DateFormat.yMMMEd().format(_createdAt!.toDate());
+    final _result = _createdAt != null
+        ? DateFormat.yMMMEd().format(_createdAt.toDate())
+        : "";
+
     return _result;
   }
 
@@ -43,23 +46,25 @@ class BestsellerRepo {
         .get();
     final _result =
         _bestsellerSnapshot.docs.map((e) => e.data()["ISBN"]).firstOrNull;
-    for (final element in _result) {
-      if (element != "") {
-        final _bookSnapshot =
-            await _bookRef.where("isbn13", isEqualTo: element).get();
-        final Book? _bookResult =
-            _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
-                ? null
-                : _bookSnapshot.docs
-                    .map((e) => Book.fromJson(e.data()))
-                    .firstOrNull!;
-        if (_bookResult != null) {
-          _bestsellerList.add(_bookResult);
+    if (_result != null) {
+      for (final element in _result) {
+        if (element != "") {
+          final _bookSnapshot =
+              await _bookRef.where("isbn13", isEqualTo: element).get();
+          final Book? _bookResult =
+              _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
+                  ? null
+                  : _bookSnapshot.docs
+                      .map((e) => Book.fromJson(e.data()))
+                      .firstOrNull!;
+          if (_bookResult != null) {
+            _bestsellerList.add(_bookResult);
+          }
         }
       }
+      return _bestsellerList;
     }
-
-    return _bestsellerList;
+    return [];
   }
 
   Future<List<String>> getAladinBestsellerISBN() async {
@@ -146,7 +151,10 @@ class BestsellerRepo {
     final _createdAt = _bestsellerForeignSnapshot.docs
         .map((e) => e.data()["createdAt"] as Timestamp)
         .firstOrNull;
-    final _result = DateFormat.yMMMEd().format(_createdAt!.toDate());
+    final _result = _createdAt != null
+        ? DateFormat.yMMMEd().format(_createdAt.toDate())
+        : "";
+
     return _result;
   }
 
@@ -160,26 +168,30 @@ class BestsellerRepo {
         .orderBy("createdAt", descending: true)
         .limit(1)
         .get();
+
     final _result = _bestsellerForeignSnapshot.docs
         .map((e) => e.data()["ISBN"])
         .firstOrNull;
-    for (final element in _result) {
-      if (element != "") {
-        final _bookSnapshot =
-            await _bookRef.where("isbn13", isEqualTo: element).get();
-        final Book? _bookResult =
-            _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
-                ? null
-                : _bookSnapshot.docs
-                    .map((e) => Book.fromJson(e.data()))
-                    .firstOrNull!;
-        if (_bookResult != null) {
-          _bestsellerForeignList.add(_bookResult);
+    if (_result != null) {
+      for (final element in _result) {
+        if (element != "") {
+          final _bookSnapshot =
+              await _bookRef.where("isbn13", isEqualTo: element).get();
+          final Book? _bookResult =
+              _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
+                  ? null
+                  : _bookSnapshot.docs
+                      .map((e) => Book.fromJson(e.data()))
+                      .firstOrNull!;
+          if (_bookResult != null) {
+            _bestsellerForeignList.add(_bookResult);
+          }
         }
       }
-    }
 
-    return _bestsellerForeignList;
+      return _bestsellerForeignList;
+    }
+    return [];
   }
 
   Future<List<String>> getAladinBestsellerForeignISBN() async {

@@ -23,7 +23,10 @@ class NewBookRepo {
     final _createdAt = _newBookSnapshot.docs
         .map((e) => e.data()["createdAt"] as Timestamp)
         .firstOrNull;
-    final _result = DateFormat.yMMMEd().format(_createdAt!.toDate());
+    final _result = _createdAt != null
+        ? DateFormat.yMMMEd().format(_createdAt.toDate())
+        : "";
+
     return _result;
   }
 
@@ -37,23 +40,26 @@ class NewBookRepo {
         await _newBookRef.orderBy("createdAt", descending: true).limit(1).get();
     final _result =
         _newBookSnapshot.docs.map((e) => e.data()["ISBN"]).firstOrNull;
-    for (final element in _result) {
-      if (element != "") {
-        final _bookSnapshot =
-            await _bookRef.where("isbn13", isEqualTo: element).get();
-        final Book? _bookResult =
-            _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
-                ? null
-                : _bookSnapshot.docs
-                    .map((e) => Book.fromJson(e.data()))
-                    .firstOrNull!;
-        if (_bookResult != null) {
-          _newBookList.add(_bookResult);
+    if (_result != null) {
+      for (final element in _result) {
+        if (element != "") {
+          final _bookSnapshot =
+              await _bookRef.where("isbn13", isEqualTo: element).get();
+          final Book? _bookResult =
+              _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
+                  ? null
+                  : _bookSnapshot.docs
+                      .map((e) => Book.fromJson(e.data()))
+                      .firstOrNull!;
+          if (_bookResult != null) {
+            _newBookList.add(_bookResult);
+          }
         }
       }
-    }
 
-    return _newBookList;
+      return _newBookList;
+    }
+    return [];
   }
 
   Future<List<String>> getAladinNewBookISBN() async {
@@ -140,7 +146,10 @@ class NewBookRepo {
     final _createdAt = _specialNewBookSnapshot.docs
         .map((e) => e.data()["createdAt"] as Timestamp)
         .firstOrNull;
-    final _result = DateFormat.yMMMEd().format(_createdAt!.toDate());
+    final _result = _createdAt != null
+        ? DateFormat.yMMMEd().format(_createdAt.toDate())
+        : "";
+
     return _result;
   }
 
@@ -156,28 +165,31 @@ class NewBookRepo {
         .get();
     final _result =
         _specialNewBookSnapshot.docs.map((e) => e.data()["ISBN"]).firstOrNull;
-    for (final element in _result) {
-      if (element != "") {
-        final _bookSnapshot =
-            await _bookRef.where("isbn13", isEqualTo: element).get();
-        final Book? _bookResult =
-            _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
-                ? null
-                : _bookSnapshot.docs
-                    .map((e) => Book.fromJson(e.data()))
-                    .firstOrNull!;
-        if (_bookResult != null) {
-          _speicalNewBookList.add(_bookResult);
+    if (_result != null) {
+      for (final element in _result) {
+        if (element != "") {
+          final _bookSnapshot =
+              await _bookRef.where("isbn13", isEqualTo: element).get();
+          final Book? _bookResult =
+              _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
+                  ? null
+                  : _bookSnapshot.docs
+                      .map((e) => Book.fromJson(e.data()))
+                      .firstOrNull!;
+          if (_bookResult != null) {
+            _speicalNewBookList.add(_bookResult);
+          }
         }
       }
-    }
 
-    return _speicalNewBookList;
+      return _speicalNewBookList;
+    }
+    return [];
   }
 
   Future<List<String>> getAladinSpecialNewBookISBN() async {
     final uri = Uri.parse(
-        "$aladinApiBaseUrl/ItemList.aspx?ttbkey=$aladinApiKey&QueryType=ItemNewSpecial&MaxResults=25&start=1&SearchTarget=book&output=js&Version=20131101");
+        "$aladinApiBaseUrl/ItemList.aspx?ttbkey=$aladinApiKey&QueryType=ItemNewSpecial&MaxResults=50&start=1&SearchTarget=book&output=js&Version=20131101");
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       final decoded = json.decode(utf8.decode(response.bodyBytes));
