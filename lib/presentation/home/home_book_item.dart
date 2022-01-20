@@ -84,13 +84,14 @@ class HomeBookItem extends StatelessWidget {
                                 : ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
                                     child: CachedNetworkImage(
-                                        imageUrl: book.thumbnail,
-                                        fit: BoxFit.cover,
-                                        placeholder: (context, url) => Center(
-                                              child: CircularProgressIndicator(
-                                                color: appMainColor,
-                                              ),
-                                            )),
+                                      imageUrl: book.thumbnail,
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) => Center(
+                                        child: CircularProgressIndicator(
+                                          color: appMainColor,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                           ),
                         ),

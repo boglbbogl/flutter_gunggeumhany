@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
-import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/setting_state.dart';
 import 'package:provider/provider.dart';
 

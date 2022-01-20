@@ -5,7 +5,6 @@ import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/model/user_activity.dart';
 import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
-import 'package:flutter_gunggeumhany/service/core/logger.dart';
 
 class ProfileRepo {
   static final ProfileRepo _profileRepo = ProfileRepo._internal();
@@ -32,22 +31,27 @@ class ProfileRepo {
     for (final element in _userActivity.bookmarkBookDocKey) {
       final _bookRef = _firestore.collection(collectionBook).doc(element);
       final _bookSnapshot = await _bookRef.get();
-      final _bookResult = Book.fromJson(_bookSnapshot.data()!);
-      _book.add(_bookResult);
+      if (_bookSnapshot.exists) {
+        final _bookResult = Book.fromJson(_bookSnapshot.data()!);
+        _book.add(_bookResult);
+      }
     }
-    for (final element in _userActivity.myReviewDocKey) {
-      final _reviewRef = _firestore
-          .collection(collectionBook)
-          .doc(element)
-          .collection(collectionReview);
-      final _reviewResult = await _reviewRef.get().then((value) {
-        return value.docs
-            .where((element) => element.data()["userKey"] == userKey)
-            .map((e) => Review.fromJson(e.data()))
-            .toList()[0];
-      });
-      _review.add(_reviewResult);
+    if (_userActivity.myReviewDocKey.isNotEmpty) {
+      for (final element in _userActivity.myReviewDocKey) {
+        final _reviewRef = _firestore
+            .collection(collectionBook)
+            .doc(element)
+            .collection(collectionReview);
+        final _reviewResult = await _reviewRef.get().then((value) {
+          return value.docs
+              .where((element) => element.data()["userKey"] == userKey)
+              .map((e) => Review.fromJson(e.data()))
+              .toList()[0];
+        });
+        _review.add(_reviewResult);
+      }
     }
+
     final ProfileModel _result =
         ProfileModel(userProfile: _userProfile, review: _review, book: _book);
     return _result;

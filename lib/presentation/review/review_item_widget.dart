@@ -52,10 +52,12 @@ Consumer reviewItemWidget() {
                         ],
                       ),
                       const SizedBox(height: 12),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('"${review.review.contents}"'),
-                      ),
+                      if (review.review.contents.isNotEmpty) ...[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('"${review.review.contents}"'),
+                        ),
+                      ],
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Text(

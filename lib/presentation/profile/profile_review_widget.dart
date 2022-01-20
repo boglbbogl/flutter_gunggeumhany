@@ -91,15 +91,17 @@ Tab profileReviewWidget({
                                 )
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 18),
-                              child: Text(
-                                '"${e.contents}"',
-                                style: theme.textTheme.bodyText2!.copyWith(
-                                    color: Colors.white, fontSize: 13),
+                            if (e.contents.isNotEmpty) ...[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 18),
+                                child: Text(
+                                  '"${e.contents}"',
+                                  style: theme.textTheme.bodyText2!.copyWith(
+                                      color: Colors.white, fontSize: 13),
+                                ),
                               ),
-                            ),
+                            ],
                           ],
                         ),
                       ),

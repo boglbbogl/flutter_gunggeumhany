@@ -203,3 +203,174 @@ abstract class _ReviewUser implements ReviewUser {
   _$ReviewUserCopyWith<_ReviewUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+class _$BookReviewUserTearOff {
+  const _$BookReviewUserTearOff();
+
+  _BookReviewUser call({required Book book, required Review review}) {
+    return _BookReviewUser(
+      book: book,
+      review: review,
+    );
+  }
+}
+
+/// @nodoc
+const $BookReviewUser = _$BookReviewUserTearOff();
+
+/// @nodoc
+mixin _$BookReviewUser {
+  Book get book => throw _privateConstructorUsedError;
+  Review get review => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $BookReviewUserCopyWith<BookReviewUser> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BookReviewUserCopyWith<$Res> {
+  factory $BookReviewUserCopyWith(
+          BookReviewUser value, $Res Function(BookReviewUser) then) =
+      _$BookReviewUserCopyWithImpl<$Res>;
+  $Res call({Book book, Review review});
+
+  $BookCopyWith<$Res> get book;
+  $ReviewCopyWith<$Res> get review;
+}
+
+/// @nodoc
+class _$BookReviewUserCopyWithImpl<$Res>
+    implements $BookReviewUserCopyWith<$Res> {
+  _$BookReviewUserCopyWithImpl(this._value, this._then);
+
+  final BookReviewUser _value;
+  // ignore: unused_field
+  final $Res Function(BookReviewUser) _then;
+
+  @override
+  $Res call({
+    Object? book = freezed,
+    Object? review = freezed,
+  }) {
+    return _then(_value.copyWith(
+      book: book == freezed
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as Book,
+      review: review == freezed
+          ? _value.review
+          : review // ignore: cast_nullable_to_non_nullable
+              as Review,
+    ));
+  }
+
+  @override
+  $BookCopyWith<$Res> get book {
+    return $BookCopyWith<$Res>(_value.book, (value) {
+      return _then(_value.copyWith(book: value));
+    });
+  }
+
+  @override
+  $ReviewCopyWith<$Res> get review {
+    return $ReviewCopyWith<$Res>(_value.review, (value) {
+      return _then(_value.copyWith(review: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$BookReviewUserCopyWith<$Res>
+    implements $BookReviewUserCopyWith<$Res> {
+  factory _$BookReviewUserCopyWith(
+          _BookReviewUser value, $Res Function(_BookReviewUser) then) =
+      __$BookReviewUserCopyWithImpl<$Res>;
+  @override
+  $Res call({Book book, Review review});
+
+  @override
+  $BookCopyWith<$Res> get book;
+  @override
+  $ReviewCopyWith<$Res> get review;
+}
+
+/// @nodoc
+class __$BookReviewUserCopyWithImpl<$Res>
+    extends _$BookReviewUserCopyWithImpl<$Res>
+    implements _$BookReviewUserCopyWith<$Res> {
+  __$BookReviewUserCopyWithImpl(
+      _BookReviewUser _value, $Res Function(_BookReviewUser) _then)
+      : super(_value, (v) => _then(v as _BookReviewUser));
+
+  @override
+  _BookReviewUser get _value => super._value as _BookReviewUser;
+
+  @override
+  $Res call({
+    Object? book = freezed,
+    Object? review = freezed,
+  }) {
+    return _then(_BookReviewUser(
+      book: book == freezed
+          ? _value.book
+          : book // ignore: cast_nullable_to_non_nullable
+              as Book,
+      review: review == freezed
+          ? _value.review
+          : review // ignore: cast_nullable_to_non_nullable
+              as Review,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_BookReviewUser implements _BookReviewUser {
+  const _$_BookReviewUser({required this.book, required this.review});
+
+  @override
+  final Book book;
+  @override
+  final Review review;
+
+  @override
+  String toString() {
+    return 'BookReviewUser(book: $book, review: $review)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _BookReviewUser &&
+            const DeepCollectionEquality().equals(other.book, book) &&
+            const DeepCollectionEquality().equals(other.review, review));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(book),
+      const DeepCollectionEquality().hash(review));
+
+  @JsonKey(ignore: true)
+  @override
+  _$BookReviewUserCopyWith<_BookReviewUser> get copyWith =>
+      __$BookReviewUserCopyWithImpl<_BookReviewUser>(this, _$identity);
+}
+
+abstract class _BookReviewUser implements BookReviewUser {
+  const factory _BookReviewUser({required Book book, required Review review}) =
+      _$_BookReviewUser;
+
+  @override
+  Book get book;
+  @override
+  Review get review;
+  @override
+  @JsonKey(ignore: true)
+  _$BookReviewUserCopyWith<_BookReviewUser> get copyWith =>
+      throw _privateConstructorUsedError;
+}

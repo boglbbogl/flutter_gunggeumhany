@@ -25,3 +25,4 @@ const documentEditorTravelBook = "TRAVEL_BOOK_1196";
 const documentEditorArtAndCulture = "ART_CULTURE_517";
 const documentEditorOldStory = "OLD_STORY_2105";
 const documentEditorChildBook = "CHILD_BOOK_1108";
+const documentEditorFantasy = "FANTASY_50928";

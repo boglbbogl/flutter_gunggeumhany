@@ -128,11 +128,16 @@ SliverList reviewCreateWidget({
                             userKey:
                                 context.read<AuthState>().userProfile!.userKey,
                           );
-
                       await context.read<ReviewState>().getMyReviewList(
                           bookDocKey: bookDocKey,
                           userKey:
                               context.read<AuthState>().userProfile!.userKey);
+                      await context
+                          .read<AuthState>()
+                          .getMainFeedUserReviewListUpdate(
+                            userKey:
+                                context.read<AuthState>().userProfile!.userKey,
+                          );
                     },
                     child: context.watch<ReviewState>().isCreateReview
                         ? Padding(

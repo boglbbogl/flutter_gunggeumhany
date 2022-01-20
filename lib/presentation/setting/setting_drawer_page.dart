@@ -49,7 +49,7 @@ class SettingDrawerPage extends StatelessWidget {
                 icon: Icons.error_outline_rounded,
                 title: 'API',
                 onTap: () {
-                  pushNewScreen(context, screen: ApiScreen());
+                  pushNewScreen(context, screen: const ApiScreen());
                 }),
           ],
         ),

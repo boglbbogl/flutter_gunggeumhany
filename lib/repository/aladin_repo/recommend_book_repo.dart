@@ -83,6 +83,10 @@ class RecommendBookRepo {
         collectionName: documentEditorChildBook,
         categoryId: "1108",
         queryType: "");
+    await aladinToFirestore(
+        collectionName: documentEditorFantasy,
+        categoryId: "50928",
+        queryType: "");
   }
 
   // Firestore get

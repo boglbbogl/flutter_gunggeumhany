@@ -4,6 +4,8 @@ import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/presentation/home/home_appbar_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/home/home_book_item.dart';
 import 'package:flutter_gunggeumhany/presentation/home/home_shimmer_widget.dart';
+import 'package:flutter_gunggeumhany/presentation/home/home_user_book_item.dart';
+import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/main_state.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -20,7 +22,7 @@ class HomePage extends StatelessWidget {
         return Scaffold(
           appBar: homeAppbarWidget(context: context),
           body: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 500),
             child: provider.bestsellerList.isEmpty
                 ? homeShimmerWidget()
                 : ListView(
@@ -34,6 +36,12 @@ class HomePage extends StatelessWidget {
                           title: "궁금하니 추천",
                           createdAt: "",
                           book: provider.hanyRecommedBook),
+                      if (context
+                          .watch<AuthState>()
+                          .userBookReview
+                          .isNotEmpty) ...[
+                        const HomeUserBookItem(),
+                      ],
                       _mainBookForm(
                           title: '주목할 만한 신간',
                           createdAt: provider.specialNewBookCreatedAt,
@@ -53,6 +61,12 @@ class HomePage extends StatelessWidget {
                             title: '신간',
                             createdAt: provider.newBookCreatedAt,
                             book: provider.newBookList),
+                      ],
+                      if (provider.editorFantasyBook.isNotEmpty) ...[
+                        _mainBookForm(
+                            title: '판타지',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorFantasyBook),
                       ],
                       if (provider.editorMysteryStory.isNotEmpty) ...[
                         _mainBookForm(

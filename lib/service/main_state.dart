@@ -40,6 +40,7 @@ class MainState extends ChangeNotifier {
   List<Book> _editorSelfImprovement = [];
   List<Book> _editorTravelBook = [];
   List<Book> _hanyRecommedBook = [];
+  List<Book> _editorFantasyBook = [];
 
   MainState() {
     _moreBookItemIndex = 0;
@@ -111,11 +112,11 @@ class MainState extends ChangeNotifier {
     notifyListeners();
     _getFirestoreBestsellerForeignBookItem();
     _getFirestoreNewBookItem();
+    _editorFantasyBook = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorFantasy);
+    notifyListeners();
     _editorMysteryStory = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorMystery);
-    notifyListeners();
-    _editorDramaStory = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorDrama);
 
     _isBookMoreLoading = false;
     _moreBookItemIndex = 1;
@@ -125,17 +126,17 @@ class MainState extends ChangeNotifier {
   Future categoryMoreBookSecondItem() async {
     _isBookMoreLoading = true;
     notifyListeners();
+    _editorDramaStory = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorDrama);
+    notifyListeners();
     _editorTravelBook = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorTravelBook);
     notifyListeners();
-
     _editorSelfImprovement = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorSelfImprovement);
     notifyListeners();
-
     _editorHistoryBook = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorHistoryBook);
-
     _isBookMoreLoading = false;
     _moreBookItemIndex = 2;
     notifyListeners();
@@ -225,4 +226,5 @@ class MainState extends ChangeNotifier {
   List<Book> get editorSelfImprovement => _editorSelfImprovement;
   List<Book> get editorTravelBook => _editorTravelBook;
   List<Book> get hanyRecommedBook => _hanyRecommedBook;
+  List<Book> get editorFantasyBook => _editorFantasyBook;
 }

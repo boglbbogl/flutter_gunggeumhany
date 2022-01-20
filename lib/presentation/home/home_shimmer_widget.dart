@@ -8,7 +8,7 @@ Shimmer homeShimmerWidget() {
       highlightColor: const Color.fromRGBO(115, 115, 115, 1),
       period: const Duration(milliseconds: 1000),
       child: ListView.builder(
-          itemCount: 4,
+          itemCount: 5,
           itemBuilder: (context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,34 +23,56 @@ Shimmer homeShimmerWidget() {
                         : index == 1
                             ? '궁금하니 추천'
                             : index == 2
-                                ? '주목할 만한 신간'
+                                ? '내가 작성한 리뷰'
                                 : index == 3
-                                    ? '추천 리스트'
-                                    : '',
+                                    ? '주목할 만한 신간'
+                                    : index == 4
+                                        ? '추천 리스트'
+                                        : '',
                     style: theme.textTheme.bodyText2!.copyWith(
                         color: Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(
-                  height: size.width * 0.4,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: size.width * 0.25,
-                            // height: size.width * 0.4,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.white),
-                          ),
-                        );
-                      }),
-                )
+                if (index == 2)
+                  SizedBox(
+                    height: size.width * 0.35,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: size.width * 0.4,
+                              // height: size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.white),
+                            ),
+                          );
+                        }),
+                  )
+                else
+                  SizedBox(
+                    height: size.width * 0.4,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 10,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              width: size.width * 0.25,
+                              // height: size.width * 0.4,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.white),
+                            ),
+                          );
+                        }),
+                  )
               ],
             );
           }));
