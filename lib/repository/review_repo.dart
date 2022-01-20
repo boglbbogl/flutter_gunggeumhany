@@ -64,7 +64,20 @@ class ReviewRepo {
     final DocumentReference<Map<String, dynamic>> _activityRef =
         _firestore.collection(collectionUserActivity).doc(review.userKey);
     final _batch = _firestore.batch();
+    if (!review.starRating.isNaN) {
+      _batch.update(_activityRef, {
+        "reviewInStarDocKey": FieldValue.arrayRemove([review.bookDocKey]),
+        "reviewInStarRating": FieldValue.increment(-review.starRating),
+      });
+    }
+    if (!review.favoriteRating.isNaN) {
+      _batch.update(_activityRef, {
+        "reviewInFavoriteDocKey": FieldValue.arrayRemove([review.bookDocKey]),
+        "reviewInFavoriteRating": FieldValue.increment(-review.favoriteRating),
+      });
+    }
     _batch.delete(_reviewRef);
+
     _batch.update(_activityRef, {
       "myReviewDocKey": FieldValue.arrayRemove([review.bookDocKey])
     });
@@ -96,9 +109,21 @@ class ReviewRepo {
     final _snapshot = await _reviewRef.get();
     final _toWrite = review.copyWith(docKey: _snapshot.id);
     final _batch = _firestore.batch();
+    if (!review.starRating.isNaN) {
+      _batch.update(_activityRef, {
+        "reviewInStarDocKey": FieldValue.arrayUnion([review.bookDocKey]),
+        "reviewInStarRating": FieldValue.increment(review.starRating),
+      });
+    }
+    if (!review.favoriteRating.isNaN) {
+      _batch.update(_activityRef, {
+        "reviewInFavoriteDocKey": FieldValue.arrayUnion([review.bookDocKey]),
+        "reviewInFavoriteRating": FieldValue.increment(review.favoriteRating),
+      });
+    }
     _batch.set(_reviewRef, _toWrite.toJson());
     _batch.update(_activityRef, {
-      "myReviewDocKey": FieldValue.arrayUnion([review.bookDocKey])
+      "myReviewDocKey": FieldValue.arrayUnion([review.bookDocKey]),
     });
     _batch.update(_bookRef, {
       "starUserKey": FieldValue.arrayUnion([review.userKey]),

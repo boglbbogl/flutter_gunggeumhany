@@ -13,40 +13,43 @@ Tab profileBookmarkWidget({
   required BuildContext context,
 }) {
   return Tab(
-    child: GridView(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: book.length > 6 ? 3 : 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 2 / 3),
-      children: [
-        ...book.map((e) => InkWell(
-              onTap: () async {
-                context.read<ReviewState>()
-                  ..started()
-                  ..getUserReviewList(
-                      userKey: context.read<AuthState>().userProfile!.userKey,
-                      bookDocKey: e.docKey!);
-                pushNewScreen(context,
-                    screen: ReviewPage(
-                      bookItem: e,
-                    ));
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: CachedNetworkImage(
-                  imageUrl: e.thumbnail,
-                  fit: BoxFit.cover,
-                  fadeInDuration: const Duration(milliseconds: 3),
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(
-                      color: appMainColor,
+    child: Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: book.length > 9 ? 4 : 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 2 / 3),
+        children: [
+          ...book.map((e) => InkWell(
+                onTap: () async {
+                  context.read<ReviewState>()
+                    ..started()
+                    ..getUserReviewList(
+                        userKey: context.read<AuthState>().userProfile!.userKey,
+                        bookDocKey: e.docKey!);
+                  pushNewScreen(context,
+                      screen: ReviewPage(
+                        bookItem: e,
+                      ));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                    imageUrl: e.thumbnail,
+                    fit: BoxFit.cover,
+                    fadeInDuration: const Duration(milliseconds: 3),
+                    placeholder: (context, url) => Center(
+                      child: CircularProgressIndicator(
+                        color: appMainColor,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ))
-      ],
+              ))
+        ],
+      ),
     ),
   );
 }

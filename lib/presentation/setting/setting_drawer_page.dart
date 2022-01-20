@@ -16,7 +16,7 @@ class SettingDrawerPage extends StatelessWidget {
     return AnimatedContainer(
       width: size.width * 0.5,
       height: size.height,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 300),
       transform: Matrix4.translationValues(
           context.watch<ProfileState>().isDrawer
               ? size.width * 0.5

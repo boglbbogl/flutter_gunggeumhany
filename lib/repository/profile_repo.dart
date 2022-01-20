@@ -52,8 +52,11 @@ class ProfileRepo {
       }
     }
 
-    final ProfileModel _result =
-        ProfileModel(userProfile: _userProfile, review: _review, book: _book);
+    final ProfileModel _result = ProfileModel(
+        userProfile: _userProfile,
+        review: _review,
+        book: _book,
+        userActivity: _userActivity);
     return _result;
   }
 }

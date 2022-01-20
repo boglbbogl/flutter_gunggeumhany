@@ -10,54 +10,65 @@ class AladinThemeRepo {
 
   Future<String> getFirestoreBestsellerCreatedAt() async {
     final _result = await aladinFromFirestoreCreatedAt(
-        collectionName: collectionBestseller);
+        collectionName: collectionAladinTheme,
+        documentName: documentBestseller);
     return _result;
   }
 
   Future<List<Book>> getFirestoreBestsellerBook() async {
-    final _result =
-        await aladinFromFirestore(collectionName: collectionBestseller);
+    final _result = await aladinFromFirestore(
+        collectionName: collectionAladinTheme,
+        documentName: documentBestseller);
     return _result;
   }
 
   Future bestsellerAladinISBNReCallKakaoBook() async {
     await aladinToFirestore(
-        collectionName: collectionBestseller, queryType: 'Bestseller');
+        collectionName: collectionAladinTheme,
+        documentName: documentBestseller,
+        queryType: 'Bestseller');
   }
 
   Future<String> getFirestoreBestsellerForeignCreatedAt() async {
     final _result = await aladinFromFirestoreCreatedAt(
-        collectionName: collectionBestsellerForeign);
+        collectionName: collectionAladinTheme,
+        documentName: documentBestsellerForeign);
     return _result;
   }
 
   Future<List<Book>> getFirestoreBestsellerForeignBook() async {
-    final _result =
-        await aladinFromFirestore(collectionName: collectionBestsellerForeign);
+    final _result = await aladinFromFirestore(
+        collectionName: collectionAladinTheme,
+        documentName: documentBestsellerForeign);
     return _result;
   }
 
   Future bestsellerForeignAladinISBNReCallKakaoBook() async {
     await aladinToFirestore(
-        collectionName: collectionBestsellerForeign,
+        collectionName: collectionAladinTheme,
+        documentName: documentBestsellerForeign,
         queryType: "Bestseller",
         searchTarget: "Foreign");
   }
 
   Future<String> getFirestoreSpecialNewBookCreatedAt() async {
     final _result = await aladinFromFirestoreCreatedAt(
-        collectionName: collectionSpecialNewBook);
+        collectionName: collectionAladinTheme,
+        documentName: documentSpecialNewBook);
     return _result;
   }
 
   Future<List<Book>> getFirestoreSpecialNewBook() async {
-    final _result =
-        await aladinFromFirestore(collectionName: collectionSpecialNewBook);
+    final _result = await aladinFromFirestore(
+        collectionName: collectionAladinTheme,
+        documentName: documentSpecialNewBook);
     return _result;
   }
 
   Future specialNewBookAladinISBNReCallKakaoBook() async {
     await aladinToFirestore(
-        collectionName: collectionSpecialNewBook, queryType: "ItemNewSpecial");
+        collectionName: collectionAladinTheme,
+        documentName: documentSpecialNewBook,
+        queryType: "ItemNewSpecial");
   }
 }

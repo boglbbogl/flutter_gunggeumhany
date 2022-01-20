@@ -9,6 +9,10 @@ class UserActivity with _$UserActivity {
     required String userKey,
     required List<String> bookmarkBookDocKey,
     required List<String> myReviewDocKey,
+    required List<String> reviewInStarDocKey,
+    required double reviewInStarRating,
+    required List<String> reviewInFavoriteDocKey,
+    required double reviewInFavoriteRating,
   }) = _UserActivity;
   const UserActivity._();
   factory UserActivity.fromJson(Map<String, dynamic> json) =>
@@ -18,5 +22,9 @@ class UserActivity with _$UserActivity {
         userKey: "",
         bookmarkBookDocKey: [],
         myReviewDocKey: [],
+        reviewInStarDocKey: [],
+        reviewInStarRating: 0.0,
+        reviewInFavoriteDocKey: [],
+        reviewInFavoriteRating: 0.0,
       );
 }

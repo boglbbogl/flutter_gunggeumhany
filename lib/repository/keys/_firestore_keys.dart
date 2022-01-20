@@ -3,14 +3,17 @@ const collectionUserActivity = "USER_ACTIVITY";
 const collectionUserInformation = "USER_INFORMATION";
 const collectionBook = "BOOKS";
 const collectionReview = "REVIEW";
-const collectionBestseller = "BESTSELLER";
-const collectionBestsellerForeign = "BESTSELLER_FOREIGN";
-const collectionNewBook = "NEWBOOKS";
-const collectionSpecialNewBook = "SPECIAL_NEWBOOKS";
-const collectionRecommendBlog = "RECOMMEND_BLOG";
-const collectionRecommendEditor = "RECOMMEND_EDITOR";
+const collectionAladinTheme = "ALADIN_THEME";
+const collectionAladinCategory = "ALADIN_CATEGORY";
 const collectionHanyRecommend = "HANY_RECOMMEND";
 // subCollection
+//theme
+const documentBestseller = "BESTSELLER";
+const documentBestsellerForeign = "BESTSELLER_FOREIGN";
+const documentSpecialNewBook = "SPECIAL_NEWBOOKS";
+const documentRecommedBlog = "RECOMMEND_BLOG";
+
+// category
 const documentEditorMystery = "MYSTERY_STORY_50926";
 const documentEditorDrama = "DRAMA_STORY_51242";
 const documentEditorComputerAndMobile = "COMPUTER_MOBILE_351";

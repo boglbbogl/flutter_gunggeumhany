@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 
 Future aladinToFirestore({
   required String collectionName,
+  required String documentName,
   required String queryType,
   String? searchTarget = "book",
   String? categoryId,
@@ -56,14 +57,11 @@ Future aladinToFirestore({
     _aladinISNB.removeWhere((element) => _removeISBN.contains(element));
     final List<String> _toFirestoreISBN =
         _aladinISNB.length > 15 ? _aladinISNB.sublist(0, 15) : _aladinISNB;
-    final DocumentReference<Map<String, dynamic>> _aladinRef = categoryId ==
-            null
-        ? _firestore.collection(collectionName).doc(DateTime.now().toString())
-        : _firestore
-            .collection(collectionRecommendEditor)
-            .doc(collectionName)
-            .collection(collectionName)
-            .doc(DateTime.now().toString());
+    final DocumentReference<Map<String, dynamic>> _aladinRef = _firestore
+        .collection(collectionName)
+        .doc(documentName)
+        .collection(documentName)
+        .doc(DateTime.now().toString());
     await _aladinRef
         .set({"ISBN": _toFirestoreISBN, "createdAt": DateTime.now()});
 

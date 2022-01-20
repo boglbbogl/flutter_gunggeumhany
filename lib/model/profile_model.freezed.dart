@@ -20,10 +20,12 @@ class _$ProfileModelTearOff {
 
   _ProfileModel call(
       {required UserProfile userProfile,
+      required UserActivity userActivity,
       required List<Review> review,
       required List<Book> book}) {
     return _ProfileModel(
       userProfile: userProfile,
+      userActivity: userActivity,
       review: review,
       book: book,
     );
@@ -36,6 +38,7 @@ const $ProfileModel = _$ProfileModelTearOff();
 /// @nodoc
 mixin _$ProfileModel {
   UserProfile get userProfile => throw _privateConstructorUsedError;
+  UserActivity get userActivity => throw _privateConstructorUsedError;
   List<Review> get review => throw _privateConstructorUsedError;
   List<Book> get book => throw _privateConstructorUsedError;
 
@@ -49,9 +52,14 @@ abstract class $ProfileModelCopyWith<$Res> {
   factory $ProfileModelCopyWith(
           ProfileModel value, $Res Function(ProfileModel) then) =
       _$ProfileModelCopyWithImpl<$Res>;
-  $Res call({UserProfile userProfile, List<Review> review, List<Book> book});
+  $Res call(
+      {UserProfile userProfile,
+      UserActivity userActivity,
+      List<Review> review,
+      List<Book> book});
 
   $UserProfileCopyWith<$Res> get userProfile;
+  $UserActivityCopyWith<$Res> get userActivity;
 }
 
 /// @nodoc
@@ -65,6 +73,7 @@ class _$ProfileModelCopyWithImpl<$Res> implements $ProfileModelCopyWith<$Res> {
   @override
   $Res call({
     Object? userProfile = freezed,
+    Object? userActivity = freezed,
     Object? review = freezed,
     Object? book = freezed,
   }) {
@@ -73,6 +82,10 @@ class _$ProfileModelCopyWithImpl<$Res> implements $ProfileModelCopyWith<$Res> {
           ? _value.userProfile
           : userProfile // ignore: cast_nullable_to_non_nullable
               as UserProfile,
+      userActivity: userActivity == freezed
+          ? _value.userActivity
+          : userActivity // ignore: cast_nullable_to_non_nullable
+              as UserActivity,
       review: review == freezed
           ? _value.review
           : review // ignore: cast_nullable_to_non_nullable
@@ -90,6 +103,13 @@ class _$ProfileModelCopyWithImpl<$Res> implements $ProfileModelCopyWith<$Res> {
       return _then(_value.copyWith(userProfile: value));
     });
   }
+
+  @override
+  $UserActivityCopyWith<$Res> get userActivity {
+    return $UserActivityCopyWith<$Res>(_value.userActivity, (value) {
+      return _then(_value.copyWith(userActivity: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -99,10 +119,16 @@ abstract class _$ProfileModelCopyWith<$Res>
           _ProfileModel value, $Res Function(_ProfileModel) then) =
       __$ProfileModelCopyWithImpl<$Res>;
   @override
-  $Res call({UserProfile userProfile, List<Review> review, List<Book> book});
+  $Res call(
+      {UserProfile userProfile,
+      UserActivity userActivity,
+      List<Review> review,
+      List<Book> book});
 
   @override
   $UserProfileCopyWith<$Res> get userProfile;
+  @override
+  $UserActivityCopyWith<$Res> get userActivity;
 }
 
 /// @nodoc
@@ -118,6 +144,7 @@ class __$ProfileModelCopyWithImpl<$Res> extends _$ProfileModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userProfile = freezed,
+    Object? userActivity = freezed,
     Object? review = freezed,
     Object? book = freezed,
   }) {
@@ -126,6 +153,10 @@ class __$ProfileModelCopyWithImpl<$Res> extends _$ProfileModelCopyWithImpl<$Res>
           ? _value.userProfile
           : userProfile // ignore: cast_nullable_to_non_nullable
               as UserProfile,
+      userActivity: userActivity == freezed
+          ? _value.userActivity
+          : userActivity // ignore: cast_nullable_to_non_nullable
+              as UserActivity,
       review: review == freezed
           ? _value.review
           : review // ignore: cast_nullable_to_non_nullable
@@ -142,10 +173,15 @@ class __$ProfileModelCopyWithImpl<$Res> extends _$ProfileModelCopyWithImpl<$Res>
 
 class _$_ProfileModel implements _ProfileModel {
   const _$_ProfileModel(
-      {required this.userProfile, required this.review, required this.book});
+      {required this.userProfile,
+      required this.userActivity,
+      required this.review,
+      required this.book});
 
   @override
   final UserProfile userProfile;
+  @override
+  final UserActivity userActivity;
   @override
   final List<Review> review;
   @override
@@ -153,7 +189,7 @@ class _$_ProfileModel implements _ProfileModel {
 
   @override
   String toString() {
-    return 'ProfileModel(userProfile: $userProfile, review: $review, book: $book)';
+    return 'ProfileModel(userProfile: $userProfile, userActivity: $userActivity, review: $review, book: $book)';
   }
 
   @override
@@ -163,6 +199,8 @@ class _$_ProfileModel implements _ProfileModel {
             other is _ProfileModel &&
             const DeepCollectionEquality()
                 .equals(other.userProfile, userProfile) &&
+            const DeepCollectionEquality()
+                .equals(other.userActivity, userActivity) &&
             const DeepCollectionEquality().equals(other.review, review) &&
             const DeepCollectionEquality().equals(other.book, book));
   }
@@ -171,6 +209,7 @@ class _$_ProfileModel implements _ProfileModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(userProfile),
+      const DeepCollectionEquality().hash(userActivity),
       const DeepCollectionEquality().hash(review),
       const DeepCollectionEquality().hash(book));
 
@@ -183,11 +222,14 @@ class _$_ProfileModel implements _ProfileModel {
 abstract class _ProfileModel implements ProfileModel {
   const factory _ProfileModel(
       {required UserProfile userProfile,
+      required UserActivity userActivity,
       required List<Review> review,
       required List<Book> book}) = _$_ProfileModel;
 
   @override
   UserProfile get userProfile;
+  @override
+  UserActivity get userActivity;
   @override
   List<Review> get review;
   @override

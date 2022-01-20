@@ -25,11 +25,19 @@ class _$UserActivityTearOff {
   _UserActivity call(
       {required String userKey,
       required List<String> bookmarkBookDocKey,
-      required List<String> myReviewDocKey}) {
+      required List<String> myReviewDocKey,
+      required List<String> reviewInStarDocKey,
+      required double reviewInStarRating,
+      required List<String> reviewInFavoriteDocKey,
+      required double reviewInFavoriteRating}) {
     return _UserActivity(
       userKey: userKey,
       bookmarkBookDocKey: bookmarkBookDocKey,
       myReviewDocKey: myReviewDocKey,
+      reviewInStarDocKey: reviewInStarDocKey,
+      reviewInStarRating: reviewInStarRating,
+      reviewInFavoriteDocKey: reviewInFavoriteDocKey,
+      reviewInFavoriteRating: reviewInFavoriteRating,
     );
   }
 
@@ -46,6 +54,10 @@ mixin _$UserActivity {
   String get userKey => throw _privateConstructorUsedError;
   List<String> get bookmarkBookDocKey => throw _privateConstructorUsedError;
   List<String> get myReviewDocKey => throw _privateConstructorUsedError;
+  List<String> get reviewInStarDocKey => throw _privateConstructorUsedError;
+  double get reviewInStarRating => throw _privateConstructorUsedError;
+  List<String> get reviewInFavoriteDocKey => throw _privateConstructorUsedError;
+  double get reviewInFavoriteRating => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,7 +73,11 @@ abstract class $UserActivityCopyWith<$Res> {
   $Res call(
       {String userKey,
       List<String> bookmarkBookDocKey,
-      List<String> myReviewDocKey});
+      List<String> myReviewDocKey,
+      List<String> reviewInStarDocKey,
+      double reviewInStarRating,
+      List<String> reviewInFavoriteDocKey,
+      double reviewInFavoriteRating});
 }
 
 /// @nodoc
@@ -77,6 +93,10 @@ class _$UserActivityCopyWithImpl<$Res> implements $UserActivityCopyWith<$Res> {
     Object? userKey = freezed,
     Object? bookmarkBookDocKey = freezed,
     Object? myReviewDocKey = freezed,
+    Object? reviewInStarDocKey = freezed,
+    Object? reviewInStarRating = freezed,
+    Object? reviewInFavoriteDocKey = freezed,
+    Object? reviewInFavoriteRating = freezed,
   }) {
     return _then(_value.copyWith(
       userKey: userKey == freezed
@@ -91,6 +111,22 @@ class _$UserActivityCopyWithImpl<$Res> implements $UserActivityCopyWith<$Res> {
           ? _value.myReviewDocKey
           : myReviewDocKey // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      reviewInStarDocKey: reviewInStarDocKey == freezed
+          ? _value.reviewInStarDocKey
+          : reviewInStarDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      reviewInStarRating: reviewInStarRating == freezed
+          ? _value.reviewInStarRating
+          : reviewInStarRating // ignore: cast_nullable_to_non_nullable
+              as double,
+      reviewInFavoriteDocKey: reviewInFavoriteDocKey == freezed
+          ? _value.reviewInFavoriteDocKey
+          : reviewInFavoriteDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      reviewInFavoriteRating: reviewInFavoriteRating == freezed
+          ? _value.reviewInFavoriteRating
+          : reviewInFavoriteRating // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -105,7 +141,11 @@ abstract class _$UserActivityCopyWith<$Res>
   $Res call(
       {String userKey,
       List<String> bookmarkBookDocKey,
-      List<String> myReviewDocKey});
+      List<String> myReviewDocKey,
+      List<String> reviewInStarDocKey,
+      double reviewInStarRating,
+      List<String> reviewInFavoriteDocKey,
+      double reviewInFavoriteRating});
 }
 
 /// @nodoc
@@ -123,6 +163,10 @@ class __$UserActivityCopyWithImpl<$Res> extends _$UserActivityCopyWithImpl<$Res>
     Object? userKey = freezed,
     Object? bookmarkBookDocKey = freezed,
     Object? myReviewDocKey = freezed,
+    Object? reviewInStarDocKey = freezed,
+    Object? reviewInStarRating = freezed,
+    Object? reviewInFavoriteDocKey = freezed,
+    Object? reviewInFavoriteRating = freezed,
   }) {
     return _then(_UserActivity(
       userKey: userKey == freezed
@@ -137,6 +181,22 @@ class __$UserActivityCopyWithImpl<$Res> extends _$UserActivityCopyWithImpl<$Res>
           ? _value.myReviewDocKey
           : myReviewDocKey // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      reviewInStarDocKey: reviewInStarDocKey == freezed
+          ? _value.reviewInStarDocKey
+          : reviewInStarDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      reviewInStarRating: reviewInStarRating == freezed
+          ? _value.reviewInStarRating
+          : reviewInStarRating // ignore: cast_nullable_to_non_nullable
+              as double,
+      reviewInFavoriteDocKey: reviewInFavoriteDocKey == freezed
+          ? _value.reviewInFavoriteDocKey
+          : reviewInFavoriteDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      reviewInFavoriteRating: reviewInFavoriteRating == freezed
+          ? _value.reviewInFavoriteRating
+          : reviewInFavoriteRating // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -147,7 +207,11 @@ class _$_UserActivity extends _UserActivity {
   const _$_UserActivity(
       {required this.userKey,
       required this.bookmarkBookDocKey,
-      required this.myReviewDocKey})
+      required this.myReviewDocKey,
+      required this.reviewInStarDocKey,
+      required this.reviewInStarRating,
+      required this.reviewInFavoriteDocKey,
+      required this.reviewInFavoriteRating})
       : super._();
 
   factory _$_UserActivity.fromJson(Map<String, dynamic> json) =>
@@ -159,10 +223,18 @@ class _$_UserActivity extends _UserActivity {
   final List<String> bookmarkBookDocKey;
   @override
   final List<String> myReviewDocKey;
+  @override
+  final List<String> reviewInStarDocKey;
+  @override
+  final double reviewInStarRating;
+  @override
+  final List<String> reviewInFavoriteDocKey;
+  @override
+  final double reviewInFavoriteRating;
 
   @override
   String toString() {
-    return 'UserActivity(userKey: $userKey, bookmarkBookDocKey: $bookmarkBookDocKey, myReviewDocKey: $myReviewDocKey)';
+    return 'UserActivity(userKey: $userKey, bookmarkBookDocKey: $bookmarkBookDocKey, myReviewDocKey: $myReviewDocKey, reviewInStarDocKey: $reviewInStarDocKey, reviewInStarRating: $reviewInStarRating, reviewInFavoriteDocKey: $reviewInFavoriteDocKey, reviewInFavoriteRating: $reviewInFavoriteRating)';
   }
 
   @override
@@ -174,7 +246,15 @@ class _$_UserActivity extends _UserActivity {
             const DeepCollectionEquality()
                 .equals(other.bookmarkBookDocKey, bookmarkBookDocKey) &&
             const DeepCollectionEquality()
-                .equals(other.myReviewDocKey, myReviewDocKey));
+                .equals(other.myReviewDocKey, myReviewDocKey) &&
+            const DeepCollectionEquality()
+                .equals(other.reviewInStarDocKey, reviewInStarDocKey) &&
+            const DeepCollectionEquality()
+                .equals(other.reviewInStarRating, reviewInStarRating) &&
+            const DeepCollectionEquality()
+                .equals(other.reviewInFavoriteDocKey, reviewInFavoriteDocKey) &&
+            const DeepCollectionEquality()
+                .equals(other.reviewInFavoriteRating, reviewInFavoriteRating));
   }
 
   @override
@@ -182,7 +262,11 @@ class _$_UserActivity extends _UserActivity {
       runtimeType,
       const DeepCollectionEquality().hash(userKey),
       const DeepCollectionEquality().hash(bookmarkBookDocKey),
-      const DeepCollectionEquality().hash(myReviewDocKey));
+      const DeepCollectionEquality().hash(myReviewDocKey),
+      const DeepCollectionEquality().hash(reviewInStarDocKey),
+      const DeepCollectionEquality().hash(reviewInStarRating),
+      const DeepCollectionEquality().hash(reviewInFavoriteDocKey),
+      const DeepCollectionEquality().hash(reviewInFavoriteRating));
 
   @JsonKey(ignore: true)
   @override
@@ -199,7 +283,11 @@ abstract class _UserActivity extends UserActivity {
   const factory _UserActivity(
       {required String userKey,
       required List<String> bookmarkBookDocKey,
-      required List<String> myReviewDocKey}) = _$_UserActivity;
+      required List<String> myReviewDocKey,
+      required List<String> reviewInStarDocKey,
+      required double reviewInStarRating,
+      required List<String> reviewInFavoriteDocKey,
+      required double reviewInFavoriteRating}) = _$_UserActivity;
   const _UserActivity._() : super._();
 
   factory _UserActivity.fromJson(Map<String, dynamic> json) =
@@ -211,6 +299,14 @@ abstract class _UserActivity extends UserActivity {
   List<String> get bookmarkBookDocKey;
   @override
   List<String> get myReviewDocKey;
+  @override
+  List<String> get reviewInStarDocKey;
+  @override
+  double get reviewInStarRating;
+  @override
+  List<String> get reviewInFavoriteDocKey;
+  @override
+  double get reviewInFavoriteRating;
   @override
   @JsonKey(ignore: true)
   _$UserActivityCopyWith<_UserActivity> get copyWith =>

@@ -30,8 +30,16 @@ Padding searchItemWidget({
                       fontSize: 14),
                 ),
                 const SizedBox(height: 6),
-                _authorsAndTranslators(list: book.authors, title: '지은이'),
-                _authorsAndTranslators(list: book.translators, title: '옮긴이'),
+                _authorsAndTranslators(
+                    list: book.authors.length > 5
+                        ? book.authors.sublist(0, 5)
+                        : book.authors,
+                    title: '지은이'),
+                _authorsAndTranslators(
+                    list: book.translators.length > 5
+                        ? book.translators.sublist(0, 5)
+                        : book.translators,
+                    title: '옮긴이'),
                 const SizedBox(height: 2),
                 DefaultTextStyle(
                   style: theme.textTheme.bodyText2!.copyWith(
@@ -99,11 +107,10 @@ DefaultTextStyle _authorsAndTranslators({
         ...list.map((e) => Wrap(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Text(
-                    e,
-                  ),
-                ),
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Text(
+                      e,
+                    )),
               ],
             )),
       ],

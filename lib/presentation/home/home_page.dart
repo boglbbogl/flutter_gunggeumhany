@@ -176,10 +176,27 @@ class HomePage extends StatelessWidget {
                                         provider.categoryMoreBookFifthItem();
                                       } else {}
                                     },
-                                    child: const Icon(
-                                      Icons.add_circle_outline_rounded,
-                                      size: 36,
-                                    )),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                            width: 40,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 4),
+                                              borderRadius:
+                                                  BorderRadius.circular(40),
+                                            ),
+                                            child: const Icon(
+                                              Icons.add_rounded,
+                                              size: 28,
+                                            )),
+                                      ],
+                                    ),
+                                  ),
                           ),
                         ),
                         const SizedBox(height: 20),

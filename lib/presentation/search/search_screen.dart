@@ -156,10 +156,7 @@ class SearchScreen extends StatelessWidget {
                 },
                 child: Stack(
                   children: [
-                    searchItemWidget(
-                        book: e,
-                        isBookmark: e.bookmarkUserKey!.contains(
-                            context.read<AuthState>().userProfile!.userKey)),
+                    searchItemWidget(book: e, isBookmark: false),
                     if (!isKakaoSearch) ...[
                       searchRatingWidget(
                         favorite: e.favoriteRating! / e.favoriteUserKey!.length,

@@ -11,80 +11,99 @@ class AladinCategoryRepo {
 
   Future<String> getFirestoreRecommendBlogCreatedAt() async {
     final _result = await aladinFromFirestoreCreatedAt(
-        collectionName: collectionRecommendBlog);
+        collectionName: collectionAladinTheme,
+        documentName: documentRecommedBlog);
     return _result;
   }
 
   Future<List<Book>> getFirestoreRecommendBlogBook() async {
-    final _result =
-        await aladinFromFirestore(collectionName: collectionRecommendBlog);
+    final _result = await aladinFromFirestore(
+        collectionName: collectionAladinTheme,
+        documentName: documentRecommedBlog);
     return _result;
   }
 
   Future recommendBlogAladinISBNReCallKakaoBook() async {
     await aladinToFirestore(
-        collectionName: collectionRecommendBlog, queryType: "BlogBest");
+        collectionName: collectionAladinTheme,
+        documentName: documentRecommedBlog,
+        queryType: "BlogBest");
   }
 
   Future recommendEditorAladinISBNReCallKakaoBook() async {
     await aladinToFirestore(
-        collectionName: documentEditorMystery,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorMystery,
         categoryId: "50926",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorDrama,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorDrama,
         categoryId: "51242",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorComputerAndMobile,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorComputerAndMobile,
         categoryId: "351",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorEssay,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorEssay,
         categoryId: "55889",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorCartoon,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorCartoon,
         categoryId: "2551",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorSelfImprovement,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorSelfImprovement,
         categoryId: "336",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorForeignLanguage,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorForeignLanguage,
         categoryId: "1322",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorCollegeTextBook,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorCollegeTextBook,
         categoryId: "8257",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorMusicBook,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorMusicBook,
         categoryId: "50966",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorHistoryBook,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorHistoryBook,
         categoryId: "74",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorTravelBook,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorTravelBook,
         categoryId: "1196",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorArtAndCulture,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorArtAndCulture,
         categoryId: "517",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorOldStory,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorOldStory,
         categoryId: "2105",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorChildBook,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorChildBook,
         categoryId: "1108",
         queryType: "");
     await aladinToFirestore(
-        collectionName: documentEditorFantasy,
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorFantasy,
         categoryId: "50928",
         queryType: "");
   }
@@ -93,7 +112,7 @@ class AladinCategoryRepo {
 
   Future<String> getFirestoreRecommendEditorCreatedAt() async {
     final _result = await aladinFromFirestoreCreatedAt(
-        collectionName: collectionRecommendEditor,
+        collectionName: collectionAladinCategory,
         documentName: documentEditorMystery);
     return _result;
   }
@@ -102,7 +121,7 @@ class AladinCategoryRepo {
     required String documentId,
   }) async {
     final _result = await aladinFromFirestore(
-        collectionName: collectionRecommendEditor, documentName: documentId);
+        collectionName: collectionAladinCategory, documentName: documentId);
     return _result;
   }
 }

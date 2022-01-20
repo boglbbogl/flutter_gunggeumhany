@@ -6,17 +6,14 @@ import 'package:intl/intl.dart';
 
 Future<String> aladinFromFirestoreCreatedAt({
   required String collectionName,
-  String? documentName,
+  required String documentName,
 }) async {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  final CollectionReference<Map<String, dynamic>> _aladinRef =
-      documentName == null
-          ? _firestore.collection(collectionName)
-          : _firestore
-              .collection(collectionName)
-              .doc(documentName)
-              .collection(documentName);
+  final CollectionReference<Map<String, dynamic>> _aladinRef = _firestore
+      .collection(collectionName)
+      .doc(documentName)
+      .collection(documentName);
   final _aladinSnapshot =
       await _aladinRef.orderBy("createdAt", descending: true).limit(1).get();
   final _createdAt = _aladinSnapshot.docs
@@ -30,18 +27,15 @@ Future<String> aladinFromFirestoreCreatedAt({
 
 Future<List<Book>> aladinFromFirestore({
   required String collectionName,
-  String? documentName,
+  required String documentName,
 }) async {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final List<Book> _aladinBookList = [];
 
-  final CollectionReference<Map<String, dynamic>> _aladinRef =
-      documentName == null
-          ? _firestore.collection(collectionName)
-          : _firestore
-              .collection(collectionName)
-              .doc(documentName)
-              .collection(documentName);
+  final CollectionReference<Map<String, dynamic>> _aladinRef = _firestore
+      .collection(collectionName)
+      .doc(documentName)
+      .collection(documentName);
   final CollectionReference<Map<String, dynamic>> _bookRef =
       _firestore.collection(collectionBook);
   final _aladinSnapshot =
