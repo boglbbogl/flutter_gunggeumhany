@@ -35,7 +35,8 @@ class ReviewRepo {
         .collection(collectionBook)
         .doc(bookDocKey)
         .collection(collectionReview);
-    final _reviewSnapshot = await _reviewRef.get();
+    final _reviewSnapshot =
+        await _reviewRef.orderBy("createdAt", descending: true).get();
     final List<Review> _reviewList =
         _reviewSnapshot.docs.map((e) => Review.fromJson(e.data())).toList();
     for (final element in _reviewList) {

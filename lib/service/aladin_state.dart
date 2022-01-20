@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gunggeumhany/repository/aladin_repo/bestseller_repo.dart';
-import 'package:flutter_gunggeumhany/repository/aladin_repo/new_book_repo.dart';
+import 'package:flutter_gunggeumhany/repository/aladin_repo/aladin_theme_repo.dart';
 import 'package:flutter_gunggeumhany/repository/aladin_repo/recommend_book_repo.dart';
 
 class AladinState extends ChangeNotifier {
-  final BestsellerRepo _bestsellerRepo = BestsellerRepo();
-  final NewBookRepo _newBookRepo = NewBookRepo();
-  final RecommendBookRepo _recommendBookRepo = RecommendBookRepo();
+  final AladinThemeRepo _aladinThemeRepo = AladinThemeRepo();
+  final AladinCategoryRepo _aladinCategoryRepo = AladinCategoryRepo();
 
   bool _isBestsellerLoading = false;
   bool _isBestsellerForeignLoading = false;
-  bool _isNewBookLoading = false;
   bool _isSpecialNewBookLoading = false;
   bool _isRecommendBlogLoading = false;
   bool _isRecommendEditorLoading = false;
@@ -18,7 +15,7 @@ class AladinState extends ChangeNotifier {
   Future aladinBestsellerToFirestoreLogic() async {
     _isBestsellerLoading = true;
     notifyListeners();
-    await _bestsellerRepo.bestsellerAladinISBNReCallKakaoBook();
+    await _aladinThemeRepo.bestsellerAladinISBNReCallKakaoBook();
     _isBestsellerLoading = false;
     notifyListeners();
   }
@@ -26,16 +23,8 @@ class AladinState extends ChangeNotifier {
   Future aladinBestsellerForeignToFirestoreLogic() async {
     _isBestsellerForeignLoading = true;
     notifyListeners();
-    await _bestsellerRepo.bestsellerForeignAladinISBNReCallKakaoBook();
+    await _aladinThemeRepo.bestsellerForeignAladinISBNReCallKakaoBook();
     _isBestsellerForeignLoading = false;
-    notifyListeners();
-  }
-
-  Future aladinNewBookToFirestoreLogic() async {
-    _isNewBookLoading = true;
-    notifyListeners();
-    await _newBookRepo.newBookAladinISBNReCallKakaoBook();
-    _isNewBookLoading = false;
     notifyListeners();
   }
 
@@ -43,7 +32,7 @@ class AladinState extends ChangeNotifier {
     _isSpecialNewBookLoading = true;
     notifyListeners();
 
-    await _newBookRepo.specialNewBookAladinISBNReCallKakaoBook();
+    await _aladinThemeRepo.specialNewBookAladinISBNReCallKakaoBook();
     _isSpecialNewBookLoading = false;
     notifyListeners();
   }
@@ -51,7 +40,7 @@ class AladinState extends ChangeNotifier {
   Future aladinRecommendBlogToFirestoreLogic() async {
     _isRecommendBlogLoading = true;
     notifyListeners();
-    await _recommendBookRepo.recommendBlogAladinISBNReCallKakaoBook();
+    await _aladinCategoryRepo.recommendBlogAladinISBNReCallKakaoBook();
     _isRecommendBlogLoading = false;
     notifyListeners();
   }
@@ -59,14 +48,13 @@ class AladinState extends ChangeNotifier {
   Future recommendEditorAladinISBNReCallKakaoBook() async {
     _isRecommendEditorLoading = true;
     notifyListeners();
-    await _recommendBookRepo.recommendEditorAladinISBNReCallKakaoBook();
+    await _aladinCategoryRepo.recommendEditorAladinISBNReCallKakaoBook();
     _isRecommendEditorLoading = false;
     notifyListeners();
   }
 
   bool get isBestsellerLoading => _isBestsellerLoading;
   bool get isBestsellerForeignLoading => _isBestsellerForeignLoading;
-  bool get isNewBookLoading => _isNewBookLoading;
   bool get isSpecialNewBookLoading => _isSpecialNewBookLoading;
   bool get isRecommendBlogLoading => _isRecommendBlogLoading;
   bool get isRecommendEditorLoading => _isRecommendEditorLoading;

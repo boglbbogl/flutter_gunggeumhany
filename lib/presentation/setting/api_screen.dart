@@ -33,12 +33,7 @@ class ApiScreen extends StatelessWidget {
                   isLoading:
                       context.watch<AladinState>().isBestsellerForeignLoading,
                   title: '알라딘 베스트셀러(외국)'),
-              _apiForm(
-                  onTap: () {
-                    context.read<AladinState>().aladinNewBookToFirestoreLogic();
-                  },
-                  isLoading: context.watch<AladinState>().isNewBookLoading,
-                  title: '알라딘 신간'),
+
               _apiForm(
                   onTap: () {
                     context

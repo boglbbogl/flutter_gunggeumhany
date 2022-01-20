@@ -3,11 +3,11 @@ import 'package:flutter_gunggeumhany/repository/core/aladin_from_firestore.dart'
 import 'package:flutter_gunggeumhany/repository/core/aladin_to_firestore.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 
-class RecommendBookRepo {
-  static final RecommendBookRepo _recommendBookRepo =
-      RecommendBookRepo._internal();
-  factory RecommendBookRepo() => _recommendBookRepo;
-  RecommendBookRepo._internal();
+class AladinCategoryRepo {
+  static final AladinCategoryRepo _aladinCategoryRepo =
+      AladinCategoryRepo._internal();
+  factory AladinCategoryRepo() => _aladinCategoryRepo;
+  AladinCategoryRepo._internal();
 
   Future<String> getFirestoreRecommendBlogCreatedAt() async {
     final _result = await aladinFromFirestoreCreatedAt(

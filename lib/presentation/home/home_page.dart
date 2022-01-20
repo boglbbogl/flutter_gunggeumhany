@@ -56,12 +56,6 @@ class HomePage extends StatelessWidget {
                             createdAt: provider.bestsellerForeignCreatedAt,
                             book: provider.bestsellerForeignList),
                       ],
-                      if (provider.newBookList.isNotEmpty) ...[
-                        _mainBookForm(
-                            title: '신간',
-                            createdAt: provider.newBookCreatedAt,
-                            book: provider.newBookList),
-                      ],
                       if (provider.editorFantasyBook.isNotEmpty) ...[
                         _mainBookForm(
                             title: '판타지',

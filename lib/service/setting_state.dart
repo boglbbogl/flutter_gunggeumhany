@@ -31,6 +31,7 @@ class SettingState extends ChangeNotifier {
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (_selectedImage != null) {
       _pickedImage = await _selectedImage.readAsBytes();
+      notifyListeners();
     }
     _isImageSeleted = false;
     notifyListeners();
@@ -40,7 +41,7 @@ class SettingState extends ChangeNotifier {
     required String userKey,
     required BuildContext context,
   }) async {
-    if (_changedNickName.isEmpty && _changedProfileImageUrl.isEmpty) {
+    if (_changedNickName.isEmpty && _pickedImage == null) {
       return appFlushbar(message: '변경 사항이 없습니다').show(context);
     }
     _isUpdate = true;
@@ -55,7 +56,9 @@ class SettingState extends ChangeNotifier {
         nickName: _changedNickName);
 
     _isUpdate = false;
-    Navigator.of(context).pop();
+    Navigator.of(context)
+      ..pop()
+      ..pop();
     notifyListeners();
   }
 

@@ -30,10 +30,13 @@ class SettingProfileUpdatePage extends StatelessWidget {
               )
             else
               TextButton(
-                  onPressed: () {
-                    context.read<SettingState>().updateUserProfile(
+                  onPressed: () async {
+                    await context.read<SettingState>().updateUserProfile(
                         userKey: context.read<AuthState>().userProfile!.userKey,
                         context: context);
+                    await context.read<AuthState>().getMyProfile(
+                        userKey:
+                            context.read<AuthState>().userProfile!.userKey);
                   },
                   child: Text(
                     '저장하기',

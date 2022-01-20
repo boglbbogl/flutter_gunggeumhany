@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
-import 'package:flutter_gunggeumhany/repository/aladin_repo/bestseller_repo.dart';
-import 'package:flutter_gunggeumhany/repository/aladin_repo/new_book_repo.dart';
+import 'package:flutter_gunggeumhany/repository/aladin_repo/aladin_theme_repo.dart';
 import 'package:flutter_gunggeumhany/repository/aladin_repo/recommend_book_repo.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 import 'package:flutter_gunggeumhany/repository/recommend_repo.dart';
 
 class MainState extends ChangeNotifier {
-  final BestsellerRepo _bestsellerRepo = BestsellerRepo();
-  final NewBookRepo _newBookRepo = NewBookRepo();
-  final RecommendBookRepo _recommendBookRepo = RecommendBookRepo();
+  final AladinThemeRepo _aladinThemeRepo = AladinThemeRepo();
+  final AladinCategoryRepo _aladinCategoryRepo = AladinCategoryRepo();
   final RecommendRepo _recommendRepo = RecommendRepo();
 
   bool _isBookMoreLoading = false;
   int _moreBookItemIndex = 0;
   List<Book> _bestsellerList = [];
   String _bestsellerCreatedAt = "";
-  List<Book> _newBookList = [];
-  String _newBookCreatedAt = "";
   List<Book> _specialNewBookList = [];
   String _specialNewBookCreatedAt = "";
   List<Book> _recommendBlogList = [];
@@ -60,49 +56,43 @@ class MainState extends ChangeNotifier {
   Future<List<Book>> _getFirestoreRecommendEditorBookItem({
     required String documentId,
   }) async {
-    final List<Book> _returnBookList = await _recommendBookRepo
+    final List<Book> _returnBookList = await _aladinCategoryRepo
         .getFirestoreRecommendEditorBook(documentId: documentId);
     return _returnBookList;
   }
 
   Future _getFirestoreRecommendEditorCreatedAt() async {
     _recommendEditorCreatedAt =
-        await _recommendBookRepo.getFirestoreRecommendEditorCreatedAt();
+        await _aladinCategoryRepo.getFirestoreRecommendEditorCreatedAt();
   }
 
   Future _getFirestoreRecommendBlogBookItem() async {
     _recommendBlogList =
-        await _recommendBookRepo.getFirestoreRecommendBlogBook();
+        await _aladinCategoryRepo.getFirestoreRecommendBlogBook();
     _recommendBlogCreatedAt =
-        await _recommendBookRepo.getFirestoreRecommendBlogCreatedAt();
+        await _aladinCategoryRepo.getFirestoreRecommendBlogCreatedAt();
     notifyListeners();
   }
 
   Future _getFirestoreSpecialNewBookItem() async {
-    _specialNewBookList = await _newBookRepo.getFirestoreSpecialNewBook();
+    _specialNewBookList = await _aladinThemeRepo.getFirestoreSpecialNewBook();
     _specialNewBookCreatedAt =
-        await _newBookRepo.getFirestoreSpecialNewBookCreatedAt();
-    notifyListeners();
-  }
-
-  Future _getFirestoreNewBookItem() async {
-    _newBookList = await _newBookRepo.getFirestoreNewBook();
-    _newBookCreatedAt = await _newBookRepo.getFirestoreNewBookCreatedAt();
+        await _aladinThemeRepo.getFirestoreSpecialNewBookCreatedAt();
     notifyListeners();
   }
 
   Future _getFirestoreBestsellerForeignBookItem() async {
     _bestsellerForeignList =
-        await _bestsellerRepo.getFirestoreBestsellerForeignBook();
+        await _aladinThemeRepo.getFirestoreBestsellerForeignBook();
     _bestsellerForeignCreatedAt =
-        await _bestsellerRepo.getFirestoreBestsellerForeignCreatedAt();
+        await _aladinThemeRepo.getFirestoreBestsellerForeignCreatedAt();
     notifyListeners();
   }
 
   Future _getFirestoreBestsellerBookItem() async {
     _bestsellerCreatedAt =
-        await _bestsellerRepo.getFirestoreBestsellerCreatedAt();
-    _bestsellerList = await _bestsellerRepo.getFirestoreBestsellerBook();
+        await _aladinThemeRepo.getFirestoreBestsellerCreatedAt();
+    _bestsellerList = await _aladinThemeRepo.getFirestoreBestsellerBook();
 
     notifyListeners();
   }
@@ -111,13 +101,13 @@ class MainState extends ChangeNotifier {
     _isBookMoreLoading = true;
     notifyListeners();
     _getFirestoreBestsellerForeignBookItem();
-    _getFirestoreNewBookItem();
     _editorFantasyBook = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorFantasy);
     notifyListeners();
     _editorMysteryStory = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorMystery);
-
+    _editorDramaStory = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorDrama);
     _isBookMoreLoading = false;
     _moreBookItemIndex = 1;
     notifyListeners();
@@ -126,9 +116,7 @@ class MainState extends ChangeNotifier {
   Future categoryMoreBookSecondItem() async {
     _isBookMoreLoading = true;
     notifyListeners();
-    _editorDramaStory = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorDrama);
-    notifyListeners();
+
     _editorTravelBook = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorTravelBook);
     notifyListeners();
@@ -202,8 +190,6 @@ class MainState extends ChangeNotifier {
 
   List<Book> get bestsellerList => _bestsellerList;
   String get bestsellerCreatedAt => _bestsellerCreatedAt;
-  List<Book> get newBookList => _newBookList;
-  String get newBookCreatedAt => _newBookCreatedAt;
   List<Book> get specialNewBookList => _specialNewBookList;
   String get specialNewBookCreatedAt => _specialNewBookCreatedAt;
   List<Book> get recommendBlogList => _recommendBlogList;

@@ -3,10 +3,10 @@ import 'package:flutter_gunggeumhany/repository/core/aladin_from_firestore.dart'
 import 'package:flutter_gunggeumhany/repository/core/aladin_to_firestore.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 
-class BestsellerRepo {
-  static final BestsellerRepo _bestsellerRepo = BestsellerRepo._internal();
-  factory BestsellerRepo() => _bestsellerRepo;
-  BestsellerRepo._internal();
+class AladinThemeRepo {
+  static final AladinThemeRepo _aladinThemeRepo = AladinThemeRepo._internal();
+  factory AladinThemeRepo() => _aladinThemeRepo;
+  AladinThemeRepo._internal();
 
   Future<String> getFirestoreBestsellerCreatedAt() async {
     final _result = await aladinFromFirestoreCreatedAt(
@@ -42,5 +42,22 @@ class BestsellerRepo {
         collectionName: collectionBestsellerForeign,
         queryType: "Bestseller",
         searchTarget: "Foreign");
+  }
+
+  Future<String> getFirestoreSpecialNewBookCreatedAt() async {
+    final _result = await aladinFromFirestoreCreatedAt(
+        collectionName: collectionSpecialNewBook);
+    return _result;
+  }
+
+  Future<List<Book>> getFirestoreSpecialNewBook() async {
+    final _result =
+        await aladinFromFirestore(collectionName: collectionSpecialNewBook);
+    return _result;
+  }
+
+  Future specialNewBookAladinISBNReCallKakaoBook() async {
+    await aladinToFirestore(
+        collectionName: collectionSpecialNewBook, queryType: "ItemNewSpecial");
   }
 }
