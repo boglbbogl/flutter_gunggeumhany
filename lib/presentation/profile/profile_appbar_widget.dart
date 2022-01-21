@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
+import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/profile_state.dart';
 import 'package:provider/provider.dart';
 
 AppBar profileAppbarWidget({
   required BuildContext context,
   required bool isMe,
+  required bool isFollowers,
   required String userNickName,
 }) {
   return AppBar(
-    title: Text(
-      userNickName,
-      style: theme.textTheme.bodyText2!.copyWith(
-          color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
-    ),
+    title: !isMe && isFollowers
+        ? RichText(
+            text: TextSpan(
+                text: "@$userNickName",
+                style: theme.textTheme.bodyText2!.copyWith(
+                  color: appMainColor,
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
+                ),
+                children: [
+                TextSpan(
+                  text: ' 님이 팔로우 합니다',
+                  style: theme.textTheme.bodyText2!.copyWith(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]))
+        : Text(
+            userNickName,
+            style: theme.textTheme.bodyText2!.copyWith(
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+          ),
     actions: [
       if (isMe) ...[
         AnimatedSwitcher(

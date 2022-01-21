@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 
 class ActivityRepo {
@@ -7,6 +8,33 @@ class ActivityRepo {
   ActivityRepo._internal();
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<List<UserProfile>> getFollowingUserList({
+    required List<String> followingUserKey,
+  }) async {
+    final List<UserProfile> _userProfileList = [];
+    for (final element in followingUserKey) {
+      final DocumentReference<Map<String, dynamic>> _userRef =
+          _firestore.collection(collectionUser).doc(element);
+      final _userSnashot = await _userRef.get();
+      final UserProfile _profile = UserProfile.fromJson(_userSnashot.data()!);
+      _userProfileList.add(_profile);
+    }
+    return _userProfileList;
+  }
+
+  Future<List<UserProfile>> getFollowerUserList({
+    required List<String> followerUserKey,
+  }) async {
+    final List<UserProfile> _userProfileList = [];
+    for (final element in followerUserKey) {
+      final DocumentReference<Map<String, dynamic>> _userRef =
+          _firestore.collection(collectionUser).doc(element);
+      final _userSnashot = await _userRef.get();
+      final UserProfile _profile = UserProfile.fromJson(_userSnashot.data()!);
+      _userProfileList.add(_profile);
+    }
+    return _userProfileList;
+  }
 
   Future addFollowing({
     required String myUserKey,

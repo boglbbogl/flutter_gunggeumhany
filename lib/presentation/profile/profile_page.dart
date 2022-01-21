@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_gunggeumhany/presentation/profile/profile_bookmark_widge
 import 'package:flutter_gunggeumhany/presentation/profile/profile_review_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/profile/profile_user_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/setting/setting_drawer_page.dart';
+import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/profile_state.dart';
 import 'package:provider/provider.dart';
 
@@ -49,6 +49,11 @@ class ProfilePage extends StatelessWidget {
                 appBar: profileAppbarWidget(
                     context: context,
                     isMe: isMe,
+                    isFollowers: context
+                        .watch<AuthState>()
+                        .userActivity!
+                        .followerUserKey
+                        .contains(userKey),
                     userNickName: context
                         .watch<ProfileState>()
                         .profileModelList
@@ -59,8 +64,14 @@ class ProfilePage extends StatelessWidget {
                 body: NestedScrollView(
                     headerSliverBuilder: (context, value) {
                       return [
-                        // profileUserWidget(context: context, userKey: userKey),
-                        ProfileUserWidget(userKey: userKey),
+                        ProfileUserWidget(
+                          userKey: userKey,
+                          isMe: context
+                              .watch<AuthState>()
+                              .userProfile!
+                              .userKey
+                              .contains(userKey),
+                        ),
                       ];
                     },
                     body: Column(children: [
