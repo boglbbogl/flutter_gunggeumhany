@@ -24,6 +24,12 @@ _$_UserActivity _$$_UserActivityFromJson(Map<String, dynamic> json) =>
           .toList(),
       reviewInFavoriteRating:
           (json['reviewInFavoriteRating'] as num).toDouble(),
+      followerUserKey: (json['followerUserKey'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      followingUserKey: (json['followingUserKey'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$_UserActivityToJson(_$_UserActivity instance) =>
@@ -35,4 +41,6 @@ Map<String, dynamic> _$$_UserActivityToJson(_$_UserActivity instance) =>
       'reviewInStarRating': instance.reviewInStarRating,
       'reviewInFavoriteDocKey': instance.reviewInFavoriteDocKey,
       'reviewInFavoriteRating': instance.reviewInFavoriteRating,
+      'followerUserKey': instance.followerUserKey,
+      'followingUserKey': instance.followingUserKey,
     };

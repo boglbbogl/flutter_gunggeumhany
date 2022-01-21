@@ -13,6 +13,8 @@ class UserActivity with _$UserActivity {
     required double reviewInStarRating,
     required List<String> reviewInFavoriteDocKey,
     required double reviewInFavoriteRating,
+    required List<String> followerUserKey,
+    required List<String> followingUserKey,
   }) = _UserActivity;
   const UserActivity._();
   factory UserActivity.fromJson(Map<String, dynamic> json) =>
@@ -26,5 +28,7 @@ class UserActivity with _$UserActivity {
         reviewInStarRating: 0.0,
         reviewInFavoriteDocKey: [],
         reviewInFavoriteRating: 0.0,
+        followerUserKey: [],
+        followingUserKey: [],
       );
 }

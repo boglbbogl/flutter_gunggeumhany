@@ -37,13 +37,13 @@ SliverAppBar reviewAppbarWidget({
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _ratingForm(
-                  rate:
-                      (book.starRating! / book.starUserKey!.length).toString(),
+                  rate: (book.starRating! / book.starUserKey!.length)
+                      .toStringAsFixed(1),
                   icon: Icons.star_rounded,
                   color: Colors.amber),
               _ratingForm(
                   rate: (book.favoriteRating! / book.favoriteUserKey!.length)
-                      .toString(),
+                      .toStringAsFixed(1),
                   icon: Icons.favorite_rounded,
                   color: Colors.pink),
             ],
@@ -208,15 +208,14 @@ SliverAppBar reviewAppbarWidget({
                   ),
                 ),
                 const SizedBox(height: 6),
-                if(book.contents.isNotEmpty)...[
-  Text(
-                  "${book.contents} ...",
-                  style: theme.textTheme.bodyText2!.copyWith(
-                    fontSize: 9,
+                if (book.contents.isNotEmpty) ...[
+                  Text(
+                    "${book.contents} ...",
+                    style: theme.textTheme.bodyText2!.copyWith(
+                      fontSize: 9,
+                    ),
                   ),
-                ),
                 ],
-              
                 const SizedBox(height: 35),
               ],
             )),

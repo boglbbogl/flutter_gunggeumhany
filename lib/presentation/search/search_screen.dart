@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_page.dart';
+import 'package:flutter_gunggeumhany/presentation/search/local_search_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/search/search_appbar_widget.dart';
-import 'package:flutter_gunggeumhany/presentation/search/search_item_widget.dart';
+import 'package:flutter_gunggeumhany/presentation/search/kakao_search_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/search/search_rating_widget.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/book_state.dart';
@@ -156,13 +158,17 @@ class SearchScreen extends StatelessWidget {
                 },
                 child: Stack(
                   children: [
-                    searchItemWidget(book: e, isBookmark: false),
+                    if (isKakaoSearch) ...[
+                      kakaoSearchWidget(book: e),
+                    ],
                     if (!isKakaoSearch) ...[
-                      searchRatingWidget(
-                        favorite: e.favoriteRating! / e.favoriteUserKey!.length,
-                        star: e.starRating! / e.starUserKey!.length,
-                        reviewLength: e.starUserKey!.length,
-                      ),
+                      localSearchWidget(
+                          book: e,
+                          isBookmark: context
+                              .watch<AuthState>()
+                              .userActivity!
+                              .bookmarkBookDocKey
+                              .contains(e.docKey)),
                     ],
                   ],
                 ),

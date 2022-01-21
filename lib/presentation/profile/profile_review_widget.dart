@@ -12,6 +12,9 @@ Tab profileReviewWidget({
       // shrinkWrap: true,
       children: [
         const SizedBox(height: 12),
+        if (review.isEmpty) ...[
+          const Center(child: Text('')),
+        ],
         ...review.map((e) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: Container(
@@ -30,8 +33,9 @@ Tab profileReviewWidget({
                             Text(
                               e.bookTitle,
                               style: theme.textTheme.bodyText2!.copyWith(
-                                  color: const Color.fromRGBO(195, 195, 195, 1),
-                                  fontSize: 10),
+                                  color: const Color.fromRGBO(215, 215, 215, 1),
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 4),
                             Wrap(
@@ -44,7 +48,7 @@ Tab profileReviewWidget({
                                             .copyWith(
                                                 color: const Color.fromRGBO(
                                                     195, 195, 195, 1),
-                                                fontSize: 8),
+                                                fontSize: 7),
                                       ),
                                     )),
                               ],

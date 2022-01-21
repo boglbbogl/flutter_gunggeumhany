@@ -8,6 +8,42 @@ class ActivityRepo {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Future addFollowing({
+    required String myUserKey,
+    required String followingUserKey,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _myActivityRef =
+        _firestore.collection(collectionUserActivity).doc(myUserKey);
+    final DocumentReference<Map<String, dynamic>> _followingActivityRef =
+        _firestore.collection(collectionUserActivity).doc(followingUserKey);
+    final _batch = _firestore.batch();
+    _batch.update(_myActivityRef, {
+      "followingUserKey": FieldValue.arrayUnion([followingUserKey])
+    });
+    _batch.update(_followingActivityRef, {
+      "followerUserKey": FieldValue.arrayUnion([myUserKey])
+    });
+    await _batch.commit();
+  }
+
+  Future removeFollowing({
+    required String myUserKey,
+    required String followingUserKey,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _myActivityRef =
+        _firestore.collection(collectionUserActivity).doc(myUserKey);
+    final DocumentReference<Map<String, dynamic>> _followingActivityRef =
+        _firestore.collection(collectionUserActivity).doc(followingUserKey);
+    final _batch = _firestore.batch();
+    _batch.update(_myActivityRef, {
+      "followingUserKey": FieldValue.arrayRemove([followingUserKey])
+    });
+    _batch.update(_followingActivityRef, {
+      "followerUserKey": FieldValue.arrayRemove([myUserKey])
+    });
+    await _batch.commit();
+  }
+
   Future addBookmark({
     required String userKey,
     required String bookDocKey,

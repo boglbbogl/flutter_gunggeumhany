@@ -50,6 +50,7 @@ class MainState extends ChangeNotifier {
   }
   Future _getHanyRecommendBookItem() async {
     _hanyRecommedBook = await _recommendRepo.getHanyRecommendBookItem();
+    _hanyRecommedBook.shuffle();
     notifyListeners();
   }
 

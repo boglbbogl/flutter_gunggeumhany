@@ -107,7 +107,7 @@ class HomeUserBookItem extends StatelessWidget {
                                           children: [
                                             _ratingForm(
                                                 rate: item.review.starRating
-                                                    .toString(),
+                                                    .toStringAsFixed(1),
                                                 icon: Icons.star_rounded,
                                                 color: Colors.amber,
                                                 iconSize: 16,
@@ -115,7 +115,7 @@ class HomeUserBookItem extends StatelessWidget {
                                             const SizedBox(height: 4),
                                             _ratingForm(
                                                 rate: item.review.favoriteRating
-                                                    .toString(),
+                                                    .toStringAsFixed(1),
                                                 icon: Icons.favorite_rounded,
                                                 color: Colors.pink,
                                                 iconSize: 14,

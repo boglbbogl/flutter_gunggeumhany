@@ -29,7 +29,9 @@ class _$UserActivityTearOff {
       required List<String> reviewInStarDocKey,
       required double reviewInStarRating,
       required List<String> reviewInFavoriteDocKey,
-      required double reviewInFavoriteRating}) {
+      required double reviewInFavoriteRating,
+      required List<String> followerUserKey,
+      required List<String> followingUserKey}) {
     return _UserActivity(
       userKey: userKey,
       bookmarkBookDocKey: bookmarkBookDocKey,
@@ -38,6 +40,8 @@ class _$UserActivityTearOff {
       reviewInStarRating: reviewInStarRating,
       reviewInFavoriteDocKey: reviewInFavoriteDocKey,
       reviewInFavoriteRating: reviewInFavoriteRating,
+      followerUserKey: followerUserKey,
+      followingUserKey: followingUserKey,
     );
   }
 
@@ -58,6 +62,8 @@ mixin _$UserActivity {
   double get reviewInStarRating => throw _privateConstructorUsedError;
   List<String> get reviewInFavoriteDocKey => throw _privateConstructorUsedError;
   double get reviewInFavoriteRating => throw _privateConstructorUsedError;
+  List<String> get followerUserKey => throw _privateConstructorUsedError;
+  List<String> get followingUserKey => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -77,7 +83,9 @@ abstract class $UserActivityCopyWith<$Res> {
       List<String> reviewInStarDocKey,
       double reviewInStarRating,
       List<String> reviewInFavoriteDocKey,
-      double reviewInFavoriteRating});
+      double reviewInFavoriteRating,
+      List<String> followerUserKey,
+      List<String> followingUserKey});
 }
 
 /// @nodoc
@@ -97,6 +105,8 @@ class _$UserActivityCopyWithImpl<$Res> implements $UserActivityCopyWith<$Res> {
     Object? reviewInStarRating = freezed,
     Object? reviewInFavoriteDocKey = freezed,
     Object? reviewInFavoriteRating = freezed,
+    Object? followerUserKey = freezed,
+    Object? followingUserKey = freezed,
   }) {
     return _then(_value.copyWith(
       userKey: userKey == freezed
@@ -127,6 +137,14 @@ class _$UserActivityCopyWithImpl<$Res> implements $UserActivityCopyWith<$Res> {
           ? _value.reviewInFavoriteRating
           : reviewInFavoriteRating // ignore: cast_nullable_to_non_nullable
               as double,
+      followerUserKey: followerUserKey == freezed
+          ? _value.followerUserKey
+          : followerUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      followingUserKey: followingUserKey == freezed
+          ? _value.followingUserKey
+          : followingUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -145,7 +163,9 @@ abstract class _$UserActivityCopyWith<$Res>
       List<String> reviewInStarDocKey,
       double reviewInStarRating,
       List<String> reviewInFavoriteDocKey,
-      double reviewInFavoriteRating});
+      double reviewInFavoriteRating,
+      List<String> followerUserKey,
+      List<String> followingUserKey});
 }
 
 /// @nodoc
@@ -167,6 +187,8 @@ class __$UserActivityCopyWithImpl<$Res> extends _$UserActivityCopyWithImpl<$Res>
     Object? reviewInStarRating = freezed,
     Object? reviewInFavoriteDocKey = freezed,
     Object? reviewInFavoriteRating = freezed,
+    Object? followerUserKey = freezed,
+    Object? followingUserKey = freezed,
   }) {
     return _then(_UserActivity(
       userKey: userKey == freezed
@@ -197,6 +219,14 @@ class __$UserActivityCopyWithImpl<$Res> extends _$UserActivityCopyWithImpl<$Res>
           ? _value.reviewInFavoriteRating
           : reviewInFavoriteRating // ignore: cast_nullable_to_non_nullable
               as double,
+      followerUserKey: followerUserKey == freezed
+          ? _value.followerUserKey
+          : followerUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      followingUserKey: followingUserKey == freezed
+          ? _value.followingUserKey
+          : followingUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -211,7 +241,9 @@ class _$_UserActivity extends _UserActivity {
       required this.reviewInStarDocKey,
       required this.reviewInStarRating,
       required this.reviewInFavoriteDocKey,
-      required this.reviewInFavoriteRating})
+      required this.reviewInFavoriteRating,
+      required this.followerUserKey,
+      required this.followingUserKey})
       : super._();
 
   factory _$_UserActivity.fromJson(Map<String, dynamic> json) =>
@@ -231,10 +263,14 @@ class _$_UserActivity extends _UserActivity {
   final List<String> reviewInFavoriteDocKey;
   @override
   final double reviewInFavoriteRating;
+  @override
+  final List<String> followerUserKey;
+  @override
+  final List<String> followingUserKey;
 
   @override
   String toString() {
-    return 'UserActivity(userKey: $userKey, bookmarkBookDocKey: $bookmarkBookDocKey, myReviewDocKey: $myReviewDocKey, reviewInStarDocKey: $reviewInStarDocKey, reviewInStarRating: $reviewInStarRating, reviewInFavoriteDocKey: $reviewInFavoriteDocKey, reviewInFavoriteRating: $reviewInFavoriteRating)';
+    return 'UserActivity(userKey: $userKey, bookmarkBookDocKey: $bookmarkBookDocKey, myReviewDocKey: $myReviewDocKey, reviewInStarDocKey: $reviewInStarDocKey, reviewInStarRating: $reviewInStarRating, reviewInFavoriteDocKey: $reviewInFavoriteDocKey, reviewInFavoriteRating: $reviewInFavoriteRating, followerUserKey: $followerUserKey, followingUserKey: $followingUserKey)';
   }
 
   @override
@@ -254,7 +290,11 @@ class _$_UserActivity extends _UserActivity {
             const DeepCollectionEquality()
                 .equals(other.reviewInFavoriteDocKey, reviewInFavoriteDocKey) &&
             const DeepCollectionEquality()
-                .equals(other.reviewInFavoriteRating, reviewInFavoriteRating));
+                .equals(other.reviewInFavoriteRating, reviewInFavoriteRating) &&
+            const DeepCollectionEquality()
+                .equals(other.followerUserKey, followerUserKey) &&
+            const DeepCollectionEquality()
+                .equals(other.followingUserKey, followingUserKey));
   }
 
   @override
@@ -266,7 +306,9 @@ class _$_UserActivity extends _UserActivity {
       const DeepCollectionEquality().hash(reviewInStarDocKey),
       const DeepCollectionEquality().hash(reviewInStarRating),
       const DeepCollectionEquality().hash(reviewInFavoriteDocKey),
-      const DeepCollectionEquality().hash(reviewInFavoriteRating));
+      const DeepCollectionEquality().hash(reviewInFavoriteRating),
+      const DeepCollectionEquality().hash(followerUserKey),
+      const DeepCollectionEquality().hash(followingUserKey));
 
   @JsonKey(ignore: true)
   @override
@@ -287,7 +329,9 @@ abstract class _UserActivity extends UserActivity {
       required List<String> reviewInStarDocKey,
       required double reviewInStarRating,
       required List<String> reviewInFavoriteDocKey,
-      required double reviewInFavoriteRating}) = _$_UserActivity;
+      required double reviewInFavoriteRating,
+      required List<String> followerUserKey,
+      required List<String> followingUserKey}) = _$_UserActivity;
   const _UserActivity._() : super._();
 
   factory _UserActivity.fromJson(Map<String, dynamic> json) =
@@ -307,6 +351,10 @@ abstract class _UserActivity extends UserActivity {
   List<String> get reviewInFavoriteDocKey;
   @override
   double get reviewInFavoriteRating;
+  @override
+  List<String> get followerUserKey;
+  @override
+  List<String> get followingUserKey;
   @override
   @JsonKey(ignore: true)
   _$UserActivityCopyWith<_UserActivity> get copyWith =>

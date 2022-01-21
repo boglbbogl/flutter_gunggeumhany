@@ -9,7 +9,6 @@ import 'package:flutter_gunggeumhany/presentation/profile/profile_review_widget.
 import 'package:flutter_gunggeumhany/presentation/profile/profile_user_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/setting/setting_drawer_page.dart';
 import 'package:flutter_gunggeumhany/service/profile_state.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -60,7 +59,8 @@ class ProfilePage extends StatelessWidget {
                 body: NestedScrollView(
                     headerSliverBuilder: (context, value) {
                       return [
-                        profileUserWidget(context: context, userKey: userKey),
+                        // profileUserWidget(context: context, userKey: userKey),
+                        ProfileUserWidget(userKey: userKey),
                       ];
                     },
                     body: Column(children: [
