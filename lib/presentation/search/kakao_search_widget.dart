@@ -18,8 +18,8 @@ Padding kakaoSearchWidget({
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              book.title.length > 40
-                  ? "${book.title.substring(0, 40)} ..."
+              book.title.length > 50
+                  ? "${book.title.substring(0, 50)} ..."
                   : book.title,
               style: theme.textTheme.bodyText2!.copyWith(
                   color: Colors.white,

@@ -34,7 +34,7 @@ Column searchRatingWidget({
           "리뷰 $reviewLength개",
           style: theme.textTheme.bodyText2!.copyWith(
               color: const Color.fromRGBO(195, 195, 195, 1),
-              fontSize: 9,
+              fontSize: 8,
               fontWeight: FontWeight.bold),
         ),
       ],
@@ -59,7 +59,7 @@ Row _iconForm({
       Text(
         rating,
         style: theme.textTheme.bodyText2!
-            .copyWith(color: color, fontSize: 10, fontWeight: FontWeight.bold),
+            .copyWith(color: color, fontSize: 9, fontWeight: FontWeight.bold),
       ),
     ],
   );

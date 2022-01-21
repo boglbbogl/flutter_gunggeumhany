@@ -5,6 +5,7 @@ import 'package:flutter_gunggeumhany/model/kakao_book.dart';
 import 'package:flutter_gunggeumhany/repository/core/search_keyword_split.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_api.keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
+import 'package:flutter_gunggeumhany/service/core/logger.dart';
 import 'package:http/http.dart' as http;
 
 class BookRepo {
@@ -27,6 +28,7 @@ class BookRepo {
         .get();
 
     final _result = _snapshot.docs.map((e) => Book.fromJson(e.data())).toList()
+      ..shuffle()
       ..sort((a, b) => b.starRating!.compareTo(a.starRating!));
 
     return _result;
@@ -129,6 +131,12 @@ class BookRepo {
       final _batch = _firestore.batch();
       final decoded = json.decode(utf8.decode(response.bodyBytes));
       final _documents = decoded["documents"] as List<dynamic>;
+      for (final element in _documents) {
+        final _null = element["datetime"];
+        if (_null == "") {
+          return [];
+        }
+      }
       final _kakaoResult = KakaoBook.fromJson(decoded as Map<String, dynamic>);
       final bool _isEnd = _kakaoResult.meta.isEnd;
       final _kakaoBookData = _documents

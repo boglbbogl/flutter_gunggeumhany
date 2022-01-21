@@ -90,15 +90,17 @@ SliverList reviewMyItemWidget({
                   color: Colors.pink,
                   size: 18,
                   leftPadding: 5),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  '"${me.contents}"',
-                  style: theme.textTheme.bodyText2!.copyWith(
-                    fontSize: 14,
+              if (me.contents.isNotEmpty) ...[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    '"${me.contents}"',
+                    style: theme.textTheme.bodyText2!.copyWith(
+                      fontSize: 14,
+                    ),
                   ),
                 ),
-              ),
+              ],
               Padding(
                 padding: const EdgeInsets.only(left: 16, bottom: 16),
                 child: Text(

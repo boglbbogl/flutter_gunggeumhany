@@ -59,13 +59,13 @@ Stack localSearchWidget({
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 4),
+                            // const SizedBox(height: 2),
                             Text(
-                              book.title.length > 33
-                                  ? "${book.title.substring(0, 33)} ..."
+                              book.title.length > 27
+                                  ? "${book.title.substring(0, 27)} ..."
                                   : book.title,
                               style: theme.textTheme.bodyText2!.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
+                                  fontSize: 13, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 4),
                             Row(
@@ -87,7 +87,7 @@ Stack localSearchWidget({
                                     )),
                               ],
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 6),
                             searchRatingWidget(
                               favorite: book.favoriteRating! /
                                   book.favoriteUserKey!.length,
