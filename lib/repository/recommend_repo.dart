@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/model/review_user.dart';
@@ -12,6 +13,66 @@ class RecommendRepo {
   RecommendRepo._internal();
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<List<Book>> allStarRatingTopRankBook() async {
+    final CollectionReference<Map<String, dynamic>> _bookRef =
+        _firestore.collection(collectionBook);
+    final _bookSnapshot =
+        await _bookRef.where('starRating', isNotEqualTo: 0).get();
+
+    final _bookList =
+        _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).toList();
+    _bookList.sort((a, b) => (b.starRating! / b.starUserKey!.length)
+        .compareTo(a.starRating! / a.starUserKey!.length));
+    _bookList.length < 15 ? _bookList.length : _bookList.sublist(0, 15);
+    return _bookList;
+  }
+
+  Future<List<Book>> allManyReviewTopRankBook() async {
+    final CollectionReference<Map<String, dynamic>> _bookRef =
+        _firestore.collection(collectionBook);
+    final _bookSnapshot =
+        await _bookRef.orderBy("starUserKey", descending: true).limit(15).get();
+    final _result =
+        _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).toList();
+    return _result;
+  }
+
+  Future<List<BookReviewUser>> allReviewNewestHomeBook() async {
+    final List<BookReviewUser> _bookReviewList = [];
+    final CollectionReference<Map<String, dynamic>> _bookRef =
+        _firestore.collection(collectionBook);
+    final _bookSnapshot = await _bookRef
+        .orderBy("lastReviewCreatedAt", descending: true)
+        .limit(15)
+        .get();
+    final _bookList =
+        _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).toList();
+    if (_bookList.isNotEmpty) {
+      for (final element in _bookList) {
+        if (element.starRating != 0.0) {
+          final CollectionReference<Map<String, dynamic>> _reviewRef =
+              _firestore
+                  .collection(collectionBook)
+                  .doc(element.docKey)
+                  .collection(collectionReview);
+          final _reviewSnapshot = await _reviewRef
+              .orderBy("createdAt", descending: true)
+              .limit(1)
+              .get();
+          final Review? _reviewResult = _reviewSnapshot.docs
+              .map((e) => Review.fromJson(e.data()))
+              .firstOrNull;
+          if (_reviewResult != null) {
+            _bookReviewList
+                .add(BookReviewUser(book: element, review: _reviewResult));
+          }
+        }
+      }
+      return _bookReviewList;
+    }
+    return [];
+  }
 
   Future<List<BookReviewUser>> getMainFeedCurrentUserPresentReview({
     required String userKey,
@@ -46,6 +107,8 @@ class RecommendRepo {
           }
         }
       }
+      _bookReviewList
+          .sort((a, b) => b.review.createdAt.compareTo(a.review.createdAt));
       return _bookReviewList;
     }
     return [];

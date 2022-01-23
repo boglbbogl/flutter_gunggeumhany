@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gunggeumhany/model/review_user.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_page.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
@@ -8,7 +9,13 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
 class HomeUserBookItem extends StatelessWidget {
-  const HomeUserBookItem({Key? key}) : super(key: key);
+  final List<BookReviewUser> reviewUserBook;
+  final String title;
+  const HomeUserBookItem({
+    Key? key,
+    required this.reviewUserBook,
+    required this.title,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class HomeUserBookItem extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      '내가 작성한 리뷰',
+                      title,
                       style: theme.textTheme.bodyText2!.copyWith(
                           color: Colors.white,
                           fontSize: 14,
@@ -38,8 +45,7 @@ class HomeUserBookItem extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 children: [
-                  ...context.watch<AuthState>().userBookReview.map((item) =>
-                      Stack(
+                  ...reviewUserBook.map((item) => Stack(
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),

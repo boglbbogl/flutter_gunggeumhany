@@ -9,6 +9,7 @@ import 'package:flutter_gunggeumhany/presentation/search/kakao_search_widget.dar
 import 'package:flutter_gunggeumhany/presentation/search/search_rating_widget.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/book_state.dart';
+import 'package:flutter_gunggeumhany/service/core/logger.dart';
 import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
@@ -151,6 +152,7 @@ class SearchScreen extends StatelessWidget {
                       userKey: context.read<AuthState>().userProfile!.userKey,
                       bookDocKey:
                           context.read<BookState>().newBookItem.docKey!);
+                  logger.e(context.read<BookState>().newBookItem.docKey);
                   pushNewScreen(context,
                       screen: const ReviewPage(bookItem: null),
                       pageTransitionAnimation:

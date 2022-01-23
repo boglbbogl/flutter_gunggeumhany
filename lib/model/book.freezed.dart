@@ -39,6 +39,7 @@ class _$BookTearOff {
       required String isbn,
       required DateTime? datetime,
       @TimestampConverter() required DateTime? createdAt,
+      @TimestampConverter() required DateTime? lastReviewCreatedAt,
       required List<String> authors,
       required String publisher,
       required List<String> translators,
@@ -61,6 +62,7 @@ class _$BookTearOff {
       isbn: isbn,
       datetime: datetime,
       createdAt: createdAt,
+      lastReviewCreatedAt: lastReviewCreatedAt,
       authors: authors,
       publisher: publisher,
       translators: translators,
@@ -96,6 +98,8 @@ mixin _$Book {
   DateTime? get datetime => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get lastReviewCreatedAt => throw _privateConstructorUsedError;
   List<String> get authors => throw _privateConstructorUsedError;
   String get publisher => throw _privateConstructorUsedError;
   List<String> get translators => throw _privateConstructorUsedError;
@@ -128,6 +132,7 @@ abstract class $BookCopyWith<$Res> {
       String isbn,
       DateTime? datetime,
       @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? lastReviewCreatedAt,
       List<String> authors,
       String publisher,
       List<String> translators,
@@ -161,6 +166,7 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
     Object? isbn = freezed,
     Object? datetime = freezed,
     Object? createdAt = freezed,
+    Object? lastReviewCreatedAt = freezed,
     Object? authors = freezed,
     Object? publisher = freezed,
     Object? translators = freezed,
@@ -232,6 +238,10 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      lastReviewCreatedAt: lastReviewCreatedAt == freezed
+          ? _value.lastReviewCreatedAt
+          : lastReviewCreatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       authors: authors == freezed
           ? _value.authors
           : authors // ignore: cast_nullable_to_non_nullable
@@ -278,6 +288,7 @@ abstract class _$BookCopyWith<$Res> implements $BookCopyWith<$Res> {
       String isbn,
       DateTime? datetime,
       @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? lastReviewCreatedAt,
       List<String> authors,
       String publisher,
       List<String> translators,
@@ -312,6 +323,7 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
     Object? isbn = freezed,
     Object? datetime = freezed,
     Object? createdAt = freezed,
+    Object? lastReviewCreatedAt = freezed,
     Object? authors = freezed,
     Object? publisher = freezed,
     Object? translators = freezed,
@@ -383,6 +395,10 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      lastReviewCreatedAt: lastReviewCreatedAt == freezed
+          ? _value.lastReviewCreatedAt
+          : lastReviewCreatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       authors: authors == freezed
           ? _value.authors
           : authors // ignore: cast_nullable_to_non_nullable
@@ -427,6 +443,7 @@ class _$_Book extends _Book {
       required this.isbn,
       required this.datetime,
       @TimestampConverter() required this.createdAt,
+      @TimestampConverter() required this.lastReviewCreatedAt,
       required this.authors,
       required this.publisher,
       required this.translators,
@@ -470,6 +487,9 @@ class _$_Book extends _Book {
   @TimestampConverter()
   final DateTime? createdAt;
   @override
+  @TimestampConverter()
+  final DateTime? lastReviewCreatedAt;
+  @override
   final List<String> authors;
   @override
   final String publisher;
@@ -482,7 +502,7 @@ class _$_Book extends _Book {
 
   @override
   String toString() {
-    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, starUserKey: $starUserKey, starRating: $starRating, favoriteUserKey: $favoriteUserKey, favoriteRating: $favoriteRating, bookmarkUserKey: $bookmarkUserKey, isbn10: $isbn10, isbn13: $isbn13, isAudlt: $isAudlt, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
+    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, starUserKey: $starUserKey, starRating: $starRating, favoriteUserKey: $favoriteUserKey, favoriteRating: $favoriteRating, bookmarkUserKey: $bookmarkUserKey, isbn10: $isbn10, isbn13: $isbn13, isAudlt: $isAudlt, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, lastReviewCreatedAt: $lastReviewCreatedAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
   }
 
   @override
@@ -512,6 +532,8 @@ class _$_Book extends _Book {
             const DeepCollectionEquality().equals(other.isbn, isbn) &&
             const DeepCollectionEquality().equals(other.datetime, datetime) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality()
+                .equals(other.lastReviewCreatedAt, lastReviewCreatedAt) &&
             const DeepCollectionEquality().equals(other.authors, authors) &&
             const DeepCollectionEquality().equals(other.publisher, publisher) &&
             const DeepCollectionEquality()
@@ -539,6 +561,7 @@ class _$_Book extends _Book {
         const DeepCollectionEquality().hash(isbn),
         const DeepCollectionEquality().hash(datetime),
         const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(lastReviewCreatedAt),
         const DeepCollectionEquality().hash(authors),
         const DeepCollectionEquality().hash(publisher),
         const DeepCollectionEquality().hash(translators),
@@ -575,6 +598,7 @@ abstract class _Book extends Book {
       required String isbn,
       required DateTime? datetime,
       @TimestampConverter() required DateTime? createdAt,
+      @TimestampConverter() required DateTime? lastReviewCreatedAt,
       required List<String> authors,
       required String publisher,
       required List<String> translators,
@@ -617,6 +641,9 @@ abstract class _Book extends Book {
   @override
   @TimestampConverter()
   DateTime? get createdAt;
+  @override
+  @TimestampConverter()
+  DateTime? get lastReviewCreatedAt;
   @override
   List<String> get authors;
   @override

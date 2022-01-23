@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+import 'package:flutter_gunggeumhany/model/review_user.dart';
 import 'package:flutter_gunggeumhany/repository/aladin_repo/aladin_theme_repo.dart';
 import 'package:flutter_gunggeumhany/repository/aladin_repo/recommend_book_repo.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
@@ -37,6 +38,9 @@ class MainState extends ChangeNotifier {
   List<Book> _editorTravelBook = [];
   List<Book> _hanyRecommedBook = [];
   List<Book> _editorFantasyBook = [];
+  List<BookReviewUser> _newestReviewAllBook = [];
+  List<Book> _allManyReviewTopRankBook = [];
+  List<Book> _allStarRatingTopRankBook = [];
 
   MainState() {
     _moreBookItemIndex = 0;
@@ -46,8 +50,26 @@ class MainState extends ChangeNotifier {
     _getHanyRecommendBookItem();
     _getFirestoreRecommendBlogBookItem();
     _getFirestoreRecommendEditorCreatedAt();
+    _getAllManyReviewTopRankBook();
+    _getAllStarRatingTopRankBook();
+    _getNewestReviewAllBook();
     notifyListeners();
   }
+  Future _getAllStarRatingTopRankBook() async {
+    _allStarRatingTopRankBook = await _recommendRepo.allStarRatingTopRankBook();
+    notifyListeners();
+  }
+
+  Future _getAllManyReviewTopRankBook() async {
+    _allManyReviewTopRankBook = await _recommendRepo.allManyReviewTopRankBook();
+    notifyListeners();
+  }
+
+  Future _getNewestReviewAllBook() async {
+    _newestReviewAllBook = await _recommendRepo.allReviewNewestHomeBook();
+    notifyListeners();
+  }
+
   Future _getHanyRecommendBookItem() async {
     _hanyRecommedBook = await _recommendRepo.getHanyRecommendBookItem();
     _hanyRecommedBook.shuffle();
@@ -214,4 +236,7 @@ class MainState extends ChangeNotifier {
   List<Book> get editorTravelBook => _editorTravelBook;
   List<Book> get hanyRecommedBook => _hanyRecommedBook;
   List<Book> get editorFantasyBook => _editorFantasyBook;
+  List<BookReviewUser> get newestReviewAllBook => _newestReviewAllBook;
+  List<Book> get allManyReviewTopRankBook => _allManyReviewTopRankBook;
+  List<Book> get allStarRatingTopRankBook => _allStarRatingTopRankBook;
 }

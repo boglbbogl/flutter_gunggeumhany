@@ -9,7 +9,7 @@ Stack localSearchWidget({
   required bool isBookmark,
 }) {
   final List<String> _authors =
-      book.authors.length > 5 ? book.authors.sublist(0, 5) : book.authors;
+      book.authors.length > 3 ? book.authors.sublist(0, 3) : book.authors;
   return Stack(
     children: [
       Padding(

@@ -41,7 +41,11 @@ class HomePage extends StatelessWidget {
                           .watch<AuthState>()
                           .userBookReview
                           .isNotEmpty) ...[
-                        const HomeUserBookItem(),
+                        HomeUserBookItem(
+                          title: '내가 작성한 리뷰',
+                          reviewUserBook:
+                              context.watch<AuthState>().userBookReview,
+                        ),
                       ],
                       _mainBookForm(
                           title: '주목할 만한 신간',
@@ -51,6 +55,20 @@ class HomePage extends StatelessWidget {
                           title: '추천 리스트',
                           createdAt: provider.recommendBlogCreatedAt,
                           book: provider.recommendBlogList),
+                      // 리뷰 많은순
+                      _mainBookForm(
+                          title: '리뷰 많은 순',
+                          createdAt: "",
+                          book: provider.allManyReviewTopRankBook),
+                      // 별점 높은순
+                      _mainBookForm(
+                          title: '별점 높은 순',
+                          createdAt: "",
+                          book: provider.allStarRatingTopRankBook),
+                      HomeUserBookItem(
+                        title: '최근에 작성된 리뷰',
+                        reviewUserBook: provider.newestReviewAllBook,
+                      ),
                       if (provider.bestsellerForeignList.isNotEmpty) ...[
                         _mainBookForm(
                             title: '베스트 셀러 (외국)',

@@ -14,11 +14,10 @@ class SettingPage extends StatelessWidget {
         shrinkWrap: true,
         children: [
           _listTileForm(
-              title: '로그아웃',
-              icon: Icons.logout_rounded,
-              onTap: () {
-                context.read<AuthState>().signOut();
-              }),
+            title: '로그아웃',
+            icon: Icons.logout_rounded,
+            onTap: () => context.read<AuthState>().signOut(),
+          ),
         ],
       ),
     );

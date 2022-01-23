@@ -86,6 +86,7 @@ Future aladinToFirestore({
                   docKey: _id.id,
                   searchKeyWord: _searchKeyWord,
                   createdAt: DateTime.now(),
+                  lastReviewCreatedAt: newBookReviewDateFormat(),
                   starUserKey: [],
                   starRating: 0.0,
                   favoriteUserKey: [],

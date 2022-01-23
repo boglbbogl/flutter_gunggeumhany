@@ -5,7 +5,6 @@ import 'package:flutter_gunggeumhany/model/kakao_book.dart';
 import 'package:flutter_gunggeumhany/repository/core/search_keyword_split.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_api.keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
-import 'package:flutter_gunggeumhany/service/core/logger.dart';
 import 'package:http/http.dart' as http;
 
 class BookRepo {
@@ -76,6 +75,12 @@ class BookRepo {
       final _batch = _firestore.batch();
       final decoded = json.decode(utf8.decode(response.bodyBytes));
       final _documents = decoded["documents"] as List<dynamic>;
+      for (final element in _documents) {
+        final _null = element["datetime"];
+        if (_null == "") {
+          return [];
+        }
+      }
       final _kakaoResult = KakaoBook.fromJson(decoded as Map<String, dynamic>);
       final _kakaoBookData = _documents
           .map((e) => Book.fromJson(e as Map<String, dynamic>))
@@ -95,6 +100,7 @@ class BookRepo {
                     docKey: _id.id,
                     searchKeyWord: _searchKeyWord,
                     createdAt: DateTime.now(),
+                    lastReviewCreatedAt: newBookReviewDateFormat(),
                     starUserKey: [],
                     starRating: 0.0,
                     favoriteUserKey: [],
@@ -159,6 +165,7 @@ class BookRepo {
                       docKey: _id.id,
                       searchKeyWord: _searchKeyWord,
                       createdAt: DateTime.now(),
+                      lastReviewCreatedAt: newBookReviewDateFormat(),
                       starUserKey: [],
                       starRating: 0.0,
                       favoriteUserKey: [],

@@ -151,6 +151,7 @@ class ReviewRepo {
     _batch.update(_bookRef, {
       "starUserKey": FieldValue.arrayUnion([review.userKey]),
       "starRating": FieldValue.increment(review.starRating),
+      "lastReviewCreatedAt": DateTime.now().toIso8601String(),
     });
     if (review.favoriteRating != 0.0) {
       _batch.update(_bookRef, {

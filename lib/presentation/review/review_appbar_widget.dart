@@ -13,6 +13,11 @@ SliverAppBar reviewAppbarWidget({
   required Book book,
   required BuildContext context,
 }) {
+  final _authors =
+      book.authors.length < 5 ? book.authors : book.authors.sublist(0, 5);
+  final _translators = book.translators.length < 5
+      ? book.translators
+      : book.translators.sublist(0, 5);
   return SliverAppBar(
     floating: true,
     expandedHeight: size.height * 0.6,
@@ -160,11 +165,11 @@ SliverAppBar reviewAppbarWidget({
                 ),
                 if (book.authors.isNotEmpty) ...[
                   const SizedBox(height: 12),
-                  _authorsAndTranslatorsForm(item: book.authors),
+                  _authorsAndTranslatorsForm(item: _authors),
                 ],
                 if (book.translators.isNotEmpty) ...[
                   const SizedBox(height: 6),
-                  _authorsAndTranslatorsForm(item: book.translators),
+                  _authorsAndTranslatorsForm(item: _translators),
                 ],
                 const SizedBox(height: 6),
                 DefaultTextStyle(

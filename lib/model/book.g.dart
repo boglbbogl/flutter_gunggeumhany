@@ -35,6 +35,9 @@ _$_Book _$$_BookFromJson(Map<String, dynamic> json) => _$_Book(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
+      lastReviewCreatedAt: json['lastReviewCreatedAt'] == null
+          ? null
+          : DateTime.parse(json['lastReviewCreatedAt'] as String),
       authors:
           (json['authors'] as List<dynamic>).map((e) => e as String).toList(),
       publisher: json['publisher'] as String,
@@ -62,6 +65,7 @@ Map<String, dynamic> _$$_BookToJson(_$_Book instance) => <String, dynamic>{
       'isbn': instance.isbn,
       'datetime': instance.datetime?.toIso8601String(),
       'createdAt': instance.createdAt?.toIso8601String(),
+      'lastReviewCreatedAt': instance.lastReviewCreatedAt?.toIso8601String(),
       'authors': instance.authors,
       'publisher': instance.publisher,
       'translators': instance.translators,

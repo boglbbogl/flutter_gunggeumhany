@@ -29,15 +29,15 @@ Padding kakaoSearchWidget({
             const SizedBox(height: 6),
             if (book.authors.isNotEmpty) ...[
               _authorsAndTranslators(
-                  list: book.authors.length > 5
-                      ? book.authors.sublist(0, 5)
+                  list: book.authors.length > 3
+                      ? book.authors.sublist(0, 3)
                       : book.authors,
                   title: '지은이'),
             ],
             if (book.translators.isNotEmpty) ...[
               _authorsAndTranslators(
-                  list: book.translators.length > 5
-                      ? book.translators.sublist(0, 5)
+                  list: book.translators.length > 3
+                      ? book.translators.sublist(0, 3)
                       : book.translators,
                   title: '옮긴이'),
             ],

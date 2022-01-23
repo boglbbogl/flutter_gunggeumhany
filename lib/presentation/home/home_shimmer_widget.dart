@@ -8,7 +8,7 @@ Shimmer homeShimmerWidget() {
       highlightColor: const Color.fromRGBO(115, 115, 115, 1),
       period: const Duration(milliseconds: 1000),
       child: ListView.builder(
-          itemCount: 5,
+          itemCount: 8,
           itemBuilder: (context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,14 +28,20 @@ Shimmer homeShimmerWidget() {
                                     ? '주목할 만한 신간'
                                     : index == 4
                                         ? '추천 리스트'
-                                        : '',
+                                        : index == 5
+                                            ? "리뷰 많은 순"
+                                            : index == 6
+                                                ? "별점 높은 순"
+                                                : index == 7
+                                                    ? "최근에 작성된 리뷰"
+                                                    : '',
                     style: theme.textTheme.bodyText2!.copyWith(
                         color: Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                if (index == 2)
+                if (index == 2 || index == 7)
                   SizedBox(
                     height: size.width * 0.35,
                     child: ListView.builder(
