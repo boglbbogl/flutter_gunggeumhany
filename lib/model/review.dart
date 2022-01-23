@@ -11,13 +11,13 @@ class Review with _$Review {
     required String docKey,
     required String bookDocKey,
     required String userKey,
+    required bool isBlocked,
     required double starRating,
     required double favoriteRating,
     required String contents,
     required String bookTitle,
     required List<String> bookAuthors,
     @TimestampConverter() required DateTime createdAt,
-    @TimestampConverter() required DateTime updatedAt,
   }) = _Review;
   const Review._();
   factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
@@ -26,12 +26,41 @@ class Review with _$Review {
         docKey: "",
         bookDocKey: "",
         userKey: "",
+        isBlocked: false,
         starRating: 0.0,
         favoriteRating: 0.0,
         contents: "",
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
         bookAuthors: [],
         bookTitle: "",
+      );
+}
+
+@freezed
+class ReviewBlocked with _$ReviewBlocked {
+  const factory ReviewBlocked({
+    required String classification,
+    required String userKey,
+    required String docKey,
+    required bool isChecked,
+    required String blockedUserKey,
+    required String bookDocKey,
+    required String reviewDocKey,
+    required String category,
+    @TimestampConverter() required DateTime createdAt,
+  }) = _ReviewBlocked;
+  const ReviewBlocked._();
+  factory ReviewBlocked.fromJson(Map<String, dynamic> json) =>
+      _$ReviewBlockedFromJson(json);
+  factory ReviewBlocked.empty() => ReviewBlocked(
+        classification: "",
+        userKey: "",
+        docKey: "",
+        isChecked: false,
+        blockedUserKey: "",
+        bookDocKey: "",
+        reviewDocKey: "",
+        category: "",
+        createdAt: DateTime.now(),
       );
 }

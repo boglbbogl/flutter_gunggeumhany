@@ -30,6 +30,18 @@ _$_UserActivity _$$_UserActivityFromJson(Map<String, dynamic> json) =>
       followingUserKey: (json['followingUserKey'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      blockedReviewDocKey: (json['blockedReviewDocKey'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      blockedUserUserKey: (json['blockedUserUserKey'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      improvementDocKey: (json['improvementDocKey'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      complainDocKey: (json['complainDocKey'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$_UserActivityToJson(_$_UserActivity instance) =>
@@ -43,4 +55,8 @@ Map<String, dynamic> _$$_UserActivityToJson(_$_UserActivity instance) =>
       'reviewInFavoriteRating': instance.reviewInFavoriteRating,
       'followerUserKey': instance.followerUserKey,
       'followingUserKey': instance.followingUserKey,
+      'blockedReviewDocKey': instance.blockedReviewDocKey,
+      'blockedUserUserKey': instance.blockedUserUserKey,
+      'improvementDocKey': instance.improvementDocKey,
+      'complainDocKey': instance.complainDocKey,
     };

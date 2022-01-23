@@ -8,6 +8,7 @@ import 'package:flutter_gunggeumhany/presentation/profile/profile_review_widget.
 import 'package:flutter_gunggeumhany/presentation/profile/profile_user_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/setting/setting_drawer_page.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
+import 'package:flutter_gunggeumhany/service/core/logger.dart';
 import 'package:flutter_gunggeumhany/service/profile_state.dart';
 import 'package:provider/provider.dart';
 
@@ -24,10 +25,12 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (context
-        .watch<ProfileState>()
-        .profileModelList
-        .where((element) => element.userProfile.userKey.contains(userKey))
-        .isEmpty) {
+            .watch<ProfileState>()
+            .profileModelList
+            .where((element) => element.userProfile.userKey.contains(userKey))
+            .isEmpty ||
+        context.watch<AuthState>().userProfile == null ||
+        context.watch<AuthState>().userActivity == null) {
       return appIndicator();
     }
     return GestureDetector(
@@ -66,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                       return [
                         ProfileUserWidget(
                           userKey: userKey,
-                          isMe: context
+                          isMyFeed: context
                               .watch<AuthState>()
                               .userProfile!
                               .userKey
@@ -89,6 +92,8 @@ class ProfilePage extends StatelessWidget {
                           child: TabBarView(
                         children: [
                           profileReviewWidget(
+                              isMe: isMe,
+                              context: context,
                               review: context
                                   .watch<ProfileState>()
                                   .profileModelList

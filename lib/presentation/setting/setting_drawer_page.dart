@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/presentation/setting/api_screen.dart';
+import 'package:flutter_gunggeumhany/presentation/setting/setting_page.dart';
 import 'package:flutter_gunggeumhany/presentation/setting/setting_profile_update_page.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/profile_state.dart';
@@ -40,10 +41,11 @@ class SettingDrawerPage extends StatelessWidget {
                   pushNewScreen(context, screen: SettingProfileUpdatePage());
                 }),
             _listTileForm(
-                icon: Icons.logout_rounded,
-                title: '로그아웃',
+                icon: Icons.settings_rounded,
+                title: '설정',
                 onTap: () {
-                  context.read<AuthState>().signOut();
+                  context.read<ProfileState>().openAndCloseDrawer(value: false);
+                  pushNewScreen(context, screen: const SettingPage());
                 }),
             _listTileForm(
                 icon: Icons.error_outline_rounded,

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
+import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/core/app_date_time.dart';
+import 'package:flutter_gunggeumhany/service/profile_state.dart';
+import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 Tab profileReviewWidget({
   required List<Review> review,
+  required BuildContext context,
+  required bool isMe,
 }) {
   return Tab(
     child: ListView(
@@ -27,32 +33,95 @@ Tab profileReviewWidget({
                       const SizedBox(height: 8),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              e.bookTitle,
-                              style: theme.textTheme.bodyText2!.copyWith(
-                                  color: const Color.fromRGBO(215, 215, 215, 1),
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 4),
-                            Wrap(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ...e.bookAuthors.map((e) => Padding(
-                                      padding: const EdgeInsets.only(right: 12),
-                                      child: Text(
-                                        e,
-                                        style: theme.textTheme.bodyText2!
-                                            .copyWith(
-                                                color: const Color.fromRGBO(
-                                                    195, 195, 195, 1),
-                                                fontSize: 7),
-                                      ),
-                                    )),
+                                Text(
+                                  e.bookTitle,
+                                  style: theme.textTheme.bodyText2!.copyWith(
+                                      color: const Color.fromRGBO(
+                                          215, 215, 215, 1),
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 4),
+                                Wrap(
+                                  children: [
+                                    ...e.bookAuthors.map((e) => Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 12),
+                                          child: Text(
+                                            e,
+                                            style: theme.textTheme.bodyText2!
+                                                .copyWith(
+                                                    color: const Color.fromRGBO(
+                                                        195, 195, 195, 1),
+                                                    fontSize: 7),
+                                          ),
+                                        )),
+                                  ],
+                                )
                               ],
-                            )
+                            ),
+                            if (isMe) ...[
+                              IconButton(
+                                  padding: const EdgeInsets.only(right: 4),
+                                  constraints: const BoxConstraints(),
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: (context) {
+                                          return SizedBox(
+                                            height: size.height * 0.1,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(12.0),
+                                              child: ListView(
+                                                children: [
+                                                  ListTile(
+                                                    onTap: () async {
+                                                      await context
+                                                          .read<ReviewState>()
+                                                          .deleteMyReview(
+                                                            review: e,
+                                                            context: context,
+                                                          );
+                                                      context
+                                                          .read<ProfileState>()
+                                                          .getUserReviewAndProfile(
+                                                              userKey:
+                                                                  e.userKey);
+                                                      context
+                                                          .read<AuthState>()
+                                                          .getMainFeedUserReviewListUpdate(
+                                                              userKey:
+                                                                  e.userKey);
+                                                    },
+                                                    title: Text(
+                                                      '리뷰 지우기',
+                                                      style: theme
+                                                          .textTheme.bodyText2!
+                                                          .copyWith(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  icon: const Icon(Icons.more_horiz_rounded,
+                                      size: 20)),
+                            ],
                           ],
                         ),
                       ),
@@ -87,7 +156,7 @@ Tab profileReviewWidget({
                                   ],
                                 ),
                                 Text(
-                                  appDateTime(dateTime: e.updatedAt),
+                                  appDateTime(dateTime: e.createdAt),
                                   style: theme.textTheme.bodyText2!.copyWith(
                                       color: const Color.fromRGBO(
                                           195, 195, 195, 1),

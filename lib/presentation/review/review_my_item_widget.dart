@@ -26,55 +26,11 @@ SliverList reviewMyItemWidget({
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    userImageAndName(
-                        context: context,
-                        userKey:
-                            context.watch<AuthState>().userProfile!.userKey,
-                        imageUrl:
-                            context.watch<AuthState>().userProfile!.imageUrl,
-                        nickName:
-                            context.watch<AuthState>().userProfile!.nickName),
-                    InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return SizedBox(
-                                  height: size.height * 0.1,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: ListView(
-                                      children: [
-                                        ListTile(
-                                          onTap: () async {
-                                            await context
-                                                .read<ReviewState>()
-                                                .deleteMyReview(
-                                                    review: me,
-                                                    context: context);
-                                          },
-                                          title: Text(
-                                            '리뷰 지우기',
-                                            style: theme.textTheme.bodyText2!
-                                                .copyWith(
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              });
-                        },
-                        child: const Icon(Icons.more_horiz_rounded)),
-                  ],
-                ),
+                child: userImageAndName(
+                    context: context,
+                    userKey: context.watch<AuthState>().userProfile!.userKey,
+                    imageUrl: context.watch<AuthState>().userProfile!.imageUrl,
+                    nickName: context.watch<AuthState>().userProfile!.nickName),
               ),
               const SizedBox(height: 8),
               _ratingForm(

@@ -51,6 +51,29 @@ class ReviewRepo {
     return _userReviewList;
   }
 
+  Future requestReviewBlocked({
+    required ReviewBlocked reviewBlocked,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _blockedRef =
+        _firestore.collection(collectionBlocked).doc();
+    final _blockedSnapshot = await _blockedRef.get();
+    final _toWrite = reviewBlocked.copyWith(docKey: _blockedSnapshot.id);
+    await _blockedRef.set(_toWrite.toJson());
+  }
+
+  Future myReviewListblockedReview({
+    required String myUserKey,
+    required String reviewDocKey,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _userActivityRef =
+        _firestore.collection(collectionUserActivity).doc(myUserKey);
+    final _batch = _firestore.batch();
+    _batch.update(_userActivityRef, {
+      "blockedReviewDocKey": FieldValue.arrayUnion([reviewDocKey]),
+    });
+    await _batch.commit();
+  }
+
   Future deleteMyReview({
     required Review review,
   }) async {

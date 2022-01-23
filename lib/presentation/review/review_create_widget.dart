@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
+import 'package:flutter_gunggeumhany/presentation/core/app_flushbar.dart';
 import 'package:flutter_gunggeumhany/service/auth_state.dart';
 import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -120,24 +121,33 @@ SliverList reviewCreateWidget({
                   ),
                   InkWell(
                     onTap: () async {
-                      await context.read<ReviewState>().createReview(
-                            context: context,
+                      if (context.read<ReviewState>().starRating == 0.0) {
+                        appFlushbar(message: '책에 대한 별점은 필수 입력사항 입니다')
+                            .show(context);
+                      } else {
+                        await context.read<ReviewState>().createReview(
+                              context: context,
+                              bookDocKey: bookDocKey,
+                              bookTitle: bookTitle,
+                              authors: authors,
+                              userKey: context
+                                  .read<AuthState>()
+                                  .userProfile!
+                                  .userKey,
+                            );
+                        await context.read<ReviewState>().getMyReviewList(
                             bookDocKey: bookDocKey,
-                            bookTitle: bookTitle,
-                            authors: authors,
                             userKey:
-                                context.read<AuthState>().userProfile!.userKey,
-                          );
-                      await context.read<ReviewState>().getMyReviewList(
-                          bookDocKey: bookDocKey,
-                          userKey:
-                              context.read<AuthState>().userProfile!.userKey);
-                      await context
-                          .read<AuthState>()
-                          .getMainFeedUserReviewListUpdate(
-                            userKey:
-                                context.read<AuthState>().userProfile!.userKey,
-                          );
+                                context.read<AuthState>().userProfile!.userKey);
+                        await context
+                            .read<AuthState>()
+                            .getMainFeedUserReviewListUpdate(
+                              userKey: context
+                                  .read<AuthState>()
+                                  .userProfile!
+                                  .userKey,
+                            );
+                      }
                     },
                     child: context.watch<ReviewState>().isCreateReview
                         ? Padding(

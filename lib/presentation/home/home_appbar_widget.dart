@@ -28,9 +28,11 @@ AppBar homeAppbarWidget({
             Icons.search,
             size: 30,
           )),
-      userImage(
-          imageUrl: context.watch<AuthState>().userProfile!.imageUrl,
-          context: context),
+      if (context.watch<AuthState>().userProfile != null) ...[
+        userImage(
+            imageUrl: context.watch<AuthState>().userProfile!.imageUrl,
+            context: context),
+      ],
       const SizedBox(width: 8),
     ],
   );

@@ -102,6 +102,7 @@ class BookRepo {
                     bookmarkUserKey: [],
                     isbn10: _setBookData[i].isbn.split(" ")[0],
                     isbn13: _setBookData[i].isbn.split(" ")[1],
+                    isAudlt: false,
                   )
                   .toJson());
         }
@@ -165,6 +166,7 @@ class BookRepo {
                       bookmarkUserKey: [],
                       isbn10: _setBookData[i].isbn.split(" ")[0],
                       isbn13: _setBookData[i].isbn.split(" ")[1],
+                      isAudlt: false,
                     )
                     .toJson());
           }

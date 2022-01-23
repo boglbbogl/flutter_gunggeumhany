@@ -12,12 +12,12 @@ import 'package:provider/provider.dart';
 
 class ProfileUserWidget extends StatelessWidget {
   final String userKey;
-  final bool isMe;
+  final bool isMyFeed;
 
   const ProfileUserWidget({
     Key? key,
     required this.userKey,
-    required this.isMe,
+    required this.isMyFeed,
   }) : super(key: key);
 
   @override
@@ -142,7 +142,7 @@ class ProfileUserWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                if (isMe) ...[
+                if (isMyFeed) ...[
                   _followingChangeForm(
                       icon: Icons.favorite_rounded,
                       color: appMainColor,
@@ -160,7 +160,7 @@ class ProfileUserWidget extends StatelessWidget {
                                 PageTransitionAnimation.slideUp);
                       })
                 ],
-                if (!isMe) ...[
+                if (!isMyFeed) ...[
                   AnimatedSwitcher(
                     duration: const Duration(
                       milliseconds: 500,

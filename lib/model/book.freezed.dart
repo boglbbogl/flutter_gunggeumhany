@@ -32,6 +32,7 @@ class _$BookTearOff {
       required List<String>? bookmarkUserKey,
       required String? isbn10,
       required String? isbn13,
+      required bool? isAudlt,
       required String title,
       required String contents,
       required String url,
@@ -53,6 +54,7 @@ class _$BookTearOff {
       bookmarkUserKey: bookmarkUserKey,
       isbn10: isbn10,
       isbn13: isbn13,
+      isAudlt: isAudlt,
       title: title,
       contents: contents,
       url: url,
@@ -86,6 +88,7 @@ mixin _$Book {
   List<String>? get bookmarkUserKey => throw _privateConstructorUsedError;
   String? get isbn10 => throw _privateConstructorUsedError;
   String? get isbn13 => throw _privateConstructorUsedError;
+  bool? get isAudlt => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get contents => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -118,6 +121,7 @@ abstract class $BookCopyWith<$Res> {
       List<String>? bookmarkUserKey,
       String? isbn10,
       String? isbn13,
+      bool? isAudlt,
       String title,
       String contents,
       String url,
@@ -150,6 +154,7 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
     Object? bookmarkUserKey = freezed,
     Object? isbn10 = freezed,
     Object? isbn13 = freezed,
+    Object? isAudlt = freezed,
     Object? title = freezed,
     Object? contents = freezed,
     Object? url = freezed,
@@ -199,6 +204,10 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
           ? _value.isbn13
           : isbn13 // ignore: cast_nullable_to_non_nullable
               as String?,
+      isAudlt: isAudlt == freezed
+          ? _value.isAudlt
+          : isAudlt // ignore: cast_nullable_to_non_nullable
+              as bool?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -262,6 +271,7 @@ abstract class _$BookCopyWith<$Res> implements $BookCopyWith<$Res> {
       List<String>? bookmarkUserKey,
       String? isbn10,
       String? isbn13,
+      bool? isAudlt,
       String title,
       String contents,
       String url,
@@ -295,6 +305,7 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
     Object? bookmarkUserKey = freezed,
     Object? isbn10 = freezed,
     Object? isbn13 = freezed,
+    Object? isAudlt = freezed,
     Object? title = freezed,
     Object? contents = freezed,
     Object? url = freezed,
@@ -344,6 +355,10 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
           ? _value.isbn13
           : isbn13 // ignore: cast_nullable_to_non_nullable
               as String?,
+      isAudlt: isAudlt == freezed
+          ? _value.isAudlt
+          : isAudlt // ignore: cast_nullable_to_non_nullable
+              as bool?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -405,6 +420,7 @@ class _$_Book extends _Book {
       required this.bookmarkUserKey,
       required this.isbn10,
       required this.isbn13,
+      required this.isAudlt,
       required this.title,
       required this.contents,
       required this.url,
@@ -439,6 +455,8 @@ class _$_Book extends _Book {
   @override
   final String? isbn13;
   @override
+  final bool? isAudlt;
+  @override
   final String title;
   @override
   final String contents;
@@ -464,7 +482,7 @@ class _$_Book extends _Book {
 
   @override
   String toString() {
-    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, starUserKey: $starUserKey, starRating: $starRating, favoriteUserKey: $favoriteUserKey, favoriteRating: $favoriteRating, bookmarkUserKey: $bookmarkUserKey, isbn10: $isbn10, isbn13: $isbn13, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
+    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, starUserKey: $starUserKey, starRating: $starRating, favoriteUserKey: $favoriteUserKey, favoriteRating: $favoriteRating, bookmarkUserKey: $bookmarkUserKey, isbn10: $isbn10, isbn13: $isbn13, isAudlt: $isAudlt, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
   }
 
   @override
@@ -487,6 +505,7 @@ class _$_Book extends _Book {
                 .equals(other.bookmarkUserKey, bookmarkUserKey) &&
             const DeepCollectionEquality().equals(other.isbn10, isbn10) &&
             const DeepCollectionEquality().equals(other.isbn13, isbn13) &&
+            const DeepCollectionEquality().equals(other.isAudlt, isAudlt) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.contents, contents) &&
             const DeepCollectionEquality().equals(other.url, url) &&
@@ -513,6 +532,7 @@ class _$_Book extends _Book {
         const DeepCollectionEquality().hash(bookmarkUserKey),
         const DeepCollectionEquality().hash(isbn10),
         const DeepCollectionEquality().hash(isbn13),
+        const DeepCollectionEquality().hash(isAudlt),
         const DeepCollectionEquality().hash(title),
         const DeepCollectionEquality().hash(contents),
         const DeepCollectionEquality().hash(url),
@@ -548,6 +568,7 @@ abstract class _Book extends Book {
       required List<String>? bookmarkUserKey,
       required String? isbn10,
       required String? isbn13,
+      required bool? isAudlt,
       required String title,
       required String contents,
       required String url,
@@ -581,6 +602,8 @@ abstract class _Book extends Book {
   String? get isbn10;
   @override
   String? get isbn13;
+  @override
+  bool? get isAudlt;
   @override
   String get title;
   @override

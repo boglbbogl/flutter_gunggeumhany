@@ -97,7 +97,12 @@ class HomeBookItem extends StatelessWidget {
                         ),
                       ),
                       if (book.bookmarkUserKey!.contains(
-                          context.watch<AuthState>().userProfile!.userKey)) ...[
+                          context.watch<AuthState>().userProfile == null
+                              ? ""
+                              : context
+                                  .watch<AuthState>()
+                                  .userProfile!
+                                  .userKey)) ...[
                         Positioned(
                           right: 2,
                           top: 2,

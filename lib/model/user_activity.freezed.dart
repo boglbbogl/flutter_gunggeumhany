@@ -31,7 +31,11 @@ class _$UserActivityTearOff {
       required List<String> reviewInFavoriteDocKey,
       required double reviewInFavoriteRating,
       required List<String> followerUserKey,
-      required List<String> followingUserKey}) {
+      required List<String> followingUserKey,
+      required List<String> blockedReviewDocKey,
+      required List<String> blockedUserUserKey,
+      required List<String> improvementDocKey,
+      required List<String> complainDocKey}) {
     return _UserActivity(
       userKey: userKey,
       bookmarkBookDocKey: bookmarkBookDocKey,
@@ -42,6 +46,10 @@ class _$UserActivityTearOff {
       reviewInFavoriteRating: reviewInFavoriteRating,
       followerUserKey: followerUserKey,
       followingUserKey: followingUserKey,
+      blockedReviewDocKey: blockedReviewDocKey,
+      blockedUserUserKey: blockedUserUserKey,
+      improvementDocKey: improvementDocKey,
+      complainDocKey: complainDocKey,
     );
   }
 
@@ -64,6 +72,10 @@ mixin _$UserActivity {
   double get reviewInFavoriteRating => throw _privateConstructorUsedError;
   List<String> get followerUserKey => throw _privateConstructorUsedError;
   List<String> get followingUserKey => throw _privateConstructorUsedError;
+  List<String> get blockedReviewDocKey => throw _privateConstructorUsedError;
+  List<String> get blockedUserUserKey => throw _privateConstructorUsedError;
+  List<String> get improvementDocKey => throw _privateConstructorUsedError;
+  List<String> get complainDocKey => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -85,7 +97,11 @@ abstract class $UserActivityCopyWith<$Res> {
       List<String> reviewInFavoriteDocKey,
       double reviewInFavoriteRating,
       List<String> followerUserKey,
-      List<String> followingUserKey});
+      List<String> followingUserKey,
+      List<String> blockedReviewDocKey,
+      List<String> blockedUserUserKey,
+      List<String> improvementDocKey,
+      List<String> complainDocKey});
 }
 
 /// @nodoc
@@ -107,6 +123,10 @@ class _$UserActivityCopyWithImpl<$Res> implements $UserActivityCopyWith<$Res> {
     Object? reviewInFavoriteRating = freezed,
     Object? followerUserKey = freezed,
     Object? followingUserKey = freezed,
+    Object? blockedReviewDocKey = freezed,
+    Object? blockedUserUserKey = freezed,
+    Object? improvementDocKey = freezed,
+    Object? complainDocKey = freezed,
   }) {
     return _then(_value.copyWith(
       userKey: userKey == freezed
@@ -145,6 +165,22 @@ class _$UserActivityCopyWithImpl<$Res> implements $UserActivityCopyWith<$Res> {
           ? _value.followingUserKey
           : followingUserKey // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      blockedReviewDocKey: blockedReviewDocKey == freezed
+          ? _value.blockedReviewDocKey
+          : blockedReviewDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      blockedUserUserKey: blockedUserUserKey == freezed
+          ? _value.blockedUserUserKey
+          : blockedUserUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      improvementDocKey: improvementDocKey == freezed
+          ? _value.improvementDocKey
+          : improvementDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      complainDocKey: complainDocKey == freezed
+          ? _value.complainDocKey
+          : complainDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -165,7 +201,11 @@ abstract class _$UserActivityCopyWith<$Res>
       List<String> reviewInFavoriteDocKey,
       double reviewInFavoriteRating,
       List<String> followerUserKey,
-      List<String> followingUserKey});
+      List<String> followingUserKey,
+      List<String> blockedReviewDocKey,
+      List<String> blockedUserUserKey,
+      List<String> improvementDocKey,
+      List<String> complainDocKey});
 }
 
 /// @nodoc
@@ -189,6 +229,10 @@ class __$UserActivityCopyWithImpl<$Res> extends _$UserActivityCopyWithImpl<$Res>
     Object? reviewInFavoriteRating = freezed,
     Object? followerUserKey = freezed,
     Object? followingUserKey = freezed,
+    Object? blockedReviewDocKey = freezed,
+    Object? blockedUserUserKey = freezed,
+    Object? improvementDocKey = freezed,
+    Object? complainDocKey = freezed,
   }) {
     return _then(_UserActivity(
       userKey: userKey == freezed
@@ -227,6 +271,22 @@ class __$UserActivityCopyWithImpl<$Res> extends _$UserActivityCopyWithImpl<$Res>
           ? _value.followingUserKey
           : followingUserKey // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      blockedReviewDocKey: blockedReviewDocKey == freezed
+          ? _value.blockedReviewDocKey
+          : blockedReviewDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      blockedUserUserKey: blockedUserUserKey == freezed
+          ? _value.blockedUserUserKey
+          : blockedUserUserKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      improvementDocKey: improvementDocKey == freezed
+          ? _value.improvementDocKey
+          : improvementDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      complainDocKey: complainDocKey == freezed
+          ? _value.complainDocKey
+          : complainDocKey // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -243,7 +303,11 @@ class _$_UserActivity extends _UserActivity {
       required this.reviewInFavoriteDocKey,
       required this.reviewInFavoriteRating,
       required this.followerUserKey,
-      required this.followingUserKey})
+      required this.followingUserKey,
+      required this.blockedReviewDocKey,
+      required this.blockedUserUserKey,
+      required this.improvementDocKey,
+      required this.complainDocKey})
       : super._();
 
   factory _$_UserActivity.fromJson(Map<String, dynamic> json) =>
@@ -267,10 +331,18 @@ class _$_UserActivity extends _UserActivity {
   final List<String> followerUserKey;
   @override
   final List<String> followingUserKey;
+  @override
+  final List<String> blockedReviewDocKey;
+  @override
+  final List<String> blockedUserUserKey;
+  @override
+  final List<String> improvementDocKey;
+  @override
+  final List<String> complainDocKey;
 
   @override
   String toString() {
-    return 'UserActivity(userKey: $userKey, bookmarkBookDocKey: $bookmarkBookDocKey, myReviewDocKey: $myReviewDocKey, reviewInStarDocKey: $reviewInStarDocKey, reviewInStarRating: $reviewInStarRating, reviewInFavoriteDocKey: $reviewInFavoriteDocKey, reviewInFavoriteRating: $reviewInFavoriteRating, followerUserKey: $followerUserKey, followingUserKey: $followingUserKey)';
+    return 'UserActivity(userKey: $userKey, bookmarkBookDocKey: $bookmarkBookDocKey, myReviewDocKey: $myReviewDocKey, reviewInStarDocKey: $reviewInStarDocKey, reviewInStarRating: $reviewInStarRating, reviewInFavoriteDocKey: $reviewInFavoriteDocKey, reviewInFavoriteRating: $reviewInFavoriteRating, followerUserKey: $followerUserKey, followingUserKey: $followingUserKey, blockedReviewDocKey: $blockedReviewDocKey, blockedUserUserKey: $blockedUserUserKey, improvementDocKey: $improvementDocKey, complainDocKey: $complainDocKey)';
   }
 
   @override
@@ -294,7 +366,15 @@ class _$_UserActivity extends _UserActivity {
             const DeepCollectionEquality()
                 .equals(other.followerUserKey, followerUserKey) &&
             const DeepCollectionEquality()
-                .equals(other.followingUserKey, followingUserKey));
+                .equals(other.followingUserKey, followingUserKey) &&
+            const DeepCollectionEquality()
+                .equals(other.blockedReviewDocKey, blockedReviewDocKey) &&
+            const DeepCollectionEquality()
+                .equals(other.blockedUserUserKey, blockedUserUserKey) &&
+            const DeepCollectionEquality()
+                .equals(other.improvementDocKey, improvementDocKey) &&
+            const DeepCollectionEquality()
+                .equals(other.complainDocKey, complainDocKey));
   }
 
   @override
@@ -308,7 +388,11 @@ class _$_UserActivity extends _UserActivity {
       const DeepCollectionEquality().hash(reviewInFavoriteDocKey),
       const DeepCollectionEquality().hash(reviewInFavoriteRating),
       const DeepCollectionEquality().hash(followerUserKey),
-      const DeepCollectionEquality().hash(followingUserKey));
+      const DeepCollectionEquality().hash(followingUserKey),
+      const DeepCollectionEquality().hash(blockedReviewDocKey),
+      const DeepCollectionEquality().hash(blockedUserUserKey),
+      const DeepCollectionEquality().hash(improvementDocKey),
+      const DeepCollectionEquality().hash(complainDocKey));
 
   @JsonKey(ignore: true)
   @override
@@ -331,7 +415,11 @@ abstract class _UserActivity extends UserActivity {
       required List<String> reviewInFavoriteDocKey,
       required double reviewInFavoriteRating,
       required List<String> followerUserKey,
-      required List<String> followingUserKey}) = _$_UserActivity;
+      required List<String> followingUserKey,
+      required List<String> blockedReviewDocKey,
+      required List<String> blockedUserUserKey,
+      required List<String> improvementDocKey,
+      required List<String> complainDocKey}) = _$_UserActivity;
   const _UserActivity._() : super._();
 
   factory _UserActivity.fromJson(Map<String, dynamic> json) =
@@ -355,6 +443,14 @@ abstract class _UserActivity extends UserActivity {
   List<String> get followerUserKey;
   @override
   List<String> get followingUserKey;
+  @override
+  List<String> get blockedReviewDocKey;
+  @override
+  List<String> get blockedUserUserKey;
+  @override
+  List<String> get improvementDocKey;
+  @override
+  List<String> get complainDocKey;
   @override
   @JsonKey(ignore: true)
   _$UserActivityCopyWith<_UserActivity> get copyWith =>

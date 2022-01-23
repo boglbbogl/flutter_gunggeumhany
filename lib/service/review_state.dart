@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/model/review_user.dart';
+import 'package:flutter_gunggeumhany/presentation/core/app_flushbar.dart';
 import 'package:flutter_gunggeumhany/repository/review_repo.dart';
 
 class ReviewState extends ChangeNotifier {
@@ -51,14 +52,40 @@ class ReviewState extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future blokedReview({
+    required String category,
+    required String myUserKey,
+    required String reviewDocKey,
+    required String blockedUserKey,
+    required String bookDocKey,
+    required BuildContext context,
+  }) async {
+    await _reviewRepo.requestReviewBlocked(
+        reviewBlocked: ReviewBlocked(
+      classification: "REVIEW",
+      userKey: myUserKey,
+      docKey: "",
+      isChecked: false,
+      blockedUserKey: blockedUserKey,
+      bookDocKey: bookDocKey,
+      reviewDocKey: reviewDocKey,
+      category: category,
+      createdAt: DateTime.now(),
+    ));
+    if (category == "나한테 더 이상 리뷰 안보이게 하기") {
+      await _reviewRepo.myReviewListblockedReview(
+          myUserKey: myUserKey, reviewDocKey: reviewDocKey);
+    }
+    Navigator.of(context).pop();
+    appFlushbar(message: '신고가 접수 되었습니다').show(context);
+  }
+
   Future deleteMyReview({
     required Review review,
     required BuildContext context,
   }) async {
     await _reviewRepo.deleteMyReview(review: review);
-    Navigator.of(context)
-      ..pop()
-      ..pop();
+    Navigator.of(context).pop();
   }
 
   Future createReview({
@@ -70,22 +97,19 @@ class ReviewState extends ChangeNotifier {
   }) async {
     _isCreateReview = true;
     notifyListeners();
-    if (_starRating == 0.0) {
-      //show snackbar
-    } else {
-      await _reviewRepo.createReview(
-          review: _review.copyWith(
-        bookDocKey: bookDocKey,
-        starRating: _starRating,
-        favoriteRating: _favoriteRating,
-        contents: _reviewContents,
-        userKey: userKey,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        bookTitle: bookTitle,
-        bookAuthors: authors,
-      ));
-    }
+
+    await _reviewRepo.createReview(
+        review: _review.copyWith(
+      bookDocKey: bookDocKey,
+      starRating: _starRating,
+      favoriteRating: _favoriteRating,
+      contents: _reviewContents,
+      userKey: userKey,
+      createdAt: DateTime.now(),
+      bookTitle: bookTitle,
+      bookAuthors: authors,
+    ));
+
     _isCreateReview = false;
     notifyListeners();
   }
