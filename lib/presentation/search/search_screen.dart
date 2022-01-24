@@ -148,17 +148,17 @@ class SearchScreen extends StatelessWidget {
                         .read<BookState>()
                         .currentBookUpdateItem(docKey: e.docKey!);
                   }
-                  context.read<ReviewState>()
-                    ..getUserReviewList(
-                        userKey: context.read<AuthState>().userProfile!.userKey,
-                        bookDocKey:
-                            context.read<BookState>().newBookItem.docKey!)
-                    ..getAladinPriceInfo(
-                        ISBN13: context.read<BookState>().newBookItem.isbn13!,
-                        ISBN10: context.read<BookState>().newBookItem.isbn10!);
+                  await context.read<ReviewState>().getUserReviewList(
+                      userKey: context.read<AuthState>().userProfile!.userKey,
+                      bookDocKey: context.read<BookState>().newBookItem.docKey!,
+                      ISBN13: context.read<BookState>().newBookItem.isbn13!,
+                      ISBN10: context.read<BookState>().newBookItem.isbn10!);
+
                   logger.e(context.read<BookState>().newBookItem.isbn13);
                   pushNewScreen(context,
-                      screen: const ReviewPage(bookItem: null),
+                      screen: const ReviewPage(
+                        bookItem: null,
+                      ),
                       pageTransitionAnimation:
                           PageTransitionAnimation.cupertino);
                 },

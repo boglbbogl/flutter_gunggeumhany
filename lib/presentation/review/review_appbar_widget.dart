@@ -156,7 +156,7 @@ SliverAppBar reviewAppbarWidget({
                   ),
                 const SizedBox(height: 18),
                 Text(
-                  book.title,
+                  book.title.replaceAll(".", " "),
                   style: theme.textTheme.bodyText2!.copyWith(
                     color: Colors.white,
                     fontSize: 16,

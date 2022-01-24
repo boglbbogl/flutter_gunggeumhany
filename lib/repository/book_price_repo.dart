@@ -29,7 +29,7 @@ class BookPriceRepo {
       return null;
     }
     final uri = Uri.parse(
-        "$aladinApiBaseUrl/ItemLookUp.aspx?ttbkey=$aladinApiKey&itemIdType=$_queryType&ItemId=$_queryISBN&output=js&Version=20131101&OptResult=usedList,reviewList");
+        "$aladinApiBaseUrl/ItemLookUp.aspx?ttbkey=$aladinApiKey&itemIdType=$_queryType&ItemId=$_queryISBN&output=js&Version=20131101&OptResult=usedList,reviewList,ebookList");
     final _response = await http.get(uri);
     if (_response.statusCode == 200) {
       final _decoded = json.decode(utf8.decode(_response.bodyBytes));

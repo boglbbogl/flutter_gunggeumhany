@@ -28,7 +28,9 @@ Tab profileBookmarkWidget({
                     ..started()
                     ..getUserReviewList(
                         userKey: context.read<AuthState>().userProfile!.userKey,
-                        bookDocKey: e.docKey!);
+                        bookDocKey: e.docKey!,
+                        ISBN10: e.isbn10!,
+                        ISBN13: e.isbn13!);
                   pushNewScreen(context,
                       screen: ReviewPage(
                         bookItem: e,

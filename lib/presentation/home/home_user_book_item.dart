@@ -54,11 +54,14 @@ class HomeUserBookItem extends StatelessWidget {
                                 context.read<ReviewState>()
                                   ..started()
                                   ..getUserReviewList(
-                                      userKey: context
-                                          .read<AuthState>()
-                                          .userProfile!
-                                          .userKey,
-                                      bookDocKey: item.book.docKey!);
+                                    userKey: context
+                                        .read<AuthState>()
+                                        .userProfile!
+                                        .userKey,
+                                    bookDocKey: item.book.docKey!,
+                                    ISBN10: item.book.isbn10!,
+                                    ISBN13: item.book.isbn13!,
+                                  );
                                 pushNewScreen(context,
                                     screen: ReviewPage(
                                       bookItem: item.book,

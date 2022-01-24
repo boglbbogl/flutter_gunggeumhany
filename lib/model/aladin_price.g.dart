@@ -24,10 +24,10 @@ Map<String, dynamic> _$$_AladinPriceToJson(_$_AladinPrice instance) =>
 _$_AladinPriceSubInfo _$$_AladinPriceSubInfoFromJson(
         Map<String, dynamic> json) =>
     _$_AladinPriceSubInfo(
-      ebookList: json['ebookList'] == null
-          ? null
-          : AladinPriceSubInfoEbookList.fromJson(
-              json['ebookList'] as Map<String, dynamic>),
+      ebookList: (json['ebookList'] as List<dynamic>?)
+          ?.map((e) =>
+              AladinPriceSubInfoEbookList.fromJson(e as Map<String, dynamic>))
+          .toList(),
       usedList: json['usedList'] == null
           ? null
           : AladinPriceSubInfoUsedList.fromJson(

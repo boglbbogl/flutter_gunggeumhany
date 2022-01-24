@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/aladin_price.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+import 'package:flutter_gunggeumhany/model/review.dart';
+import 'package:flutter_gunggeumhany/model/review_user.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
 import 'package:flutter_gunggeumhany/presentation/review/book_price_info_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_appbar_widget.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_gunggeumhany/presentation/review/review_create_widget.da
 import 'package:flutter_gunggeumhany/presentation/review/review_item_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_my_item_widget.dart';
 import 'package:flutter_gunggeumhany/service/book_state.dart';
+import 'package:flutter_gunggeumhany/service/core/logger.dart';
 import 'package:flutter_gunggeumhany/service/review_state.dart';
 import 'package:provider/provider.dart';
 
@@ -23,16 +26,28 @@ class ReviewPage extends StatelessWidget {
     final Book _bookItem = bookItem == null
         ? Provider.of<BookState>(context).newBookItem
         : bookItem!;
+    logger.e(_bookItem);
+    final List<ReviewUser> _reviewUserList =
+        Provider.of<ReviewState>(context).userReviewList;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
             reviewAppbarWidget(book: _bookItem, context: context),
-            if (context.watch<ReviewState>().aladinPrice != null) ...[
-              bookPriceInfoWidget(
-                  aladinPrice: context.watch<ReviewState>().aladinPrice!),
-            ],
+            // if (context.watch<ReviewState>().aladinPrice != null) ...[
+            //   if (context.watch<ReviewState>().isBookPriceLoading)
+            //     SliverList(
+            //         delegate: SliverChildListDelegate([
+            //       const Padding(
+            //         padding: EdgeInsets.only(top: 20),
+            //         child: Center(child: CircularProgressIndicator()),
+            //       )
+            //     ]))
+            //   else
+            //     bookPriceInfoWidget(
+            //         aladinPrice: context.watch<ReviewState>().aladinPrice!),
+            // ],
             if (!context.watch<ReviewState>().isGetReviewListLoading) ...[
               if (context.watch<ReviewState>().myReview == null) ...[
                 reviewCreateWidget(
@@ -46,7 +61,8 @@ class ReviewPage extends StatelessWidget {
                     me: context.watch<ReviewState>().myReview!,
                     context: context),
               ],
-              reviewItemWidget(),
+              reviewItemWidget(
+                  userReviewList: _reviewUserList, context: context),
             ],
             if (context.watch<ReviewState>().isGetReviewListLoading) ...[
               SliverList(

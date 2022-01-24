@@ -232,7 +232,7 @@ class _$AladinPriceSubInfoTearOff {
   const _$AladinPriceSubInfoTearOff();
 
   _AladinPriceSubInfo call(
-      {required AladinPriceSubInfoEbookList? ebookList,
+      {required List<AladinPriceSubInfoEbookList>? ebookList,
       required AladinPriceSubInfoUsedList? usedList}) {
     return _AladinPriceSubInfo(
       ebookList: ebookList,
@@ -250,7 +250,7 @@ const $AladinPriceSubInfo = _$AladinPriceSubInfoTearOff();
 
 /// @nodoc
 mixin _$AladinPriceSubInfo {
-  AladinPriceSubInfoEbookList? get ebookList =>
+  List<AladinPriceSubInfoEbookList>? get ebookList =>
       throw _privateConstructorUsedError;
   AladinPriceSubInfoUsedList? get usedList =>
       throw _privateConstructorUsedError;
@@ -267,10 +267,9 @@ abstract class $AladinPriceSubInfoCopyWith<$Res> {
           AladinPriceSubInfo value, $Res Function(AladinPriceSubInfo) then) =
       _$AladinPriceSubInfoCopyWithImpl<$Res>;
   $Res call(
-      {AladinPriceSubInfoEbookList? ebookList,
+      {List<AladinPriceSubInfoEbookList>? ebookList,
       AladinPriceSubInfoUsedList? usedList});
 
-  $AladinPriceSubInfoEbookListCopyWith<$Res>? get ebookList;
   $AladinPriceSubInfoUsedListCopyWith<$Res>? get usedList;
 }
 
@@ -292,24 +291,12 @@ class _$AladinPriceSubInfoCopyWithImpl<$Res>
       ebookList: ebookList == freezed
           ? _value.ebookList
           : ebookList // ignore: cast_nullable_to_non_nullable
-              as AladinPriceSubInfoEbookList?,
+              as List<AladinPriceSubInfoEbookList>?,
       usedList: usedList == freezed
           ? _value.usedList
           : usedList // ignore: cast_nullable_to_non_nullable
               as AladinPriceSubInfoUsedList?,
     ));
-  }
-
-  @override
-  $AladinPriceSubInfoEbookListCopyWith<$Res>? get ebookList {
-    if (_value.ebookList == null) {
-      return null;
-    }
-
-    return $AladinPriceSubInfoEbookListCopyWith<$Res>(_value.ebookList!,
-        (value) {
-      return _then(_value.copyWith(ebookList: value));
-    });
   }
 
   @override
@@ -332,11 +319,9 @@ abstract class _$AladinPriceSubInfoCopyWith<$Res>
       __$AladinPriceSubInfoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {AladinPriceSubInfoEbookList? ebookList,
+      {List<AladinPriceSubInfoEbookList>? ebookList,
       AladinPriceSubInfoUsedList? usedList});
 
-  @override
-  $AladinPriceSubInfoEbookListCopyWith<$Res>? get ebookList;
   @override
   $AladinPriceSubInfoUsedListCopyWith<$Res>? get usedList;
 }
@@ -361,7 +346,7 @@ class __$AladinPriceSubInfoCopyWithImpl<$Res>
       ebookList: ebookList == freezed
           ? _value.ebookList
           : ebookList // ignore: cast_nullable_to_non_nullable
-              as AladinPriceSubInfoEbookList?,
+              as List<AladinPriceSubInfoEbookList>?,
       usedList: usedList == freezed
           ? _value.usedList
           : usedList // ignore: cast_nullable_to_non_nullable
@@ -380,7 +365,7 @@ class _$_AladinPriceSubInfo implements _AladinPriceSubInfo {
       _$$_AladinPriceSubInfoFromJson(json);
 
   @override
-  final AladinPriceSubInfoEbookList? ebookList;
+  final List<AladinPriceSubInfoEbookList>? ebookList;
   @override
   final AladinPriceSubInfoUsedList? usedList;
 
@@ -417,14 +402,14 @@ class _$_AladinPriceSubInfo implements _AladinPriceSubInfo {
 
 abstract class _AladinPriceSubInfo implements AladinPriceSubInfo {
   const factory _AladinPriceSubInfo(
-      {required AladinPriceSubInfoEbookList? ebookList,
+      {required List<AladinPriceSubInfoEbookList>? ebookList,
       required AladinPriceSubInfoUsedList? usedList}) = _$_AladinPriceSubInfo;
 
   factory _AladinPriceSubInfo.fromJson(Map<String, dynamic> json) =
       _$_AladinPriceSubInfo.fromJson;
 
   @override
-  AladinPriceSubInfoEbookList? get ebookList;
+  List<AladinPriceSubInfoEbookList>? get ebookList;
   @override
   AladinPriceSubInfoUsedList? get usedList;
   @override

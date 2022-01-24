@@ -23,7 +23,7 @@ class AladinPrice with _$AladinPrice {
 @freezed
 class AladinPriceSubInfo with _$AladinPriceSubInfo {
   const factory AladinPriceSubInfo({
-    required AladinPriceSubInfoEbookList? ebookList,
+    required List<AladinPriceSubInfoEbookList>? ebookList,
     required AladinPriceSubInfoUsedList? usedList,
   }) = _AladinPriceSubInfo;
   factory AladinPriceSubInfo.fromJson(Map<String, dynamic> json) =>

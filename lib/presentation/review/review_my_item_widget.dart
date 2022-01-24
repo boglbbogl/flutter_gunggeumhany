@@ -25,7 +25,7 @@ SliverList reviewMyItemWidget({
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: userImageAndName(
                     context: context,
                     userKey: context.watch<AuthState>().userProfile!.userKey,

@@ -40,7 +40,7 @@ Tab profileReviewWidget({
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  e.bookTitle,
+                                  e.bookTitle.replaceAll(".", " "),
                                   style: theme.textTheme.bodyText2!.copyWith(
                                       color: const Color.fromRGBO(
                                           215, 215, 215, 1),
