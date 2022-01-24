@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gunggeumhany/model/aladin_price.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+import 'package:flutter_gunggeumhany/presentation/core/app_color.dart';
+import 'package:flutter_gunggeumhany/presentation/review/book_price_info_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_appbar_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_create_widget.dart';
 import 'package:flutter_gunggeumhany/presentation/review/review_item_widget.dart';
@@ -26,6 +29,10 @@ class ReviewPage extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             reviewAppbarWidget(book: _bookItem, context: context),
+            if (context.watch<ReviewState>().aladinPrice != null) ...[
+              bookPriceInfoWidget(
+                  aladinPrice: context.watch<ReviewState>().aladinPrice!),
+            ],
             if (!context.watch<ReviewState>().isGetReviewListLoading) ...[
               if (context.watch<ReviewState>().myReview == null) ...[
                 reviewCreateWidget(

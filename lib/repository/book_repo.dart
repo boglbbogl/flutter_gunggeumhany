@@ -11,6 +11,7 @@ class BookRepo {
   static final BookRepo _bookRepo = BookRepo._internal();
   factory BookRepo() => _bookRepo;
   BookRepo._internal();
+
   static String apiBaseUrl = ConfigReader.getKakaoApiBaseUrl();
   static String apiKey = ConfigReader.getKakaoApiKey();
 

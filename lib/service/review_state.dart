@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gunggeumhany/model/aladin_price.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/model/review_user.dart';
 import 'package:flutter_gunggeumhany/presentation/core/app_flushbar.dart';
+import 'package:flutter_gunggeumhany/repository/book_price_repo.dart';
 import 'package:flutter_gunggeumhany/repository/review_repo.dart';
+import 'package:flutter_gunggeumhany/service/core/logger.dart';
 
 class ReviewState extends ChangeNotifier {
   final ReviewRepo _reviewRepo = ReviewRepo();
+  final BookPriceRepo _bookPriceRepo = BookPriceRepo();
+  AladinPrice? _aladinPrice;
   final Review _review = Review.empty();
   List<ReviewUser> _userReviewList = [];
   Review? _myReview;
@@ -19,6 +24,16 @@ class ReviewState extends ChangeNotifier {
     _starRating = 0;
     _favoriteRating = 0;
     _reviewContents = "";
+  }
+
+  Future getAladinPriceInfo({
+    required String ISBN13,
+    required String ISBN10,
+  }) async {
+    _aladinPrice =
+        await _bookPriceRepo.getAladinPriceInfo(ISBN13: ISBN13, ISBN10: ISBN10);
+    logger.e(_aladinPrice);
+    notifyListeners();
   }
 
   Future getUserReviewList({
@@ -142,4 +157,5 @@ class ReviewState extends ChangeNotifier {
   List<ReviewUser> get userReviewList => _userReviewList;
   Review? get myReview => _myReview;
   bool get isGetReviewListLoading => _isGetReviewListLoading;
+  AladinPrice? get aladinPrice => _aladinPrice;
 }

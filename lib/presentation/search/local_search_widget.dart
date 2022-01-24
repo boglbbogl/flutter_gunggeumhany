@@ -62,8 +62,8 @@ Stack localSearchWidget({
                             // const SizedBox(height: 2),
                             Text(
                               book.title.length > 27
-                                  ? "${book.title.substring(0, 27)} ..."
-                                  : book.title,
+                                  ? "${book.title.replaceAll(".", " ").substring(0, 27)} ..."
+                                  : book.title.replaceAll(".", " "),
                               style: theme.textTheme.bodyText2!.copyWith(
                                   fontSize: 13, fontWeight: FontWeight.bold),
                             ),

@@ -15,7 +15,7 @@ SliverList reviewCreateWidget({
   return SliverList(
       delegate: SliverChildListDelegate([
     Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

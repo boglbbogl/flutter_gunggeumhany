@@ -19,8 +19,8 @@ Padding kakaoSearchWidget({
           children: [
             Text(
               book.title.length > 50
-                  ? "${book.title.substring(0, 50)} ..."
-                  : book.title,
+                  ? "${book.title.replaceAll(".", " ").substring(0, 50)} ..."
+                  : book.title.replaceAll(".", " "),
               style: theme.textTheme.bodyText2!.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
