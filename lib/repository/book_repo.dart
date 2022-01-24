@@ -3,14 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/model/kakao_book.dart';
 import 'package:flutter_gunggeumhany/repository/core/search_keyword_split.dart';
-import 'package:flutter_gunggeumhany/repository/keys/_api.keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
+import 'package:flutter_gunggeumhany/repository/keys/config_reader.dart';
 import 'package:http/http.dart' as http;
 
 class BookRepo {
   static final BookRepo _bookRepo = BookRepo._internal();
   factory BookRepo() => _bookRepo;
   BookRepo._internal();
+  static String apiBaseUrl = ConfigReader.getKakaoApiBaseUrl();
+  static String apiKey = ConfigReader.getKakaoApiKey();
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -61,9 +63,9 @@ class BookRepo {
     required int page,
   }) async {
     final uri = Uri.parse(
-        "$kakaoApiBaseUrl/search/book?target=title&query=$query&size=50&page=$page");
+        "$apiBaseUrl/search/book?target=title&query=$query&size=50&page=$page");
     final response = await http.get(uri, headers: {
-      'Authorization': 'KakaoAK $kakaoApiKey',
+      'Authorization': 'KakaoAK $apiKey',
       "Content-Type": "application/json",
     });
     if (response.statusCode == 200) {
@@ -124,9 +126,9 @@ class BookRepo {
     required int page,
   }) async {
     final uri = Uri.parse(
-        "$kakaoApiBaseUrl/search/book?target=title&query=$query&size=50&page=$page");
+        "$apiBaseUrl/search/book?target=title&query=$query&size=50&page=$page");
     final response = await http.get(uri, headers: {
-      'Authorization': 'KakaoAK $kakaoApiKey',
+      'Authorization': 'KakaoAK $apiKey',
       "Content-Type": "application/json",
     });
     if (response.statusCode == 200) {
