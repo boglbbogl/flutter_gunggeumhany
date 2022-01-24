@@ -4,7 +4,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/model/kakao_book.dart';
 import 'package:flutter_gunggeumhany/repository/core/search_keyword_split.dart';
-import 'package:flutter_gunggeumhany/repository/keys/_api.keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/config_reader.dart';
 import 'package:http/http.dart' as http;
