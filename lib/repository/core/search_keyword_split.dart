@@ -1,7 +1,7 @@
 import 'package:flutter_gunggeumhany/model/book.dart';
 
 DateTime newBookReviewDateFormat() {
-  DateTime _ago = DateTime.parse("1900-02-27 13:27:00,123456789z");
+  final DateTime _ago = DateTime.parse("1900-02-27 13:27:00,123456789z");
   return _ago;
 }
 

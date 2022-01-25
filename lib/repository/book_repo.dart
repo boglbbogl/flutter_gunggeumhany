@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/model/kakao_book.dart';
+import 'package:flutter_gunggeumhany/model/review.dart';
+import 'package:flutter_gunggeumhany/model/review_user.dart';
+import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/core/search_keyword_split.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/config_reader.dart';
@@ -22,28 +25,46 @@ class BookRepo {
   }) async {
     final CollectionReference<Map<String, dynamic>> _bookRef =
         _firestore.collection(collectionBook);
-    final _snapshot = await _bookRef
+    final _bookSnapshot = await _bookRef
         .where('searchKeyWord', arrayContains: query)
         .limit(100)
-        // .where('title', isGreaterThanOrEqualTo: query)
-        // .where('title', isLessThanOrEqualTo: "$query+\uf7ff")
         .get();
 
-    final _result = _snapshot.docs.map((e) => Book.fromJson(e.data())).toList()
-      ..shuffle()
-      ..sort((a, b) => b.starRating!.compareTo(a.starRating!));
+    final List<Book> _bookResult =
+        _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).toList()
+          ..shuffle()
+          ..sort((a, b) => b.starRating!.compareTo(a.starRating!));
 
-    return _result;
+    return _bookResult;
   }
 
   Future<Book> currentBookUpdateItem({
     required String docKey,
   }) async {
+    final List<ReviewUser> _reviewUser = [];
     final DocumentReference<Map<String, dynamic>> _bookRef =
         _firestore.collection(collectionBook).doc(docKey);
     final _snapshot = await _bookRef.get();
     final _result = Book.fromJson(_snapshot.data()!);
-    return _result;
+    final CollectionReference<Map<String, dynamic>> _reviewRef = _firestore
+        .collection(collectionBook)
+        .doc(_result.docKey)
+        .collection(collectionReview);
+    final _reviewSnapshot = await _reviewRef.get();
+    final List<Review> _reviewList =
+        _reviewSnapshot.docs.map((e) => Review.fromJson(e.data())).toList();
+    if (_reviewList.isNotEmpty) {
+      for (final element in _reviewList) {
+        final DocumentReference<Map<String, dynamic>> _userRef =
+            _firestore.collection(collectionUser).doc(element.userKey);
+        final _userSnapshot = await _userRef.get();
+        final UserProfile _userProfile =
+            UserProfile.fromJson(_userSnapshot.data()!);
+        _reviewUser.add(ReviewUser(review: element, userProfile: _userProfile));
+        _result.copyWith(reviewUser: _reviewUser);
+      }
+    }
+    return _result.copyWith(reviewUser: _reviewUser);
   }
 
   Future<Book> getNewBookWhereISBNItemNotDocKey({
@@ -112,6 +133,7 @@ class BookRepo {
                     isbn10: _setBookData[i].isbn.split(" ")[0],
                     isbn13: _setBookData[i].isbn.split(" ")[1],
                     isAudlt: false,
+                    reviewUser: [],
                   )
                   .toJson());
         }
@@ -177,6 +199,7 @@ class BookRepo {
                       isbn10: _setBookData[i].isbn.split(" ")[0],
                       isbn13: _setBookData[i].isbn.split(" ")[1],
                       isAudlt: false,
+                      reviewUser: [],
                     )
                     .toJson());
           }

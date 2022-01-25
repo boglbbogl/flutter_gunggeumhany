@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
-import 'package:flutter_gunggeumhany/model/review_user.dart';
-import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 
 class ReviewRepo {
@@ -25,30 +23,6 @@ class ReviewRepo {
         .where((element) => userKey.contains(element.userKey))
         .toList();
     return _result[0];
-  }
-
-  Future<List<ReviewUser>> getUserJoinReview({
-    required String bookDocKey,
-  }) async {
-    final List<ReviewUser> _userReviewList = [];
-    final CollectionReference<Map<String, dynamic>> _reviewRef = _firestore
-        .collection(collectionBook)
-        .doc(bookDocKey)
-        .collection(collectionReview);
-    final _reviewSnapshot =
-        await _reviewRef.orderBy("createdAt", descending: true).get();
-    final List<Review> _reviewList =
-        _reviewSnapshot.docs.map((e) => Review.fromJson(e.data())).toList();
-    for (final element in _reviewList) {
-      final _userRef =
-          _firestore.collection(collectionUser).doc(element.userKey);
-      final _userSnapshot = await _userRef.get();
-      final UserProfile _userProfile =
-          UserProfile.fromJson(_userSnapshot.data()!);
-      _userReviewList
-          .add(ReviewUser(review: element, userProfile: _userProfile));
-    }
-    return _userReviewList;
   }
 
   Future requestReviewBlocked({

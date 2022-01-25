@@ -1,4 +1,5 @@
-import 'package:flutter_gunggeumhany/service/core/timestamp_converter.dart';
+import 'package:flutter_gunggeumhany/model/review_user.dart';
+import 'package:flutter_gunggeumhany/repository/core/timestamp_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'book.freezed.dart';
@@ -29,6 +30,7 @@ class Book with _$Book {
     required List<String> translators,
     required int price,
     required String thumbnail,
+    required List<ReviewUser>? reviewUser,
   }) = _Book;
   const Book._();
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
@@ -55,5 +57,6 @@ class Book with _$Book {
         translators: [],
         price: 0,
         thumbnail: "",
+        reviewUser: [],
       );
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 import 'package:intl/intl.dart';
 
@@ -31,7 +32,6 @@ Future<List<Book>> aladinFromFirestore({
 }) async {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final List<Book> _aladinBookList = [];
-
   final CollectionReference<Map<String, dynamic>> _aladinRef = _firestore
       .collection(collectionName)
       .doc(documentName)

@@ -44,7 +44,8 @@ class _$BookTearOff {
       required String publisher,
       required List<String> translators,
       required int price,
-      required String thumbnail}) {
+      required String thumbnail,
+      required List<ReviewUser>? reviewUser}) {
     return _Book(
       docKey: docKey,
       searchKeyWord: searchKeyWord,
@@ -68,6 +69,7 @@ class _$BookTearOff {
       translators: translators,
       price: price,
       thumbnail: thumbnail,
+      reviewUser: reviewUser,
     );
   }
 
@@ -105,6 +107,7 @@ mixin _$Book {
   List<String> get translators => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
+  List<ReviewUser>? get reviewUser => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -137,7 +140,8 @@ abstract class $BookCopyWith<$Res> {
       String publisher,
       List<String> translators,
       int price,
-      String thumbnail});
+      String thumbnail,
+      List<ReviewUser>? reviewUser});
 }
 
 /// @nodoc
@@ -172,6 +176,7 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
     Object? translators = freezed,
     Object? price = freezed,
     Object? thumbnail = freezed,
+    Object? reviewUser = freezed,
   }) {
     return _then(_value.copyWith(
       docKey: docKey == freezed
@@ -262,6 +267,10 @@ class _$BookCopyWithImpl<$Res> implements $BookCopyWith<$Res> {
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      reviewUser: reviewUser == freezed
+          ? _value.reviewUser
+          : reviewUser // ignore: cast_nullable_to_non_nullable
+              as List<ReviewUser>?,
     ));
   }
 }
@@ -293,7 +302,8 @@ abstract class _$BookCopyWith<$Res> implements $BookCopyWith<$Res> {
       String publisher,
       List<String> translators,
       int price,
-      String thumbnail});
+      String thumbnail,
+      List<ReviewUser>? reviewUser});
 }
 
 /// @nodoc
@@ -329,6 +339,7 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
     Object? translators = freezed,
     Object? price = freezed,
     Object? thumbnail = freezed,
+    Object? reviewUser = freezed,
   }) {
     return _then(_Book(
       docKey: docKey == freezed
@@ -419,6 +430,10 @@ class __$BookCopyWithImpl<$Res> extends _$BookCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      reviewUser: reviewUser == freezed
+          ? _value.reviewUser
+          : reviewUser // ignore: cast_nullable_to_non_nullable
+              as List<ReviewUser>?,
     ));
   }
 }
@@ -448,7 +463,8 @@ class _$_Book extends _Book {
       required this.publisher,
       required this.translators,
       required this.price,
-      required this.thumbnail})
+      required this.thumbnail,
+      required this.reviewUser})
       : super._();
 
   factory _$_Book.fromJson(Map<String, dynamic> json) => _$$_BookFromJson(json);
@@ -499,10 +515,12 @@ class _$_Book extends _Book {
   final int price;
   @override
   final String thumbnail;
+  @override
+  final List<ReviewUser>? reviewUser;
 
   @override
   String toString() {
-    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, starUserKey: $starUserKey, starRating: $starRating, favoriteUserKey: $favoriteUserKey, favoriteRating: $favoriteRating, bookmarkUserKey: $bookmarkUserKey, isbn10: $isbn10, isbn13: $isbn13, isAudlt: $isAudlt, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, lastReviewCreatedAt: $lastReviewCreatedAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail)';
+    return 'Book(docKey: $docKey, searchKeyWord: $searchKeyWord, starUserKey: $starUserKey, starRating: $starRating, favoriteUserKey: $favoriteUserKey, favoriteRating: $favoriteRating, bookmarkUserKey: $bookmarkUserKey, isbn10: $isbn10, isbn13: $isbn13, isAudlt: $isAudlt, title: $title, contents: $contents, url: $url, isbn: $isbn, datetime: $datetime, createdAt: $createdAt, lastReviewCreatedAt: $lastReviewCreatedAt, authors: $authors, publisher: $publisher, translators: $translators, price: $price, thumbnail: $thumbnail, reviewUser: $reviewUser)';
   }
 
   @override
@@ -539,7 +557,9 @@ class _$_Book extends _Book {
             const DeepCollectionEquality()
                 .equals(other.translators, translators) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.thumbnail, thumbnail));
+            const DeepCollectionEquality().equals(other.thumbnail, thumbnail) &&
+            const DeepCollectionEquality()
+                .equals(other.reviewUser, reviewUser));
   }
 
   @override
@@ -566,7 +586,8 @@ class _$_Book extends _Book {
         const DeepCollectionEquality().hash(publisher),
         const DeepCollectionEquality().hash(translators),
         const DeepCollectionEquality().hash(price),
-        const DeepCollectionEquality().hash(thumbnail)
+        const DeepCollectionEquality().hash(thumbnail),
+        const DeepCollectionEquality().hash(reviewUser)
       ]);
 
   @JsonKey(ignore: true)
@@ -603,7 +624,8 @@ abstract class _Book extends Book {
       required String publisher,
       required List<String> translators,
       required int price,
-      required String thumbnail}) = _$_Book;
+      required String thumbnail,
+      required List<ReviewUser>? reviewUser}) = _$_Book;
   const _Book._() : super._();
 
   factory _Book.fromJson(Map<String, dynamic> json) = _$_Book.fromJson;
@@ -654,6 +676,8 @@ abstract class _Book extends Book {
   int get price;
   @override
   String get thumbnail;
+  @override
+  List<ReviewUser>? get reviewUser;
   @override
   @JsonKey(ignore: true)
   _$BookCopyWith<_Book> get copyWith => throw _privateConstructorUsedError;

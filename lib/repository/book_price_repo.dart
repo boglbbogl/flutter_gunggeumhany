@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:flutter_gunggeumhany/model/aladin_price.dart';
 import 'package:flutter_gunggeumhany/repository/keys/config_reader.dart';
-import 'package:flutter_gunggeumhany/service/core/logger.dart';
+import 'package:flutter_gunggeumhany/state/core/logger.dart';
 import 'package:http/http.dart' as http;
 
 class BookPriceRepo {

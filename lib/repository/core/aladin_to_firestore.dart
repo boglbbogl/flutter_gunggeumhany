@@ -100,6 +100,7 @@ Future aladinToFirestore({
                   isbn10: _aladinItem[i].isbn.split(" ")[0],
                   isbn13: _aladinItem[i].isbn.split(" ")[1],
                   isAudlt: false,
+                  reviewUser: [],
                 )
                 .toJson());
       }
