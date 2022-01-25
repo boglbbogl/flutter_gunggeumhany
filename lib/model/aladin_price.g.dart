@@ -10,6 +10,7 @@ _$_AladinPrice _$$_AladinPriceFromJson(Map<String, dynamic> json) =>
     _$_AladinPrice(
       priceStandard: json['priceStandard'] as int,
       priceSales: json['priceSales'] as int,
+      link: json['link'] as String,
       subInfo:
           AladinPriceSubInfo.fromJson(json['subInfo'] as Map<String, dynamic>),
     );
@@ -18,6 +19,7 @@ Map<String, dynamic> _$$_AladinPriceToJson(_$_AladinPrice instance) =>
     <String, dynamic>{
       'priceStandard': instance.priceStandard,
       'priceSales': instance.priceSales,
+      'link': instance.link,
       'subInfo': instance.subInfo,
     };
 

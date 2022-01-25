@@ -8,16 +8,18 @@ class AladinPrice with _$AladinPrice {
   const factory AladinPrice({
     required int priceStandard,
     required int priceSales,
+    required String link,
     required AladinPriceSubInfo subInfo,
   }) = _AladinPrice;
   const AladinPrice._();
   factory AladinPrice.fromJson(Map<String, dynamic> json) =>
       _$AladinPriceFromJson(json);
-  // factory AladinPrice.empty() => AladinPrice(
-  //       priceStandard: priceStandard,
-  //       priceSales: priceSales,
-  //       subInfo: subInfo,
-  //     );
+  factory AladinPrice.empty() => AladinPrice(
+        priceStandard: 0,
+        priceSales: 0,
+        link: "",
+        subInfo: AladinPriceSubInfo.empty(),
+      );
 }
 
 @freezed
@@ -28,6 +30,11 @@ class AladinPriceSubInfo with _$AladinPriceSubInfo {
   }) = _AladinPriceSubInfo;
   factory AladinPriceSubInfo.fromJson(Map<String, dynamic> json) =>
       _$AladinPriceSubInfoFromJson(json);
+  const AladinPriceSubInfo._();
+  factory AladinPriceSubInfo.empty() => AladinPriceSubInfo(
+        ebookList: [],
+        usedList: AladinPriceSubInfoUsedList.empty(),
+      );
 }
 
 @freezed
@@ -48,6 +55,10 @@ class AladinPriceSubInfoUsedList with _$AladinPriceSubInfoUsedList {
   }) = _AladinPriceSubInfoUsedList;
   factory AladinPriceSubInfoUsedList.fromJson(Map<String, dynamic> json) =>
       _$AladinPriceSubInfoUsedListFromJson(json);
+  const AladinPriceSubInfoUsedList._();
+  factory AladinPriceSubInfoUsedList.empty() => AladinPriceSubInfoUsedList(
+      aladinUsed: AladinPriceSubInfoUserListUsed.empty(),
+      userUsed: AladinPriceSubInfoUserListUsed.empty());
 }
 
 @freezed
@@ -59,4 +70,7 @@ class AladinPriceSubInfoUserListUsed with _$AladinPriceSubInfoUserListUsed {
   }) = _AladinPriceSubInfoUserListUsed;
   factory AladinPriceSubInfoUserListUsed.fromJson(Map<String, dynamic> json) =>
       _$AladinPriceSubInfoUserListUsedFromJson(json);
+  const AladinPriceSubInfoUserListUsed._();
+  factory AladinPriceSubInfoUserListUsed.empty() =>
+      const AladinPriceSubInfoUserListUsed(itemCount: 0, minPrice: 0, link: "");
 }

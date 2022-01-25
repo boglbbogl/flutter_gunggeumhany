@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 SliverList reviewItemWidget({
   required BuildContext context,
   required List<ReviewUser> userReviewList,
+  required bool isMe,
 }) {
   return SliverList(
       delegate: SliverChildListDelegate([
@@ -25,12 +26,14 @@ SliverList reviewItemWidget({
             child: InkWell(
               onDoubleTap: () {},
               onLongPress: () {
-                blockedListWidget(
-                  context: context,
-                  blockedUserKey: review.userProfile.userKey,
-                  bookDocKey: review.review.bookDocKey,
-                  reviewDocKey: review.review.docKey,
-                );
+                if (!isMe) {
+                  blockedListWidget(
+                    context: context,
+                    blockedUserKey: review.userProfile.userKey,
+                    bookDocKey: review.review.bookDocKey,
+                    reviewDocKey: review.review.docKey,
+                  );
+                }
               },
               child: Container(
                   decoration: BoxDecoration(

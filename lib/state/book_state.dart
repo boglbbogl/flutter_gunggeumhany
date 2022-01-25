@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gunggeumhany/model/aladin_price.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+import 'package:flutter_gunggeumhany/repository/book_price_repo.dart';
 import 'package:flutter_gunggeumhany/repository/book_repo.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BookState extends ChangeNotifier {
   final BookRepo _bookRepo = BookRepo();
+  final BookPriceRepo _bookPriceRepo = BookPriceRepo();
+  AladinPrice _aladinPrice = AladinPrice.empty();
   List<Book> _localBookList = [];
   List<Book> _kakaoBookList = [];
   Book _newBookItem = Book.empty();
@@ -13,6 +18,8 @@ class BookState extends ChangeNotifier {
   bool _isLocalLoading = false;
   bool _isKakaoLoading = false;
   bool _isCurrentBookItemLoading = false;
+  int _currentBookItemIndex = -1;
+  int _currentBookListIndex = -1;
   int _page = 1;
   String _query = "";
 
@@ -64,28 +71,56 @@ class BookState extends ChangeNotifier {
 
   Future currentBookUpdateItem({
     required String docKey,
+    int? itemIndex,
+    int? listIndex,
+    required String ISBN13,
+    required String ISBN10,
   }) async {
+    if (itemIndex != null && listIndex != null) {
+      _currentBookItemIndex = itemIndex;
+      _currentBookListIndex = listIndex;
+    }
     _isCurrentBookItemLoading = true;
     notifyListeners();
     _newBookItem = await _bookRepo.currentBookUpdateItem(docKey: docKey);
+    if (ISBN10 != "" && ISBN13 != "") {
+      await _getAladinPriceInfo(ISBN10: ISBN10, ISBN13: ISBN13);
+    }
     _isCurrentBookItemLoading = false;
+    _currentBookItemIndex = -1;
+    _currentBookListIndex = -1;
+    notifyListeners();
+  }
 
+  Future _getAladinPriceInfo({
+    required String ISBN13,
+    required String ISBN10,
+  }) async {
+    _aladinPrice =
+        await _bookPriceRepo.getAladinPriceInfo(ISBN13: ISBN13, ISBN10: ISBN10);
     notifyListeners();
   }
 
   Future getNewBookWhereISBNItemNotDocKey({
     required String isbn,
   }) async {
+    final String ISBN10 = isbn.split(" ")[0];
+    final String ISBN13 = isbn.split(" ")[1];
     _newBookItem = await _bookRepo.getNewBookWhereISBNItemNotDocKey(isbn: isbn);
+    await _getAladinPriceInfo(ISBN13: ISBN13, ISBN10: ISBN10);
     notifyListeners();
   }
 
-  // void getLocalBookDetailItme({
-  //   required Book book,
-  // }) {
-  //   _newBookItem = book;
-  //   notifyListeners();
-  // }
+  Future openBookPurchaseUrlLauncher({
+    required String url,
+  }) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+      );
+    }
+  }
 
   List<Book> get localBookList => _localBookList;
   List<Book> get kakaoBookList => _kakaoBookList;
@@ -96,4 +131,7 @@ class BookState extends ChangeNotifier {
   bool get isKakaoLoading => _isKakaoLoading;
   Book get newBookItem => _newBookItem;
   bool get isCurrentBookItemLoading => _isCurrentBookItemLoading;
+  int get currentBookItemIndex => _currentBookItemIndex;
+  int get currentBookListIndex => _currentBookListIndex;
+  AladinPrice get aladinPrice => _aladinPrice;
 }

@@ -116,7 +116,6 @@ class MainState extends ChangeNotifier {
     _bestsellerCreatedAt =
         await _aladinThemeRepo.getFirestoreBestsellerCreatedAt();
     _bestsellerList = await _aladinThemeRepo.getFirestoreBestsellerBook();
-
     notifyListeners();
   }
 

@@ -25,10 +25,12 @@ class _$AladinPriceTearOff {
   _AladinPrice call(
       {required int priceStandard,
       required int priceSales,
+      required String link,
       required AladinPriceSubInfo subInfo}) {
     return _AladinPrice(
       priceStandard: priceStandard,
       priceSales: priceSales,
+      link: link,
       subInfo: subInfo,
     );
   }
@@ -45,6 +47,7 @@ const $AladinPrice = _$AladinPriceTearOff();
 mixin _$AladinPrice {
   int get priceStandard => throw _privateConstructorUsedError;
   int get priceSales => throw _privateConstructorUsedError;
+  String get link => throw _privateConstructorUsedError;
   AladinPriceSubInfo get subInfo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,7 +61,11 @@ abstract class $AladinPriceCopyWith<$Res> {
   factory $AladinPriceCopyWith(
           AladinPrice value, $Res Function(AladinPrice) then) =
       _$AladinPriceCopyWithImpl<$Res>;
-  $Res call({int priceStandard, int priceSales, AladinPriceSubInfo subInfo});
+  $Res call(
+      {int priceStandard,
+      int priceSales,
+      String link,
+      AladinPriceSubInfo subInfo});
 
   $AladinPriceSubInfoCopyWith<$Res> get subInfo;
 }
@@ -75,6 +82,7 @@ class _$AladinPriceCopyWithImpl<$Res> implements $AladinPriceCopyWith<$Res> {
   $Res call({
     Object? priceStandard = freezed,
     Object? priceSales = freezed,
+    Object? link = freezed,
     Object? subInfo = freezed,
   }) {
     return _then(_value.copyWith(
@@ -86,6 +94,10 @@ class _$AladinPriceCopyWithImpl<$Res> implements $AladinPriceCopyWith<$Res> {
           ? _value.priceSales
           : priceSales // ignore: cast_nullable_to_non_nullable
               as int,
+      link: link == freezed
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String,
       subInfo: subInfo == freezed
           ? _value.subInfo
           : subInfo // ignore: cast_nullable_to_non_nullable
@@ -108,7 +120,11 @@ abstract class _$AladinPriceCopyWith<$Res>
           _AladinPrice value, $Res Function(_AladinPrice) then) =
       __$AladinPriceCopyWithImpl<$Res>;
   @override
-  $Res call({int priceStandard, int priceSales, AladinPriceSubInfo subInfo});
+  $Res call(
+      {int priceStandard,
+      int priceSales,
+      String link,
+      AladinPriceSubInfo subInfo});
 
   @override
   $AladinPriceSubInfoCopyWith<$Res> get subInfo;
@@ -128,6 +144,7 @@ class __$AladinPriceCopyWithImpl<$Res> extends _$AladinPriceCopyWithImpl<$Res>
   $Res call({
     Object? priceStandard = freezed,
     Object? priceSales = freezed,
+    Object? link = freezed,
     Object? subInfo = freezed,
   }) {
     return _then(_AladinPrice(
@@ -139,6 +156,10 @@ class __$AladinPriceCopyWithImpl<$Res> extends _$AladinPriceCopyWithImpl<$Res>
           ? _value.priceSales
           : priceSales // ignore: cast_nullable_to_non_nullable
               as int,
+      link: link == freezed
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String,
       subInfo: subInfo == freezed
           ? _value.subInfo
           : subInfo // ignore: cast_nullable_to_non_nullable
@@ -153,6 +174,7 @@ class _$_AladinPrice extends _AladinPrice {
   const _$_AladinPrice(
       {required this.priceStandard,
       required this.priceSales,
+      required this.link,
       required this.subInfo})
       : super._();
 
@@ -164,11 +186,13 @@ class _$_AladinPrice extends _AladinPrice {
   @override
   final int priceSales;
   @override
+  final String link;
+  @override
   final AladinPriceSubInfo subInfo;
 
   @override
   String toString() {
-    return 'AladinPrice(priceStandard: $priceStandard, priceSales: $priceSales, subInfo: $subInfo)';
+    return 'AladinPrice(priceStandard: $priceStandard, priceSales: $priceSales, link: $link, subInfo: $subInfo)';
   }
 
   @override
@@ -180,6 +204,7 @@ class _$_AladinPrice extends _AladinPrice {
                 .equals(other.priceStandard, priceStandard) &&
             const DeepCollectionEquality()
                 .equals(other.priceSales, priceSales) &&
+            const DeepCollectionEquality().equals(other.link, link) &&
             const DeepCollectionEquality().equals(other.subInfo, subInfo));
   }
 
@@ -188,6 +213,7 @@ class _$_AladinPrice extends _AladinPrice {
       runtimeType,
       const DeepCollectionEquality().hash(priceStandard),
       const DeepCollectionEquality().hash(priceSales),
+      const DeepCollectionEquality().hash(link),
       const DeepCollectionEquality().hash(subInfo));
 
   @JsonKey(ignore: true)
@@ -205,6 +231,7 @@ abstract class _AladinPrice extends AladinPrice {
   const factory _AladinPrice(
       {required int priceStandard,
       required int priceSales,
+      required String link,
       required AladinPriceSubInfo subInfo}) = _$_AladinPrice;
   const _AladinPrice._() : super._();
 
@@ -215,6 +242,8 @@ abstract class _AladinPrice extends AladinPrice {
   int get priceStandard;
   @override
   int get priceSales;
+  @override
+  String get link;
   @override
   AladinPriceSubInfo get subInfo;
   @override
@@ -357,9 +386,9 @@ class __$AladinPriceSubInfoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AladinPriceSubInfo implements _AladinPriceSubInfo {
-  const _$_AladinPriceSubInfo(
-      {required this.ebookList, required this.usedList});
+class _$_AladinPriceSubInfo extends _AladinPriceSubInfo {
+  const _$_AladinPriceSubInfo({required this.ebookList, required this.usedList})
+      : super._();
 
   factory _$_AladinPriceSubInfo.fromJson(Map<String, dynamic> json) =>
       _$$_AladinPriceSubInfoFromJson(json);
@@ -400,10 +429,11 @@ class _$_AladinPriceSubInfo implements _AladinPriceSubInfo {
   }
 }
 
-abstract class _AladinPriceSubInfo implements AladinPriceSubInfo {
+abstract class _AladinPriceSubInfo extends AladinPriceSubInfo {
   const factory _AladinPriceSubInfo(
       {required List<AladinPriceSubInfoEbookList>? ebookList,
       required AladinPriceSubInfoUsedList? usedList}) = _$_AladinPriceSubInfo;
+  const _AladinPriceSubInfo._() : super._();
 
   factory _AladinPriceSubInfo.fromJson(Map<String, dynamic> json) =
       _$_AladinPriceSubInfo.fromJson;
@@ -751,9 +781,10 @@ class __$AladinPriceSubInfoUsedListCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AladinPriceSubInfoUsedList implements _AladinPriceSubInfoUsedList {
+class _$_AladinPriceSubInfoUsedList extends _AladinPriceSubInfoUsedList {
   const _$_AladinPriceSubInfoUsedList(
-      {required this.aladinUsed, required this.userUsed});
+      {required this.aladinUsed, required this.userUsed})
+      : super._();
 
   factory _$_AladinPriceSubInfoUsedList.fromJson(Map<String, dynamic> json) =>
       _$$_AladinPriceSubInfoUsedListFromJson(json);
@@ -796,12 +827,12 @@ class _$_AladinPriceSubInfoUsedList implements _AladinPriceSubInfoUsedList {
   }
 }
 
-abstract class _AladinPriceSubInfoUsedList
-    implements AladinPriceSubInfoUsedList {
+abstract class _AladinPriceSubInfoUsedList extends AladinPriceSubInfoUsedList {
   const factory _AladinPriceSubInfoUsedList(
           {required AladinPriceSubInfoUserListUsed? aladinUsed,
           required AladinPriceSubInfoUserListUsed? userUsed}) =
       _$_AladinPriceSubInfoUsedList;
+  const _AladinPriceSubInfoUsedList._() : super._();
 
   factory _AladinPriceSubInfoUsedList.fromJson(Map<String, dynamic> json) =
       _$_AladinPriceSubInfoUsedList.fromJson;
@@ -946,9 +977,10 @@ class __$AladinPriceSubInfoUserListUsedCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AladinPriceSubInfoUserListUsed
-    implements _AladinPriceSubInfoUserListUsed {
+    extends _AladinPriceSubInfoUserListUsed {
   const _$_AladinPriceSubInfoUserListUsed(
-      {required this.itemCount, required this.minPrice, required this.link});
+      {required this.itemCount, required this.minPrice, required this.link})
+      : super._();
 
   factory _$_AladinPriceSubInfoUserListUsed.fromJson(
           Map<String, dynamic> json) =>
@@ -996,11 +1028,12 @@ class _$_AladinPriceSubInfoUserListUsed
 }
 
 abstract class _AladinPriceSubInfoUserListUsed
-    implements AladinPriceSubInfoUserListUsed {
+    extends AladinPriceSubInfoUserListUsed {
   const factory _AladinPriceSubInfoUserListUsed(
       {required int itemCount,
       required int minPrice,
       required String link}) = _$_AladinPriceSubInfoUserListUsed;
+  const _AladinPriceSubInfoUserListUsed._() : super._();
 
   factory _AladinPriceSubInfoUserListUsed.fromJson(Map<String, dynamic> json) =
       _$_AladinPriceSubInfoUserListUsed.fromJson;

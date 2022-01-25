@@ -136,9 +136,11 @@ SliverList reviewCreateWidget({
                                   .userProfile!
                                   .userKey,
                             );
-                        await context
-                            .read<BookState>()
-                            .currentBookUpdateItem(docKey: bookDocKey);
+                        await context.read<BookState>().currentBookUpdateItem(
+                              docKey: bookDocKey,
+                              ISBN10: "",
+                              ISBN13: "",
+                            );
                         await context.read<ReviewState>().getMyReviewList(
                             bookDocKey: bookDocKey,
                             userKey:

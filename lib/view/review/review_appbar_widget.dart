@@ -21,7 +21,7 @@ SliverAppBar reviewAppbarWidget({
       : book.translators.sublist(0, 5);
   return SliverAppBar(
     floating: true,
-    expandedHeight: size.height * 0.6,
+    expandedHeight: size.height * 0.65,
     centerTitle: false,
     title: Text(
       "리뷰 ${book.starUserKey!.length.toString()} 개",
@@ -102,21 +102,26 @@ SliverAppBar reviewAppbarWidget({
         children: [
           if (book.thumbnail.isEmpty)
             Container(
-              height: size.height * 0.6,
+              height: size.height * 0.65,
               color: Colors.deepPurple.shade100,
             )
           else
-            CachedNetworkImage(
-              width: size.width,
-              height: size.height * 0.6,
-              imageUrl: book.thumbnail,
-              fit: BoxFit.fill,
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(12),
+                  bottomRight: Radius.circular(12)),
+              child: CachedNetworkImage(
+                width: size.width,
+                height: size.height * 0.65,
+                imageUrl: book.thumbnail,
+                fit: BoxFit.fill,
+              ),
             ),
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Container(
               width: size.width,
-              height: size.height * 0.63,
+              height: size.height,
               decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.6),
                   borderRadius: const BorderRadius.only(

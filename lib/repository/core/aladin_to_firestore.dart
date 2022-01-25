@@ -6,6 +6,7 @@ import 'package:flutter_gunggeumhany/model/kakao_book.dart';
 import 'package:flutter_gunggeumhany/repository/core/search_keyword_split.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/config_reader.dart';
+import 'package:flutter_gunggeumhany/state/core/logger.dart';
 import 'package:http/http.dart' as http;
 
 Future aladinToFirestore({
@@ -35,6 +36,7 @@ Future aladinToFirestore({
     final _result = _documents.map((e) => e["isbn13"].toString()).toList();
 
     _aladinISNB = _result.where((element) => element != "").toList();
+    _aladinISNB.removeWhere((element) => element == "4910013170323");
 
     for (final element in _aladinISNB) {
       final uri = Uri.parse(
@@ -45,6 +47,7 @@ Future aladinToFirestore({
       });
       if (response.statusCode == 200) {
         final decoded = json.decode(utf8.decode(response.bodyBytes));
+        logger.e(decoded);
         final KakaoBook _kakaoResult =
             KakaoBook.fromJson(decoded as Map<String, dynamic>);
         final List<Book> _kakaoDocument = _kakaoResult.documents;

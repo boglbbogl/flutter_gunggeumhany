@@ -1,12 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+import 'package:flutter_gunggeumhany/state/book_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/search/search_rating_widget.dart';
+import 'package:flutter_gunggeumhany/view/search/search_shimmer_loading_widget.dart';
+import 'package:provider/provider.dart';
 
 Stack localSearchWidget({
   required Book book,
   required bool isBookmark,
+  required int itemIndex,
+  required int listIndex,
+  required BuildContext context,
 }) {
   final List<String> _authors =
       book.authors.length > 3 ? book.authors.sublist(0, 3) : book.authors;
@@ -59,7 +65,6 @@ Stack localSearchWidget({
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // const SizedBox(height: 2),
                             Text(
                               book.title.length > 27
                                   ? "${book.title.replaceAll(".", " ").substring(0, 27)} ..."
@@ -103,6 +108,11 @@ Stack localSearchWidget({
               ],
             ),
           )),
+      if (context.watch<BookState>().isCurrentBookItemLoading &&
+          context.watch<BookState>().currentBookItemIndex == itemIndex &&
+          context.watch<BookState>().currentBookListIndex == listIndex) ...[
+        searchShimmerLoadingWidget(width: size.width, height: size.width * 0.2),
+      ],
       if (isBookmark) ...[
         Positioned(
           right: 2,

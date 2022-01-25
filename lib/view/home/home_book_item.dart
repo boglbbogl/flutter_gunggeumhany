@@ -3,22 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/book_state.dart';
+import 'package:flutter_gunggeumhany/state/core/logger.dart';
 import 'package:flutter_gunggeumhany/state/review_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
+import 'package:flutter_gunggeumhany/view/home/item_loading_shimmer_widget.dart';
 import 'package:flutter_gunggeumhany/view/review/review_page.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeBookItem extends StatelessWidget {
   final String title;
   final List<Book> bookList;
   final String createdAt;
+  final int listIndex;
   const HomeBookItem({
     Key? key,
     required this.title,
     required this.bookList,
     required this.createdAt,
+    required this.listIndex,
   }) : super(key: key);
 
   @override
@@ -53,73 +58,88 @@ class HomeBookItem extends StatelessWidget {
             )),
         SizedBox(
           height: size.width * 0.4,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            children: [
-              ...bookList.map((book) => Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: InkWell(
-                          onTap: () async {
-                            context.read<ReviewState>().started();
-                            await context
-                                .read<BookState>()
-                                .currentBookUpdateItem(docKey: book.docKey!);
-                            pushNewScreen(context,
-                                screen: ReviewPage(
-                                  bookItem:
-                                      context.read<BookState>().newBookItem,
-                                ));
-                          },
-                          child: Container(
-                            width: size.width * 0.25,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: darkThemeNavyCardColor),
-                            child: book.thumbnail.isEmpty
-                                ? Container()
-                                : ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: CachedNetworkImage(
-                                      imageUrl: book.thumbnail,
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) => Center(
-                                        child: CircularProgressIndicator(
-                                          color: appMainColor,
-                                        ),
+          child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: bookList.length,
+              itemBuilder: (context, index) {
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () async {
+                          context.read<ReviewState>().started();
+                          await context.read<BookState>().currentBookUpdateItem(
+                              docKey: bookList[index].docKey!,
+                              ISBN10: bookList[index].isbn10!,
+                              ISBN13: bookList[index].isbn13!,
+                              itemIndex: index,
+                              listIndex: listIndex);
+                          pushNewScreen(context,
+                              screen: ReviewPage(
+                                aladinPrice:
+                                    context.read<BookState>().aladinPrice,
+                                bookItem: context.read<BookState>().newBookItem,
+                              ));
+                        },
+                        child: Container(
+                          width: size.width * 0.25,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: darkThemeNavyCardColor),
+                          child: bookList[index].thumbnail.isEmpty
+                              ? Container()
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: CachedNetworkImage(
+                                    imageUrl: bookList[index].thumbnail,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) => Center(
+                                      child: CircularProgressIndicator(
+                                        color: appMainColor,
                                       ),
                                     ),
                                   ),
-                          ),
+                                ),
                         ),
                       ),
-                      if (book.bookmarkUserKey!.contains(
-                          context.watch<AuthState>().userProfile == null
-                              ? ""
-                              : context
-                                  .watch<AuthState>()
-                                  .userProfile!
-                                  .userKey)) ...[
-                        Positioned(
-                          right: 2,
-                          top: 2,
-                          child: Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: darkThemeMainColor),
-                            child: Icon(Icons.bookmark_added_rounded,
-                                size: 18, color: appMainColor),
-                          ),
-                        ),
-                      ],
+                    ),
+                    if (context.watch<BookState>().isCurrentBookItemLoading &&
+                        index ==
+                            context.watch<BookState>().currentBookItemIndex &&
+                        listIndex ==
+                            context
+                                .watch<BookState>()
+                                .currentBookListIndex) ...[
+                      itemLoadingShimmerWidget(
+                          width: size.width * 0.25, height: size.width * 0.4),
                     ],
-                  ))
-            ],
-          ),
+                    if (bookList[index].bookmarkUserKey!.contains(
+                        context.watch<AuthState>().userProfile == null
+                            ? ""
+                            : context
+                                .watch<AuthState>()
+                                .userProfile!
+                                .userKey)) ...[
+                      Positioned(
+                        right: 2,
+                        top: 2,
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: darkThemeMainColor),
+                          child: Icon(Icons.bookmark_added_rounded,
+                              size: 18, color: appMainColor),
+                        ),
+                      ),
+                    ],
+                  ],
+                );
+              }),
         ),
       ],
     );

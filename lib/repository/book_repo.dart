@@ -8,6 +8,7 @@ import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/core/search_keyword_split.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 import 'package:flutter_gunggeumhany/repository/keys/config_reader.dart';
+import 'package:flutter_gunggeumhany/state/core/logger.dart';
 import 'package:http/http.dart' as http;
 
 class BookRepo {
@@ -64,6 +65,7 @@ class BookRepo {
         _result.copyWith(reviewUser: _reviewUser);
       }
     }
+    logger.e(_result.docKey);
     return _result.copyWith(reviewUser: _reviewUser);
   }
 

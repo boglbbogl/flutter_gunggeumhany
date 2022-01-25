@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/aladin_price.dart';
+import 'package:flutter_gunggeumhany/state/book_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/core/intl_format.dart';
+import 'package:provider/provider.dart';
 
 SliverList bookPriceInfoWidget({
   required AladinPrice aladinPrice,
+  required BuildContext context,
 }) {
   return SliverList(
       delegate: SliverChildListDelegate([
@@ -34,7 +37,9 @@ SliverList bookPriceInfoWidget({
               ),
               const SizedBox(height: 6),
               _aladinPriceForm(
+                  context: context,
                   title: '알라딘',
+                  url: aladinPrice.link,
                   price: aladinPrice.priceStandard,
                   salesPrice: aladinPrice.priceSales),
               if (aladinPrice.subInfo.usedList != null) ...[
@@ -42,7 +47,9 @@ SliverList bookPriceInfoWidget({
                   if (aladinPrice.subInfo.usedList!.aladinUsed!.minPrice !=
                       0) ...[
                     _aladinPriceForm(
+                        context: context,
                         title: '중고 (알라딘)',
+                        url: aladinPrice.subInfo.usedList!.aladinUsed!.link,
                         price:
                             aladinPrice.subInfo.usedList!.aladinUsed!.minPrice,
                         count: aladinPrice
@@ -53,7 +60,9 @@ SliverList bookPriceInfoWidget({
                   if (aladinPrice.subInfo.usedList!.userUsed!.minPrice !=
                       0) ...[
                     _aladinPriceForm(
+                        context: context,
                         title: '중고 (사용자)',
+                        url: aladinPrice.subInfo.usedList!.userUsed!.link,
                         price: aladinPrice.subInfo.usedList!.userUsed!.minPrice,
                         count:
                             aladinPrice.subInfo.usedList!.userUsed!.itemCount),
@@ -63,8 +72,11 @@ SliverList bookPriceInfoWidget({
               if (aladinPrice.subInfo.ebookList != null) ...[
                 if (aladinPrice.subInfo.ebookList!.isNotEmpty) ...[
                   ...aladinPrice.subInfo.ebookList!.map(
-                    (e) =>
-                        _aladinPriceForm(title: 'e-Book', price: e.priceSales),
+                    (e) => _aladinPriceForm(
+                        url: e.link,
+                        context: context,
+                        title: 'e-Book',
+                        price: e.priceSales),
                   )
                 ],
               ],
@@ -77,15 +89,19 @@ SliverList bookPriceInfoWidget({
 }
 
 Padding _aladinPriceForm({
+  required BuildContext context,
   required String title,
   required int price,
+  required String url,
   int? salesPrice,
   int? count,
 }) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 4),
     child: InkWell(
-      onTap: () {},
+      onTap: () async {
+        await context.read<BookState>().openBookPurchaseUrlLauncher(url: url);
+      },
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

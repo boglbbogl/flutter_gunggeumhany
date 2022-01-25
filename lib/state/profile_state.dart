@@ -5,11 +5,14 @@ import 'package:flutter_gunggeumhany/repository/profile_repo.dart';
 class ProfileState extends ChangeNotifier {
   final ProfileRepo _profileRepo = ProfileRepo();
   bool _isDrawer = false;
+  bool _isStartLoading = false;
   final List<ProfileModel> _profileModelList = [];
 
   Future getUserReviewAndProfile({
     required String userKey,
   }) async {
+    _isStartLoading = true;
+    notifyListeners();
     final ProfileModel _profileModel =
         await _profileRepo.getUserReviewAndProfile(userKey: userKey);
 
@@ -25,6 +28,7 @@ class ProfileState extends ChangeNotifier {
       _profileModelList.remove(_deleteUserModel);
     }
     _profileModelList.add(_profileModel);
+    _isStartLoading = false;
     notifyListeners();
   }
 
@@ -36,5 +40,6 @@ class ProfileState extends ChangeNotifier {
   }
 
   bool get isDrawer => _isDrawer;
+  bool get isStartLoading => _isStartLoading;
   List<ProfileModel> get profileModelList => _profileModelList;
 }

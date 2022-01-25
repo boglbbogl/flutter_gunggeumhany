@@ -13,7 +13,7 @@ class BookPriceRepo {
   static String aladinApiBaseUrl = ConfigReader.getAladinApiBaseUrl();
   static String aladinApiKey = ConfigReader.getAladinApiKey();
 
-  Future<AladinPrice?> getAladinPriceInfo({
+  Future<AladinPrice> getAladinPriceInfo({
     required String ISBN13,
     required String ISBN10,
   }) async {
@@ -26,7 +26,7 @@ class BookPriceRepo {
       _queryType = "ISBN";
       _queryISBN = ISBN10;
     } else {
-      return null;
+      return AladinPrice.empty();
     }
     final uri = Uri.parse(
         "$aladinApiBaseUrl/ItemLookUp.aspx?ttbkey=$aladinApiKey&itemIdType=$_queryType&ItemId=$_queryISBN&output=js&Version=20131101&OptResult=usedList,reviewList,ebookList");
@@ -40,13 +40,12 @@ class BookPriceRepo {
             .toList();
         if (_toList.isNotEmpty) {
           final _result = _toList.firstOrNull;
-          logger.e(_result);
-          return _result;
+          return _result!;
         } else {
-          return null;
+          return AladinPrice.empty();
         }
       }
     }
-    return null;
+    return AladinPrice.empty();
   }
 }

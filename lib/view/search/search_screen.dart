@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
+import 'package:flutter_gunggeumhany/state/auth_state.dart';
+import 'package:flutter_gunggeumhany/state/book_state.dart';
+import 'package:flutter_gunggeumhany/state/core/logger.dart';
+import 'package:flutter_gunggeumhany/state/review_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/review/review_page.dart';
 import 'package:flutter_gunggeumhany/view/search/kakao_search_widget.dart';
 import 'package:flutter_gunggeumhany/view/search/local_search_widget.dart';
 import 'package:flutter_gunggeumhany/view/search/search_appbar_widget.dart';
-import 'package:flutter_gunggeumhany/state/auth_state.dart';
-import 'package:flutter_gunggeumhany/state/book_state.dart';
-import 'package:flutter_gunggeumhany/state/review_state.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,7 @@ class SearchScreen extends StatelessWidget {
                 ),
                 if (!value.isKakaoSearch) ...[
                   _bookListView(
+                      listIndex: 20,
                       isKakaoSearch: value.isKakaoSearch,
                       context: context,
                       bookList: value.localBookList,
@@ -68,6 +70,7 @@ class SearchScreen extends StatelessWidget {
                 ],
                 if (value.isKakaoSearch) ...[
                   _bookListView(
+                    listIndex: 21,
                     isKakaoSearch: value.isKakaoSearch,
                     context: context,
                     bookList: value.kakaoBookList,
@@ -125,6 +128,7 @@ class SearchScreen extends StatelessWidget {
     required BuildContext context,
     required Widget widget,
     required bool isKakaoSearch,
+    required int listIndex,
   }) {
     return Expanded(
       child: Padding(
@@ -132,28 +136,28 @@ class SearchScreen extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
-            ...bookList.map(
-              (e) => InkWell(
+            ...List.generate(
+              bookList.length,
+              (index) => InkWell(
                 onTap: () async {
                   context.read<ReviewState>().started();
-                  if (e.docKey == null) {
+                  if (bookList[index].docKey == null) {
                     await context
                         .read<BookState>()
-                        .getNewBookWhereISBNItemNotDocKey(isbn: e.isbn);
+                        .getNewBookWhereISBNItemNotDocKey(
+                            isbn: bookList[index].isbn);
                   } else {
-                    await context
-                        .read<BookState>()
-                        .currentBookUpdateItem(docKey: e.docKey!);
+                    await context.read<BookState>().currentBookUpdateItem(
+                        docKey: bookList[index].docKey!,
+                        ISBN10: bookList[index].isbn10!,
+                        ISBN13: bookList[index].isbn13!,
+                        itemIndex: index,
+                        listIndex: listIndex);
                   }
-                  // await context.read<ReviewState>().getUserReviewList(
-                  //     userKey: context.read<AuthState>().userProfile!.userKey,
-                  //     bookDocKey: context.read<BookState>().newBookItem.docKey!,
-                  //     ISBN13: context.read<BookState>().newBookItem.isbn13!,
-                  //     ISBN10: context.read<BookState>().newBookItem.isbn10!);
-
                   pushNewScreen(context,
-                      screen: const ReviewPage(
-                        bookItem: null,
+                      screen: ReviewPage(
+                        bookItem: context.read<BookState>().newBookItem,
+                        aladinPrice: context.read<BookState>().aladinPrice,
                       ),
                       pageTransitionAnimation:
                           PageTransitionAnimation.cupertino);
@@ -161,16 +165,21 @@ class SearchScreen extends StatelessWidget {
                 child: Stack(
                   children: [
                     if (isKakaoSearch) ...[
-                      kakaoSearchWidget(book: e),
+                      kakaoSearchWidget(
+                        book: bookList[index],
+                      ),
                     ],
                     if (!isKakaoSearch) ...[
                       localSearchWidget(
-                          book: e,
+                          itemIndex: index,
+                          listIndex: listIndex,
+                          context: context,
+                          book: bookList[index],
                           isBookmark: context
                               .watch<AuthState>()
                               .userActivity!
                               .bookmarkBookDocKey
-                              .contains(e.docKey)),
+                              .contains(bookList[index].docKey)),
                     ],
                   ],
                 ),

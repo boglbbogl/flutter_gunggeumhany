@@ -1,10 +1,12 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gunggeumhany/model/aladin_price.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/book_state.dart';
 import 'package:flutter_gunggeumhany/state/review_state.dart';
+import 'package:flutter_gunggeumhany/view/review/book_price_info_widget.dart';
 import 'package:flutter_gunggeumhany/view/review/review_appbar_widget.dart';
 import 'package:flutter_gunggeumhany/view/review/review_create_widget.dart';
 import 'package:flutter_gunggeumhany/view/review/review_item_widget.dart';
@@ -13,9 +15,11 @@ import 'package:provider/provider.dart';
 
 class ReviewPage extends StatelessWidget {
   final Book? bookItem;
+  final AladinPrice? aladinPrice;
   const ReviewPage({
     Key? key,
     required this.bookItem,
+    required this.aladinPrice,
   }) : super(key: key);
 
   @override
@@ -23,6 +27,9 @@ class ReviewPage extends StatelessWidget {
     final Book _bookItem = bookItem == null
         ? Provider.of<BookState>(context).newBookItem
         : bookItem!;
+    final AladinPrice _aladinPrice = aladinPrice == null
+        ? Provider.of<BookState>(context).aladinPrice
+        : aladinPrice!;
     final Review? _myReview = _bookItem.reviewUser!
             .where((element) => context
                 .watch<AuthState>()
@@ -48,20 +55,7 @@ class ReviewPage extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(slivers: [
           reviewAppbarWidget(book: _bookItem, context: context),
-          // if (context.watch<ReviewState>().aladinPrice != null) ...[
-          //   if (context.watch<ReviewState>().isBookPriceLoading)
-          //     SliverList(
-          //         delegate: SliverChildListDelegate([
-          //       const Padding(
-          //         padding: EdgeInsets.only(top: 20),
-          //         child: Center(child: CircularProgressIndicator()),
-          //       )
-          //     ]))
-          //   else
-          //     bookPriceInfoWidget(
-          //         aladinPrice: context.watch<ReviewState>().aladinPrice!),
-          // ],
-
+          bookPriceInfoWidget(aladinPrice: _aladinPrice, context: context),
           if (_myReview == null) ...[
             if (_createReview == null)
               reviewCreateWidget(
@@ -76,7 +70,11 @@ class ReviewPage extends StatelessWidget {
             reviewMyItemWidget(me: _myReview, context: context),
           ],
           reviewItemWidget(
-              userReviewList: _bookItem.reviewUser!, context: context),
+              isMe: _bookItem.reviewUser!
+                  .map((e) => e.userProfile.userKey)
+                  .contains(context.watch<AuthState>().userProfile!.userKey),
+              userReviewList: _bookItem.reviewUser!,
+              context: context),
         ]),
       ),
     );
