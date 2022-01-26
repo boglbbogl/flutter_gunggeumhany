@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/profile_state.dart';
 import 'package:flutter_gunggeumhany/state/setting_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
@@ -35,7 +36,15 @@ class SettingDrawerPage extends StatelessWidget {
                 icon: Icons.account_circle_rounded,
                 title: '프로필',
                 onTap: () {
-                  context.read<SettingState>().started();
+                  context.read<SettingState>().started(
+                      isSocial: context
+                          .read<AuthState>()
+                          .userProfile!
+                          .presentProfileImageUrl
+                          .contains(context
+                              .read<AuthState>()
+                              .userProfile!
+                              .socialProfileImageUrl));
                   context.read<ProfileState>().openAndCloseDrawer(value: false);
                   pushNewScreen(context, screen: SettingProfileUpdatePage());
                 }),

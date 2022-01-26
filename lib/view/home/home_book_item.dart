@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/book_state.dart';
-import 'package:flutter_gunggeumhany/state/core/logger.dart';
 import 'package:flutter_gunggeumhany/state/review_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/home/item_loading_shimmer_widget.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_gunggeumhany/view/review/review_page.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomeBookItem extends StatelessWidget {
   final String title;
@@ -88,7 +86,7 @@ class HomeBookItem extends StatelessWidget {
                           width: size.width * 0.25,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              color: darkThemeNavyCardColor),
+                              color: darkThemeBlackCardColor),
                           child: bookList[index].thumbnail.isEmpty
                               ? Container()
                               : ClipRRect(

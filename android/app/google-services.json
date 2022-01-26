@@ -14,6 +14,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "411627814424-4tirhd0ltoe3kn78roqle00r2gttmn02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tyger.gunggeumhany",
+            "certificate_hash": "1ed9caf2e71816c648e5fe536daf668db103a2de"
+          }
+        },
+        {
+          "client_id": "411627814424-555248fhm9haqtkgipsq8pv6kkd0ffql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tyger.gunggeumhany",
+            "certificate_hash": "2268791d41d33d3089644a5577dc6f9eb03a7bae"
+          }
+        },
+        {
+          "client_id": "411627814424-hnvs21jlaht3hb85vl95hgj3u45tbupt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tyger.gunggeumhany",
+            "certificate_hash": "f08e1e2fe9864c2d92027618bb655707f5b89e6c"
+          }
+        },
+        {
+          "client_id": "411627814424-kftb1gks3l2cruepibh0mapm5nu591oe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tyger.gunggeumhany",
+            "certificate_hash": "108f9c8d7aaec984ee684974bea2b50354adf2ba"
+          }
+        },
+        {
           "client_id": "411627814424-e4l7jjhpk9g8771fhq3vag8fg1uvheet.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +61,13 @@
             {
               "client_id": "411627814424-e4l7jjhpk9g8771fhq3vag8fg1uvheet.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "411627814424-ncmfa9oh64uac9rmlk0sarftvmtft52a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tyger.gunggeumhany"
+              }
             }
           ]
         }

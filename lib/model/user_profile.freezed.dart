@@ -25,13 +25,19 @@ class _$UserProfileTearOff {
   _User call(
       {required String userKey,
       required String nickName,
-      required String imageUrl,
+      required String profileImageUrl,
+      required String presentProfileImageUrl,
+      required String socialProfileImageUrl,
+      required String provider,
       @TimestampConverter() required DateTime createdAt,
       @TimestampConverter() required DateTime updatedAt}) {
     return _User(
       userKey: userKey,
       nickName: nickName,
-      imageUrl: imageUrl,
+      profileImageUrl: profileImageUrl,
+      presentProfileImageUrl: presentProfileImageUrl,
+      socialProfileImageUrl: socialProfileImageUrl,
+      provider: provider,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
@@ -49,7 +55,10 @@ const $UserProfile = _$UserProfileTearOff();
 mixin _$UserProfile {
   String get userKey => throw _privateConstructorUsedError;
   String get nickName => throw _privateConstructorUsedError;
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get profileImageUrl => throw _privateConstructorUsedError;
+  String get presentProfileImageUrl => throw _privateConstructorUsedError;
+  String get socialProfileImageUrl => throw _privateConstructorUsedError;
+  String get provider => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -69,7 +78,10 @@ abstract class $UserProfileCopyWith<$Res> {
   $Res call(
       {String userKey,
       String nickName,
-      String imageUrl,
+      String profileImageUrl,
+      String presentProfileImageUrl,
+      String socialProfileImageUrl,
+      String provider,
       @TimestampConverter() DateTime createdAt,
       @TimestampConverter() DateTime updatedAt});
 }
@@ -86,7 +98,10 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
   $Res call({
     Object? userKey = freezed,
     Object? nickName = freezed,
-    Object? imageUrl = freezed,
+    Object? profileImageUrl = freezed,
+    Object? presentProfileImageUrl = freezed,
+    Object? socialProfileImageUrl = freezed,
+    Object? provider = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -99,9 +114,21 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      profileImageUrl: profileImageUrl == freezed
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      presentProfileImageUrl: presentProfileImageUrl == freezed
+          ? _value.presentProfileImageUrl
+          : presentProfileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      socialProfileImageUrl: socialProfileImageUrl == freezed
+          ? _value.socialProfileImageUrl
+          : socialProfileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      provider: provider == freezed
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -123,7 +150,10 @@ abstract class _$UserCopyWith<$Res> implements $UserProfileCopyWith<$Res> {
   $Res call(
       {String userKey,
       String nickName,
-      String imageUrl,
+      String profileImageUrl,
+      String presentProfileImageUrl,
+      String socialProfileImageUrl,
+      String provider,
       @TimestampConverter() DateTime createdAt,
       @TimestampConverter() DateTime updatedAt});
 }
@@ -141,7 +171,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
   $Res call({
     Object? userKey = freezed,
     Object? nickName = freezed,
-    Object? imageUrl = freezed,
+    Object? profileImageUrl = freezed,
+    Object? presentProfileImageUrl = freezed,
+    Object? socialProfileImageUrl = freezed,
+    Object? provider = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -154,9 +187,21 @@ class __$UserCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      profileImageUrl: profileImageUrl == freezed
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      presentProfileImageUrl: presentProfileImageUrl == freezed
+          ? _value.presentProfileImageUrl
+          : presentProfileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      socialProfileImageUrl: socialProfileImageUrl == freezed
+          ? _value.socialProfileImageUrl
+          : socialProfileImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      provider: provider == freezed
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -176,7 +221,10 @@ class _$_User extends _User {
   const _$_User(
       {required this.userKey,
       required this.nickName,
-      required this.imageUrl,
+      required this.profileImageUrl,
+      required this.presentProfileImageUrl,
+      required this.socialProfileImageUrl,
+      required this.provider,
       @TimestampConverter() required this.createdAt,
       @TimestampConverter() required this.updatedAt})
       : super._();
@@ -188,7 +236,13 @@ class _$_User extends _User {
   @override
   final String nickName;
   @override
-  final String imageUrl;
+  final String profileImageUrl;
+  @override
+  final String presentProfileImageUrl;
+  @override
+  final String socialProfileImageUrl;
+  @override
+  final String provider;
   @override
   @TimestampConverter()
   final DateTime createdAt;
@@ -198,7 +252,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'UserProfile(userKey: $userKey, nickName: $nickName, imageUrl: $imageUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserProfile(userKey: $userKey, nickName: $nickName, profileImageUrl: $profileImageUrl, presentProfileImageUrl: $presentProfileImageUrl, socialProfileImageUrl: $socialProfileImageUrl, provider: $provider, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -208,7 +262,13 @@ class _$_User extends _User {
             other is _User &&
             const DeepCollectionEquality().equals(other.userKey, userKey) &&
             const DeepCollectionEquality().equals(other.nickName, nickName) &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.profileImageUrl, profileImageUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.presentProfileImageUrl, presentProfileImageUrl) &&
+            const DeepCollectionEquality()
+                .equals(other.socialProfileImageUrl, socialProfileImageUrl) &&
+            const DeepCollectionEquality().equals(other.provider, provider) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
@@ -218,7 +278,10 @@ class _$_User extends _User {
       runtimeType,
       const DeepCollectionEquality().hash(userKey),
       const DeepCollectionEquality().hash(nickName),
-      const DeepCollectionEquality().hash(imageUrl),
+      const DeepCollectionEquality().hash(profileImageUrl),
+      const DeepCollectionEquality().hash(presentProfileImageUrl),
+      const DeepCollectionEquality().hash(socialProfileImageUrl),
+      const DeepCollectionEquality().hash(provider),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(updatedAt));
 
@@ -237,7 +300,10 @@ abstract class _User extends UserProfile {
   const factory _User(
       {required String userKey,
       required String nickName,
-      required String imageUrl,
+      required String profileImageUrl,
+      required String presentProfileImageUrl,
+      required String socialProfileImageUrl,
+      required String provider,
       @TimestampConverter() required DateTime createdAt,
       @TimestampConverter() required DateTime updatedAt}) = _$_User;
   const _User._() : super._();
@@ -249,7 +315,13 @@ abstract class _User extends UserProfile {
   @override
   String get nickName;
   @override
-  String get imageUrl;
+  String get profileImageUrl;
+  @override
+  String get presentProfileImageUrl;
+  @override
+  String get socialProfileImageUrl;
+  @override
+  String get provider;
   @override
   @TimestampConverter()
   DateTime get createdAt;

@@ -78,7 +78,8 @@ class FollowAndFollowingPage extends StatelessWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: CachedNetworkImage(
-                                  imageUrl: e.imageUrl, fit: BoxFit.cover),
+                                  imageUrl: e.presentProfileImageUrl,
+                                  fit: BoxFit.cover),
                             ),
                           ),
                         ),
@@ -113,7 +114,7 @@ class FollowAndFollowingPage extends StatelessWidget {
                                             .userProfile!
                                             .userKey,
                                         followingUserKey: e.userKey);
-                                context.read<AuthState>().getMyActivity(
+                                context.read<AuthState>().getMyUserModel(
                                       userKey: context
                                           .read<AuthState>()
                                           .userProfile!
@@ -132,7 +133,7 @@ class FollowAndFollowingPage extends StatelessWidget {
                                             .userProfile!
                                             .userKey,
                                         followingUserKey: e.userKey);
-                                context.read<AuthState>().getMyActivity(
+                                context.read<AuthState>().getMyUserModel(
                                       userKey: context
                                           .read<AuthState>()
                                           .userProfile!

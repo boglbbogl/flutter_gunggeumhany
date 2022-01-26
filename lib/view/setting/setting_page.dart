@@ -16,7 +16,9 @@ class SettingPage extends StatelessWidget {
           _listTileForm(
             title: '로그아웃',
             icon: Icons.logout_rounded,
-            onTap: () => context.read<AuthState>().signOut(),
+            onTap: () => context.read<AuthState>().signOut(
+                  provider: context.read<AuthState>().userProfile!.provider,
+                ),
           ),
         ],
       ),

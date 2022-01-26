@@ -96,7 +96,8 @@ class ProfileUserWidget extends StatelessWidget {
                                 .profileModelList
                                 .where((element) => element.userProfile.userKey
                                     .contains(userKey))
-                                .map((e) => e.userProfile.imageUrl)
+                                .map(
+                                    (e) => e.userProfile.presentProfileImageUrl)
                                 .firstOrNull!,
                             placeholder: (context, url) =>
                                 const CircularProgressIndicator(
@@ -182,7 +183,7 @@ class ProfileUserWidget extends StatelessWidget {
                                           .userProfile!
                                           .userKey,
                                       followingUserKey: userKey);
-                              context.read<AuthState>().getMyActivity(
+                              context.read<AuthState>().getMyUserModel(
                                   userKey: context
                                       .read<AuthState>()
                                       .userProfile!
@@ -200,7 +201,7 @@ class ProfileUserWidget extends StatelessWidget {
                                       .userProfile!
                                       .userKey,
                                   followingUserKey: userKey);
-                              context.read<AuthState>().getMyActivity(
+                              context.read<AuthState>().getMyUserModel(
                                   userKey: context
                                       .read<AuthState>()
                                       .userProfile!

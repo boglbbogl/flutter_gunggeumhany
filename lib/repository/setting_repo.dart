@@ -19,17 +19,29 @@ class SettingRepo {
     required String userKey,
     required String imageUrl,
     required String nickName,
+    required bool isChangedSocial,
+    required String presentImageUrl,
   }) async {
     final DocumentReference<Map<String, dynamic>> _userRef =
         _firestore.collection(collectionUser).doc(userKey);
     final _batch = _firestore.batch();
+    if (isChangedSocial) {
+      _batch.update(_userRef, {
+        "presentProfileImageUrl": presentImageUrl,
+        "updatedAt": DateTime.now(),
+      });
+    }
     if (nickName.isNotEmpty) {
-      _batch.update(
-          _userRef, {"nickName": nickName, "updatedAt": DateTime.now()});
+      _batch.update(_userRef, {
+        "nickName": nickName,
+        "updatedAt": DateTime.now(),
+      });
     }
     if (imageUrl.isNotEmpty) {
-      _batch.update(
-          _userRef, {"imageUrl": imageUrl, "updatedAt": DateTime.now()});
+      _batch.update(_userRef, {
+        "profileImageUrl": imageUrl,
+        "updatedAt": DateTime.now(),
+      });
     }
     await _batch.commit();
   }

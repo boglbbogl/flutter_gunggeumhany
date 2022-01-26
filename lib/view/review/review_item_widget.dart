@@ -4,13 +4,13 @@ import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/core/app_date_time.dart';
 import 'package:flutter_gunggeumhany/view/blocked/blocked_list_widget.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
+import 'package:flutter_gunggeumhany/view/core/app_flushbar.dart';
 import 'package:flutter_gunggeumhany/view/core/user_image.dart';
 import 'package:provider/provider.dart';
 
 SliverList reviewItemWidget({
   required BuildContext context,
   required List<ReviewUser> userReviewList,
-  required bool isMe,
 }) {
   return SliverList(
       delegate: SliverChildListDelegate([
@@ -26,7 +26,13 @@ SliverList reviewItemWidget({
             child: InkWell(
               onDoubleTap: () {},
               onLongPress: () {
-                if (!isMe) {
+                if (context
+                    .read<AuthState>()
+                    .userProfile!
+                    .userKey
+                    .contains(review.userProfile.userKey)) {
+                  appFlushbar(message: '프로필 > 리뷰 탭에서 삭제해 주세요').show(context);
+                } else {
                   blockedListWidget(
                     context: context,
                     blockedUserKey: review.userProfile.userKey,
@@ -50,7 +56,8 @@ SliverList reviewItemWidget({
                             userImageAndName(
                                 context: context,
                                 userKey: review.userProfile.userKey,
-                                imageUrl: review.userProfile.imageUrl,
+                                imageUrl:
+                                    review.userProfile.presentProfileImageUrl,
                                 nickName: review.userProfile.nickName),
                             Row(
                               children: [

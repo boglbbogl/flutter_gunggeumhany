@@ -108,7 +108,7 @@ Future blockedListWidget({
                                           blockedUserKey: blockedUserKey,
                                           bookDocKey: bookDocKey,
                                         );
-                                    context.read<AuthState>().getMyActivity(
+                                    context.read<AuthState>().getMyUserModel(
                                         userKey: context
                                             .read<AuthState>()
                                             .userProfile!

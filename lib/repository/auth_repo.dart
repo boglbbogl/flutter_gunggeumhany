@@ -38,6 +38,31 @@ class AuthRepo {
     }
   }
 
+  Future updateSoicalProfileImageUrl({
+    required String userKey,
+    required String newSocialProfileImageUrl,
+    required String presentProfileImageUrl,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _userRef =
+        _firestore.collection(collectionUser).doc(userKey);
+    final _userSnapshot = await _userRef.get();
+    final _userProfile = UserProfile.fromJson(_userSnapshot.data()!);
+    final bool _isUpdate =
+        _userProfile.socialProfileImageUrl.contains(presentProfileImageUrl);
+    if (_isUpdate) {
+      _userRef.update({
+        "presentProfileImageUrl": newSocialProfileImageUrl,
+        "socialProfileImageUrl": newSocialProfileImageUrl,
+        "updatedAt": DateTime.now(),
+      });
+    } else {
+      _userRef.update({
+        "socialProfileImageUrl": newSocialProfileImageUrl,
+        "updatedAt": DateTime.now(),
+      });
+    }
+  }
+
   Future createNewUserProfile({
     required UserProfile userProfile,
     required UserActivity userActivity,

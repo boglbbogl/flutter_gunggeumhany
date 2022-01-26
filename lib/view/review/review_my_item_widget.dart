@@ -28,7 +28,10 @@ SliverList reviewMyItemWidget({
                 child: userImageAndName(
                     context: context,
                     userKey: context.watch<AuthState>().userProfile!.userKey,
-                    imageUrl: context.watch<AuthState>().userProfile!.imageUrl,
+                    imageUrl: context
+                        .watch<AuthState>()
+                        .userProfile!
+                        .presentProfileImageUrl,
                     nickName: context.watch<AuthState>().userProfile!.nickName),
               ),
               const SizedBox(height: 8),

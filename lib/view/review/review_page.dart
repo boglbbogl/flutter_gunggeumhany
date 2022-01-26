@@ -70,11 +70,7 @@ class ReviewPage extends StatelessWidget {
             reviewMyItemWidget(me: _myReview, context: context),
           ],
           reviewItemWidget(
-              isMe: _bookItem.reviewUser!
-                  .map((e) => e.userProfile.userKey)
-                  .contains(context.watch<AuthState>().userProfile!.userKey),
-              userReviewList: _bookItem.reviewUser!,
-              context: context),
+              userReviewList: _bookItem.reviewUser!, context: context),
         ]),
       ),
     );

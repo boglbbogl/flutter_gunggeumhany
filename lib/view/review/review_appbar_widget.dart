@@ -72,7 +72,7 @@ SliverAppBar reviewAppbarWidget({
                   await context.read<ActivityState>().removeBookmark(
                       userKey: context.read<AuthState>().userProfile!.userKey,
                       bookDocKey: book.docKey!);
-                  await context.read<AuthState>().getMyActivity(
+                  await context.read<AuthState>().getMyUserModel(
                       userKey: context.read<AuthState>().userProfile!.userKey);
                 },
                 icon: Icon(
@@ -85,7 +85,7 @@ SliverAppBar reviewAppbarWidget({
                   await context.read<ActivityState>().addBookmark(
                       userKey: context.read<AuthState>().userProfile!.userKey,
                       bookDocKey: book.docKey!);
-                  await context.read<AuthState>().getMyActivity(
+                  await context.read<AuthState>().getMyUserModel(
                         userKey: context.read<AuthState>().userProfile!.userKey,
                       );
                 },

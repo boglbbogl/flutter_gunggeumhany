@@ -23,16 +23,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (context
-    //         .watch<ProfileState>()
-    //         .profileModelList
-    //         .where((element) => element.userProfile.userKey.contains(userKey))
-    //         .isEmpty ||
-    //     context.watch<AuthState>().userProfile == null ||
-    //     context.watch<AuthState>().userActivity == null) {
-    //   return appIndicator();
-    // }
-    if (context.watch<ProfileState>().isStartLoading) {
+    if (context.watch<ProfileState>().isStartLoading ||
+        context.watch<AuthState>().userProfile == null ||
+        context.watch<AuthState>().userActivity == null) {
       return appIndicator();
     }
     return GestureDetector(

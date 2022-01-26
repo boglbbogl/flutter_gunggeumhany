@@ -9,7 +9,6 @@ import 'package:flutter_gunggeumhany/state/profile_state.dart';
 import 'package:flutter_gunggeumhany/state/review_state.dart';
 import 'package:flutter_gunggeumhany/state/router/router.dart';
 import 'package:flutter_gunggeumhany/state/setting_state.dart';
-import 'package:flutter_gunggeumhany/state/sign_in_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +21,6 @@ class HanyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => MainState()),
         ChangeNotifierProvider(create: (context) => AuthState()),
-        ChangeNotifierProvider(create: (context) => SignInState()),
         ChangeNotifierProvider(create: (context) => BookState()),
         ChangeNotifierProvider(create: (context) => ReviewState()),
         ChangeNotifierProvider(create: (context) => ActivityState()),

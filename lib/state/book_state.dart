@@ -118,7 +118,11 @@ class BookState extends ChangeNotifier {
       await launch(
         url,
         forceSafariVC: false,
+        enableJavaScript: true,
+        universalLinksOnly: true,
       );
+    } else {
+      throw 'error';
     }
   }
 

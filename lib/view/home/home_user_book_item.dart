@@ -89,7 +89,7 @@ class HomeUserBookItem extends StatelessWidget {
                                       borderRadius: const BorderRadius.only(
                                           topLeft: Radius.circular(8),
                                           bottomLeft: Radius.circular(8)),
-                                      color: darkThemeNavyCardColor),
+                                      color: darkThemeBlackCardColor),
                                   child: reviewUserBook[index]
                                           .book
                                           .thumbnail

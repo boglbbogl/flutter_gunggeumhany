@@ -32,9 +32,9 @@ class SettingProfileUpdatePage extends StatelessWidget {
               TextButton(
                   onPressed: () async {
                     await context.read<SettingState>().updateUserProfile(
-                        userKey: context.read<AuthState>().userProfile!.userKey,
+                        userProfile: context.read<AuthState>().userProfile!,
                         context: context);
-                    await context.read<AuthState>().getMyProfile(
+                    await context.read<AuthState>().getMyUserModel(
                         userKey:
                             context.read<AuthState>().userProfile!.userKey);
                   },
@@ -66,7 +66,108 @@ class SettingProfileUpdatePage extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 20),
-                  Stack(
+                  Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                color: Colors.white),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: context
+                                          .watch<SettingState>()
+                                          .pickedImage !=
+                                      null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(18),
+                                      child: Image.memory(
+                                        context
+                                            .watch<SettingState>()
+                                            .pickedImage!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: BorderRadius.circular(18),
+                                      child: CachedNetworkImage(
+                                        imageUrl: context
+                                            .watch<AuthState>()
+                                            .userProfile!
+                                            .profileImageUrl,
+                                        placeholder: (context, url) =>
+                                            const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
+                                      ),
+                                    ),
+                            ),
+                          ),
+                          if (context
+                              .watch<SettingState>()
+                              .isImageSelected) ...[
+                            const Positioned(
+                              top: 30,
+                              bottom: 30,
+                              right: 30,
+                              left: 30,
+                              child: CircularProgressIndicator(),
+                            ),
+                          ],
+                          Positioned(
+                            right: -5,
+                            top: -5,
+                            child: InkWell(
+                              onTap: () {
+                                context
+                                    .read<SettingState>()
+                                    .changedProfileImage();
+                              },
+                              child: Container(
+                                width: 30,
+                                height: 30,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: darkThemeMainColor),
+                                child: const Icon(
+                                  Icons.add_circle_outline_rounded,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25),
+                        child: IconButton(
+                            onPressed: () {
+                              context
+                                  .read<SettingState>()
+                                  .selectedIsSocialOrLocalProfileImage(
+                                      value: false);
+                            },
+                            icon: context
+                                        .watch<SettingState>()
+                                        .isSocialProfileImage ??
+                                    false
+                                ? const Icon(
+                                    Icons.circle_outlined,
+                                    size: 20,
+                                  )
+                                : Icon(
+                                    Icons.circle_rounded,
+                                    size: 24,
+                                    color: appSubColor,
+                                  )),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+                  Row(
                     children: [
                       Container(
                         width: 80,
@@ -76,59 +177,51 @@ class SettingProfileUpdatePage extends StatelessWidget {
                             color: Colors.white),
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: context.watch<SettingState>().pickedImage !=
-                                  null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(18),
-                                  child: Image.memory(
-                                    context.watch<SettingState>().pickedImage!,
-                                    fit: BoxFit.cover,
-                                  ),
-                                )
-                              : ClipRRect(
-                                  borderRadius: BorderRadius.circular(18),
-                                  child: CachedNetworkImage(
-                                    imageUrl: context
-                                        .watch<AuthState>()
-                                        .userProfile!
-                                        .imageUrl,
-                                    placeholder: (context, url) => const Center(
-                                        child: CircularProgressIndicator()),
-                                  ),
-                                ),
-                        ),
-                      ),
-                      if (context.watch<SettingState>().isImageSelected) ...[
-                        const Positioned(
-                          top: 30,
-                          bottom: 30,
-                          right: 30,
-                          left: 30,
-                          child: CircularProgressIndicator(),
-                        ),
-                      ],
-                      Positioned(
-                        right: -5,
-                        top: -5,
-                        child: InkWell(
-                          onTap: () {
-                            context.read<SettingState>().changedProfileImage();
-                          },
-                          child: Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: darkThemeMainColor),
-                            child: const Icon(
-                              Icons.add_circle_outline_rounded,
-                              color: Colors.white,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(18),
+                            child: CachedNetworkImage(
+                              imageUrl: context
+                                  .watch<AuthState>()
+                                  .userProfile!
+                                  .socialProfileImageUrl,
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator()),
                             ),
                           ),
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25),
+                        child: IconButton(
+                            onPressed: () {
+                              context
+                                  .read<SettingState>()
+                                  .selectedIsSocialOrLocalProfileImage(
+                                      value: true);
+                            },
+                            icon: context
+                                        .watch<SettingState>()
+                                        .isSocialProfileImage ??
+                                    false
+                                ? Icon(
+                                    Icons.circle_rounded,
+                                    size: 24,
+                                    color: appSubColor,
+                                  )
+                                : const Icon(Icons.circle_outlined, size: 20)),
                       )
                     ],
-                  )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 8, left: 4),
+                    child: Text(
+                      "Profile With ${context.watch<AuthState>().userProfile!.provider}",
+                      style: theme.textTheme.bodyText2!.copyWith(
+                          color: const Color.fromRGBO(195, 195, 195, 1),
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ],
               )
             ],

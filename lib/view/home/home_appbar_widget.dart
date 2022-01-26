@@ -30,7 +30,8 @@ AppBar homeAppbarWidget({
           )),
       if (context.watch<AuthState>().userProfile != null) ...[
         userImage(
-            imageUrl: context.watch<AuthState>().userProfile!.imageUrl,
+            imageUrl:
+                context.watch<AuthState>().userProfile!.presentProfileImageUrl,
             context: context),
       ],
       const SizedBox(width: 8),
