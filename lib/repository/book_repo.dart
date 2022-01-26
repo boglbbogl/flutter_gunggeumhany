@@ -114,7 +114,14 @@ class BookRepo {
       final List<Book> _setBookData = _kakaoResult.documents;
       if (_setBookData.isNotEmpty) {
         _setBookData.removeWhere((element) =>
-            _localBookData.map((e) => e.title).contains(element.title));
+            _localBookData
+                .map((e) => e.isbn13)
+                .contains(element.isbn.split(" ")[1]) ||
+            _localBookData
+                .map((e) => e.isbn10)
+                .contains(element.isbn.split(" ")[0]) ||
+            _localBookData.map((e) => e.isbn).contains(element.isbn));
+
         for (int i = 0; i < _setBookData.length; i++) {
           final _id = _bookRef.doc();
           final List<String> _searchKeyWord =
@@ -180,7 +187,13 @@ class BookRepo {
       if (!_isEnd) {
         if (_setBookData.isNotEmpty) {
           _setBookData.removeWhere((element) =>
-              _localBookData.map((e) => e.title).contains(element.title));
+              _localBookData
+                  .map((e) => e.isbn13)
+                  .contains(element.isbn.split(" ")[1]) ||
+              _localBookData
+                  .map((e) => e.isbn10)
+                  .contains(element.isbn.split(" ")[0]) ||
+              _localBookData.map((e) => e.isbn).contains(element.isbn));
           for (int i = 0; i < _setBookData.length; i++) {
             final _id = _bookRef.doc();
             final List<String> _searchKeyWord =

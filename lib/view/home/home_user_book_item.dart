@@ -103,7 +103,7 @@ class HomeUserBookItem extends StatelessWidget {
                                             imageUrl: reviewUserBook[index]
                                                 .book
                                                 .thumbnail,
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.fill,
                                             placeholder: (context, url) =>
                                                 Center(
                                               child: CircularProgressIndicator(

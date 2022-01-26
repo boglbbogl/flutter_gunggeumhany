@@ -84,6 +84,7 @@ class HomeBookItem extends StatelessWidget {
                         },
                         child: Container(
                           width: size.width * 0.25,
+                          height: size.width * 0.4,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               color: darkThemeBlackCardColor),
@@ -93,7 +94,7 @@ class HomeBookItem extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                   child: CachedNetworkImage(
                                     imageUrl: bookList[index].thumbnail,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                     placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator(
                                         color: appMainColor,
