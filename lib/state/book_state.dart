@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/aladin_price.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
-import 'package:flutter_gunggeumhany/repository/book_price_repo.dart';
-import 'package:flutter_gunggeumhany/repository/book_repo.dart';
+import 'package:flutter_gunggeumhany/repository/book/book_price_repo.dart';
+import 'package:flutter_gunggeumhany/repository/book/book_repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BookState extends ChangeNotifier {

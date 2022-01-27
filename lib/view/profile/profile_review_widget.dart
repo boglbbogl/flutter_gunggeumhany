@@ -148,11 +148,13 @@ Tab profileReviewWidget({
                                         icon: Icons.star_rounded,
                                         size: 20),
                                     const SizedBox(width: 22),
-                                    _ratingIndicator(
-                                        color: Colors.pink,
-                                        rating: e.favoriteRating,
-                                        icon: Icons.favorite_rounded,
-                                        size: 18),
+                                    if (e.favoriteRating != 0.0) ...[
+                                      _ratingIndicator(
+                                          color: Colors.pink,
+                                          rating: e.favoriteRating,
+                                          icon: Icons.favorite_rounded,
+                                          size: 18),
+                                    ],
                                   ],
                                 ),
                                 Text(

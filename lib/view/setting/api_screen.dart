@@ -61,7 +61,21 @@ class ApiScreen extends StatelessWidget {
                   isLoading:
                       context.watch<AladinState>().isRecommendEditorLoading,
                   title: '에디터 추천(카테고리 별) - 1'),
+              _apiForm(
+                  onTap: () {
+                    context.read<AladinState>().thumbnailNoneFieldAdd();
+                  },
+                  isLoading:
+                      context.watch<AladinState>().isThumbnailNoneLoading,
+                  title: '썸네일 이미지 추가'),
+              _apiForm(
+                  onTap: () {
+                    context.read<AladinState>().contentsNoneFieldAdd();
+                  },
+                  isLoading: context.watch<AladinState>().isContentsNoneLoading,
+                  title: '책 설명 추가'),
               // _apiForm(
+
               //     onTap: () {
               //       context
               //           .read<AladinState>()
@@ -89,6 +103,10 @@ class ApiScreen extends StatelessWidget {
           width: size.width * 0.8,
           height: size.height * 0.06,
           child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(
+                  const Color.fromRGBO(71, 71, 71, 1)),
+            ),
             onPressed: onTap,
             child: isLoading
                 ? CircularProgressIndicator(
@@ -97,13 +115,13 @@ class ApiScreen extends StatelessWidget {
                 : Text(
                     title,
                     style: theme.textTheme.bodyText2!.copyWith(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16),
                   ),
           ),
         ),
-        const SizedBox(height: 35),
+        const SizedBox(height: 20),
       ],
     );
   }

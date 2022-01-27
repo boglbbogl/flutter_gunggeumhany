@@ -28,7 +28,7 @@ class ProfileRepo {
         UserProfile.fromJson(_userSnapshot.data()!);
     final UserActivity _userActivity =
         UserActivity.fromJson(_activitySnapshot.data()!);
-    for (final element in _userActivity.bookmarkBookDocKey) {
+    for (final element in _userActivity.bookmarkBookDocKey.reversed) {
       final _bookRef = _firestore.collection(collectionBook).doc(element);
       final _bookSnapshot = await _bookRef.get();
       if (_bookSnapshot.exists) {
@@ -37,7 +37,7 @@ class ProfileRepo {
       }
     }
     if (_userActivity.myReviewDocKey.isNotEmpty) {
-      for (final element in _userActivity.myReviewDocKey) {
+      for (final element in _userActivity.myReviewDocKey.reversed) {
         final _reviewRef = _firestore
             .collection(collectionBook)
             .doc(element)

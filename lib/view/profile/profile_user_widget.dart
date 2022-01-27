@@ -218,60 +218,66 @@ class ProfileUserWidget extends StatelessWidget {
             const SizedBox(height: 25),
             SizedBox(
               width: size.width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _userStatusForm(
-                      title: '리뷰',
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _userStatusForm(
+                        title: '리뷰',
+                        rating: context
+                            .watch<ProfileState>()
+                            .profileModelList
+                            .where(
+                                (e) => userKey.contains(e.userProfile.userKey))
+                            .map((e) => e.userActivity.myReviewDocKey.length)
+                            .firstOrNull!
+                            .toString(),
+                        color: Colors.white),
+                    _userStatusForm(
+                        title: '북마크',
+                        rating: context
+                            .watch<ProfileState>()
+                            .profileModelList
+                            .where(
+                                (e) => userKey.contains(e.userProfile.userKey))
+                            .map(
+                                (e) => e.userActivity.bookmarkBookDocKey.length)
+                            .firstOrNull!
+                            .toString(),
+                        color: appMainColor),
+                    _userStatusForm(
+                        title: '별점',
+                        rating: _starRating.toStringAsFixed(1),
+                        color: Colors.amber),
+                    _userStatusForm(
+                        title: '추천',
+                        rating: _favoriteRating.toStringAsFixed(1),
+                        color: Colors.pink),
+                    _userStatusForm(
+                      title: '팔로우',
                       rating: context
                           .watch<ProfileState>()
                           .profileModelList
                           .where((e) => userKey.contains(e.userProfile.userKey))
-                          .map((e) => e.userActivity.myReviewDocKey.length)
+                          .map((e) => e.userActivity.followerUserKey.length)
                           .firstOrNull!
                           .toString(),
-                      color: Colors.white),
-                  _userStatusForm(
-                      title: '북마크',
+                      color: const Color.fromRGBO(195, 195, 195, 1),
+                    ),
+                    _userStatusForm(
+                      title: '팔로잉',
                       rating: context
                           .watch<ProfileState>()
                           .profileModelList
                           .where((e) => userKey.contains(e.userProfile.userKey))
-                          .map((e) => e.userActivity.bookmarkBookDocKey.length)
+                          .map((e) => e.userActivity.followingUserKey.length)
                           .firstOrNull!
                           .toString(),
-                      color: appMainColor),
-                  _userStatusForm(
-                      title: '별점',
-                      rating: _starRating.toStringAsFixed(1),
-                      color: Colors.amber),
-                  _userStatusForm(
-                      title: '추천',
-                      rating: _favoriteRating.toStringAsFixed(1),
-                      color: Colors.pink),
-                  _userStatusForm(
-                    title: '팔로우',
-                    rating: context
-                        .watch<ProfileState>()
-                        .profileModelList
-                        .where((e) => userKey.contains(e.userProfile.userKey))
-                        .map((e) => e.userActivity.followerUserKey.length)
-                        .firstOrNull!
-                        .toString(),
-                    color: const Color.fromRGBO(195, 195, 195, 1),
-                  ),
-                  _userStatusForm(
-                    title: '팔로잉',
-                    rating: context
-                        .watch<ProfileState>()
-                        .profileModelList
-                        .where((e) => userKey.contains(e.userProfile.userKey))
-                        .map((e) => e.userActivity.followingUserKey.length)
-                        .firstOrNull!
-                        .toString(),
-                    color: const Color.fromRGBO(195, 195, 195, 1),
-                  ),
-                ],
+                      color: const Color.fromRGBO(195, 195, 195, 1),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
@@ -309,23 +315,20 @@ class ProfileUserWidget extends StatelessWidget {
     );
   }
 
-  Padding _userStatusForm({
+  DefaultTextStyle _userStatusForm({
     required String title,
     required String rating,
     required Color color,
   }) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16),
-      child: DefaultTextStyle(
-        style: theme.textTheme.bodyText2!
-            .copyWith(fontSize: 14, fontWeight: FontWeight.bold, color: color),
-        child: Column(
-          children: [
-            Text(rating),
-            const SizedBox(height: 8),
-            Text(title),
-          ],
-        ),
+    return DefaultTextStyle(
+      style: theme.textTheme.bodyText2!
+          .copyWith(fontSize: 14, fontWeight: FontWeight.bold, color: color),
+      child: Column(
+        children: [
+          Text(rating),
+          const SizedBox(height: 8),
+          Text(title),
+        ],
       ),
     );
   }

@@ -42,7 +42,7 @@ class SignInPage extends StatelessWidget {
                   baseColor: Colors.white70,
                   highlightColor: Colors.white,
                   child: Text(
-                    '궁금하니 ?',
+                    '궁금하니',
                     style: TextStyle(
                       fontFamily: AppFonts().jua,
                       fontSize: 60,
@@ -68,7 +68,6 @@ class SignInPage extends StatelessWidget {
                         assets: 'google',
                         isLoading: context.watch<AuthState>().isGoogleLogin,
                         padding: 12),
-                 
                   ],
                 )
               ],
