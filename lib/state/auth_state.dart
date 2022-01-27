@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as f;
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as facebook;
 import 'package:flutter_gunggeumhany/model/book_review_model.dart';
 import 'package:flutter_gunggeumhany/model/user_activity.dart';
 import 'package:flutter_gunggeumhany/model/user_information.dart';
