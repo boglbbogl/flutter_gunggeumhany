@@ -26,7 +26,7 @@ Column updateProfileNicknameWidget({
             ),
             child: TextFormField(
               inputFormatters: [
-                FilteringTextInputFormatter(RegExp("[a-z_]"), allow: true)
+                FilteringTextInputFormatter(RegExp("[a-z_0-9]"), allow: true)
               ],
               readOnly: context.watch<SettingState>().isReadOnly,
               controller: controller,

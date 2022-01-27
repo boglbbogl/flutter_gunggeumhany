@@ -1,15 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart' as f;
 import 'package:flutter/cupertino.dart';
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart' as facebook;
 import 'package:flutter_gunggeumhany/model/book_review_model.dart';
 import 'package:flutter_gunggeumhany/model/user_activity.dart';
 import 'package:flutter_gunggeumhany/model/user_information.dart';
 import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/auth_repo.dart';
 import 'package:flutter_gunggeumhany/repository/recommend_repo.dart';
-import 'package:flutter_gunggeumhany/state/core/logger.dart';
 import 'package:flutter_gunggeumhany/view/core/app_flushbar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/all.dart' as kakao;
+import 'package:url_launcher/url_launcher.dart';
 
 class AuthState extends ChangeNotifier {
   final f.FirebaseAuth _firebaseAuth = f.FirebaseAuth.instance;
@@ -19,6 +20,8 @@ class AuthState extends ChangeNotifier {
   UserProfile? _userProfile;
   UserActivity? _userActivity;
   List<BookReviewUser> _userBookReview = [];
+  bool _isKakaoLogin = false;
+  bool _isGoogleLogin = false;
 
   AuthState() {
     userChecked();
@@ -49,7 +52,6 @@ class AuthState extends ChangeNotifier {
       await getMyUserModel(
           userKey: _kakaoUser.id.toString() + _kakaoUser.kakaoAccount!.email!);
       if (_userProfile != null && _userActivity != null) {
-        logger.e(_kakaoUser.kakaoAccount!.profile!.thumbnailImageUrl);
         if (!_userProfile!.socialProfileImageUrl
             .contains(_kakaoUser.kakaoAccount!.profile!.thumbnailImageUrl!)) {
           await _signInStateUpdateSoicalUserImage(
@@ -120,9 +122,19 @@ class AuthState extends ChangeNotifier {
   Future signInWithKakao({
     required BuildContext context,
   }) async {
+    _isKakaoLogin = true;
+    notifyListeners();
     final _installed = await kakao.isKakaoTalkInstalled();
     if (!_installed) {
-// launcher store
+      const _kakaoMarket = "market://details?id=" + "com.kakao.talk";
+      if (await canLaunch(_kakaoMarket)) {
+        await launch(_kakaoMarket);
+      } else {
+        throw 'error';
+      }
+
+      _isKakaoLogin = false;
+      notifyListeners();
     } else {
       try {
         final _code = await kakao.AuthCodeClient.instance.requestWithTalk();
@@ -143,20 +155,32 @@ class AuthState extends ChangeNotifier {
                     _kakaoUser.kakaoAccount!.profile!.thumbnailImageUrl!);
           }
           await userChecked();
+          _isKakaoLogin = false;
+          notifyListeners();
         }
       } catch (error) {
         appFlushbar(message: '서버 에러가 발생 했습니다. 잠시 후 다시 이용해 주세요').show(context);
+        _isKakaoLogin = false;
+        notifyListeners();
       }
     }
   }
 
+  Future signInWithFacebook({
+    required BuildContext context,
+  }) async {}
+
   Future signInWithGoogle({
     required BuildContext context,
   }) async {
+    _isGoogleLogin = true;
+    notifyListeners();
     try {
       final _googleSignInUser = await _googleSignIn.signIn();
       if (_googleSignInUser == null) {
         appFlushbar(message: '구글 계정을 가져올 수 없습니다').show(context);
+        _isGoogleLogin = false;
+        notifyListeners();
       } else {
         final _authentication = await _googleSignInUser.authentication;
         final _authCredential = f.GoogleAuthProvider.credential(
@@ -176,10 +200,14 @@ class AuthState extends ChangeNotifier {
                 socialProfileImageUrl: _firebaseUser.photoURL!);
           }
           await userChecked();
+          _isGoogleLogin = false;
+          notifyListeners();
         }
       }
     } catch (error) {
       appFlushbar(message: '서버 에러가 발생 했습니다. 잠시 후 다시 이용해 주세요').show(context);
+      _isGoogleLogin = false;
+      notifyListeners();
     }
   }
 
@@ -222,4 +250,6 @@ class AuthState extends ChangeNotifier {
   UserProfile? get userProfile => _userProfile;
   UserActivity? get userActivity => _userActivity;
   List<BookReviewUser> get userBookReview => _userBookReview;
+  bool get isKakaoLogin => _isKakaoLogin;
+  bool get isGoogleLogin => _isGoogleLogin;
 }

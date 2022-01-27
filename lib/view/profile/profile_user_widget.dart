@@ -71,7 +71,7 @@ class ProfileUserWidget extends StatelessWidget {
     return SliverList(
         delegate: SliverChildListDelegate([
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
         child: Column(
           children: [
             Row(
@@ -110,7 +110,7 @@ class ProfileUserWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 30),
+                    const SizedBox(width: 20),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -124,7 +124,7 @@ class ProfileUserWidget extends StatelessWidget {
                               .firstOrNull!,
                           style: theme.textTheme.bodyText2!.copyWith(
                               color: Colors.white,
-                              fontSize: 14,
+                              fontSize: 13,
                               fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 12),

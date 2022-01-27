@@ -3,7 +3,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/model/book_review_model.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
-import 'package:flutter_gunggeumhany/model/review_user.dart';
 import 'package:flutter_gunggeumhany/model/user_activity.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 

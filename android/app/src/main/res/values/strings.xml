@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="kakao_native_key">kakao86e16ec9ff8293e68e2e7983be638f94</string>
+  <!-- <string name="app_name">gunggeumhany</string>
+  <string name="facebook_app_id">310884057662815</string>
+  <string name="fb_login_protocol_scheme">fb310884057662815</string> -->
 </resources>
