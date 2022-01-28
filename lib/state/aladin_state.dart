@@ -19,6 +19,7 @@ class AladinState extends ChangeNotifier {
   Future contentsNoneFieldAdd() async {
     _isContentsNoneLoading = true;
     notifyListeners();
+    await _bookNoneRepo.noneFieldAddProvderKakao(updateData: "contents");
     await _bookNoneRepo.noneFieldAddProviderAladin(
         updateData: "contents", aladinParameter: "description");
     _isContentsNoneLoading = false;
@@ -28,6 +29,7 @@ class AladinState extends ChangeNotifier {
   Future thumbnailNoneFieldAdd() async {
     _isThumbnailNoneLoading = true;
     notifyListeners();
+    await _bookNoneRepo.noneFieldAddProvderKakao(updateData: "thumbnail");
     await _bookNoneRepo.noneFieldAddProviderAladin(
         updateData: "thumbnail", aladinParameter: "cover");
 
@@ -38,6 +40,7 @@ class AladinState extends ChangeNotifier {
   Future aladinBestsellerToFirestoreLogic() async {
     _isBestsellerLoading = true;
     notifyListeners();
+
     await _aladinThemeRepo.bestsellerAladinISBNReCallKakaoBook();
     _isBestsellerLoading = false;
     notifyListeners();
