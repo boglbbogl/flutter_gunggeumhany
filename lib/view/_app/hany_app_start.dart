@@ -10,10 +10,10 @@ class HanyAppStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.delayed(const Duration(milliseconds: 100), () => 0),
+        future: Future.delayed(const Duration(milliseconds: 3000), () => 0),
         builder: (context, snapshot) {
           return AnimatedSwitcher(
-            duration: const Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 50),
             child: _splashLoadingWidget(snapshot),
           );
         });

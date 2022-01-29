@@ -10,6 +10,33 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (context.watch<AuthState>().isLogin) {
+      return Scaffold(
+        body: Container(
+            color: Colors.black,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: [
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+                FutureBuilder(
+                    future: Future.delayed(const Duration(milliseconds: 5000)),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Positioned(
+                            bottom: 50,
+                            child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Center(child: Text('다시 로그인하기'))));
+                      }
+                      return Container();
+                    }),
+              ],
+            )),
+      );
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -44,7 +71,7 @@ class SignInPage extends StatelessWidget {
                   child: Text(
                     '궁금하니',
                     style: TextStyle(
-                      fontFamily: AppFonts().jua,
+                      fontFamily: AppFonts().bMDoHyeon,
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
                     ),

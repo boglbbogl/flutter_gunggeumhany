@@ -16,6 +16,7 @@ class AuthState extends ChangeNotifier {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final AuthRepo _authRepo = AuthRepo();
   final RecommendRepo _recommendRepo = RecommendRepo();
+  bool _isLogin = false;
   UserProfile? _userProfile;
   UserActivity? _userActivity;
   List<BookReviewUser> _userBookReview = [];
@@ -27,6 +28,8 @@ class AuthState extends ChangeNotifier {
   }
 
   Future userChecked() async {
+    _isLogin = true;
+    notifyListeners();
     final _firebaseUser = _firebaseAuth.currentUser;
     final bool _googleUser = await _googleSignIn.isSignedIn();
     final kakao.OAuthToken? _kakaoToken =
@@ -44,6 +47,7 @@ class AuthState extends ChangeNotifier {
       } else {
         _userProfile = null;
         _userActivity = null;
+        _isLogin = false;
         notifyListeners();
       }
     } else if (_kakaoToken != null) {
@@ -62,11 +66,13 @@ class AuthState extends ChangeNotifier {
       } else {
         _userProfile = null;
         _userActivity = null;
+        _isLogin = false;
         notifyListeners();
       }
     } else {
       _userProfile = null;
       _userActivity = null;
+      _isLogin = false;
       notifyListeners();
     }
   }
@@ -251,4 +257,5 @@ class AuthState extends ChangeNotifier {
   List<BookReviewUser> get userBookReview => _userBookReview;
   bool get isKakaoLogin => _isKakaoLogin;
   bool get isGoogleLogin => _isGoogleLogin;
+  bool get isLogin => _isLogin;
 }
