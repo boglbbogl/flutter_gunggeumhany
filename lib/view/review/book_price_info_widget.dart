@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 SliverList bookPriceInfoWidget({
   required AladinPrice aladinPrice,
-  required bool isAdult,
+  required bool? isAdult,
   required BuildContext context,
 }) {
   return SliverList(
@@ -38,7 +38,7 @@ SliverList bookPriceInfoWidget({
                           fontWeight: FontWeight.bold,
                           fontSize: 14),
                     ),
-                    if (isAdult) ...[
+                    if (isAdult != null && isAdult) ...[
                       Text(
                         '성인 인증 필요',
                         style: theme.textTheme.bodyText2!.copyWith(

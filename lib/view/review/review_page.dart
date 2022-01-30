@@ -58,7 +58,7 @@ class ReviewPage extends StatelessWidget {
           bookPriceInfoWidget(
               aladinPrice: _aladinPrice,
               context: context,
-              isAdult: _bookItem.isAdult!),
+              isAdult: _bookItem.isAdult == null ? null : _bookItem.isAdult!),
           if (_myReview == null) ...[
             if (_createReview == null)
               reviewCreateWidget(
