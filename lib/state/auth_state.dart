@@ -106,6 +106,13 @@ class AuthState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void reSignIn() {
+    _userProfile = null;
+    _userActivity = null;
+    _isLogin = false;
+    notifyListeners();
+  }
+
   Future signOut({
     required String provider,
   }) async {
@@ -122,6 +129,8 @@ class AuthState extends ChangeNotifier {
       _userActivity = null;
       notifyListeners();
     }
+    _isLogin = false;
+    notifyListeners();
   }
 
   Future signInWithKakao({

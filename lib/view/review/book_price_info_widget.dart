@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 SliverList bookPriceInfoWidget({
   required AladinPrice aladinPrice,
+  required bool isAdult,
   required BuildContext context,
 }) {
   return SliverList(
@@ -27,12 +28,26 @@ SliverList bookPriceInfoWidget({
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '지금 여기서 구매',
-                  style: theme.textTheme.bodyText2!.copyWith(
-                      color: appMainColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '지금 여기서 구매',
+                      style: theme.textTheme.bodyText2!.copyWith(
+                          color: appMainColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                    if (isAdult) ...[
+                      Text(
+                        '성인 인증 필요',
+                        style: theme.textTheme.bodyText2!.copyWith(
+                            color: appSubColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10),
+                      ),
+                    ],
+                  ],
                 ),
               ),
               const SizedBox(height: 6),

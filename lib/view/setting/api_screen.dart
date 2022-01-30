@@ -74,6 +74,18 @@ class ApiScreen extends StatelessWidget {
                   },
                   isLoading: context.watch<AladinState>().isContentsNoneLoading,
                   title: '책 설명 추가'),
+              _apiForm(
+                  onTap: () {
+                    context.read<AladinState>().adultNoneFieldAdd();
+                  },
+                  isLoading: context.watch<AladinState>().isAdultNoneLoading,
+                  title: '성인 등급 추가'),
+              _apiForm(
+                  onTap: () {
+                    context.read<AladinState>().categoryNoneFieldAdd();
+                  },
+                  isLoading: context.watch<AladinState>().isCategoryNoneLoading,
+                  title: '카테고리 추가'),
               // _apiForm(
 
               //     onTap: () {

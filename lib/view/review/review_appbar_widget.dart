@@ -212,12 +212,39 @@ SliverAppBar reviewAppbarWidget({
                   ),
                 ),
                 const SizedBox(height: 6),
-                Text(
-                  "ISBN - ${book.isbn}",
+                DefaultTextStyle(
                   style: theme.textTheme.bodyText2!.copyWith(
                     fontSize: 10,
                   ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (book.isbn13!.isNotEmpty) ...[
+                        Text(
+                          "ISBN 13 - ${book.isbn13}",
+                        ),
+                      ],
+                      if (book.isbn13!.isNotEmpty &&
+                          book.isbn10!.isNotEmpty) ...[
+                        const Text('     /     '),
+                      ],
+                      if (book.isbn10!.isNotEmpty) ...[
+                        Text(
+                          "ISBN 10 - ${book.isbn10}",
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
+                if (book.categoryName!.isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    book.categoryName!,
+                    style: theme.textTheme.bodyText2!.copyWith(
+                        color: const Color.fromRGBO(215, 215, 215, 1),
+                        fontSize: 9),
+                  ),
+                ],
                 const SizedBox(height: 6),
                 if (book.contents.isNotEmpty) ...[
                   Text(

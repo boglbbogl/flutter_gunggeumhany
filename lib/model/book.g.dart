@@ -24,7 +24,11 @@ _$_Book _$$_BookFromJson(Map<String, dynamic> json) => _$_Book(
           .toList(),
       isbn10: json['isbn10'] as String?,
       isbn13: json['isbn13'] as String?,
-      isAudlt: json['isAudlt'] as bool?,
+      isAdult: json['isAdult'] as bool?,
+      categoryName: json['categoryName'] as String?,
+      categoryList: (json['categoryList'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       title: json['title'] as String,
       contents: json['contents'] as String,
       url: json['url'] as String,
@@ -61,7 +65,9 @@ Map<String, dynamic> _$$_BookToJson(_$_Book instance) => <String, dynamic>{
       'bookmarkUserKey': instance.bookmarkUserKey,
       'isbn10': instance.isbn10,
       'isbn13': instance.isbn13,
-      'isAudlt': instance.isAudlt,
+      'isAdult': instance.isAdult,
+      'categoryName': instance.categoryName,
+      'categoryList': instance.categoryList,
       'title': instance.title,
       'contents': instance.contents,
       'url': instance.url,

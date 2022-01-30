@@ -74,6 +74,7 @@ class BookRepo {
   }) async {
     final CollectionReference<Map<String, dynamic>> _bookRef =
         _firestore.collection(collectionBook);
+    logger.e(isbn);
     final List<Book> _result = await _bookRef
         .where('isbn', isEqualTo: isbn)
         .get()
@@ -141,7 +142,9 @@ class BookRepo {
                     bookmarkUserKey: [],
                     isbn10: _setBookData[i].isbn.split(" ")[0],
                     isbn13: _setBookData[i].isbn.split(" ")[1],
-                    isAudlt: false,
+                    isAdult: null,
+                    categoryList: [],
+                    categoryName: "",
                     reviewUser: [],
                   )
                   .toJson());
@@ -213,7 +216,9 @@ class BookRepo {
                       bookmarkUserKey: [],
                       isbn10: _setBookData[i].isbn.split(" ")[0],
                       isbn13: _setBookData[i].isbn.split(" ")[1],
-                      isAudlt: false,
+                      isAdult: null,
+                      categoryName: "",
+                      categoryList: [],
                       reviewUser: [],
                     )
                     .toJson());

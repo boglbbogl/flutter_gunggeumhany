@@ -44,10 +44,8 @@ Future<List<Book>> aladinFromFirestore({
   if (_result != null) {
     for (final element in _result) {
       if (element != "") {
-        final _bookSnapshot = await _bookRef
-            .where("isAudlt", isEqualTo: false)
-            .where("isbn13", isEqualTo: element)
-            .get();
+        final _bookSnapshot =
+            await _bookRef.where("isbn13", isEqualTo: element).get();
         final Book? _bookResult =
             _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).isEmpty
                 ? null
@@ -55,7 +53,9 @@ Future<List<Book>> aladinFromFirestore({
                     .map((e) => Book.fromJson(e.data()))
                     .firstOrNull!;
         if (_bookResult != null) {
-          _aladinBookList.add(_bookResult);
+          if (_bookResult.isAdult != true) {
+            _aladinBookList.add(_bookResult);
+          }
         }
       }
     }

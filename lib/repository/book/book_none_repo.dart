@@ -53,6 +53,86 @@ class BookNoneRepo {
     }
   }
 
+  Future noneFieldAddCategoryProviderAladin() async {
+    final CollectionReference<Map<String, dynamic>> _bookRef =
+        _firestore.collection(collectionBook);
+    final List<Book> _bookList = await _bookRef.get().then((value) {
+      return value.docs
+          .map((e) => Book.fromJson(e.data()))
+          .where((element) => element.categoryName == "")
+          .toList();
+    });
+    for (final element in _bookList) {
+      if (element.isbn13!.isNotEmpty) {
+        final _uri = Uri.parse(
+            "$aladinApiBaseUrl/ItemLookUp.aspx?ttbkey=$aladinApiKey&itemIdType=ISBN13&ItemId=${element.isbn13}&output=js&Version=20131101");
+        final _response = await http.get(_uri);
+        if (_response.statusCode == 200) {
+          final _decoded = json.decode(utf8.decode(_response.bodyBytes));
+          if (_decoded["errorCode"] != 8) {
+            final _item = _decoded["item"] as List<dynamic>;
+            final _categoryResult = _item.map((e) => e["categoryName"]);
+            if (_categoryResult.isNotEmpty) {
+              final _categoryToString = _categoryResult
+                  .toString()
+                  .replaceAll("(", "")
+                  .replaceAll(")", "");
+              final _categoryToList = _categoryToString.split(">");
+              final _bookDocRef = _bookRef.doc(element.docKey);
+              await _bookDocRef.update({
+                "categoryName": _categoryToString,
+                "categoryList": _categoryToList,
+                "searchKeyWord": FieldValue.arrayUnion(_categoryToList),
+              });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  Future noneFieldAddAdultProviderAladin() async {
+    final CollectionReference<Map<String, dynamic>> _bookRef =
+        _firestore.collection(collectionBook);
+    final List<Book> _bookList = await _bookRef.get().then((value) {
+      return value.docs
+          .map((e) => Book.fromJson(e.data()))
+          .where((element) => element.isAdult == null)
+          .toList();
+    });
+    for (final element in _bookList) {
+      if (element.isbn13!.isNotEmpty) {
+        final _uri = Uri.parse(
+            "$aladinApiBaseUrl/ItemLookUp.aspx?ttbkey=$aladinApiKey&itemIdType=ISBN13&ItemId=${element.isbn13}&output=js&Version=20131101");
+        final _response = await http.get(_uri);
+        if (_response.statusCode == 200) {
+          final _decoded = json.decode(utf8.decode(_response.bodyBytes));
+          if (_decoded["errorCode"] != 8) {
+            final _item = _decoded["item"] as List<dynamic>;
+            final _isAdultResult = _item.map((e) => e["adult"]);
+            logger.e(_isAdultResult);
+            if (_isAdultResult.isNotEmpty) {
+              final _isAdultToString = _isAdultResult
+                  .toString()
+                  .replaceAll("(", "")
+                  .replaceAll(")", "");
+              bool? _setIsAdult;
+              if (_isAdultToString == "true") {
+                _setIsAdult = true;
+              } else {
+                _setIsAdult = false;
+              }
+              final _bookDocRef = _bookRef.doc(element.docKey);
+              await _bookDocRef.update({
+                "isAdult": _setIsAdult,
+              });
+            }
+          }
+        }
+      }
+    }
+  }
+
   Future noneFieldAddProviderAladin({
     required String updateData,
     required String aladinParameter,
@@ -72,12 +152,14 @@ class BookNoneRepo {
           final decoded = json.decode(utf8.decode(_response.bodyBytes));
           if (decoded["errorCode"] != 8) {
             final _item = decoded["item"] as List<dynamic>;
-            final _thumbnail = _item.map((e) => e[aladinParameter]);
-            final _thumbnailToString =
-                _thumbnail.toString().replaceAll("(", "").replaceAll(")", "");
+            final _parameterResult = _item.map((e) => e[aladinParameter]);
+            final _parameterResultString = _parameterResult
+                .toString()
+                .replaceAll("(", "")
+                .replaceAll(")", "");
             final _bookDocRef = _bookRef.doc(element.docKey);
             await _bookDocRef.update({
-              updateData: _thumbnailToString,
+              updateData: _parameterResultString,
             });
           }
         }

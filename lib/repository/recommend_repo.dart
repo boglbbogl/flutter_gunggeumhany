@@ -24,7 +24,7 @@ class RecommendRepo {
     _bookList.sort((a, b) => (b.starRating! / b.starUserKey!.length)
         .compareTo(a.starRating! / a.starUserKey!.length));
     _bookList.length < 15 ? _bookList.length : _bookList.sublist(0, 15);
-    return _bookList;
+    return _bookList.where((element) => element.isAdult != true).toList();
   }
 
   Future<List<Book>> allManyReviewTopRankBook() async {
@@ -34,7 +34,7 @@ class RecommendRepo {
         await _bookRef.orderBy("starUserKey", descending: true).limit(15).get();
     final _result =
         _bookSnapshot.docs.map((e) => Book.fromJson(e.data())).toList();
-    return _result;
+    return _result.where((element) => element.isAdult != true).toList();
   }
 
   Future<List<BookReviewUser>> allReviewNewestHomeBook() async {
@@ -129,7 +129,7 @@ class RecommendRepo {
         final Book _book = Book.fromJson(_bookSnapshot.data()!);
         _hanyBookList.add(_book);
       }
-      return _hanyBookList;
+      return _hanyBookList.where((element) => element.isAdult != true).toList();
     }
     return [];
   }

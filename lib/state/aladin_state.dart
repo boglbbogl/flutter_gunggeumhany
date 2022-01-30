@@ -15,6 +15,24 @@ class AladinState extends ChangeNotifier {
   bool _isRecommendEditorLoading = false;
   bool _isContentsNoneLoading = false;
   bool _isThumbnailNoneLoading = false;
+  bool _isAdultNoneLoading = false;
+  bool _isCategoryNoneLoading = false;
+
+  Future categoryNoneFieldAdd() async {
+    _isCategoryNoneLoading = true;
+    notifyListeners();
+    await _bookNoneRepo.noneFieldAddCategoryProviderAladin();
+    _isCategoryNoneLoading = false;
+    notifyListeners();
+  }
+
+  Future adultNoneFieldAdd() async {
+    _isAdultNoneLoading = true;
+    notifyListeners();
+    await _bookNoneRepo.noneFieldAddAdultProviderAladin();
+    _isAdultNoneLoading = false;
+    notifyListeners();
+  }
 
   Future contentsNoneFieldAdd() async {
     _isContentsNoneLoading = true;
@@ -86,4 +104,6 @@ class AladinState extends ChangeNotifier {
   bool get isRecommendEditorLoading => _isRecommendEditorLoading;
   bool get isContentsNoneLoading => _isContentsNoneLoading;
   bool get isThumbnailNoneLoading => _isThumbnailNoneLoading;
+  bool get isAdultNoneLoading => _isAdultNoneLoading;
+  bool get isCategoryNoneLoading => _isCategoryNoneLoading;
 }

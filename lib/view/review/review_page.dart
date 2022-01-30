@@ -55,7 +55,10 @@ class ReviewPage extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(slivers: [
           reviewAppbarWidget(book: _bookItem, context: context),
-          bookPriceInfoWidget(aladinPrice: _aladinPrice, context: context),
+          bookPriceInfoWidget(
+              aladinPrice: _aladinPrice,
+              context: context,
+              isAdult: _bookItem.isAdult!),
           if (_myReview == null) ...[
             if (_createReview == null)
               reviewCreateWidget(
