@@ -26,7 +26,7 @@ class _$UserInformationTearOff {
       {required String userKey,
       required String age,
       required String sex,
-      required PreferenceModel preference}) {
+      required List<PreferenceModel> preference}) {
     return _UserInformation(
       userKey: userKey,
       age: age,
@@ -48,7 +48,7 @@ mixin _$UserInformation {
   String get userKey => throw _privateConstructorUsedError;
   String get age => throw _privateConstructorUsedError;
   String get sex => throw _privateConstructorUsedError;
-  PreferenceModel get preference => throw _privateConstructorUsedError;
+  List<PreferenceModel> get preference => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,9 +62,10 @@ abstract class $UserInformationCopyWith<$Res> {
           UserInformation value, $Res Function(UserInformation) then) =
       _$UserInformationCopyWithImpl<$Res>;
   $Res call(
-      {String userKey, String age, String sex, PreferenceModel preference});
-
-  $PreferenceModelCopyWith<$Res> get preference;
+      {String userKey,
+      String age,
+      String sex,
+      List<PreferenceModel> preference});
 }
 
 /// @nodoc
@@ -99,15 +100,8 @@ class _$UserInformationCopyWithImpl<$Res>
       preference: preference == freezed
           ? _value.preference
           : preference // ignore: cast_nullable_to_non_nullable
-              as PreferenceModel,
+              as List<PreferenceModel>,
     ));
-  }
-
-  @override
-  $PreferenceModelCopyWith<$Res> get preference {
-    return $PreferenceModelCopyWith<$Res>(_value.preference, (value) {
-      return _then(_value.copyWith(preference: value));
-    });
   }
 }
 
@@ -119,10 +113,10 @@ abstract class _$UserInformationCopyWith<$Res>
       __$UserInformationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String userKey, String age, String sex, PreferenceModel preference});
-
-  @override
-  $PreferenceModelCopyWith<$Res> get preference;
+      {String userKey,
+      String age,
+      String sex,
+      List<PreferenceModel> preference});
 }
 
 /// @nodoc
@@ -159,7 +153,7 @@ class __$UserInformationCopyWithImpl<$Res>
       preference: preference == freezed
           ? _value.preference
           : preference // ignore: cast_nullable_to_non_nullable
-              as PreferenceModel,
+              as List<PreferenceModel>,
     ));
   }
 }
@@ -184,7 +178,7 @@ class _$_UserInformation extends _UserInformation {
   @override
   final String sex;
   @override
-  final PreferenceModel preference;
+  final List<PreferenceModel> preference;
 
   @override
   String toString() {
@@ -227,7 +221,7 @@ abstract class _UserInformation extends UserInformation {
       {required String userKey,
       required String age,
       required String sex,
-      required PreferenceModel preference}) = _$_UserInformation;
+      required List<PreferenceModel> preference}) = _$_UserInformation;
   const _UserInformation._() : super._();
 
   factory _UserInformation.fromJson(Map<String, dynamic> json) =
@@ -240,7 +234,7 @@ abstract class _UserInformation extends UserInformation {
   @override
   String get sex;
   @override
-  PreferenceModel get preference;
+  List<PreferenceModel> get preference;
   @override
   @JsonKey(ignore: true)
   _$UserInformationCopyWith<_UserInformation> get copyWith =>

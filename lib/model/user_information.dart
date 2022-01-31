@@ -10,15 +10,15 @@ class UserInformation with _$UserInformation {
     required String userKey,
     required String age,
     required String sex,
-    required PreferenceModel preference,
+    required List<PreferenceModel> preference,
   }) = _UserInformation;
   const UserInformation._();
   factory UserInformation.fromJson(Map<String, dynamic> json) =>
       _$UserInformationFromJson(json);
-  factory UserInformation.empty() => UserInformation(
+  factory UserInformation.empty() => const UserInformation(
         userKey: "",
         age: "",
         sex: "",
-        preference: PreferenceModel.empty(),
+        preference: [],
       );
 }

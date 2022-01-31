@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/preference_model.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
+import 'package:flutter_gunggeumhany/state/preference_state.dart';
 import 'package:flutter_gunggeumhany/state/profile_state.dart';
 import 'package:flutter_gunggeumhany/state/setting_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
@@ -61,7 +62,14 @@ class SettingDrawerPage extends StatelessWidget {
                 icon: Icons.star_rounded,
                 title: '선호도 조사',
                 onTap: () {
-                  pushNewScreen(context, screen: const PreferencePage());
+                  pushNewScreen(context,
+                      screen: ChangeNotifierProvider(
+                          create: (context) => PreferenceState(
+                              userKey: context
+                                  .read<AuthState>()
+                                  .userProfile!
+                                  .userKey),
+                          child: const PreferencePage()));
                 }),
             _listTileForm(
                 icon: Icons.error_outline_rounded,

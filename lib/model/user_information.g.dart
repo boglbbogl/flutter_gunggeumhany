@@ -11,8 +11,9 @@ _$_UserInformation _$$_UserInformationFromJson(Map<String, dynamic> json) =>
       userKey: json['userKey'] as String,
       age: json['age'] as String,
       sex: json['sex'] as String,
-      preference:
-          PreferenceModel.fromJson(json['preference'] as Map<String, dynamic>),
+      preference: (json['preference'] as List<dynamic>)
+          .map((e) => PreferenceModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_UserInformationToJson(_$_UserInformation instance) =>
