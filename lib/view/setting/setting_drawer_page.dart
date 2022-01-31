@@ -61,15 +61,10 @@ class SettingDrawerPage extends StatelessWidget {
             _listTileForm(
                 icon: Icons.star_rounded,
                 title: '선호도 조사',
-                onTap: () {
-                  pushNewScreen(context,
-                      screen: ChangeNotifierProvider(
-                          create: (context) => PreferenceState(
-                              userKey: context
-                                  .read<AuthState>()
-                                  .userProfile!
-                                  .userKey),
-                          child: const PreferencePage()));
+                onTap: () async {
+                  await context.read<PreferenceState>().getPreferenceModel(
+                      userKey: context.read<AuthState>().userProfile!.userKey);
+                  pushNewScreen(context, screen: const PreferencePage());
                 }),
             _listTileForm(
                 icon: Icons.error_outline_rounded,

@@ -25,7 +25,8 @@ class PreferenceRepo {
     final CollectionReference<Map<String, dynamic>> _bookRef =
         _firestore.collection(collectionBook);
     final _bookList = await _bookRef.get().then((value) => value.docs
-        .map((e) => !_referISBN13.contains(e.data()["isbn13"]))
+        .where((element) => !_referISBN13.contains(element.data()["isbn13"]))
+        .map((e) => Book.fromJson(e.data()))
         .toList());
     logger.e(_bookList);
     return [];
