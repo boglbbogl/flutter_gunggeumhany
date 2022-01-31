@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_gunggeumhany/model/customer_service.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 import 'package:image/image.dart';
 import 'package:path_provider/path_provider.dart';
@@ -14,6 +15,31 @@ class SettingRepo {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
+
+  Future<List<CustomerService>> getCustomerService({
+    required String userKey,
+  }) async {
+    final CollectionReference<Map<String, dynamic>> _customerServiceRef =
+        _firestore.collection(collectionCustomerService);
+    final _result = await _customerServiceRef
+        .where("userKey", isEqualTo: userKey)
+        .get()
+        .then((value) =>
+            value.docs.map((e) => CustomerService.fromJson(e.data())).toList());
+    return _result;
+  }
+
+  Future setRequestCustomerServices({
+    required CustomerService customerService,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _customerServiceRef =
+        _firestore.collection(collectionCustomerService).doc();
+    final _customerServiceSnapshot = await _customerServiceRef.get();
+    final _toWrite = customerService.copyWith(docKey: _customerServiceRef.id);
+    if (!_customerServiceSnapshot.exists) {
+      await _customerServiceRef.set(_toWrite.toJson());
+    }
+  }
 
   Future updateUserProfile({
     required String userKey,

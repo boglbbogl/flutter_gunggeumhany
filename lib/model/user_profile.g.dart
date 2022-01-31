@@ -6,9 +6,11 @@ part of 'user_profile.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
+_$_UserProfile _$$_UserProfileFromJson(Map<String, dynamic> json) =>
+    _$_UserProfile(
       userKey: json['userKey'] as String,
       nickName: json['nickName'] as String,
+      email: json['email'] as String,
       profileImageUrl: json['profileImageUrl'] as String,
       presentProfileImageUrl: json['presentProfileImageUrl'] as String,
       socialProfileImageUrl: json['socialProfileImageUrl'] as String,
@@ -19,9 +21,11 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
     );
 
-Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
+Map<String, dynamic> _$$_UserProfileToJson(_$_UserProfile instance) =>
+    <String, dynamic>{
       'userKey': instance.userKey,
       'nickName': instance.nickName,
+      'email': instance.email,
       'profileImageUrl': instance.profileImageUrl,
       'presentProfileImageUrl': instance.presentProfileImageUrl,
       'socialProfileImageUrl': instance.socialProfileImageUrl,

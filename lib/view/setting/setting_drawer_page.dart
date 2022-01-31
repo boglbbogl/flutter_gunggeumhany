@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gunggeumhany/model/preference_model.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/profile_state.dart';
 import 'package:flutter_gunggeumhany/state/setting_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
+import 'package:flutter_gunggeumhany/view/preference/preference_page.dart';
 import 'package:flutter_gunggeumhany/view/setting/api_screen.dart';
 import 'package:flutter_gunggeumhany/view/setting/setting_page.dart';
 import 'package:flutter_gunggeumhany/view/setting/setting_profile_update_page.dart';
@@ -54,6 +56,12 @@ class SettingDrawerPage extends StatelessWidget {
                 onTap: () {
                   context.read<ProfileState>().openAndCloseDrawer(value: false);
                   pushNewScreen(context, screen: const SettingPage());
+                }),
+            _listTileForm(
+                icon: Icons.star_rounded,
+                title: '선호도 조사',
+                onTap: () {
+                  pushNewScreen(context, screen: const PreferencePage());
                 }),
             _listTileForm(
                 icon: Icons.error_outline_rounded,

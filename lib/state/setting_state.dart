@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gunggeumhany/model/customer_service.dart';
 import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/setting_repo.dart';
 import 'package:flutter_gunggeumhany/view/core/app_flushbar.dart';
@@ -9,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 class SettingState extends ChangeNotifier {
   final SettingRepo _settingRepo = SettingRepo();
   final ImagePicker _imagePicker = ImagePicker();
+  List<CustomerService> _customerServiceList = [];
   Uint8List? _pickedImage;
   String _changedProfileImageUrl = "";
   bool _isReadOnly = true;
@@ -26,6 +28,33 @@ class SettingState extends ChangeNotifier {
     _isSocialProfileImage = isSocial;
     _pickedImage = null;
     notifyListeners();
+  }
+
+  Future getCustomerServiceList({
+    required String userKey,
+  }) async {
+    _customerServiceList =
+        await _settingRepo.getCustomerService(userKey: userKey);
+    notifyListeners();
+  }
+
+  Future requestCustomerServiceComplainAndImprove({
+    required String userKey,
+    required String content,
+    required String email,
+    required String category,
+  }) async {
+    await _settingRepo.setRequestCustomerServices(
+        customerService: CustomerService(
+            category: category,
+            docKey: "",
+            userKey: userKey,
+            content: content,
+            email: email,
+            createdAt: DateTime.now(),
+            commentCreatedAt: DateTime.now(),
+            isComment: false,
+            comment: ""));
   }
 
   Future changedProfileImage() async {
@@ -122,6 +151,7 @@ class SettingState extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<CustomerService> get customerServiceList => _customerServiceList;
   bool get isReadOnly => _isReadOnly;
   String get changedNickName => _changedNickName;
   bool get isUpdate => _isUpdate;

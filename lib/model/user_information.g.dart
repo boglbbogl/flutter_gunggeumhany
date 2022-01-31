@@ -11,6 +11,8 @@ _$_UserInformation _$$_UserInformationFromJson(Map<String, dynamic> json) =>
       userKey: json['userKey'] as String,
       age: json['age'] as String,
       sex: json['sex'] as String,
+      preference:
+          PreferenceModel.fromJson(json['preference'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserInformationToJson(_$_UserInformation instance) =>
@@ -18,4 +20,5 @@ Map<String, dynamic> _$$_UserInformationToJson(_$_UserInformation instance) =>
       'userKey': instance.userKey,
       'age': instance.age,
       'sex': instance.sex,
+      'preference': instance.preference,
     };

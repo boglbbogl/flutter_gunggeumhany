@@ -15,25 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
+  return _UserProfile.fromJson(json);
 }
 
 /// @nodoc
 class _$UserProfileTearOff {
   const _$UserProfileTearOff();
 
-  _User call(
+  _UserProfile call(
       {required String userKey,
       required String nickName,
+      required String email,
       required String profileImageUrl,
       required String presentProfileImageUrl,
       required String socialProfileImageUrl,
       required String provider,
       @TimestampConverter() required DateTime createdAt,
       @TimestampConverter() required DateTime updatedAt}) {
-    return _User(
+    return _UserProfile(
       userKey: userKey,
       nickName: nickName,
+      email: email,
       profileImageUrl: profileImageUrl,
       presentProfileImageUrl: presentProfileImageUrl,
       socialProfileImageUrl: socialProfileImageUrl,
@@ -55,6 +57,7 @@ const $UserProfile = _$UserProfileTearOff();
 mixin _$UserProfile {
   String get userKey => throw _privateConstructorUsedError;
   String get nickName => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String get profileImageUrl => throw _privateConstructorUsedError;
   String get presentProfileImageUrl => throw _privateConstructorUsedError;
   String get socialProfileImageUrl => throw _privateConstructorUsedError;
@@ -78,6 +81,7 @@ abstract class $UserProfileCopyWith<$Res> {
   $Res call(
       {String userKey,
       String nickName,
+      String email,
       String profileImageUrl,
       String presentProfileImageUrl,
       String socialProfileImageUrl,
@@ -98,6 +102,7 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
   $Res call({
     Object? userKey = freezed,
     Object? nickName = freezed,
+    Object? email = freezed,
     Object? profileImageUrl = freezed,
     Object? presentProfileImageUrl = freezed,
     Object? socialProfileImageUrl = freezed,
@@ -113,6 +118,10 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
       nickName: nickName == freezed
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       profileImageUrl: profileImageUrl == freezed
           ? _value.profileImageUrl
@@ -143,13 +152,16 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$UserCopyWith<$Res> implements $UserProfileCopyWith<$Res> {
-  factory _$UserCopyWith(_User value, $Res Function(_User) then) =
-      __$UserCopyWithImpl<$Res>;
+abstract class _$UserProfileCopyWith<$Res>
+    implements $UserProfileCopyWith<$Res> {
+  factory _$UserProfileCopyWith(
+          _UserProfile value, $Res Function(_UserProfile) then) =
+      __$UserProfileCopyWithImpl<$Res>;
   @override
   $Res call(
       {String userKey,
       String nickName,
+      String email,
       String profileImageUrl,
       String presentProfileImageUrl,
       String socialProfileImageUrl,
@@ -159,18 +171,20 @@ abstract class _$UserCopyWith<$Res> implements $UserProfileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UserCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
-    implements _$UserCopyWith<$Res> {
-  __$UserCopyWithImpl(_User _value, $Res Function(_User) _then)
-      : super(_value, (v) => _then(v as _User));
+class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
+    implements _$UserProfileCopyWith<$Res> {
+  __$UserProfileCopyWithImpl(
+      _UserProfile _value, $Res Function(_UserProfile) _then)
+      : super(_value, (v) => _then(v as _UserProfile));
 
   @override
-  _User get _value => super._value as _User;
+  _UserProfile get _value => super._value as _UserProfile;
 
   @override
   $Res call({
     Object? userKey = freezed,
     Object? nickName = freezed,
+    Object? email = freezed,
     Object? profileImageUrl = freezed,
     Object? presentProfileImageUrl = freezed,
     Object? socialProfileImageUrl = freezed,
@@ -178,7 +192,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_User(
+    return _then(_UserProfile(
       userKey: userKey == freezed
           ? _value.userKey
           : userKey // ignore: cast_nullable_to_non_nullable
@@ -186,6 +200,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
       nickName: nickName == freezed
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       profileImageUrl: profileImageUrl == freezed
           ? _value.profileImageUrl
@@ -217,10 +235,11 @@ class __$UserCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_User extends _User {
-  const _$_User(
+class _$_UserProfile extends _UserProfile {
+  const _$_UserProfile(
       {required this.userKey,
       required this.nickName,
+      required this.email,
       required this.profileImageUrl,
       required this.presentProfileImageUrl,
       required this.socialProfileImageUrl,
@@ -229,12 +248,15 @@ class _$_User extends _User {
       @TimestampConverter() required this.updatedAt})
       : super._();
 
-  factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
+  factory _$_UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$$_UserProfileFromJson(json);
 
   @override
   final String userKey;
   @override
   final String nickName;
+  @override
+  final String email;
   @override
   final String profileImageUrl;
   @override
@@ -252,16 +274,17 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'UserProfile(userKey: $userKey, nickName: $nickName, profileImageUrl: $profileImageUrl, presentProfileImageUrl: $presentProfileImageUrl, socialProfileImageUrl: $socialProfileImageUrl, provider: $provider, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserProfile(userKey: $userKey, nickName: $nickName, email: $email, profileImageUrl: $profileImageUrl, presentProfileImageUrl: $presentProfileImageUrl, socialProfileImageUrl: $socialProfileImageUrl, provider: $provider, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _User &&
+            other is _UserProfile &&
             const DeepCollectionEquality().equals(other.userKey, userKey) &&
             const DeepCollectionEquality().equals(other.nickName, nickName) &&
+            const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality()
                 .equals(other.profileImageUrl, profileImageUrl) &&
             const DeepCollectionEquality()
@@ -278,6 +301,7 @@ class _$_User extends _User {
       runtimeType,
       const DeepCollectionEquality().hash(userKey),
       const DeepCollectionEquality().hash(nickName),
+      const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(profileImageUrl),
       const DeepCollectionEquality().hash(presentProfileImageUrl),
       const DeepCollectionEquality().hash(socialProfileImageUrl),
@@ -287,33 +311,37 @@ class _$_User extends _User {
 
   @JsonKey(ignore: true)
   @override
-  _$UserCopyWith<_User> get copyWith =>
-      __$UserCopyWithImpl<_User>(this, _$identity);
+  _$UserProfileCopyWith<_UserProfile> get copyWith =>
+      __$UserProfileCopyWithImpl<_UserProfile>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserToJson(this);
+    return _$$_UserProfileToJson(this);
   }
 }
 
-abstract class _User extends UserProfile {
-  const factory _User(
+abstract class _UserProfile extends UserProfile {
+  const factory _UserProfile(
       {required String userKey,
       required String nickName,
+      required String email,
       required String profileImageUrl,
       required String presentProfileImageUrl,
       required String socialProfileImageUrl,
       required String provider,
       @TimestampConverter() required DateTime createdAt,
-      @TimestampConverter() required DateTime updatedAt}) = _$_User;
-  const _User._() : super._();
+      @TimestampConverter() required DateTime updatedAt}) = _$_UserProfile;
+  const _UserProfile._() : super._();
 
-  factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
+  factory _UserProfile.fromJson(Map<String, dynamic> json) =
+      _$_UserProfile.fromJson;
 
   @override
   String get userKey;
   @override
   String get nickName;
+  @override
+  String get email;
   @override
   String get profileImageUrl;
   @override
@@ -330,5 +358,6 @@ abstract class _User extends UserProfile {
   DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;
+  _$UserProfileCopyWith<_UserProfile> get copyWith =>
+      throw _privateConstructorUsedError;
 }

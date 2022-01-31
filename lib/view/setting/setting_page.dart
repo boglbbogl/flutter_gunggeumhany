@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
+import 'package:flutter_gunggeumhany/state/setting_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
+import 'package:flutter_gunggeumhany/view/setting/customer_service_list_page.dart';
+import 'package:flutter_gunggeumhany/view/setting/customer_service_request_page.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
 class SettingPage extends StatelessWidget {
@@ -13,6 +17,29 @@ class SettingPage extends StatelessWidget {
       body: ListView(
         shrinkWrap: true,
         children: [
+          _listTileForm(
+              title: '개선 사항 요청',
+              icon: Icons.create_rounded,
+              onTap: () => pushNewScreen(context,
+                  screen: CustomerServiceRequestPage(
+                    category: "Improve",
+                  ))),
+          _listTileForm(
+              title: '불편 신고 요청',
+              icon: Icons.error_outline_rounded,
+              onTap: () => pushNewScreen(context,
+                  screen: CustomerServiceRequestPage(
+                    category: "Complain",
+                  ))),
+          _listTileForm(
+            title: '접수 결과',
+            icon: Icons.list_rounded,
+            onTap: () async {
+              await context.read<SettingState>().getCustomerServiceList(
+                  userKey: context.read<AuthState>().userProfile!.userKey);
+              pushNewScreen(context, screen: const CustomerServiceListPage());
+            },
+          ),
           _listTileForm(
             title: '로그아웃',
             icon: Icons.logout_rounded,

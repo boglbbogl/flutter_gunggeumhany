@@ -1,6 +1,7 @@
 const collectionUser = "USERS";
 const collectionUserActivity = "USER_ACTIVITY";
 const collectionUserInformation = "USER_INFORMATION";
+const collectionCustomerService = "CUSTOMER_SERVICE";
 const collectionBook = "BOOKS";
 const collectionReview = "REVIEW";
 const collectionAladinTheme = "ALADIN_THEME";

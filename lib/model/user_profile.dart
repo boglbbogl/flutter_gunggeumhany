@@ -10,13 +10,14 @@ class UserProfile with _$UserProfile {
   const factory UserProfile({
     required String userKey,
     required String nickName,
+    required String email,
     required String profileImageUrl,
     required String presentProfileImageUrl,
     required String socialProfileImageUrl,
     required String provider,
     @TimestampConverter() required DateTime createdAt,
     @TimestampConverter() required DateTime updatedAt,
-  }) = _User;
+  }) = _UserProfile;
   const UserProfile._();
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
@@ -24,6 +25,7 @@ class UserProfile with _$UserProfile {
   factory UserProfile.empty() => UserProfile(
         userKey: "",
         nickName: "",
+        email: "",
         presentProfileImageUrl: "",
         profileImageUrl:
             "https://firebasestorage.googleapis.com/v0/b/flutter-gunggeumhany-eef52.appspot.com/o/contant%2Fuser.png?alt=media&token=33cc9343-e3e4-4f56-99d3-26eda3477173",
