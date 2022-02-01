@@ -49,7 +49,7 @@ class SettingRepo {
     required String presentImageUrl,
   }) async {
     final DocumentReference<Map<String, dynamic>> _userRef =
-        _firestore.collection(collectionUser).doc(userKey);
+        _firestore.collection(collectionUserProfile).doc(userKey);
     final _batch = _firestore.batch();
     if (isChangedSocial) {
       _batch.update(_userRef, {
@@ -76,7 +76,7 @@ class SettingRepo {
     required String nickName,
   }) async {
     final CollectionReference<Map<String, dynamic>> _userRef =
-        _firestore.collection(collectionUser);
+        _firestore.collection(collectionUserProfile);
     final _usersNickName = await _userRef
         .where('nickName')
         .get()

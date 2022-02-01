@@ -1,4 +1,4 @@
-const collectionUser = "USERS";
+const collectionUserProfile = "USER_PROFILE";
 const collectionUserActivity = "USER_ACTIVITY";
 const collectionUserInformation = "USER_INFORMATION";
 const collectionCustomerService = "CUSTOMER_SERVICE";

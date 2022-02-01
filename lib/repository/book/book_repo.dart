@@ -57,7 +57,7 @@ class BookRepo {
     if (_reviewList.isNotEmpty) {
       for (final element in _reviewList) {
         final DocumentReference<Map<String, dynamic>> _userRef =
-            _firestore.collection(collectionUser).doc(element.userKey);
+            _firestore.collection(collectionUserProfile).doc(element.userKey);
         final _userSnapshot = await _userRef.get();
         final UserProfile _userProfile =
             UserProfile.fromJson(_userSnapshot.data()!);

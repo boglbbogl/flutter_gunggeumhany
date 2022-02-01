@@ -15,6 +15,16 @@ class PreferenceModel with _$PreferenceModel {
   factory PreferenceModel.fromJson(Map<String, dynamic> json) =>
       _$PreferenceModelFromJson(json);
   const PreferenceModel._();
+  Map<dynamic, dynamic> toMap() {
+    final _map = {};
+    _map["isbn13"] = isbn13;
+    _map["isbn10"] = isbn10;
+    _map["title"] = title;
+    _map["category"] = category;
+    _map["starRating"] = starRating;
+    return _map;
+  }
+
   factory PreferenceModel.empty() => const PreferenceModel(
         isbn13: "",
         isbn10: "",

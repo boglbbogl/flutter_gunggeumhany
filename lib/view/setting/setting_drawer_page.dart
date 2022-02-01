@@ -61,9 +61,13 @@ class SettingDrawerPage extends StatelessWidget {
             _listTileForm(
                 icon: Icons.star_rounded,
                 title: '선호도 조사',
-                onTap: () async {
-                  await context.read<PreferenceState>().getPreferenceModel(
-                      userKey: context.read<AuthState>().userProfile!.userKey);
+                onTap: () {
+                  context.read<PreferenceState>()
+                    ..started()
+                    ..getPreferenceModel(
+                        userKey:
+                            context.read<AuthState>().userProfile!.userKey);
+                  context.read<ProfileState>().openAndCloseDrawer(value: false);
                   pushNewScreen(context, screen: const PreferencePage());
                 }),
             _listTileForm(

@@ -19,7 +19,7 @@ class ProfileRepo {
     final List<Review> _review = [];
     final List<Book> _book = [];
     final DocumentReference<Map<String, dynamic>> _userRef =
-        _firestore.collection(collectionUser).doc(userKey);
+        _firestore.collection(collectionUserProfile).doc(userKey);
     final DocumentReference<Map<String, dynamic>> _activityRef =
         _firestore.collection(collectionUserActivity).doc(userKey);
     final _userSnapshot = await _userRef.get();

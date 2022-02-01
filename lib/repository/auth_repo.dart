@@ -14,11 +14,26 @@ class AuthRepo {
     required String userKey,
   }) async {
     final DocumentReference<Map<String, dynamic>> _userRef =
-        _firestore.collection(collectionUser).doc(userKey);
+        _firestore.collection(collectionUserProfile).doc(userKey);
     final _result = await _userRef.get();
     if (_result.exists) {
       final UserProfile _userProfile = UserProfile.fromJson(_result.data()!);
       return _userProfile;
+    } else {
+      return null;
+    }
+  }
+
+  Future<UserInformation?> getMyInformation({
+    required String userKey,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _infoRef =
+        _firestore.collection(collectionUserInformation).doc(userKey);
+    final _result = await _infoRef.get();
+    if (_result.exists) {
+      final UserInformation _userInformation =
+          UserInformation.fromJson(_result.data()!);
+      return _userInformation;
     } else {
       return null;
     }
@@ -44,7 +59,7 @@ class AuthRepo {
     required String presentProfileImageUrl,
   }) async {
     final DocumentReference<Map<String, dynamic>> _userRef =
-        _firestore.collection(collectionUser).doc(userKey);
+        _firestore.collection(collectionUserProfile).doc(userKey);
     final _userSnapshot = await _userRef.get();
     final _userProfile = UserProfile.fromJson(_userSnapshot.data()!);
     final bool _isUpdate =
@@ -69,7 +84,7 @@ class AuthRepo {
     required UserInformation userInformation,
   }) async {
     final DocumentReference<Map<String, dynamic>> _userRef =
-        _firestore.collection(collectionUser).doc(userProfile.userKey);
+        _firestore.collection(collectionUserProfile).doc(userProfile.userKey);
     final DocumentReference<Map<String, dynamic>> _activityRef =
         _firestore.collection(collectionUserActivity).doc(userProfile.userKey);
     final DocumentReference<Map<String, dynamic>> _infomationRef = _firestore

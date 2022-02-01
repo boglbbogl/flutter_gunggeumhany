@@ -20,6 +20,7 @@ class AuthState extends ChangeNotifier {
   bool _isLogin = false;
   UserProfile? _userProfile;
   UserActivity? _userActivity;
+  UserInformation? _userInformation;
   List<BookReviewUser> _userBookReview = [];
   bool _isKakaoLogin = false;
   bool _isGoogleLogin = false;
@@ -37,6 +38,8 @@ class AuthState extends ChangeNotifier {
         await kakao.TokenManagerProvider.instance.manager.getToken();
     if (_firebaseUser != null && _googleUser) {
       await getMyUserModel(userKey: _firebaseUser.uid);
+      _userInformation =
+          await _authRepo.getMyInformation(userKey: _firebaseUser.uid);
       if (_userProfile != null && _userActivity != null) {
         if (!_userProfile!.socialProfileImageUrl
             .contains(_firebaseUser.photoURL!)) {
@@ -54,6 +57,8 @@ class AuthState extends ChangeNotifier {
     } else if (_kakaoToken != null) {
       final kakao.User _kakaoUser = await kakao.UserApi.instance.me();
       await getMyUserModel(
+          userKey: _kakaoUser.id.toString() + _kakaoUser.kakaoAccount!.email!);
+      _userInformation = await _authRepo.getMyInformation(
           userKey: _kakaoUser.id.toString() + _kakaoUser.kakaoAccount!.email!);
       if (_userProfile != null && _userActivity != null) {
         if (!_userProfile!.socialProfileImageUrl
@@ -93,6 +98,13 @@ class AuthState extends ChangeNotifier {
     await _getMyActivity(userKey: userKey);
   }
 
+  Future getMyInformation({
+    required String userKey,
+  }) async {
+    _userInformation = await _authRepo.getMyInformation(userKey: userKey);
+    notifyListeners();
+  }
+
   Future _getMyActivity({
     required String userKey,
   }) async {
@@ -122,12 +134,14 @@ class AuthState extends ChangeNotifier {
       _googleSignIn.signOut();
       _userProfile = null;
       _userActivity = null;
+      _userInformation = null;
       notifyListeners();
     } else if (provider == "KAKAO") {
       await kakao.UserApi.instance.logout();
       await kakao.TokenManagerProvider.instance.manager.clear();
       _userProfile = null;
       _userActivity = null;
+      _userInformation = null;
       notifyListeners();
     }
     _isLogin = false;
@@ -267,6 +281,7 @@ class AuthState extends ChangeNotifier {
 
   UserProfile? get userProfile => _userProfile;
   UserActivity? get userActivity => _userActivity;
+  UserInformation? get userInformation => _userInformation;
   List<BookReviewUser> get userBookReview => _userBookReview;
   bool get isKakaoLogin => _isKakaoLogin;
   bool get isGoogleLogin => _isGoogleLogin;

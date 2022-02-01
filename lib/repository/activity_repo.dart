@@ -14,7 +14,7 @@ class ActivityRepo {
     final List<UserProfile> _userProfileList = [];
     for (final element in followingUserKey) {
       final DocumentReference<Map<String, dynamic>> _userRef =
-          _firestore.collection(collectionUser).doc(element);
+          _firestore.collection(collectionUserProfile).doc(element);
       final _userSnashot = await _userRef.get();
       final UserProfile _profile = UserProfile.fromJson(_userSnashot.data()!);
       _userProfileList.add(_profile);
@@ -28,7 +28,7 @@ class ActivityRepo {
     final List<UserProfile> _userProfileList = [];
     for (final element in followerUserKey) {
       final DocumentReference<Map<String, dynamic>> _userRef =
-          _firestore.collection(collectionUser).doc(element);
+          _firestore.collection(collectionUserProfile).doc(element);
       final _userSnashot = await _userRef.get();
       final UserProfile _profile = UserProfile.fromJson(_userSnashot.data()!);
       _userProfileList.add(_profile);
