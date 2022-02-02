@@ -24,6 +24,7 @@ class AladinThemeRepo {
 
   Future bestsellerAladinISBNReCallKakaoBook() async {
     await aladinToFirestore(
+        itemSize: 10,
         collectionName: collectionAladinTheme,
         documentName: documentBestseller,
         queryType: 'Bestseller');

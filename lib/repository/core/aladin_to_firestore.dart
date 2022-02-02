@@ -12,6 +12,7 @@ Future aladinToFirestore({
   required String queryType,
   String? searchTarget = "book",
   String? categoryId,
+  int? itemSize = 30,
 }) async {
   final String aladinApiBaseUrl = ConfigReader.getAladinApiBaseUrl();
   final String aladinApiKey = ConfigReader.getAladinApiKey();
@@ -68,12 +69,12 @@ Future aladinToFirestore({
                 .where((element) => element.isbn13 != "")
                 .toList()
                 .length >
-            15
+            itemSize!
         ? _aladinBookResult
             .where((element) => element.thumbnail != "")
             .where((element) => element.isbn13 != "")
             .toList()
-            .sublist(0, 15)
+            .sublist(0, itemSize)
         : _aladinBookResult
             .where((element) => element.thumbnail != "")
             .where((element) => element.isbn13 != "")

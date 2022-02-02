@@ -5,6 +5,7 @@ import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/book_state.dart';
 import 'package:flutter_gunggeumhany/state/review_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
+import 'package:flutter_gunggeumhany/view/home/book_ranking_widget.dart';
 import 'package:flutter_gunggeumhany/view/home/item_loading_shimmer_widget.dart';
 import 'package:flutter_gunggeumhany/view/review/review_page.dart';
 
@@ -115,6 +116,7 @@ class HomeBookItem extends StatelessWidget {
                       itemLoadingShimmerWidget(
                           width: size.width * 0.25, height: size.width * 0.4),
                     ],
+                    bookRankingWidget(index: index),
                     if (bookList[index].bookmarkUserKey!.contains(
                         context.watch<AuthState>().userProfile == null
                             ? ""
