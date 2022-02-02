@@ -101,7 +101,13 @@ class PreferencePage extends StatelessWidget {
                     SizedBox(
                       height: 60,
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            provider.getPreferenceModel(
+                                userKey: context
+                                    .read<AuthState>()
+                                    .userProfile!
+                                    .userKey);
+                          },
                           icon: Container(
                               width: 50,
                               height: 60,

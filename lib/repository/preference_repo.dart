@@ -42,9 +42,7 @@ class PreferenceRepo {
         .where((element) => element.data()["thumbnail"] != "")
         .map((e) => Book.fromJson(e.data()))
         .toList());
-    final _sortBookList = _bookList
-      ..shuffle()
-      ..sublist(0, 100);
+    final _sortBookList = _bookList.sublist(0, 100)..shuffle();
 
     return _sortBookList;
   }
