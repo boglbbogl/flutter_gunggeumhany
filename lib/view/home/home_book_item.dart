@@ -116,7 +116,9 @@ class HomeBookItem extends StatelessWidget {
                       itemLoadingShimmerWidget(
                           width: size.width * 0.25, height: size.width * 0.4),
                     ],
-                    bookRankingWidget(index: index),
+                    if (listIndex == 1) ...[
+                      bookRankingWidget(index: index),
+                    ],
                     if (bookList[index].bookmarkUserKey!.contains(
                         context.watch<AuthState>().userProfile == null
                             ? ""
