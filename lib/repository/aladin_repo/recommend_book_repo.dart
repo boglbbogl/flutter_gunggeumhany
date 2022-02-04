@@ -106,6 +106,61 @@ class AladinCategoryRepo {
         documentName: documentEditorFantasy,
         categoryId: "50928",
         queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorSocialScience,
+        categoryId: "798",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorNationalDefense,
+        categoryId: "51050",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorWarHistory,
+        categoryId: "51407",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorGeography,
+        categoryId: "51011",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorSFStory,
+        categoryId: "50930",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorMovieStroy,
+        categoryId: "51239",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorThemeHistory,
+        categoryId: "81",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorEconomyHistory,
+        categoryId: "27795",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorWorldPeopleHistory,
+        categoryId: "5566",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorArchitecture,
+        categoryId: "50969",
+        queryType: "");
+    await aladinToFirestore(
+        collectionName: collectionAladinCategory,
+        documentName: documentEditorPicture,
+        categoryId: "50968",
+        queryType: "");
   }
 
   // Firestore get

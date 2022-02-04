@@ -260,13 +260,6 @@ class HomeUserBookItem extends StatelessWidget {
                       ],
                     );
                   }),
-              // child: ListView(
-              //   scrollDirection: Axis.horizontal,
-              //   shrinkWrap: true,
-              //   children: [
-              //     ...reviewUserBook.map((item) =>)
-              //   ],
-              // ),
             ),
           ],
         ),

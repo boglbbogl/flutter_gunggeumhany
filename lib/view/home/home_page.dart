@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                           .userBookReview
                           .isNotEmpty) ...[
                         HomeUserBookItem(
-                          listIndex: 10,
+                          listIndex: 100,
                           title: '내가 작성한 리뷰',
                           reviewUserBook:
                               context.watch<AuthState>().userBookReview,
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                           createdAt: "",
                           book: provider.allStarRatingTopRankBook),
                       HomeUserBookItem(
-                        listIndex: 11,
+                        listIndex: 101,
                         title: '최근에 작성된 리뷰',
                         reviewUserBook: provider.newestReviewAllBook,
                       ),
@@ -188,6 +188,83 @@ class HomePage extends StatelessWidget {
                             title: '음악',
                             createdAt: provider.recommendEditorCreatedAt,
                             book: provider.editorMusicBook),
+                      ],
+                      if (provider.editorSocialScience.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 23,
+                            title: '사회 과학',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorSocialScience),
+                      ],
+                      if (provider.editorNationalDefense.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 24,
+                            title: '국방',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorNationalDefense),
+                      ],
+                      if (provider.editorWarHistory.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 25,
+                            title: '전쟁사',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorWarHistory),
+                      ],
+                      if (provider.editorGeography.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 26,
+                            title: '지리학',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorGeography),
+                      ],
+                      if (provider.editorSFStory.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 27,
+                            title: 'SF',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorSFStory),
+                      ],
+                      if (provider.editorMovieStory.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 28,
+                            title: '영화 소설',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorMovieStory),
+                      ],
+                      if (provider.editorThemeHistory.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 29,
+                            title: '테마로 보는 역사',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorThemeHistory),
+                      ],
+                      if (provider.editorEconomyHistory.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 30,
+                            title: '경제사',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorEconomyHistory),
+                      ],
+                      if (provider.editorWorldPeopleHistory.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 31,
+                            title: '세계 인물사',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorWorldPeopleHistory),
+                      ],
+                      if (provider.editorArchitecture.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 32,
+                            title: '건축',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorArchitecture),
+                      ],
+                      if (provider.editorPicture.isNotEmpty) ...[
+                        _mainBookForm(
+                            listIndex: 33,
+                            title: '사진',
+                            createdAt: provider.recommendEditorCreatedAt,
+                            book: provider.editorPicture),
                       ],
                       const SizedBox(height: 20),
                       if (provider.bestsellerList.isNotEmpty &&
