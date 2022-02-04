@@ -7,7 +7,10 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, boxConstraints) {
       return Container(
-        child: Image.asset("assets/images/app_icon.png"),
+        color: Colors.black,
+        child: Image.asset(
+          "assets/images/splash_main2.gif",
+        ),
       );
     });
   }
