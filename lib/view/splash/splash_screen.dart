@@ -6,10 +6,10 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, boxConstraints) {
-      return Container(
-        color: Colors.black,
+      return SizedBox(
         child: Image.asset(
-          "assets/images/splash_main2.gif",
+          "assets/images/splash_main.gif",
+          fit: BoxFit.scaleDown,
         ),
       );
     });

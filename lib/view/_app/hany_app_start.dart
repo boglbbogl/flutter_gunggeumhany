@@ -10,10 +10,10 @@ class HanyAppStart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.delayed(const Duration(milliseconds: 3000), () => 0),
+        future: Future.delayed(const Duration(milliseconds: 2000), () => 0),
         builder: (context, snapshot) {
           return AnimatedSwitcher(
-            duration: const Duration(milliseconds: 50),
+            duration: const Duration(milliseconds: 500),
             child: _splashLoadingWidget(snapshot),
           );
         });
@@ -23,8 +23,7 @@ class HanyAppStart extends StatelessWidget {
     if (snapshot.hasError) {
       return Text('hasError : ${snapshot.hasError}');
     } else if (snapshot.hasData) {
-      // return const HanyApp();
-      return SplashScreen();
+      return const HanyApp();
     } else {
       return const SplashScreen();
     }
