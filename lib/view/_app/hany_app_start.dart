@@ -23,7 +23,8 @@ class HanyAppStart extends StatelessWidget {
     if (snapshot.hasError) {
       return Text('hasError : ${snapshot.hasError}');
     } else if (snapshot.hasData) {
-      return const HanyApp();
+      // return const HanyApp();
+      return SplashScreen();
     } else {
       return const SplashScreen();
     }
