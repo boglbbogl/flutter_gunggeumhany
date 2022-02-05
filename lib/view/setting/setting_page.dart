@@ -4,6 +4,7 @@ import 'package:flutter_gunggeumhany/state/setting_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/setting/customer_service_list_page.dart';
 import 'package:flutter_gunggeumhany/view/setting/customer_service_request_page.dart';
+import 'package:flutter_gunggeumhany/view/setting/not_search_book_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +39,13 @@ class SettingPage extends StatelessWidget {
               await context.read<SettingState>().getCustomerServiceList(
                   userKey: context.read<AuthState>().userProfile!.userKey);
               pushNewScreen(context, screen: const CustomerServiceListPage());
+            },
+          ),
+          _listTileForm(
+            title: '검색 안되는 책 등록',
+            icon: Icons.collections_bookmark_outlined,
+            onTap: () {
+              pushNewScreen(context, screen: const NotSearchBookPage());
             },
           ),
           _listTileForm(

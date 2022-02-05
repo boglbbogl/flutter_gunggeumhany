@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gunggeumhany/model/preference_model.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/preference_state.dart';
 import 'package:flutter_gunggeumhany/state/profile_state.dart';

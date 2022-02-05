@@ -139,16 +139,21 @@ class HomeUserBookItem extends StatelessWidget {
                                               color: Colors.amber,
                                               iconSize: 16,
                                               fontSize: 16),
-                                          const SizedBox(height: 4),
-                                          _ratingForm(
-                                              rate: reviewUserBook[index]
+                                          if (reviewUserBook[index]
                                                   .review
-                                                  .favoriteRating
-                                                  .toStringAsFixed(1),
-                                              icon: Icons.favorite_rounded,
-                                              color: Colors.pink,
-                                              iconSize: 14,
-                                              fontSize: 16),
+                                                  .favoriteRating !=
+                                              0.0) ...[
+                                            const SizedBox(height: 4),
+                                            _ratingForm(
+                                                rate: reviewUserBook[index]
+                                                    .review
+                                                    .favoriteRating
+                                                    .toStringAsFixed(1),
+                                                icon: Icons.favorite_rounded,
+                                                color: Colors.pink,
+                                                iconSize: 14,
+                                                fontSize: 16),
+                                          ],
                                         ],
                                       ),
                                     ),
@@ -195,16 +200,22 @@ class HomeUserBookItem extends StatelessWidget {
                                                   color: Colors.amber,
                                                   iconSize: 12,
                                                   fontSize: 12),
-                                              const SizedBox(width: 12),
-                                              _ratingForm(
-                                                  rate: reviewUserBook[index]
+                                              if (reviewUserBook[index]
                                                       .review
-                                                      .favoriteRating
-                                                      .toString(),
-                                                  icon: Icons.favorite_rounded,
-                                                  color: Colors.pink,
-                                                  iconSize: 10,
-                                                  fontSize: 12),
+                                                      .favoriteRating !=
+                                                  0.0) ...[
+                                                const SizedBox(width: 12),
+                                                _ratingForm(
+                                                    rate: reviewUserBook[index]
+                                                        .review
+                                                        .favoriteRating
+                                                        .toString(),
+                                                    icon:
+                                                        Icons.favorite_rounded,
+                                                    color: Colors.pink,
+                                                    iconSize: 10,
+                                                    fontSize: 12),
+                                              ],
                                             ],
                                           ),
                                         ],
@@ -282,6 +293,7 @@ class HomeUserBookItem extends StatelessWidget {
           color: color,
           size: iconSize,
         ),
+        const SizedBox(width: 2),
         Text(
           rate,
           style: theme.textTheme.bodyText2!.copyWith(

@@ -6,7 +6,6 @@ import 'package:flutter_gunggeumhany/model/user_information.dart';
 import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/auth_repo.dart';
 import 'package:flutter_gunggeumhany/repository/recommend_repo.dart';
-import 'package:flutter_gunggeumhany/state/core/logger.dart';
 import 'package:flutter_gunggeumhany/view/core/app_flushbar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk/all.dart' as kakao;

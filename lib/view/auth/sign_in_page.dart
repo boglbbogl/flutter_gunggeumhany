@@ -84,42 +84,48 @@ class SignInPage extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Shimmer.fromColors(
-                  baseColor: Colors.white70,
-                  highlightColor: Colors.white,
-                  child: Text(
-                    '궁금하니',
-                    style: TextStyle(
-                      fontFamily: AppFonts().bMDoHyeon,
-                      fontSize: 60,
-                      fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 80),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Shimmer.fromColors(
+                    baseColor: Colors.white70,
+                    highlightColor: Colors.white,
+                    child: Text(
+                      '궁금하니',
+                      style: TextStyle(
+                        fontFamily: AppFonts().bMDoHyeon,
+                        fontSize: 60,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _loginButtonForm(
-                        onTap: () => context
-                            .read<AuthState>()
-                            .signInWithKakao(context: context),
-                        assets: 'kakao-talk',
-                        isLoading: context.watch<AuthState>().isKakaoLogin,
-                        padding: 10),
-                    _loginButtonForm(
-                        onTap: () => context
-                            .read<AuthState>()
-                            .signInWithGoogle(context: context),
-                        assets: 'google',
-                        isLoading: context.watch<AuthState>().isGoogleLogin,
-                        padding: 12),
-                  ],
-                )
-              ],
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _loginButtonForm(
+                            onTap: () => context
+                                .read<AuthState>()
+                                .signInWithKakao(context: context),
+                            assets: 'kakao-talk',
+                            isLoading: context.watch<AuthState>().isKakaoLogin,
+                            padding: 10),
+                        _loginButtonForm(
+                            onTap: () => context
+                                .read<AuthState>()
+                                .signInWithGoogle(context: context),
+                            assets: 'google',
+                            isLoading: context.watch<AuthState>().isGoogleLogin,
+                            padding: 12),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],

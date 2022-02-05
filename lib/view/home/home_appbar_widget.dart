@@ -15,7 +15,7 @@ AppBar homeAppbarWidget({
     title: Text(
       '궁금하니',
       style: theme.appBarTheme.titleTextStyle!
-          .copyWith(fontFamily: AppFonts().jua, fontSize: 25),
+          .copyWith(fontFamily: AppFonts().bMDoHyeon, fontSize: 25),
     ),
     actions: [
       IconButton(
