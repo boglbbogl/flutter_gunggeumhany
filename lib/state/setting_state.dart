@@ -18,6 +18,8 @@ class SettingState extends ChangeNotifier {
   bool _isImageSeleted = false;
   bool? _isSocialProfileImage;
   String _changedNickName = "";
+  int? _genderIndex;
+  String? _age;
 
   void started({
     required bool isSocial,
@@ -28,6 +30,46 @@ class SettingState extends ChangeNotifier {
     _isSocialProfileImage = isSocial;
     _pickedImage = null;
     notifyListeners();
+  }
+
+  void infoStarted({
+    required int genderIndex,
+    required String age,
+  }) {
+    _genderIndex = genderIndex;
+    _age = age;
+    notifyListeners();
+  }
+
+  Future updateUserInformation({
+    required String userKey,
+  }) async {
+    await _settingRepo.updateUserInformation(
+      userKey: userKey,
+      sex: _genderIndex!,
+      age: age!,
+    );
+  }
+
+  void changedAge({
+    required String age,
+  }) {
+    _age = age;
+    notifyListeners();
+  }
+
+  void changedGender({
+    required int index,
+  }) {
+    _genderIndex = index;
+    notifyListeners();
+  }
+
+  Future setNotSearchBook({
+    required String title,
+    required String isbn,
+  }) async {
+    await _settingRepo.setNotSearchBook(title: title, isbn: isbn);
   }
 
   Future getCustomerServiceList({
@@ -158,4 +200,6 @@ class SettingState extends ChangeNotifier {
   Uint8List? get pickedImage => _pickedImage;
   bool get isImageSelected => _isImageSeleted;
   bool? get isSocialProfileImage => _isSocialProfileImage;
+  int? get genderIndex => _genderIndex;
+  String? get age => _age;
 }

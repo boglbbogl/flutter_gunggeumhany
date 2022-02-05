@@ -10,7 +10,7 @@ _$_UserInformation _$$_UserInformationFromJson(Map<String, dynamic> json) =>
     _$_UserInformation(
       userKey: json['userKey'] as String,
       age: json['age'] as String,
-      sex: json['sex'] as String,
+      sex: json['sex'] as int,
       preference: (json['preference'] as List<dynamic>)
           .map((e) => PreferenceModel.fromJson(e as Map<String, dynamic>))
           .toList(),

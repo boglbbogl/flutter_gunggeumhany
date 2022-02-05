@@ -45,7 +45,7 @@ class SettingPage extends StatelessWidget {
             title: '검색 안되는 책 등록',
             icon: Icons.collections_bookmark_outlined,
             onTap: () {
-              pushNewScreen(context, screen: const NotSearchBookPage());
+              pushNewScreen(context, screen: NotSearchBookPage());
             },
           ),
           _listTileForm(

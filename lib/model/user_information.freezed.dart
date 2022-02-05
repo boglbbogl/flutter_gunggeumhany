@@ -25,7 +25,7 @@ class _$UserInformationTearOff {
   _UserInformation call(
       {required String userKey,
       required String age,
-      required String sex,
+      required int sex,
       required List<PreferenceModel> preference}) {
     return _UserInformation(
       userKey: userKey,
@@ -47,7 +47,7 @@ const $UserInformation = _$UserInformationTearOff();
 mixin _$UserInformation {
   String get userKey => throw _privateConstructorUsedError;
   String get age => throw _privateConstructorUsedError;
-  String get sex => throw _privateConstructorUsedError;
+  int get sex => throw _privateConstructorUsedError;
   List<PreferenceModel> get preference => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -62,10 +62,7 @@ abstract class $UserInformationCopyWith<$Res> {
           UserInformation value, $Res Function(UserInformation) then) =
       _$UserInformationCopyWithImpl<$Res>;
   $Res call(
-      {String userKey,
-      String age,
-      String sex,
-      List<PreferenceModel> preference});
+      {String userKey, String age, int sex, List<PreferenceModel> preference});
 }
 
 /// @nodoc
@@ -96,7 +93,7 @@ class _$UserInformationCopyWithImpl<$Res>
       sex: sex == freezed
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       preference: preference == freezed
           ? _value.preference
           : preference // ignore: cast_nullable_to_non_nullable
@@ -113,10 +110,7 @@ abstract class _$UserInformationCopyWith<$Res>
       __$UserInformationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String userKey,
-      String age,
-      String sex,
-      List<PreferenceModel> preference});
+      {String userKey, String age, int sex, List<PreferenceModel> preference});
 }
 
 /// @nodoc
@@ -149,7 +143,7 @@ class __$UserInformationCopyWithImpl<$Res>
       sex: sex == freezed
           ? _value.sex
           : sex // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       preference: preference == freezed
           ? _value.preference
           : preference // ignore: cast_nullable_to_non_nullable
@@ -176,7 +170,7 @@ class _$_UserInformation extends _UserInformation {
   @override
   final String age;
   @override
-  final String sex;
+  final int sex;
   @override
   final List<PreferenceModel> preference;
 
@@ -220,7 +214,7 @@ abstract class _UserInformation extends UserInformation {
   const factory _UserInformation(
       {required String userKey,
       required String age,
-      required String sex,
+      required int sex,
       required List<PreferenceModel> preference}) = _$_UserInformation;
   const _UserInformation._() : super._();
 
@@ -232,7 +226,7 @@ abstract class _UserInformation extends UserInformation {
   @override
   String get age;
   @override
-  String get sex;
+  int get sex;
   @override
   List<PreferenceModel> get preference;
   @override

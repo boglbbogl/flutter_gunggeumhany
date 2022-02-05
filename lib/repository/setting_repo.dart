@@ -16,6 +16,40 @@ class SettingRepo {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
+  Future updateUserInformation({
+    required String userKey,
+    required int sex,
+    required String age,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _userInfoRef =
+        _firestore.collection(collectionUserInformation).doc(userKey);
+    final _batch = _firestore.batch();
+    if (age.isNotEmpty) {
+      _batch.update(_userInfoRef, {
+        "age": age,
+      });
+    }
+    if (!sex.isNaN) {
+      _batch.update(_userInfoRef, {
+        "sex": sex,
+      });
+    }
+    await _batch.commit();
+  }
+
+  Future setNotSearchBook({
+    required String title,
+    required String isbn,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _notSearchBookRef =
+        _firestore.collection(collectionNotSearchBook).doc();
+    await _notSearchBookRef.set({
+      "title": title,
+      "ISBN": isbn,
+      "createdAt": DateTime.now(),
+    });
+  }
+
   Future<List<CustomerService>> getCustomerService({
     required String userKey,
   }) async {

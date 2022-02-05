@@ -9,7 +9,7 @@ class UserInformation with _$UserInformation {
   const factory UserInformation({
     required String userKey,
     required String age,
-    required String sex,
+    required int sex,
     required List<PreferenceModel> preference,
   }) = _UserInformation;
   const UserInformation._();
@@ -18,7 +18,7 @@ class UserInformation with _$UserInformation {
   factory UserInformation.empty() => const UserInformation(
         userKey: "",
         age: "",
-        sex: "",
+        sex: 0,
         preference: [],
       );
 }

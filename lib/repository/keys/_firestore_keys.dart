@@ -8,6 +8,7 @@ const collectionAladinTheme = "ALADIN_THEME";
 const collectionAladinCategory = "ALADIN_CATEGORY";
 const collectionHanyRecommend = "HANY_RECOMMEND";
 const collectionBlocked = "BLOCKED";
+const collectionNotSearchBook = "NOT_SEARCH_BOOK";
 // subCollection
 //theme
 const documentBestseller = "BESTSELLER";

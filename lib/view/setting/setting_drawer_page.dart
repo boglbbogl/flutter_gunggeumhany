@@ -8,6 +8,7 @@ import 'package:flutter_gunggeumhany/view/preference/preference_page.dart';
 import 'package:flutter_gunggeumhany/view/setting/api_screen.dart';
 import 'package:flutter_gunggeumhany/view/setting/setting_page.dart';
 import 'package:flutter_gunggeumhany/view/setting/setting_profile_update_page.dart';
+import 'package:flutter_gunggeumhany/view/setting/user_information_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
@@ -49,6 +50,19 @@ class SettingDrawerPage extends StatelessWidget {
                               .socialProfileImageUrl));
                   context.read<ProfileState>().openAndCloseDrawer(value: false);
                   pushNewScreen(context, screen: SettingProfileUpdatePage());
+                }),
+            _listTileForm(
+                icon: Icons.feed_rounded,
+                title: '사용자 정보',
+                onTap: () {
+                  context.read<SettingState>().infoStarted(
+                      genderIndex:
+                          context.read<AuthState>().userInformation!.sex,
+                      age: context.read<AuthState>().userInformation!.age);
+
+                  context.read<ProfileState>().openAndCloseDrawer(value: false);
+
+                  pushNewScreen(context, screen: const UserInformationPage());
                 }),
             _listTileForm(
                 icon: Icons.settings_rounded,
