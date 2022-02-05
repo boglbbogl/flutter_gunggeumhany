@@ -83,7 +83,7 @@ class UserInformationPage extends StatelessWidget {
             Wrap(
               children: [
                 ..._age.map((e) => Padding(
-                      padding: const EdgeInsets.only(right: 8, top: 12),
+                      padding: const EdgeInsets.only(right: 6, top: 12),
                       child: InkWell(
                         onTap: () {
                           context.read<SettingState>().changedAge(age: e);
