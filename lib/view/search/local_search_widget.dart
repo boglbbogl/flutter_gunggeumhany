@@ -80,7 +80,11 @@ Stack localSearchWidget({
                                         Padding(
                                             padding:
                                                 const EdgeInsets.only(right: 8),
-                                            child: Text(e,
+                                            child: Text(
+                                                e.length > 30
+                                                    ? e.substring(0, 30)
+                                                    : e,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: theme
                                                     .textTheme.bodyText2!
                                                     .copyWith(
