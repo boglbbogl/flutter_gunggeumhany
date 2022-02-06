@@ -9,7 +9,7 @@ class UserInformationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> _age = [
+    final List<String> _age = [
       "0-9",
       "10-19",
       "20-29",

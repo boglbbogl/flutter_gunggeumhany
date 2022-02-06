@@ -161,6 +161,7 @@ class SearchScreen extends StatelessWidget {
                       ),
                       pageTransitionAnimation:
                           PageTransitionAnimation.cupertino);
+                  logger.e(bookList[index].docKey);
                 },
                 child: Stack(
                   children: [

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
+import 'package:flutter_gunggeumhany/state/core/logger.dart';
 
 class ReviewRepo {
   static final ReviewRepo _reviewRepo = ReviewRepo._internal();
@@ -99,6 +100,15 @@ class ReviewRepo {
         .doc(review.bookDocKey)
         .collection(collectionReview)
         .doc();
+
+    // final CollectionReference<Map<String, dynamic>> _getMyReviewRef = _firestore
+    //     .collection(collectionBook)
+    //     .doc(review.bookDocKey)
+    //     .collection(collectionReview);
+    // final _getMyReviewSnapshot =
+    //     await _getMyReviewRef.where("userKey", isEqualTo: review.userKey).get();
+    // logger.d(_getMyReviewSnapshot.docs.map((e) => e.exists));
+
     final DocumentReference<Map<String, dynamic>> _bookRef =
         _firestore.collection(collectionBook).doc(review.bookDocKey);
     final DocumentReference<Map<String, dynamic>> _activityRef =
