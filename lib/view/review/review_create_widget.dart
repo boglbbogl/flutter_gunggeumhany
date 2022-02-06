@@ -126,33 +126,38 @@ SliverList reviewCreateWidget({
                         appFlushbar(message: '책에 대한 별점은 필수 입력사항 입니다')
                             .show(context);
                       } else {
-                        await context.read<ReviewState>().createReview(
-                              context: context,
+                        final _isSuccess =
+                            await context.read<ReviewState>().createReview(
+                                  context: context,
+                                  bookDocKey: bookDocKey,
+                                  bookTitle: bookTitle,
+                                  authors: authors,
+                                  userKey: context
+                                      .read<AuthState>()
+                                      .userProfile!
+                                      .userKey,
+                                );
+                        if (_isSuccess) {
+                          await context.read<BookState>().currentBookUpdateItem(
+                                docKey: bookDocKey,
+                                ISBN10: "",
+                                ISBN13: "",
+                              );
+                          await context.read<ReviewState>().getMyReviewList(
                               bookDocKey: bookDocKey,
-                              bookTitle: bookTitle,
-                              authors: authors,
                               userKey: context
                                   .read<AuthState>()
                                   .userProfile!
-                                  .userKey,
-                            );
-                        await context.read<BookState>().currentBookUpdateItem(
-                              docKey: bookDocKey,
-                              ISBN10: "",
-                              ISBN13: "",
-                            );
-                        await context.read<ReviewState>().getMyReviewList(
-                            bookDocKey: bookDocKey,
-                            userKey:
-                                context.read<AuthState>().userProfile!.userKey);
-                        await context
-                            .read<AuthState>()
-                            .getMainFeedUserReviewListUpdate(
-                              userKey: context
-                                  .read<AuthState>()
-                                  .userProfile!
-                                  .userKey,
-                            );
+                                  .userKey);
+                          await context
+                              .read<AuthState>()
+                              .getMainFeedUserReviewListUpdate(
+                                userKey: context
+                                    .read<AuthState>()
+                                    .userProfile!
+                                    .userKey,
+                              );
+                        }
                       }
                     },
                     child: context.watch<ReviewState>().isCreateReview

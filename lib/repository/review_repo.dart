@@ -92,7 +92,7 @@ class ReviewRepo {
     await _batch.commit();
   }
 
-  Future createReview({
+  Future<bool> createReview({
     required Review review,
   }) async {
     final DocumentReference<Map<String, dynamic>> _reviewRef = _firestore
@@ -101,49 +101,53 @@ class ReviewRepo {
         .collection(collectionReview)
         .doc();
 
-    // final CollectionReference<Map<String, dynamic>> _getMyReviewRef = _firestore
-    //     .collection(collectionBook)
-    //     .doc(review.bookDocKey)
-    //     .collection(collectionReview);
-    // final _getMyReviewSnapshot =
-    //     await _getMyReviewRef.where("userKey", isEqualTo: review.userKey).get();
-    // logger.d(_getMyReviewSnapshot.docs.map((e) => e.exists));
-
-    final DocumentReference<Map<String, dynamic>> _bookRef =
-        _firestore.collection(collectionBook).doc(review.bookDocKey);
-    final DocumentReference<Map<String, dynamic>> _activityRef =
-        _firestore.collection(collectionUserActivity).doc(review.userKey);
-    final _snapshot = await _reviewRef.get();
-    final _toWrite = review.copyWith(docKey: _snapshot.id);
-    final _batch = _firestore.batch();
-    if (!review.starRating.isNaN) {
+    final CollectionReference<Map<String, dynamic>> _getMyReviewRef = _firestore
+        .collection(collectionBook)
+        .doc(review.bookDocKey)
+        .collection(collectionReview);
+    final _getMyReviewSnapshot =
+        await _getMyReviewRef.where("userKey", isEqualTo: review.userKey).get();
+    final _result = _getMyReviewSnapshot.docs.map((e) => e.exists);
+    if (_result.isNotEmpty) {
+      return false;
+    } else {
+      final DocumentReference<Map<String, dynamic>> _bookRef =
+          _firestore.collection(collectionBook).doc(review.bookDocKey);
+      final DocumentReference<Map<String, dynamic>> _activityRef =
+          _firestore.collection(collectionUserActivity).doc(review.userKey);
+      final _snapshot = await _reviewRef.get();
+      final _toWrite = review.copyWith(docKey: _snapshot.id);
+      final _batch = _firestore.batch();
+      if (!review.starRating.isNaN) {
+        _batch.update(_activityRef, {
+          "reviewInStarDocKey": FieldValue.arrayUnion([review.bookDocKey]),
+          "reviewInStarRating": FieldValue.increment(review.starRating),
+        });
+      }
+      if (!review.favoriteRating.isNaN) {
+        _batch.update(_activityRef, {
+          "reviewInFavoriteDocKey": FieldValue.arrayUnion([review.bookDocKey]),
+          "reviewInFavoriteRating": FieldValue.increment(review.favoriteRating),
+        });
+      }
+      _batch.set(_reviewRef, _toWrite.toJson());
       _batch.update(_activityRef, {
-        "reviewInStarDocKey": FieldValue.arrayUnion([review.bookDocKey]),
-        "reviewInStarRating": FieldValue.increment(review.starRating),
+        "myReviewDocKey": FieldValue.arrayUnion([review.bookDocKey]),
       });
-    }
-    if (!review.favoriteRating.isNaN) {
-      _batch.update(_activityRef, {
-        "reviewInFavoriteDocKey": FieldValue.arrayUnion([review.bookDocKey]),
-        "reviewInFavoriteRating": FieldValue.increment(review.favoriteRating),
-      });
-    }
-    _batch.set(_reviewRef, _toWrite.toJson());
-    _batch.update(_activityRef, {
-      "myReviewDocKey": FieldValue.arrayUnion([review.bookDocKey]),
-    });
-    _batch.update(_bookRef, {
-      "starUserKey": FieldValue.arrayUnion([review.userKey]),
-      "starRating": FieldValue.increment(review.starRating),
-      "lastReviewCreatedAt": DateTime.now().toIso8601String(),
-    });
-    if (review.favoriteRating != 0.0) {
       _batch.update(_bookRef, {
-        "favoriteUserKey": FieldValue.arrayUnion([review.userKey]),
-        "favoriteRating": FieldValue.increment(review.favoriteRating),
+        "starUserKey": FieldValue.arrayUnion([review.userKey]),
+        "starRating": FieldValue.increment(review.starRating),
+        "lastReviewCreatedAt": DateTime.now().toIso8601String(),
       });
-    }
+      if (review.favoriteRating != 0.0) {
+        _batch.update(_bookRef, {
+          "favoriteUserKey": FieldValue.arrayUnion([review.userKey]),
+          "favoriteRating": FieldValue.increment(review.favoriteRating),
+        });
+      }
 
-    await _batch.commit();
+      await _batch.commit();
+      return true;
+    }
   }
 }

@@ -65,7 +65,7 @@ class ReviewState extends ChangeNotifier {
     Navigator.of(context).pop();
   }
 
-  Future createReview({
+  Future<bool> createReview({
     required String bookDocKey,
     required String userKey,
     required String bookTitle,
@@ -74,7 +74,7 @@ class ReviewState extends ChangeNotifier {
   }) async {
     _isCreateReview = true;
     notifyListeners();
-    await _reviewRepo.createReview(
+    final _isSuccess = await _reviewRepo.createReview(
         review: _review.copyWith(
       bookDocKey: bookDocKey,
       starRating: _starRating,
@@ -85,9 +85,18 @@ class ReviewState extends ChangeNotifier {
       bookTitle: bookTitle,
       bookAuthors: authors,
     ));
+    if (_isSuccess) {
+      _isCreateReview = false;
+      notifyListeners();
 
-    _isCreateReview = false;
-    notifyListeners();
+      return true;
+    } else {
+      appFlushbar(message: '이미 등록한 리뷰가 있습니다').show(context);
+      _isCreateReview = false;
+      notifyListeners();
+
+      return false;
+    }
   }
 
   void changedReviewContents({
