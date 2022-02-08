@@ -16,8 +16,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
-    theme = Theme.of(context);
     return Consumer<MainState>(
       builder: (context, provider, child) {
         return Scaffold(

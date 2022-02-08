@@ -64,8 +64,26 @@ class MainState extends ChangeNotifier {
     _getAllManyReviewTopRankBook();
     _getAllStarRatingTopRankBook();
     _getNewestReviewAllBook();
+    _initialGetBook();
     notifyListeners();
   }
+
+  Future _initialGetBook() async {
+    _getFirestoreBestsellerForeignBookItem();
+    _editorFantasyBook = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorFantasy);
+    notifyListeners();
+    _editorMysteryStory = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorMystery);
+    notifyListeners();
+    _editorDramaStory = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorDrama);
+    notifyListeners();
+    _editorTravelBook = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorTravelBook);
+    notifyListeners();
+  }
+
   Future _getAllStarRatingTopRankBook() async {
     _allStarRatingTopRankBook = await _recommendRepo.allStarRatingTopRankBook();
     notifyListeners();
@@ -133,27 +151,9 @@ class MainState extends ChangeNotifier {
   Future categoryMoreBookFirstItem() async {
     _isBookMoreLoading = true;
     notifyListeners();
-    _getFirestoreBestsellerForeignBookItem();
-    _editorFantasyBook = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorFantasy);
-    notifyListeners();
-    _editorMysteryStory = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorMystery);
-    _editorDramaStory = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorDrama);
-    _editorTravelBook = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorTravelBook);
-    notifyListeners();
+
     _editorSelfImprovement = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorSelfImprovement);
-    notifyListeners();
-    _isBookMoreLoading = false;
-    _moreBookItemIndex = 1;
-    notifyListeners();
-  }
-
-  Future categoryMoreBookSecondItem() async {
-    _isBookMoreLoading = true;
     notifyListeners();
     _editorHistoryBook = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorHistoryBook);
@@ -163,16 +163,17 @@ class MainState extends ChangeNotifier {
     notifyListeners();
     _editorArtAndCulture = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorArtAndCulture);
-    notifyListeners();
-    _editorEssay = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorEssay);
     _isBookMoreLoading = false;
-    _moreBookItemIndex = 2;
+    _moreBookItemIndex = 1;
     notifyListeners();
   }
 
-  Future categoryMoreBookThirdItem() async {
+  Future categoryMoreBookSecondItem() async {
     _isBookMoreLoading = true;
+    notifyListeners();
+
+    _editorEssay = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorEssay);
     notifyListeners();
     _editorOldStory = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorOldStory);
@@ -185,20 +186,20 @@ class MainState extends ChangeNotifier {
     notifyListeners();
     _editorCartoon = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorCartoon);
+    _isBookMoreLoading = false;
+    _moreBookItemIndex = 2;
     notifyListeners();
+  }
+
+  Future categoryMoreBookThirdItem() async {
+    _isBookMoreLoading = true;
+    notifyListeners();
+
     _editorComputerAndMobile = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorComputerAndMobile);
     notifyListeners();
     _editorMusicBook = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorMusicBook);
-    _isBookMoreLoading = false;
-    _moreBookItemIndex = 3;
-    notifyListeners();
-  }
-
-  Future categoryMoreBookForthItem() async {
-    _isBookMoreLoading = true;
-    notifyListeners();
     _editorSocialScience = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorSocialScience);
     notifyListeners();
@@ -207,7 +208,15 @@ class MainState extends ChangeNotifier {
     notifyListeners();
     _editorWarHistory = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorWarHistory);
+    _isBookMoreLoading = false;
+    _moreBookItemIndex = 3;
     notifyListeners();
+  }
+
+  Future categoryMoreBookForthItem() async {
+    _isBookMoreLoading = true;
+    notifyListeners();
+
     _editorGeography = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorGeography);
     notifyListeners();
@@ -216,6 +225,11 @@ class MainState extends ChangeNotifier {
     notifyListeners();
     _editorMovieStory = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorMovieStroy);
+    _editorThemeHistory = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorThemeHistory);
+    notifyListeners();
+    _editorEconomyHistory = await _getFirestoreRecommendEditorBookItem(
+        documentId: documentEditorEconomyHistory);
     _isBookMoreLoading = false;
     _moreBookItemIndex = 4;
     notifyListeners();
@@ -224,12 +238,7 @@ class MainState extends ChangeNotifier {
   Future categoryMoreBookFifthItem() async {
     _isBookMoreLoading = true;
     notifyListeners();
-    _editorThemeHistory = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorThemeHistory);
-    notifyListeners();
-    _editorEconomyHistory = await _getFirestoreRecommendEditorBookItem(
-        documentId: documentEditorEconomyHistory);
-    notifyListeners();
+
     _editorWorldPeopleHistory = await _getFirestoreRecommendEditorBookItem(
         documentId: documentEditorWorldPeopleHistory);
     notifyListeners();
