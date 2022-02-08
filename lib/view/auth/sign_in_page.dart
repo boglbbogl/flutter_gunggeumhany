@@ -10,55 +10,55 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.watch<AuthState>().isLogin) {
-      return Scaffold(
-        body: Container(
-            color: Colors.black,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Stack(
-              children: [
-                const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                FutureBuilder(
-                    future: Future.delayed(const Duration(milliseconds: 7000)),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return Positioned(
-                            bottom: 50,
-                            child: SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                child: Center(
-                                    child: Column(
-                                  children: [
-                                    const Text('사용자 정보를 불러오지 못했습니다',
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(195, 195, 195, 1),
-                                          fontSize: 13,
-                                        )),
-                                    const SizedBox(height: 12),
-                                    TextButton(
-                                      onPressed: () =>
-                                          context.read<AuthState>().reSignIn(),
-                                      child: const Text('다시 로그인하기',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(
-                                                107, 232, 204, 1),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          )),
-                                    ),
-                                  ],
-                                ))));
-                      }
-                      return Container();
-                    }),
-              ],
-            )),
-      );
-    }
+    // if (context.watch<AuthState>().isLogin) {
+    //   return Scaffold(
+    //     body: Container(
+    //         color: Colors.black,
+    //         width: MediaQuery.of(context).size.width,
+    //         height: MediaQuery.of(context).size.height,
+    //         child: Stack(
+    //           children: [
+    //             const Center(
+    //               child: CircularProgressIndicator(),
+    //             ),
+    //             FutureBuilder(
+    //                 future: Future.delayed(const Duration(milliseconds: 7000)),
+    //                 builder: (context, snapshot) {
+    //                   if (snapshot.connectionState == ConnectionState.done) {
+    //                     return Positioned(
+    //                         bottom: 50,
+    //                         child: SizedBox(
+    //                             width: MediaQuery.of(context).size.width,
+    //                             child: Center(
+    //                                 child: Column(
+    //                               children: [
+    //                                 const Text('사용자 정보를 불러오지 못했습니다',
+    //                                     style: TextStyle(
+    //                                       color:
+    //                                           Color.fromRGBO(195, 195, 195, 1),
+    //                                       fontSize: 13,
+    //                                     )),
+    //                                 const SizedBox(height: 12),
+    //                                 TextButton(
+    //                                   onPressed: () =>
+    //                                       context.read<AuthState>().reSignIn(),
+    //                                   child: const Text('다시 로그인하기',
+    //                                       style: TextStyle(
+    //                                         color: Color.fromRGBO(
+    //                                             107, 232, 204, 1),
+    //                                         fontSize: 16,
+    //                                         fontWeight: FontWeight.bold,
+    //                                       )),
+    //                                 ),
+    //                               ],
+    //                             ))));
+    //                   }
+    //                   return Container();
+    //                 }),
+    //           ],
+    //         )),
+    //   );
+    // }
     return Scaffold(
       body: Stack(
         children: [

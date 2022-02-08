@@ -10,6 +10,7 @@ import 'package:flutter_gunggeumhany/state/profile_state.dart';
 import 'package:flutter_gunggeumhany/state/review_state.dart';
 import 'package:flutter_gunggeumhany/state/router/router.dart';
 import 'package:flutter_gunggeumhany/state/setting_state.dart';
+import 'package:flutter_gunggeumhany/view/_app/main_screen.dart';
 import 'package:flutter_gunggeumhany/view/core/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -30,11 +31,19 @@ class HanyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AladinState()),
         ChangeNotifierProvider(create: (context) => PreferenceState()),
       ],
-      child: MaterialApp.router(
-        routeInformationParser: BeamerParser(),
-        routerDelegate: routerDelegate,
+      child: MaterialApp(
+        // home: MainScreen(),
         theme: AppTheme.darkTheme,
+        initialRoute: '/',
+        routes: {
+          "/": (context) => const MainScreen(),
+        },
       ),
+      // child: MaterialApp.router(
+      //   routeInformationParser: BeamerParser(),
+      //   routerDelegate: routerDelegate,
+      //   theme: AppTheme.darkTheme,
+      // ),
     );
   }
 }

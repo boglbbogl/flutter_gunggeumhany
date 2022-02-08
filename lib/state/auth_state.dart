@@ -47,6 +47,8 @@ class AuthState extends ChangeNotifier {
               newSocialProfileImageUrl: _firebaseUser.photoURL!);
         }
         await getMainFeedUserReviewListUpdate(userKey: _userProfile!.userKey);
+        _isLogin = false;
+        notifyListeners();
       } else {
         _userProfile = null;
         _userActivity = null;
@@ -68,6 +70,8 @@ class AuthState extends ChangeNotifier {
                   _kakaoUser.kakaoAccount!.profile!.thumbnailImageUrl!);
         }
         await getMainFeedUserReviewListUpdate(userKey: _userProfile!.userKey);
+        _isLogin = false;
+        notifyListeners();
       } else {
         _userProfile = null;
         _userActivity = null;
