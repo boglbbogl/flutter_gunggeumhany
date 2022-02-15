@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/book.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/main_state.dart';
-import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/home/home_appbar_widget.dart';
 import 'package:flutter_gunggeumhany/view/home/home_book_item.dart';
 import 'package:flutter_gunggeumhany/view/home/home_shimmer_widget.dart';

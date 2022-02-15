@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/state/setting_state.dart';
+import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/core/app_flushbar.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 
 class NotSearchBookPage extends StatelessWidget {
   final TextEditingController _titleController = TextEditingController();

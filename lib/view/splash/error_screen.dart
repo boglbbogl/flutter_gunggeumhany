@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/core/app_fonts.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({Key? key}) : super(key: key);

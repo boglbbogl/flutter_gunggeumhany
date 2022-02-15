@@ -3,12 +3,10 @@ import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/main_state.dart';
 import 'package:flutter_gunggeumhany/view/auth/sign_in_page.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
-import 'package:flutter_gunggeumhany/view/core/app_fonts.dart';
 import 'package:flutter_gunggeumhany/view/home/home_page.dart';
 import 'package:flutter_gunggeumhany/view/splash/error_screen.dart';
 import 'package:flutter_gunggeumhany/view/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);

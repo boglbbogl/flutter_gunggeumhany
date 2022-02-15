@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/model/user_activity.dart';
 import 'package:flutter_gunggeumhany/model/user_profile.dart';

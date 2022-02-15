@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/state/activity_state.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
-import 'package:flutter_gunggeumhany/state/review_state.dart';
 import 'package:flutter_gunggeumhany/view/blocked/blocked_local_data.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:provider/provider.dart';

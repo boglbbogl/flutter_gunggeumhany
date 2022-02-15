@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_gunggeumhany/model/review.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
-import 'package:flutter_gunggeumhany/state/core/logger.dart';
 
 class ReviewRepo {
   static final ReviewRepo _reviewRepo = ReviewRepo._internal();
