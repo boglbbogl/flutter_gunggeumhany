@@ -1,6 +1,7 @@
 const collectionUserProfile = "USER_PROFILE";
 const collectionUserActivity = "USER_ACTIVITY";
 const collectionUserInformation = "USER_INFORMATION";
+const collectionUserBlocked = "USER_BLOCKED";
 const collectionCustomerService = "CUSTOMER_SERVICE";
 const collectionBook = "BOOKS";
 const collectionReview = "REVIEW";

@@ -60,3 +60,19 @@ Map<String, dynamic> _$$_UserActivityToJson(_$_UserActivity instance) =>
       'improvementDocKey': instance.improvementDocKey,
       'complainDocKey': instance.complainDocKey,
     };
+
+_$_UserBlocked _$$_UserBlockedFromJson(Map<String, dynamic> json) =>
+    _$_UserBlocked(
+      requestUserKey: json['requestUserKey'] as String,
+      blockedUserKey: json['blockedUserKey'] as String,
+      content: json['content'] as String,
+      isCheck: json['isCheck'] as bool,
+    );
+
+Map<String, dynamic> _$$_UserBlockedToJson(_$_UserBlocked instance) =>
+    <String, dynamic>{
+      'requestUserKey': instance.requestUserKey,
+      'blockedUserKey': instance.blockedUserKey,
+      'content': instance.content,
+      'isCheck': instance.isCheck,
+    };

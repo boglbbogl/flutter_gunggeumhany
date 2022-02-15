@@ -45,6 +45,7 @@ class ProfilePage extends StatelessWidget {
                   0),
               child: Scaffold(
                 appBar: profileAppbarWidget(
+                    userKey: userKey,
                     context: context,
                     isMe: isMe,
                     isFollowers: context

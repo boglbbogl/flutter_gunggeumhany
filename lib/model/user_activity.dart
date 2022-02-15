@@ -40,3 +40,15 @@ class UserActivity with _$UserActivity {
         complainDocKey: [],
       );
 }
+
+@freezed
+class UserBlocked with _$UserBlocked {
+  const factory UserBlocked({
+    required String requestUserKey,
+    required String blockedUserKey,
+    required String content,
+    required bool isCheck,
+  }) = _UserBlocked;
+  factory UserBlocked.fromJson(Map<String, dynamic> json) =>
+      _$UserBlockedFromJson(json);
+}

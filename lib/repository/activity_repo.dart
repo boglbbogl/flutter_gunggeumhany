@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_gunggeumhany/model/user_activity.dart';
 import 'package:flutter_gunggeumhany/model/user_profile.dart';
 import 'package:flutter_gunggeumhany/repository/keys/_firestore_keys.dart';
 
@@ -105,6 +106,24 @@ class ActivityRepo {
     _batch.update(_bookRef, {
       "bookmarkUserKey": FieldValue.arrayRemove([userKey])
     });
+    await _batch.commit();
+  }
+
+  Future userBlockRequest({
+    required UserBlocked userBlocked,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _activityRef = _firestore
+        .collection(collectionUserActivity)
+        .doc(userBlocked.requestUserKey);
+    final DocumentReference<Map<String, dynamic>> _userBlockRef =
+        _firestore.collection(collectionUserBlocked).doc();
+    final _batch = _firestore.batch();
+    _batch.update(_activityRef, {
+      "blockedUserUserKey": FieldValue.arrayUnion([
+        userBlocked.blockedUserKey,
+      ])
+    });
+    _batch.set(_userBlockRef, userBlocked.toJson());
     await _batch.commit();
   }
 }

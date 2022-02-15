@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gunggeumhany/state/profile_state.dart';
+import 'package:flutter_gunggeumhany/view/blocked/user_blocked_list_widget.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,7 @@ AppBar profileAppbarWidget({
   required bool isMe,
   required bool isFollowers,
   required String userNickName,
+  required String userKey,
 }) {
   return AppBar(
     title: !isMe && isFollowers
@@ -53,6 +55,13 @@ AppBar profileAppbarWidget({
                         .read<ProfileState>()
                         .openAndCloseDrawer(value: true),
                     icon: Icons.menu_rounded))
+      ],
+      if (!isMe) ...[
+        IconButton(
+            onPressed: () {
+              userBlockedListWidget(context: context, blockedUserKey: userKey);
+            },
+            icon: const Icon(Icons.more_vert_rounded))
       ],
     ],
   );
