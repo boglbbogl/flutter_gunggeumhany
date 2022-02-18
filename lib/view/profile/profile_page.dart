@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gunggeumhany/state/activity_state.dart';
 import 'package:flutter_gunggeumhany/state/auth_state.dart';
 import 'package:flutter_gunggeumhany/state/profile_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
@@ -60,57 +61,105 @@ class ProfilePage extends StatelessWidget {
                             element.userProfile.userKey.contains(userKey))
                         .map((e) => e.userProfile.nickName)
                         .firstOrNull!),
-                body: NestedScrollView(
-                    headerSliverBuilder: (context, value) {
-                      return [
-                        ProfileUserWidget(
-                          userKey: userKey,
-                          isMyFeed: context
-                              .watch<AuthState>()
-                              .userProfile!
-                              .userKey
-                              .contains(userKey),
+                body: context
+                        .watch<AuthState>()
+                        .userActivity!
+                        .blockedUserUserKey
+                        .contains(userKey)
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                                '${context.watch<ProfileState>().profileModelList.where((element) => element.userProfile.userKey.contains(userKey)).map((e) => e.userProfile.nickName).firstOrNull!}님을 차단함',
+                                style: theme.textTheme.bodyText2!.copyWith(
+                                    fontSize: 14, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () async {
+                                await context
+                                    .read<ActivityState>()
+                                    .userBlockedCancelRequest(
+                                      userKey: context
+                                          .read<AuthState>()
+                                          .userProfile!
+                                          .userKey,
+                                      blockedUserKey: userKey,
+                                    );
+                                await context.read<AuthState>().getMyUserModel(
+                                    userKey: context
+                                        .read<AuthState>()
+                                        .userProfile!
+                                        .userKey);
+                              },
+                              child: Text(
+                                '취소하기',
+                                style: theme.textTheme.bodyText2!.copyWith(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Container(
+                              height: 50,
+                            ),
+                          ],
                         ),
-                      ];
-                    },
-                    body: Column(children: [
-                      TabBar(
-                        indicatorWeight: 3,
-                        tabs: [
-                          _tabForm(icon: Icons.article_rounded, title: '리뷰'),
-                          _tabForm(
-                              icon: Icons.bookmark_add_rounded, title: '북마크'),
-                        ],
-                        indicatorColor: appMainColor,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                      ),
-                      Expanded(
-                          child: TabBarView(
-                        children: [
-                          profileReviewWidget(
-                              isMe: isMe,
-                              context: context,
-                              review: context
-                                  .watch<ProfileState>()
-                                  .profileModelList
-                                  .where((element) => element
-                                      .userProfile.userKey
-                                      .contains(userKey))
-                                  .map((e) => e.review)
-                                  .firstOrNull!),
-                          profileBookmarkWidget(
-                            context: context,
-                            book: context
-                                .watch<ProfileState>()
-                                .profileModelList
-                                .where((element) => element.userProfile.userKey
-                                    .contains(userKey))
-                                .map((e) => e.book)
-                                .firstOrNull!,
+                      )
+                    : NestedScrollView(
+                        headerSliverBuilder: (context, value) {
+                          return [
+                            ProfileUserWidget(
+                              userKey: userKey,
+                              isMyFeed: context
+                                  .watch<AuthState>()
+                                  .userProfile!
+                                  .userKey
+                                  .contains(userKey),
+                            ),
+                          ];
+                        },
+                        body: Column(children: [
+                          TabBar(
+                            indicatorWeight: 3,
+                            tabs: [
+                              _tabForm(
+                                  icon: Icons.article_rounded, title: '리뷰'),
+                              _tabForm(
+                                  icon: Icons.bookmark_add_rounded,
+                                  title: '북마크'),
+                            ],
+                            indicatorColor: appMainColor,
+                            indicatorSize: TabBarIndicatorSize.tab,
                           ),
-                        ],
-                      ))
-                    ])),
+                          Expanded(
+                              child: TabBarView(
+                            children: [
+                              profileReviewWidget(
+                                  isMe: isMe,
+                                  context: context,
+                                  review: context
+                                      .watch<ProfileState>()
+                                      .profileModelList
+                                      .where((element) => element
+                                          .userProfile.userKey
+                                          .contains(userKey))
+                                      .map((e) => e.review)
+                                      .firstOrNull!),
+                              profileBookmarkWidget(
+                                context: context,
+                                book: context
+                                    .watch<ProfileState>()
+                                    .profileModelList
+                                    .where((element) => element
+                                        .userProfile.userKey
+                                        .contains(userKey))
+                                    .map((e) => e.book)
+                                    .firstOrNull!,
+                              ),
+                            ],
+                          ))
+                        ])),
               ),
             ),
             const SettingDrawerPage(),

@@ -43,6 +43,7 @@ app.*.map.json
 # Secrets
 /config/*.json
 !/config/app_config_example.json
+android/app/google-services.json
 
 # Android Studio will place build artifacts here
 /android/app/debug

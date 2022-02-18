@@ -5,6 +5,7 @@ import 'package:flutter_gunggeumhany/state/profile_state.dart';
 import 'package:flutter_gunggeumhany/state/setting_state.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:flutter_gunggeumhany/view/preference/preference_page.dart';
+import 'package:flutter_gunggeumhany/view/setting/api_screen.dart';
 import 'package:flutter_gunggeumhany/view/setting/setting_page.dart';
 import 'package:flutter_gunggeumhany/view/setting/setting_profile_update_page.dart';
 import 'package:flutter_gunggeumhany/view/setting/user_information_page.dart';
@@ -82,12 +83,12 @@ class SettingDrawerPage extends StatelessWidget {
                   context.read<ProfileState>().openAndCloseDrawer(value: false);
                   pushNewScreen(context, screen: const PreferencePage());
                 }),
-            // _listTileForm(
-            //     icon: Icons.error_outline_rounded,
-            //     title: 'API',
-            //     onTap: () {
-            //       pushNewScreen(context, screen: const ApiScreen());
-            //     }),
+            _listTileForm(
+                icon: Icons.error_outline_rounded,
+                title: 'API',
+                onTap: () {
+                  pushNewScreen(context, screen: const ApiScreen());
+                }),
           ],
         ),
       ),

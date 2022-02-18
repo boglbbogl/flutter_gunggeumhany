@@ -9,7 +9,7 @@ class BlockedLocalData {
     "거짓 정보",
     "나한테 더 이상 리뷰 안보이게 하기"
   ];
-  final List<String> userBlocked = [
+  final List<String> userInapposite = [
     "부적절한 언어 사용",
     "19금 행위",
     "혐오 발언",

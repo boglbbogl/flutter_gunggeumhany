@@ -9,16 +9,33 @@ class ActivityState extends ChangeNotifier {
   List<UserProfile> _followerList = [];
   List<UserProfile> _followingList = [];
 
-  Future userBlockRequest({
+  Future userBlockedRequest({
     required String userKey,
     required String blockedUserKey,
+  }) async {
+    await _activityRepo.userBlockedRequest(
+        requestUserKey: userKey, blockedUserKey: blockedUserKey);
+  }
+
+  Future userBlockedCancelRequest({
+    required String userKey,
+    required String blockedUserKey,
+  }) async {
+    await _activityRepo.userBlockedCancelRequest(
+        requestUserKey: userKey, blockedUserKey: blockedUserKey);
+  }
+
+  Future userInappositeRequest({
+    required String userKey,
+    required String blockedUserKey,
+    required String content,
     required BuildContext context,
   }) async {
-    await _activityRepo.userBlockRequest(
+    await _activityRepo.userIappositeRequest(
         userBlocked: UserBlocked(
       requestUserKey: userKey,
       blockedUserKey: blockedUserKey,
-      content: "content",
+      content: content,
       isCheck: false,
     ));
     Navigator.of(context).pop();

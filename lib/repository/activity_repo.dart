@@ -109,20 +109,39 @@ class ActivityRepo {
     await _batch.commit();
   }
 
-  Future userBlockRequest({
+  Future userBlockedRequest({
+    required String requestUserKey,
+    required String blockedUserKey,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _activityRef =
+        _firestore.collection(collectionUserActivity).doc(requestUserKey);
+    await _activityRef.update({
+      "blockedUserUserKey": FieldValue.arrayUnion([
+        blockedUserKey,
+      ])
+    });
+  }
+
+  Future userBlockedCancelRequest({
+    required String requestUserKey,
+    required String blockedUserKey,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> _activityRef =
+        _firestore.collection(collectionUserActivity).doc(requestUserKey);
+    await _activityRef.update({
+      "blockedUserUserKey": FieldValue.arrayRemove([
+        blockedUserKey,
+      ])
+    });
+  }
+
+  Future userIappositeRequest({
     required UserBlocked userBlocked,
   }) async {
-    final DocumentReference<Map<String, dynamic>> _activityRef = _firestore
-        .collection(collectionUserActivity)
-        .doc(userBlocked.requestUserKey);
     final DocumentReference<Map<String, dynamic>> _userBlockRef =
         _firestore.collection(collectionUserBlocked).doc();
     final _batch = _firestore.batch();
-    _batch.update(_activityRef, {
-      "blockedUserUserKey": FieldValue.arrayUnion([
-        userBlocked.blockedUserKey,
-      ])
-    });
+
     _batch.set(_userBlockRef, userBlocked.toJson());
     await _batch.commit();
   }

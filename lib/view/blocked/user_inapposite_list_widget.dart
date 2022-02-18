@@ -5,9 +5,9 @@ import 'package:flutter_gunggeumhany/view/blocked/blocked_local_data.dart';
 import 'package:flutter_gunggeumhany/view/core/app_color.dart';
 import 'package:provider/provider.dart';
 
-Future userBlockedListWidget({
+Future userInappositeListWidget({
   required BuildContext context,
-  required String blockedUserKey,
+  required String inappositeUserKey,
 }) {
   return showModalBottomSheet(
       isDismissible: false,
@@ -88,27 +88,30 @@ Future userBlockedListWidget({
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         children: [
-                          ...BlockedLocalData().userBlocked.map((e) => Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 18),
-                                child: InkWell(
-                                  onTap: () async {
-                                    await context
-                                        .read<ActivityState>()
-                                        .userBlockRequest(
-                                          context: context,
-                                          userKey: context
-                                              .read<AuthState>()
-                                              .userProfile!
-                                              .userKey,
-                                          blockedUserKey: blockedUserKey,
-                                        );
-                                  },
-                                  child: Text(e,
-                                      style: theme.textTheme.bodyText2!
-                                          .copyWith(fontSize: 15)),
-                                ),
-                              )),
+                          ...BlockedLocalData()
+                              .userInapposite
+                              .map((e) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 18),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await context
+                                            .read<ActivityState>()
+                                            .userInappositeRequest(
+                                              content: e,
+                                              context: context,
+                                              userKey: context
+                                                  .read<AuthState>()
+                                                  .userProfile!
+                                                  .userKey,
+                                              blockedUserKey: inappositeUserKey,
+                                            );
+                                      },
+                                      child: Text(e,
+                                          style: theme.textTheme.bodyText2!
+                                              .copyWith(fontSize: 15)),
+                                    ),
+                                  )),
                           const SizedBox(height: 20)
                         ],
                       )

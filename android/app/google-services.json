@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "411627814424-fgugi7qf9utb17o5chd98qafj3rm740a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tyger.gunggeumhany",
+            "certificate_hash": "da7f480be234fa388b9ed36dc6bc8c1a2c333db9"
+          }
+        },
+        {
           "client_id": "411627814424-hnvs21jlaht3hb85vl95hgj3u45tbupt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
