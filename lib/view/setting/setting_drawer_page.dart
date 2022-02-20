@@ -83,12 +83,12 @@ class SettingDrawerPage extends StatelessWidget {
                   context.read<ProfileState>().openAndCloseDrawer(value: false);
                   pushNewScreen(context, screen: const PreferencePage());
                 }),
-            _listTileForm(
-                icon: Icons.error_outline_rounded,
-                title: 'API',
-                onTap: () {
-                  pushNewScreen(context, screen: const ApiScreen());
-                }),
+            // _listTileForm(
+            //     icon: Icons.error_outline_rounded,
+            //     title: 'API',
+            //     onTap: () {
+            //       pushNewScreen(context, screen: const ApiScreen());
+            //     }),
           ],
         ),
       ),
